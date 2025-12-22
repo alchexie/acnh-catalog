@@ -68,3 +68,19 @@ export function getSourceName(source) {
     }
     return translationsCache.sources[source] || source;
 }
+
+// 获取所有分类的排序顺序
+export function getCategoryOrder() {
+    if (!translationsCache || !translationsCache.categories) {
+        return [];
+    }
+    return Object.keys(translationsCache.categories);
+}
+
+// 获取所有来源的排序顺序
+export function getSourceOrder() {
+    if (!translationsCache || !translationsCache.sources) {
+        return [];
+    }
+    return Object.keys(translationsCache.sources);
+}

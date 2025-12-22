@@ -2,7 +2,7 @@
  * 筛选和排序模块
  */
 
-import { CONFIG, getCategoryName, getSourceName } from './config.js';
+import { CONFIG, getCategoryName, getSourceName, getCategoryOrder, getSourceOrder } from './config.js';
 
 /**
  * 筛选物品
@@ -53,9 +53,20 @@ export function sortItems(items, sortValue) {
  */
 export function populateCategoryFilter(items) {
     const categoryFilter = document.getElementById('categoryFilter');
-    const categories = [...new Set(items.map(item => item.category))].sort();
+    const itemCategories = new Set(items.map(item => item.category));
+    const categoryOrder = getCategoryOrder();
     
-    categories.forEach(category => {
+    // 按照 translations.json 中定义的顺序显示分类
+    const orderedCategories = categoryOrder.filter(cat => itemCategories.has(cat));
+    
+    // 添加未在 translations 中定义的分类（如果有）
+    itemCategories.forEach(cat => {
+        if (!categoryOrder.includes(cat)) {
+            orderedCategories.push(cat);
+        }
+    });
+    
+    orderedCategories.forEach(category => {
         const option = document.createElement('option');
         option.value = category;
         option.textContent = getCategoryName(category);
@@ -96,14 +107,26 @@ export function populateVersionFilter(items) {
  */
 export function populateSourceFilter(items) {
     const sourceFilter = document.getElementById('sourceFilter');
-    const sources = new Set();
+    const itemSources = new Set();
     
     items.forEach(item => {
-        const itemSources = item.originalData?.source || [];
-        itemSources.forEach(source => sources.add(source));
+        const sources = item.originalData?.source || [];
+        sources.forEach(source => itemSources.add(source));
     });
     
-    [...sources].sort().forEach(source => {
+    const sourceOrder = getSourceOrder();
+    
+    // 按照 translations.json 中定义的顺序显示来源
+    const orderedSources = sourceOrder.filter(src => itemSources.has(src));
+    
+    // 添加未在 translations 中定义的来源（如果有）
+    itemSources.forEach(src => {
+        if (!sourceOrder.includes(src)) {
+            orderedSources.push(src);
+        }
+    });
+    
+    orderedSources.forEach(source => {
         const option = document.createElement('option');
         option.value = source;
         option.textContent = getSourceName(source);
