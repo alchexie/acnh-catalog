@@ -4,7 +4,7 @@
 
 import { CONFIG, loadTranslations } from './config.js';
 import { loadItemsData, loadCatalogData, processItemsData } from './dataLoader.js';
-import { filterItems, sortItems, populateCategoryFilter, populateVersionFilter, populateSourceFilter } from './filters.js';
+import { filterItems, sortItems, populateCategoryFilter, populateVersionFilter, populateSourceFilter, populateSizeFilter, populateTagFilter } from './filters.js';
 import { renderItems, updateStats, updatePagination } from './itemRenderer.js';
 
 class ACNHCatalogApp {
@@ -39,6 +39,8 @@ class ACNHCatalogApp {
         populateCategoryFilter(this.allItems);
         populateVersionFilter(this.allItems);
         populateSourceFilter(this.allItems);
+        populateSizeFilter(this.allItems);
+        populateTagFilter(this.allItems);
     }
     
     setupEventListeners() {
@@ -65,7 +67,23 @@ class ACNHCatalogApp {
         document.getElementById('versionFilter').addEventListener('change', () => {
             this.handleFilterChange();
         });
-                // 排序
+        
+        // 来源筛选
+        document.getElementById('sourceFilter').addEventListener('change', () => {
+            this.handleFilterChange();
+        });
+        
+        // 尺寸筛选
+        document.getElementById('sizeFilter').addEventListener('change', () => {
+            this.handleFilterChange();
+        });
+        
+        // 标签筛选
+        document.getElementById('tagFilter').addEventListener('change', () => {
+            this.handleFilterChange();
+        });
+        
+        // 排序
         document.getElementById('sortSelect').addEventListener('change', () => {
             this.handleSortChange();
         });
@@ -109,8 +127,10 @@ class ACNHCatalogApp {
         const ownedFilter = document.getElementById('ownedFilter').value;
         const versionFilter = document.getElementById('versionFilter').value;
         const sourceFilter = document.getElementById('sourceFilter').value;
+        const sizeFilter = document.getElementById('sizeFilter').value;
+        const tagFilter = document.getElementById('tagFilter').value;
         
-        this.filteredItems = filterItems(this.allItems, searchTerm, category, ownedFilter, versionFilter, sourceFilter);
+        this.filteredItems = filterItems(this.allItems, searchTerm, category, ownedFilter, versionFilter, sourceFilter, sizeFilter, tagFilter);
         this.handleSortChange();
         this.currentPage = 1;
         this.updateDisplay();

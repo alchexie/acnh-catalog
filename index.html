@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>动物森友会 - 物品目录</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <div class="container">
         <header>
@@ -15,7 +17,7 @@
 
         <div class="controls">
             <input type="text" id="searchInput" class="search-box" placeholder="🔍 搜索物品名称...">
-            
+
             <div class="filter-section">
                 <label>分类：</label>
                 <select id="categoryFilter">
@@ -28,7 +30,7 @@
                     <option value="name-desc">名称 Z-A</option>
                     <option value="price-asc">价格从低到高</option>
                     <option value="price-desc">价格从高到低</option>
-                    <option value="id-asc">ID从小到大</option>
+                    <option value="id-asc" selected>ID从小到大</option>
                     <option value="id-desc">ID从大到小</option>
                 </select>
 
@@ -51,6 +53,16 @@
                 <label>版本：</label>
                 <select id="versionFilter">
                     <option value="">全部版本</option>
+                </select>
+
+                <label>尺寸：</label>
+                <select id="sizeFilter">
+                    <option value="">全部尺寸</option>
+                </select>
+
+                <label>标签：</label>
+                <select id="tagFilter">
+                    <option value="">全部标签</option>
                 </select>
 
                 <label>来源：</label>
@@ -81,4 +93,5 @@
 
     <script type="module" src="js/app.js?v=9"></script>
 </body>
+
 </html>

@@ -7,7 +7,7 @@ import { CONFIG, getCategoryName, getSourceName, getCategoryOrder, getSourceOrde
 /**
  * 筛选物品
  */
-export function filterItems(allItems, searchTerm, category, ownedFilter, versionFilter, sourceFilter) {
+export function filterItems(allItems, searchTerm, category, ownedFilter, versionFilter, sourceFilter, sizeFilter, tagFilter) {
     return allItems.filter(item => {
         const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase());
         const matchesCategory = !category || item.category === category;
@@ -16,7 +16,9 @@ export function filterItems(allItems, searchTerm, category, ownedFilter, version
                             (ownedFilter === CONFIG.FILTER_OPTIONS.NOT_OWNED && !item.owned);
         const matchesVersion = !versionFilter || item.originalData?.versionAdded === versionFilter;
         const matchesSource = !sourceFilter || (item.originalData?.source && item.originalData.source.includes(sourceFilter));
-        return matchesSearch && matchesCategory && matchesOwned && matchesVersion && matchesSource;
+        const matchesSize = !sizeFilter || item.originalData?.size === sizeFilter;
+        const matchesTag = !tagFilter || item.originalData?.tag === tagFilter;
+        return matchesSearch && matchesCategory && matchesOwned && matchesVersion && matchesSource && matchesSize && matchesTag;
     });
 }
 
@@ -131,5 +133,47 @@ export function populateSourceFilter(items) {
         option.value = source;
         option.textContent = getSourceName(source);
         sourceFilter.appendChild(option);
+    });
+}
+
+/**
+ * 填充尺寸筛选器
+ */
+export function populateSizeFilter(items) {
+    const sizeFilter = document.getElementById('sizeFilter');
+    const sizes = [...new Set(items
+        .map(item => item.originalData?.size)
+        .filter(s => s))]
+        .sort((a, b) => {
+            // 按尺寸排序，例如 1x1, 1x2, 2x1, 2x2 等
+            const [aWidth, aHeight] = a.split('x').map(Number);
+            const [bWidth, bHeight] = b.split('x').map(Number);
+            if (aWidth !== bWidth) return aWidth - bWidth;
+            return aHeight - bHeight;
+        });
+    
+    sizes.forEach(size => {
+        const option = document.createElement('option');
+        option.value = size;
+        option.textContent = size;
+        sizeFilter.appendChild(option);
+    });
+}
+
+/**
+ * 填充标签筛选器
+ */
+export function populateTagFilter(items) {
+    const tagFilter = document.getElementById('tagFilter');
+    const tags = [...new Set(items
+        .map(item => item.originalData?.tag)
+        .filter(t => t))]
+        .sort((a, b) => a.localeCompare(b, 'en'));
+    
+    tags.forEach(tag => {
+        const option = document.createElement('option');
+        option.value = tag;
+        option.textContent = tag;
+        tagFilter.appendChild(option);
     });
 }
