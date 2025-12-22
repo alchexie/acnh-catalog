@@ -17,6 +17,22 @@ const {
 const fs = require("fs");
 const path = require("path");
 
+const itemsPath = path.join(__dirname, "config", "acnh-items.json");
+// 删除items中sourceSheet = Message Cards的项
+const filteredItems = items.filter(
+  (item) => item.sourceSheet !== "Message Cards"
+);
+// 读取Interior Structures.json中的数据 并合并到filteredItems
+const interiorStructuresPath = path.join(
+  __dirname,
+  "config",
+  "Interior Structures.json"
+);
+const interiorStructures = JSON.parse(fs.readFileSync(interiorStructuresPath, "utf-8"));
+const mergedItems = filteredItems.concat(interiorStructures);
+fs.writeFileSync(itemsPath, JSON.stringify(mergedItems, null, 2));
+
+
 const achievementsPath = path.join(__dirname, "config", "acnh-achievements.json");
 fs.writeFileSync(achievementsPath, JSON.stringify(achievements, null, 2));
 
@@ -25,9 +41,6 @@ fs.writeFileSync(constructionPath, JSON.stringify(construction, null, 2));
 
 const creaturesPath = path.join(__dirname, "config", "acnh-creatures.json");
 fs.writeFileSync(creaturesPath, JSON.stringify(creatures, null, 2));
-
-const itemsPath = path.join(__dirname, "config", "acnh-items.json");
-fs.writeFileSync(itemsPath, JSON.stringify(items, null, 2));
 
 const reactionsPath = path.join(__dirname, "config", "acnh-reactions.json");
 fs.writeFileSync(reactionsPath, JSON.stringify(reactions, null, 2));

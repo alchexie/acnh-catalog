@@ -12,7 +12,7 @@ export const CONFIG = {
     
     // 分页配置
     PAGINATION: {
-        DEFAULT_PER_PAGE: 40,
+        DEFAULT_PER_PAGE: 100,
         OPTIONS: [20, 40, 60, 100, 'all']
     },
     
