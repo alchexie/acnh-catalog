@@ -157,6 +157,30 @@ h1 {
     max-width: 100%;
 }
 
+/* 尺寸信息 */
+.size-info {
+    font-size: 11px;
+    color: #495057;
+    margin-top: 5px;
+    padding: 4px 8px;
+    background: #e9ecef;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* 尺寸和标签信息 */
+.size-tag-info {
+    font-size: 11px;
+    color: #495057;
+    margin-top: 5px;
+    padding: 4px 8px;
+    background: #e9ecef;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: 500;
+}
+
 .item-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);

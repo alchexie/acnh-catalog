@@ -74,6 +74,11 @@ export function createItemCard(item) {
     const sourceTextEN = sources.length > 0 ? sources.join(', ') : '';
     const sourceBadge = sourceTextCN ? `<div class="source-info" title="${sourceTextEN}">📍 ${sourceTextCN}</div>` : '';
     
+    // 获取尺寸信息
+    const size = item.originalData?.size || '';
+    const tag = item.originalData?.tag || '';
+    const sizeTagInfo = (size || tag) ? `<div class="size-tag-info">${size ? '📏 ' + size : ''}${size && tag ? ' · ' : ''}${tag ? '🏷️ ' + tag : ''}</div>` : '';
+    
     return `
         <div class="item-card ${item.owned ? 'item-owned' : ''}" id="${itemId}" data-item='${JSON.stringify(item).replace(/'/g, "&apos;")}'>
             ${versionBadge}
@@ -85,6 +90,7 @@ export function createItemCard(item) {
             <div class="item-name">${displayName}</div>
             <div class="item-id">ID: ${item.id || 'N/A'}</div>
             ${sourceBadge}
+            ${sizeTagInfo}
             ${item.DiyRecipe ? '<div class="item-recipe">可DIY</div>' : ''}
             ${variationControls}
         </div>
