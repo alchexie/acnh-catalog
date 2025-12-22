@@ -59,27 +59,48 @@ function generateColorBlock(colors) {
  * 创建物品卡片HTML
  */
 export function createItemCard(item) {
-    const imagePath = item.imageUrl;
-    const itemId = `item-${item.id}`;
+    const vIndex = item.vIndex || 0;
+    const pIndex = item.pIndex || 0;
+    
+    // 根据vIndex和pIndex获取当前应该显示的变体
+    let currentVariant = null;
+    let currentPattern = null;
+    let imagePath = item.imageUrl;
+    let displayId = item.id;
+    let displayColors = item.colors || [];
+    
+    if (item.hasVariations && item.variantGroups && item.variantGroups.length > 0) {
+        currentVariant = item.variantGroups[vIndex] || item.variantGroups[0];
+        if (currentVariant && currentVariant.patterns && currentVariant.patterns.length > 0) {
+            currentPattern = currentVariant.patterns[pIndex] || currentVariant.patterns[0];
+            if (currentPattern) {
+                imagePath = currentPattern.imageUrl;
+                displayId = currentPattern.id;
+                displayColors = currentPattern.colors || [];
+            }
+        }
+    }
+    
+    const itemId = `item-${displayId}`;
     
     // 生成两层变体选择器HTML
     let variationControls = '';
     if (item.hasVariations && item.variantGroups.length > 0) {
         // 第一层：variant（款式/颜色）
         const hasMultipleVariants = item.variantGroups.length > 1;
-        const hasPatterns = item.variantGroups[0].patterns.length > 1;
+        const hasPatterns = item.variantGroups[vIndex].patterns.length > 1;
         
         if (hasMultipleVariants) {
             variationControls += `
                 <div class="variation-row variant-row">
                     <span class="variation-label">款式:</span>
                     <div class="variation-dots">
-                        ${item.variantGroups.map((vg, vIndex) => 
-                            `<span class="variation-dot variant-dot ${vIndex === 0 ? 'active' : ''}" 
-                                   data-variant-index="${vIndex}"
+                        ${item.variantGroups.map((vg, vIdx) => 
+                            `<span class="variation-dot variant-dot ${vIdx === vIndex ? 'active' : ''}" 
+                                   data-variant-index="${vIdx}"
                                    data-pattern-index="0"
-                                   title="${vg.variantName || '款式 ' + (vIndex + 1)}">
-                                ${vIndex + 1}
+                                   title="${vg.variantName || '款式 ' + (vIdx + 1)}">
+                                ${vIdx + 1}
                             </span>`
                         ).join('')}
                     </div>
@@ -93,12 +114,12 @@ export function createItemCard(item) {
                 <div class="variation-row pattern-row">
                     <span class="variation-label">图案:</span>
                     <div class="variation-dots">
-                        ${item.variantGroups[0].patterns.map((p, pIndex) => 
-                            `<span class="variation-dot pattern-dot ${pIndex === 0 ? 'active' : ''}" 
-                                   data-variant-index="0"
-                                   data-pattern-index="${pIndex}"
-                                   title="${p.patternName || '图案 ' + (pIndex + 1)}">
-                                ${pIndex + 1}
+                        ${item.variantGroups[vIndex].patterns.map((p, pIdx) => 
+                            `<span class="variation-dot pattern-dot ${pIdx === pIndex ? 'active' : ''}" 
+                                   data-variant-index="${vIndex}"
+                                   data-pattern-index="${pIdx}"
+                                   title="${p.patternName || '图案 ' + (pIdx + 1)}">
+                                ${pIdx + 1}
                             </span>`
                         ).join('')}
                     </div>
@@ -109,10 +130,9 @@ export function createItemCard(item) {
     
     // 获取当前显示的名称
     let displayName = item.name;
-    if (item.hasVariations && item.variantGroups.length > 0) {
-        const variant = item.variantGroups[0];
-        if (variant.variantName) displayName += ` - ${variant.variantName}`;
-        if (variant.patterns[0].patternName) displayName += ` - ${variant.patterns[0].patternName}`;
+    if (currentVariant) {
+        if (currentVariant.variantName) displayName += ` - ${currentVariant.variantName}`;
+        if (currentPattern && currentPattern.patternName) displayName += ` - ${currentPattern.patternName}`;
     }
     
     // 获取版本信息
@@ -128,15 +148,14 @@ export function createItemCard(item) {
     // 获取尺寸信息
     const size = item.originalData?.size || '';
     const tag = item.originalData?.tag || '';
-    const colors = item.colors || [];
     
     // 生成颜色块HTML
     let colorBlocks = '';
-    if (colors.length > 0) {
-        colorBlocks = generateColorBlock(colors);
+    if (displayColors.length > 0) {
+        colorBlocks = generateColorBlock(displayColors);
     }
     
-    const sizeTagInfo = (size || tag || colors.length > 0) ? `<div class="size-tag-info">${size ? '📏 ' + size : ''}${size && tag ? ' · ' : ''}${tag ? '🏷️ ' + tag : ''}${(size || tag) && colors.length > 0 ? ' ' : ''}${colorBlocks}</div>` : '';
+    const sizeTagInfo = (size || tag || displayColors.length > 0) ? `<div class="size-tag-info">${size ? '📏 ' + size : ''}${size && tag ? ' · ' : ''}${tag ? '🏷️ ' + tag : ''}${(size || tag) && displayColors.length > 0 ? ' ' : ''}${colorBlocks}</div>` : '';
     
     return `
         <div class="item-card ${item.owned ? 'item-owned' : ''}" id="${itemId}" data-item='${JSON.stringify(item).replace(/'/g, "&apos;")}'>
@@ -147,7 +166,7 @@ export function createItemCard(item) {
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
             <div class="item-image missing" style="display:none;">无图片</div>
             <div class="item-name">${displayName}</div>
-            <div class="item-id">ID: ${item.id || 'N/A'}</div>
+            <div class="item-id">ID: ${displayId || 'N/A'}</div>
             ${sourceBadge}
             ${sizeTagInfo}
             ${item.DiyRecipe ? '<div class="item-recipe">可DIY</div>' : ''}
@@ -188,6 +207,10 @@ function setupVariationListeners(container) {
             
             // 如果点击的是 variant 圆点
             if (dot.classList.contains('variant-dot')) {
+                // 更新itemData的索引
+                itemData.vIndex = variantIndex;
+                itemData.pIndex = 0;  // 切换variant时重置为第一个pattern
+                
                 // 切换 variant 激活状态
                 card.querySelectorAll('.variant-dot').forEach(d => d.classList.remove('active'));
                 dot.classList.add('active');
@@ -205,17 +228,27 @@ function setupVariationListeners(container) {
                     ).join('');
                 }
                 
-                // 使用第一个 pattern
-                updateItemDisplay(card, itemData, variantIndex, 0);
+                // 更新card的data-item
+                card.dataset.item = JSON.stringify(itemData).replace(/'/g, "&apos;");
+                
+                // 更新显示
+                updateItemDisplay(card, itemData);
             }
             // 如果点击的是 pattern 圆点
             else if (dot.classList.contains('pattern-dot')) {
+                // 更新itemData的索引
+                itemData.vIndex = variantIndex;
+                itemData.pIndex = patternIndex;
+                
                 // 切换 pattern 激活状态
                 card.querySelectorAll('.pattern-dot').forEach(d => d.classList.remove('active'));
                 dot.classList.add('active');
                 
+                // 更新card的data-item
+                card.dataset.item = JSON.stringify(itemData).replace(/'/g, "&apos;");
+                
                 // 更新显示
-                updateItemDisplay(card, itemData, variantIndex, patternIndex);
+                updateItemDisplay(card, itemData);
             }
         }
     });
@@ -224,9 +257,12 @@ function setupVariationListeners(container) {
 /**
  * 更新物品显示
  */
-function updateItemDisplay(card, itemData, variantIndex, patternIndex) {
-    const variant = itemData.variantGroups[variantIndex];
-    const pattern = variant.patterns[patternIndex];
+function updateItemDisplay(card, itemData) {
+    const vIndex = itemData.vIndex || 0;
+    const pIndex = itemData.pIndex || 0;
+    
+    const variant = itemData.variantGroups[vIndex];
+    const pattern = variant.patterns[pIndex];
     
     const img = card.querySelector('.item-image');
     const nameEl = card.querySelector('.item-name');

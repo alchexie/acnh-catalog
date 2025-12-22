@@ -18,7 +18,23 @@ export function filterItems(allItems, searchTerm, category, ownedFilter, version
         const matchesSource = !sourceFilter || (item.source && item.source.includes(sourceFilter));
         const matchesSize = !sizeFilter || item.size === sizeFilter;
         const matchesTag = !tagFilter || item.tag === tagFilter;
-        const matchesColor = !colorFilter || (item.colors && item.colors.includes(colorFilter));
+        let matchesColor = !colorFilter || (item.colors && item.colors.includes(colorFilter));
+        for (var i = 0; i < (item.variantGroups ? item.variantGroups.length : 0); i++) {
+            var variation = item.variantGroups[i];
+            for (var j = 0; j < (variation.patterns ? variation.patterns.length : 0); j++) {
+                var pattern = variation.patterns[j];
+                if (pattern.colors && pattern.colors.includes(colorFilter)) {
+                    matchesColor = true;
+                    item.vIndex = i;
+                    item.pIndex = j;
+                    break;
+                }
+            }
+            if (matchesColor) {
+                break;
+            }
+        }
+
         
         const matches = matchesSearch && matchesCategory && matchesOwned && matchesVersion && matchesSource && matchesSize && matchesTag && matchesColor;
         

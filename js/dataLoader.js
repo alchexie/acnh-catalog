@@ -112,6 +112,8 @@ export function processItemsData(acnhItems, ownedData) {
         owned: owned,
         variantGroups: variantGroups,
         hasVariations: hasVariations,
+        vIndex: 0,  // 默认显示第一个变体
+        pIndex: 0,  // 默认显示第一个图案
         // 提升筛选所需字段到顶层
         versionAdded: item.versionAdded,
         source: item.source,
