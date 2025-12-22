@@ -2,7 +2,7 @@
  * 筛选和排序模块
  */
 
-import { CONFIG, getCategoryName, getSourceName, getCategoryOrder, getSourceOrder } from './config.js';
+import { CONFIG, getCategoryName, getSourceName, getColorName, getCategoryOrder, getSourceOrder, getColorOrder } from './config.js';
 
 /**
  * 筛选物品
@@ -218,19 +218,28 @@ export function populateTagFilter(items) {
  */
 export function populateColorFilter(items) {
     const colorFilter = document.getElementById('colorFilter');
-    const colors = new Set();
+    const itemColors = new Set();
+    const colorOrder = getColorOrder();
     
     items.forEach(item => {
-        const itemColors = item.colors || [];
-        itemColors.forEach(color => colors.add(color));
+        const colors = item.colors || [];
+        colors.forEach(color => itemColors.add(color));
     });
     
-    const sortedColors = [...colors].sort((a, b) => a.localeCompare(b, 'en'));
+    // 按照 translations.json 中定义的顺序显示颜色
+    const orderedColors = colorOrder.filter(color => itemColors.has(color));
     
-    sortedColors.forEach(color => {
+    // 添加未在 translations 中定义的颜色（如果有）
+    itemColors.forEach(color => {
+        if (!orderedColors.includes(color)) {
+            orderedColors.push(color);
+        }
+    });
+    
+    orderedColors.forEach(color => {
         const option = document.createElement('option');
         option.value = color;
-        option.textContent = color;
+        option.textContent = getColorName(color);
         colorFilter.appendChild(option);
     });
 }

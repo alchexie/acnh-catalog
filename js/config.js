@@ -67,6 +67,14 @@ export function getSourceName(source) {
     return translationsCache.sources[source] || source;
 }
 
+// 获取颜色的中文名称
+export function getColorName(color) {
+    if (!translationsCache || !translationsCache.colors) {
+        return color;
+    }
+    return translationsCache.colors[color] || color;
+}
+
 // 获取所有分类的排序顺序
 export function getCategoryOrder() {
     if (!translationsCache || !translationsCache.categories) {
@@ -81,4 +89,12 @@ export function getSourceOrder() {
         return [];
     }
     return Object.keys(translationsCache.sources);
+}
+
+// 获取所有颜色的排序顺序
+export function getColorOrder() {
+    if (!translationsCache || !translationsCache.colors) {
+        return [];
+    }
+    return Object.keys(translationsCache.colors);
 }
