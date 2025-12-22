@@ -28,11 +28,49 @@ const COLOR_MAP = {
 function generateColorBlock(colors) {
     if (colors.length === 0) return '';
     
-    if (colors.length === 1) {
+    const hasColorful = colors.includes('Colorful');
+    
+    if (hasColorful && colors.length === 1) {
+        // 纯 Colorful：彩虹同心圆
+        return `<span class="color-block" style="background: conic-gradient(from 0deg, #e74c3c 0deg, #e67e22 60deg, #f1c40f 120deg, #27ae60 180deg, #1abc9c 240deg, #3498db 300deg, #e74c3c 360deg);"></span>`;
+    } else if (hasColorful) {
+        // Colorful + 其他颜色：扇形分割
+        const nonColorfulColors = colors.filter(c => c !== 'Colorful');
+        const totalSections = nonColorfulColors.length + 1; // +1 for Colorful section
+        const sectionDeg = 360 / totalSections;
+        
+        let gradientStops = [];
+        let currentDeg = 0;
+        
+        // 添加 Colorful 彩虹扇形
+        const colorfulEndDeg = currentDeg + sectionDeg;
+        const rainbowStep = sectionDeg / 6;
+        gradientStops.push(`#e74c3c ${currentDeg}deg`);
+        gradientStops.push(`#e67e22 ${currentDeg + rainbowStep}deg`);
+        gradientStops.push(`#f1c40f ${currentDeg + rainbowStep * 2}deg`);
+        gradientStops.push(`#27ae60 ${currentDeg + rainbowStep * 3}deg`);
+        gradientStops.push(`#1abc9c ${currentDeg + rainbowStep * 4}deg`);
+        gradientStops.push(`#3498db ${currentDeg + rainbowStep * 5}deg`);
+        gradientStops.push(`#9b59b6 ${colorfulEndDeg}deg`);
+        currentDeg = colorfulEndDeg;
+        
+        // 添加其他纯色扇形
+        nonColorfulColors.forEach(color => {
+            const colorValue = COLOR_MAP[color] || '#ccc';
+            const endDeg = currentDeg + sectionDeg;
+            gradientStops.push(`${colorValue} ${currentDeg}deg`);
+            gradientStops.push(`${colorValue} ${endDeg}deg`);
+            currentDeg = endDeg;
+        });
+        
+        const gradient = `conic-gradient(from -135deg, ${gradientStops.join(', ')})`;
+        return `<span class="color-block" style="background: ${gradient};"></span>`;
+    } else if (colors.length === 1) {
+        // 单纯色
         const color = COLOR_MAP[colors[0]] || '#ccc';
         return `<span class="color-block" style="background: ${color};"></span>`;
     } else {
-        // 多色：生成斜向渐变
+        // 多纯色：使用线性渐变
         const colorValues = colors.map(c => COLOR_MAP[c] || '#ccc');
         const step = 100 / colors.length;
         const gradientStops = colorValues.map((color, index) => {
