@@ -121,6 +121,4 @@ MIT
 
 
 ## 相关链接
-https://github.com/Norviah/acnh-images
-https://github.com/phecdaDia/ACNH
 https://github.com/Norviah/animal-crossing
