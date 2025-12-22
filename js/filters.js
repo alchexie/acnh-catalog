@@ -7,18 +7,37 @@ import { CONFIG, getCategoryName, getSourceName, getCategoryOrder, getSourceOrde
 /**
  * 筛选物品
  */
-export function filterItems(allItems, searchTerm, category, ownedFilter, versionFilter, sourceFilter, sizeFilter, tagFilter) {
+export function filterItems(allItems, searchTerm, category, ownedFilter, versionFilter, sourceFilter, sizeFilter, tagFilter, colorFilter) {
     return allItems.filter(item => {
         const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase());
         const matchesCategory = !category || item.category === category;
         const matchesOwned = ownedFilter === CONFIG.FILTER_OPTIONS.ALL || 
                             (ownedFilter === CONFIG.FILTER_OPTIONS.OWNED && item.owned) ||
                             (ownedFilter === CONFIG.FILTER_OPTIONS.NOT_OWNED && !item.owned);
-        const matchesVersion = !versionFilter || item.originalData?.versionAdded === versionFilter;
-        const matchesSource = !sourceFilter || (item.originalData?.source && item.originalData.source.includes(sourceFilter));
-        const matchesSize = !sizeFilter || item.originalData?.size === sizeFilter;
-        const matchesTag = !tagFilter || item.originalData?.tag === tagFilter;
-        return matchesSearch && matchesCategory && matchesOwned && matchesVersion && matchesSource && matchesSize && matchesTag;
+        const matchesVersion = !versionFilter || item.versionAdded === versionFilter;
+        const matchesSource = !sourceFilter || (item.source && item.source.includes(sourceFilter));
+        const matchesSize = !sizeFilter || item.size === sizeFilter;
+        const matchesTag = !tagFilter || item.tag === tagFilter;
+        const matchesColor = !colorFilter || (item.colors && item.colors.includes(colorFilter));
+        
+        const matches = matchesSearch && matchesCategory && matchesOwned && matchesVersion && matchesSource && matchesSize && matchesTag && matchesColor;
+        
+        // 如果有颜色筛选且物品匹配，调整显示的变体
+        if (matches && colorFilter && item.hasVariations && item.variantGroups) {
+            // 查找第一个包含该颜色的变体
+            for (const variantGroup of item.variantGroups) {
+                for (const pattern of variantGroup.patterns) {
+                    if (pattern.colors && pattern.colors.includes(colorFilter)) {
+                        // 更新物品的显示信息为这个变体
+                        item.id = pattern.id;
+                        item.imageUrl = pattern.imageUrl;
+                        return true;
+                    }
+                }
+            }
+        }
+        
+        return matches;
     });
 }
 
@@ -82,7 +101,7 @@ export function populateCategoryFilter(items) {
 export function populateVersionFilter(items) {
     const versionFilter = document.getElementById('versionFilter');
     const versions = [...new Set(items
-        .map(item => item.originalData?.versionAdded)
+        .map(item => item.versionAdded)
         .filter(v => v))]
         .sort((a, b) => {
             // 按版本号排序
@@ -112,7 +131,7 @@ export function populateSourceFilter(items) {
     const itemSources = new Set();
     
     items.forEach(item => {
-        const sources = item.originalData?.source || [];
+        const sources = item.source || [];
         sources.forEach(source => itemSources.add(source));
     });
     
@@ -142,7 +161,7 @@ export function populateSourceFilter(items) {
 export function populateSizeFilter(items) {
     const sizeFilter = document.getElementById('sizeFilter');
     const sizes = [...new Set(items
-        .map(item => item.originalData?.size)
+        .map(item => item.size)
         .filter(s => s))]
         .sort((a, b) => {
             // 按尺寸排序，例如 1x1, 1x2, 2x1, 2x2 等
@@ -166,7 +185,7 @@ export function populateSizeFilter(items) {
 export function populateTagFilter(items) {
     const tagFilter = document.getElementById('tagFilter');
     const tags = [...new Set(items
-        .map(item => item.originalData?.tag)
+        .map(item => item.tag)
         .filter(t => t))]
         .sort((a, b) => a.localeCompare(b, 'en'));
     
@@ -175,5 +194,27 @@ export function populateTagFilter(items) {
         option.value = tag;
         option.textContent = tag;
         tagFilter.appendChild(option);
+    });
+}
+
+/**
+ * 填充颜色筛选器
+ */
+export function populateColorFilter(items) {
+    const colorFilter = document.getElementById('colorFilter');
+    const colors = new Set();
+    
+    items.forEach(item => {
+        const itemColors = item.colors || [];
+        itemColors.forEach(color => colors.add(color));
+    });
+    
+    const sortedColors = [...colors].sort((a, b) => a.localeCompare(b, 'en'));
+    
+    sortedColors.forEach(color => {
+        const option = document.createElement('option');
+        option.value = color;
+        option.textContent = color;
+        colorFilter.appendChild(option);
     });
 }

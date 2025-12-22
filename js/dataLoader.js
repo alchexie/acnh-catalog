@@ -19,17 +19,29 @@ export async function loadCatalogData() {
   try {
     const response = await fetch(CONFIG.DATA_FILES.CATALOG);
     const data = await response.json();
-    return new Set(data.items.map((item) => item.label));
+    const ownedNames = new Set();
+    const ownedIds = new Set();
+    
+    data.items.forEach(item => {
+      // 添加物品名称（主要用于判断拥有状态）
+      ownedNames.add(item.label);
+      // 添加物品的 unique_id
+      ownedIds.add(item.unique_id);
+    });
+    
+    return { ownedNames, ownedIds };
   } catch (error) {
     console.log("无法加载 catalog_items.json，将不显示拥有状态");
-    return new Set();
+    return { ownedNames: new Set(), ownedIds: new Set() };
   }
 }
 
 /**
  * 处理物品数据，添加分类和拥有状态
  */
-export function processItemsData(acnhItems, ownedItemsSet) {
+export function processItemsData(acnhItems, ownedData) {
+  const { ownedNames, ownedIds } = ownedData;
+  
   return acnhItems
     .map((item) => {
       let name = item.translations?.cNzh || item.name;
@@ -45,6 +57,7 @@ export function processItemsData(acnhItems, ownedItemsSet) {
       let variantGroups = [];
       let hasVariations = false;
       let colors = item.colors || [];
+      let owned = false;
 
       if (item.variations && item.variations.length > 0) {
         // 按 variant 分组
@@ -59,7 +72,7 @@ export function processItemsData(acnhItems, ownedItemsSet) {
               patterns: [],
             });
           }
-
+          
           variantMap.get(variantName).patterns.push({
             patternName: v.patternTranslations?.cNzh || v.pattern || "",
             imageUrl:
@@ -86,6 +99,9 @@ export function processItemsData(acnhItems, ownedItemsSet) {
           colors = firstPattern.colors || colors;
         }
       }
+      
+      // 检查是否拥有（通过名称或ID）
+      owned = ownedNames.has(name) || ownedIds.has(item.internalId) || ownedIds.has(item.uniqueEntryId);
 
       return {
         name: name,
@@ -93,9 +109,14 @@ export function processItemsData(acnhItems, ownedItemsSet) {
         category: item.sourceSheet || "Other",
         imageUrl: imageUrl,
         colors: colors,
-        owned: ownedItemsSet.has(name),
+        owned: owned,
         variantGroups: variantGroups,
         hasVariations: hasVariations,
+        // 提升筛选所需字段到顶层
+        versionAdded: item.versionAdded,
+        source: item.source,
+        size: item.size,
+        tag: item.tag,
         // 保留原始数据以备使用
         originalData: item,
       };

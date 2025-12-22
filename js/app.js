@@ -4,7 +4,7 @@
 
 import { CONFIG, loadTranslations } from './config.js';
 import { loadItemsData, loadCatalogData, processItemsData } from './dataLoader.js';
-import { filterItems, sortItems, populateCategoryFilter, populateVersionFilter, populateSourceFilter, populateSizeFilter, populateTagFilter } from './filters.js';
+import { filterItems, sortItems, populateCategoryFilter, populateVersionFilter, populateSourceFilter, populateSizeFilter, populateTagFilter, populateColorFilter } from './filters.js';
 import { renderItems, updateStats, updatePagination } from './itemRenderer.js';
 
 class ACNHCatalogApp {
@@ -41,6 +41,7 @@ class ACNHCatalogApp {
         populateSourceFilter(this.allItems);
         populateSizeFilter(this.allItems);
         populateTagFilter(this.allItems);
+        populateColorFilter(this.allItems);
     }
     
     setupEventListeners() {
@@ -80,6 +81,11 @@ class ACNHCatalogApp {
         
         // 标签筛选
         document.getElementById('tagFilter').addEventListener('change', () => {
+            this.handleFilterChange();
+        });
+        
+        // 颜色筛选
+        document.getElementById('colorFilter').addEventListener('change', () => {
             this.handleFilterChange();
         });
         
@@ -129,8 +135,9 @@ class ACNHCatalogApp {
         const sourceFilter = document.getElementById('sourceFilter').value;
         const sizeFilter = document.getElementById('sizeFilter').value;
         const tagFilter = document.getElementById('tagFilter').value;
+        const colorFilter = document.getElementById('colorFilter').value;
         
-        this.filteredItems = filterItems(this.allItems, searchTerm, category, ownedFilter, versionFilter, sourceFilter, sizeFilter, tagFilter);
+        this.filteredItems = filterItems(this.allItems, searchTerm, category, ownedFilter, versionFilter, sourceFilter, sizeFilter, tagFilter, colorFilter);
         this.handleSortChange();
         this.currentPage = 1;
         this.updateDisplay();
