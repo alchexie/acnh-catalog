@@ -34,9 +34,9 @@ export function processItemsData(acnhItems, ownedItemsSet) {
     // const clothingCategories = ['Accessories', 'Tops', 'Bottoms', 'Dress-Up', 'Headwear', 'Socks', 'Shoes', 'Bags', 'Umbrellas'];
     
     return acnhItems.map(item => {
-        const name = item.translations?.cNzh || item.name;
-        const id = item.internalId;
-        const imageUrl = item.image || item.storageImage || item.closetImage || item.framedImage;
+        let name = item.translations?.cNzh || item.name;
+        let id = item.internalId;
+        let imageUrl = item.image || item.storageImage || item.closetImage || item.framedImage;
         // const isClothing = clothingCategories.includes(item.sourceSheet);
         
         // 处理变体信息
@@ -47,6 +47,14 @@ export function processItemsData(acnhItems, ownedItemsSet) {
                 imageUrl: v.image || v.storageImage || v.closetImage || v.framedImage || imageUrl,
                 id: v.internalId || id
             }));
+        }
+
+        if (variations.length > 0)
+        {
+            // 如果有变体，使用第一个变体的信息作为默认
+            name = variations[0].name || name;
+            id = variations[0].id || id;
+            imageUrl = variations[0].imageUrl || imageUrl;
         }
 
         return {
@@ -60,5 +68,5 @@ export function processItemsData(acnhItems, ownedItemsSet) {
             // 保留原始数据以备使用
             originalData: item
         };
-    });
+    }).sort((a, b) => a.id - b.id);
 }

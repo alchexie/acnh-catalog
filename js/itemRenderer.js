@@ -39,7 +39,6 @@ export function createItemCard(item) {
             <div class="item-name">${item.name}${item.hasVariations && item.variations[0].name ? ' - ' + item.variations[0].name : ''}</div>
             <div class="item-id">ID: ${id || 'N/A'}</div>
             ${item.DiyRecipe ? '<div class="item-recipe">可DIY</div>' : ''}
-            ${item.owned ? '<div class="owned-badge">已拥有</div>' : ''}
             ${variationDots}
         </div>
     `;
