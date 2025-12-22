@@ -30,31 +30,46 @@ export async function loadCatalogData() {
  * 处理物品数据，添加分类和拥有状态
  */
 export function processItemsData(acnhItems, ownedItemsSet) {
-    // 定义服饰类分类
-    // const clothingCategories = ['Accessories', 'Tops', 'Bottoms', 'Dress-Up', 'Headwear', 'Socks', 'Shoes', 'Bags', 'Umbrellas'];
-    
     return acnhItems.map(item => {
         let name = item.translations?.cNzh || item.name;
         let id = item.internalId;
         let imageUrl = item.image || item.storageImage || item.closetImage || item.framedImage;
-        // const isClothing = clothingCategories.includes(item.sourceSheet);
         
-        // 处理变体信息
-        let variations = [];
+        // 处理两层变体信息：variant(款式) 和 pattern(图案)
+        let variantGroups = [];
+        let hasVariations = false;
+        
         if (item.variations && item.variations.length > 0) {
-            variations = item.variations.map(v => ({
-                name: v.variantTranslations?.cNzh || v.variation || '',
-                imageUrl: v.image || v.storageImage || v.closetImage || v.framedImage || imageUrl,
-                id: v.internalId || id
-            }));
-        }
-
-        if (variations.length > 0)
-        {
-            // 如果有变体，使用第一个变体的信息作为默认
-            // name = variations[0].name || name;
-            id = variations[0].id || id;
-            imageUrl = variations[0].imageUrl || imageUrl;
+            // 按 variant 分组
+            const variantMap = new Map();
+            
+            item.variations.forEach(v => {
+                const variantName = v.variantTranslations?.cNzh || v.variation || '';
+                
+                if (!variantMap.has(variantName)) {
+                    variantMap.set(variantName, {
+                        variantName: variantName,
+                        patterns: []
+                    });
+                }
+                
+                variantMap.get(variantName).patterns.push({
+                    patternName: v.patternTranslations?.cNzh || v.pattern || '',
+                    imageUrl: v.image || v.storageImage || v.closetImage || v.framedImage || imageUrl,
+                    id: v.internalId || id,
+                    uniqueEntryId: v.uniqueEntryId
+                });
+            });
+            
+            variantGroups = Array.from(variantMap.values());
+            hasVariations = variantGroups.length > 0;
+            
+            // 使用第一个变体的第一个图案作为默认
+            if (hasVariations && variantGroups[0].patterns.length > 0) {
+                const firstPattern = variantGroups[0].patterns[0];
+                id = firstPattern.id || id;
+                imageUrl = firstPattern.imageUrl || imageUrl;
+            }
         }
 
         return {
@@ -63,8 +78,8 @@ export function processItemsData(acnhItems, ownedItemsSet) {
             category: item.sourceSheet || 'Other',
             imageUrl: imageUrl,
             owned: ownedItemsSet.has(name),
-            variations: variations,
-            hasVariations: variations.length > 0,
+            variantGroups: variantGroups,
+            hasVariations: hasVariations,
             // 保留原始数据以备使用
             originalData: item
         };

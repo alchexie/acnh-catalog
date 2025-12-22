@@ -8,25 +8,60 @@ import { CONFIG } from './config.js';
  * 创建物品卡片HTML
  */
 export function createItemCard(item) {
-    // 优先使用 animal-crossing 提供的图片 URL
-    const imagePath = item.hasVariations && item.variations[0].imageUrl ? item.variations[0].imageUrl : item.imageUrl;
-    const id = item.hasVariations && item.variations[0].id ? item.variations[0].id : item.id;
-    const itemId = `item-${id}`;
+    const imagePath = item.imageUrl;
+    const itemId = `item-${item.id}`;
     
-    // 生成变体圆点HTML
-    let variationDots = '';
-    if (item.hasVariations && item.variations.length > 1) {
-        variationDots = `
-            <div class="variation-dots">
-                ${item.variations.map((v, index) => 
-                    `<span class="variation-dot ${index === 0 ? 'active' : ''}" 
-                           data-index="${index}"
-                           title="${v.name || '变体 ' + (index + 1)}">
-                        ${index + 1}
-                    </span>`
-                ).join('')}
-            </div>
-        `;
+    // 生成两层变体选择器HTML
+    let variationControls = '';
+    if (item.hasVariations && item.variantGroups.length > 0) {
+        // 第一层：variant（款式/颜色）
+        const hasMultipleVariants = item.variantGroups.length > 1;
+        const hasPatterns = item.variantGroups[0].patterns.length > 1;
+        
+        if (hasMultipleVariants) {
+            variationControls += `
+                <div class="variation-row variant-row">
+                    <span class="variation-label">款式:</span>
+                    <div class="variation-dots">
+                        ${item.variantGroups.map((vg, vIndex) => 
+                            `<span class="variation-dot variant-dot ${vIndex === 0 ? 'active' : ''}" 
+                                   data-variant-index="${vIndex}"
+                                   data-pattern-index="0"
+                                   title="${vg.variantName || '款式 ' + (vIndex + 1)}">
+                                ${vIndex + 1}
+                            </span>`
+                        ).join('')}
+                    </div>
+                </div>
+            `;
+        }
+        
+        // 第二层：pattern（图案）
+        if (hasPatterns) {
+            variationControls += `
+                <div class="variation-row pattern-row">
+                    <span class="variation-label">图案:</span>
+                    <div class="variation-dots">
+                        ${item.variantGroups[0].patterns.map((p, pIndex) => 
+                            `<span class="variation-dot pattern-dot ${pIndex === 0 ? 'active' : ''}" 
+                                   data-variant-index="0"
+                                   data-pattern-index="${pIndex}"
+                                   title="${p.patternName || '图案 ' + (pIndex + 1)}">
+                                ${pIndex + 1}
+                            </span>`
+                        ).join('')}
+                    </div>
+                </div>
+            `;
+        }
+    }
+    
+    // 获取当前显示的名称
+    let displayName = item.name;
+    if (item.hasVariations && item.variantGroups.length > 0) {
+        const variant = item.variantGroups[0];
+        if (variant.variantName) displayName += ` - ${variant.variantName}`;
+        if (variant.patterns[0].patternName) displayName += ` - ${variant.patterns[0].patternName}`;
     }
     
     return `
@@ -36,10 +71,10 @@ export function createItemCard(item) {
                  class="item-image"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
             <div class="item-image missing" style="display:none;">无图片</div>
-            <div class="item-name">${item.name}${item.hasVariations && item.variations[0].name ? ' - ' + item.variations[0].name : ''}</div>
-            <div class="item-id">ID: ${id || 'N/A'}</div>
+            <div class="item-name">${displayName}</div>
+            <div class="item-id">ID: ${item.id || 'N/A'}</div>
             ${item.DiyRecipe ? '<div class="item-recipe">可DIY</div>' : ''}
-            ${variationDots}
+            ${variationControls}
         </div>
     `;
 }
@@ -70,28 +105,69 @@ function setupVariationListeners(container) {
             const dot = e.target;
             const card = dot.closest('.item-card');
             const itemData = JSON.parse(card.dataset.item);
-            const variantIndex = parseInt(dot.dataset.index);
             
-            // 切换激活状态
-            card.querySelectorAll('.variation-dot').forEach(d => d.classList.remove('active'));
-            dot.classList.add('active');
+            const variantIndex = parseInt(dot.dataset.variantIndex);
+            const patternIndex = parseInt(dot.dataset.patternIndex);
             
-            // 更新图片和名称
-            const variation = itemData.variations[variantIndex];
-            const img = card.querySelector('.item-image');
-            const nameEl = card.querySelector('.item-name');
-            
-            img.src = variation.imageUrl;
-            img.style.display = 'block';
-            img.nextElementSibling.style.display = 'none';
-            
-            nameEl.textContent = itemData.name + (variation.name ? ' - ' + variation.name : '');
-
-            // 更新id
-            const idEl = card.querySelector('.item-id');
-            idEl.textContent = `ID: ${variation.id || itemData.id || 'N/A'}`;
+            // 如果点击的是 variant 圆点
+            if (dot.classList.contains('variant-dot')) {
+                // 切换 variant 激活状态
+                card.querySelectorAll('.variant-dot').forEach(d => d.classList.remove('active'));
+                dot.classList.add('active');
+                
+                // 重新生成 pattern 圆点（如果有）
+                const patternRow = card.querySelector('.pattern-row .variation-dots');
+                if (patternRow && itemData.variantGroups[variantIndex].patterns.length > 1) {
+                    patternRow.innerHTML = itemData.variantGroups[variantIndex].patterns.map((p, pIndex) => 
+                        `<span class="variation-dot pattern-dot ${pIndex === 0 ? 'active' : ''}" 
+                               data-variant-index="${variantIndex}"
+                               data-pattern-index="${pIndex}"
+                               title="${p.patternName || '图案 ' + (pIndex + 1)}">
+                            ${pIndex + 1}
+                        </span>`
+                    ).join('');
+                }
+                
+                // 使用第一个 pattern
+                updateItemDisplay(card, itemData, variantIndex, 0);
+            }
+            // 如果点击的是 pattern 圆点
+            else if (dot.classList.contains('pattern-dot')) {
+                // 切换 pattern 激活状态
+                card.querySelectorAll('.pattern-dot').forEach(d => d.classList.remove('active'));
+                dot.classList.add('active');
+                
+                // 更新显示
+                updateItemDisplay(card, itemData, variantIndex, patternIndex);
+            }
         }
     });
+}
+
+/**
+ * 更新物品显示
+ */
+function updateItemDisplay(card, itemData, variantIndex, patternIndex) {
+    const variant = itemData.variantGroups[variantIndex];
+    const pattern = variant.patterns[patternIndex];
+    
+    const img = card.querySelector('.item-image');
+    const nameEl = card.querySelector('.item-name');
+    const idEl = card.querySelector('.item-id');
+    
+    // 更新图片
+    img.src = pattern.imageUrl;
+    img.style.display = 'block';
+    img.nextElementSibling.style.display = 'none';
+    
+    // 更新名称
+    let displayName = itemData.name;
+    if (variant.variantName) displayName += ` - ${variant.variantName}`;
+    if (pattern.patternName) displayName += ` - ${pattern.patternName}`;
+    nameEl.textContent = displayName;
+    
+    // 更新ID
+    idEl.textContent = `ID: ${pattern.id || itemData.id || 'N/A'}`;
 }
 
 /**

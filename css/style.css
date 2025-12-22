@@ -221,13 +221,27 @@ h1 {
 }
 
 /* 变体圆点样式 */
+.variation-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    padding: 6px 0;
+}
+
+.variation-label {
+    font-size: 11px;
+    color: #6c757d;
+    font-weight: 600;
+    min-width: 40px;
+}
+
 .variation-dots {
     display: flex;
     gap: 6px;
-    margin-top: 10px;
-    padding: 8px 0;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
+    flex: 1;
 }
 
 .variation-dot {
@@ -256,6 +270,17 @@ h1 {
     color: white;
     border-color: #5568d3;
     box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+}
+
+/* 区分两层变体的颜色 */
+.variant-dot.active {
+    background: #667eea;
+    border-color: #5568d3;
+}
+
+.pattern-dot.active {
+    background: #764ba2;
+    border-color: #6a3f8f;
 }
 
 .pagination {
