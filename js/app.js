@@ -4,7 +4,7 @@
 
 import { CONFIG } from './config.js';
 import { loadItemsData, loadCatalogData, processItemsData } from './dataLoader.js';
-import { filterItems, sortItems, populateCategoryFilter, populateVersionFilter } from './filters.js';
+import { filterItems, sortItems, populateCategoryFilter, populateVersionFilter, populateSourceFilter } from './filters.js';
 import { renderItems, updateStats, updatePagination } from './itemRenderer.js';
 
 class ACNHCatalogApp {
@@ -37,6 +37,7 @@ class ACNHCatalogApp {
         
         populateCategoryFilter(this.allItems);
         populateVersionFilter(this.allItems);
+        populateSourceFilter(this.allItems);
     }
     
     setupEventListeners() {
@@ -106,8 +107,9 @@ class ACNHCatalogApp {
         const category = document.getElementById('categoryFilter').value;
         const ownedFilter = document.getElementById('ownedFilter').value;
         const versionFilter = document.getElementById('versionFilter').value;
+        const sourceFilter = document.getElementById('sourceFilter').value;
         
-        this.filteredItems = filterItems(this.allItems, searchTerm, category, ownedFilter, versionFilter);
+        this.filteredItems = filterItems(this.allItems, searchTerm, category, ownedFilter, versionFilter, sourceFilter);
         this.handleSortChange();
         this.currentPage = 1;
         this.updateDisplay();

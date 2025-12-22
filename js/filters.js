@@ -7,7 +7,7 @@ import { CONFIG } from './config.js';
 /**
  * 筛选物品
  */
-export function filterItems(allItems, searchTerm, category, ownedFilter, versionFilter) {
+export function filterItems(allItems, searchTerm, category, ownedFilter, versionFilter, sourceFilter) {
     return allItems.filter(item => {
         const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase());
         const matchesCategory = !category || item.category === category;
@@ -15,7 +15,8 @@ export function filterItems(allItems, searchTerm, category, ownedFilter, version
                             (ownedFilter === CONFIG.FILTER_OPTIONS.OWNED && item.owned) ||
                             (ownedFilter === CONFIG.FILTER_OPTIONS.NOT_OWNED && !item.owned);
         const matchesVersion = !versionFilter || item.originalData?.versionAdded === versionFilter;
-        return matchesSearch && matchesCategory && matchesOwned && matchesVersion;
+        const matchesSource = !sourceFilter || (item.originalData?.source && item.originalData.source.includes(sourceFilter));
+        return matchesSearch && matchesCategory && matchesOwned && matchesVersion && matchesSource;
     });
 }
 
@@ -87,5 +88,25 @@ export function populateVersionFilter(items) {
         option.value = version;
         option.textContent = `v${version}`;
         versionFilter.appendChild(option);
+    });
+}
+
+/**
+ * 填充来源筛选器
+ */
+export function populateSourceFilter(items) {
+    const sourceFilter = document.getElementById('sourceFilter');
+    const sources = new Set();
+    
+    items.forEach(item => {
+        const itemSources = item.originalData?.source || [];
+        itemSources.forEach(source => sources.add(source));
+    });
+    
+    [...sources].sort().forEach(source => {
+        const option = document.createElement('option');
+        option.value = source;
+        option.textContent = source;
+        sourceFilter.appendChild(option);
     });
 }

@@ -142,6 +142,21 @@ h1 {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+/* 来源信息 */
+.source-info {
+    font-size: 11px;
+    color: #6c757d;
+    margin-top: 5px;
+    padding: 4px 8px;
+    background: #f8f9fa;
+    border-radius: 4px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
 .item-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);

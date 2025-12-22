@@ -68,6 +68,11 @@ export function createItemCard(item) {
     const versionAdded = item.originalData?.versionAdded || '';
     const versionBadge = versionAdded ? `<div class="version-badge">${versionAdded}</div>` : '';
     
+    // 获取来源信息
+    const sources = item.originalData?.source || [];
+    const sourceText = sources.length > 0 ? sources.join(', ') : '';
+    const sourceBadge = sourceText ? `<div class="source-info" title="${sourceText}">📍 ${sourceText}</div>` : '';
+    
     return `
         <div class="item-card ${item.owned ? 'item-owned' : ''}" id="${itemId}" data-item='${JSON.stringify(item).replace(/'/g, "&apos;")}'>
             ${versionBadge}
@@ -78,6 +83,7 @@ export function createItemCard(item) {
             <div class="item-image missing" style="display:none;">无图片</div>
             <div class="item-name">${displayName}</div>
             <div class="item-id">ID: ${item.id || 'N/A'}</div>
+            ${sourceBadge}
             ${item.DiyRecipe ? '<div class="item-recipe">可DIY</div>' : ''}
             ${variationControls}
         </div>
