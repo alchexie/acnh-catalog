@@ -6,7 +6,8 @@ export const CONFIG = {
     // 数据文件路径
     DATA_FILES: {
         ITEMS: 'config/acnh-items.json',
-        CATALOG: 'catalog_items.json'
+        CATALOG: 'catalog_items.json',
+        TRANSLATIONS: 'config/translations.json'
     },
     
     // 分页配置
@@ -32,3 +33,38 @@ export const CONFIG = {
         NOT_OWNED: 'not-owned'
     }
 };
+
+// 翻译缓存
+let translationsCache = null;
+
+// 加载翻译数据
+export async function loadTranslations() {
+    if (translationsCache) {
+        return translationsCache;
+    }
+    
+    try {
+        const response = await fetch(CONFIG.DATA_FILES.TRANSLATIONS);
+        translationsCache = await response.json();
+        return translationsCache;
+    } catch (error) {
+        console.error('加载翻译数据失败:', error);
+        return { categories: {}, sources: {} };
+    }
+}
+
+// 获取分类的中文名称
+export function getCategoryName(category) {
+    if (!translationsCache || !translationsCache.categories) {
+        return category;
+    }
+    return translationsCache.categories[category] || category;
+}
+
+// 获取来源的中文名称
+export function getSourceName(source) {
+    if (!translationsCache || !translationsCache.sources) {
+        return source;
+    }
+    return translationsCache.sources[source] || source;
+}

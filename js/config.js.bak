@@ -1,0 +1,107 @@
+/**
+ * 应用配置文件
+ */
+
+export const CONFIG = {
+    // 数据文件路径
+    DATA_FILES: {
+        ITEMS: 'config/acnh-items.json',
+        CATALOG: 'catalog_items.json',
+        TRANSLATIONS: 'config/translations.json'
+    },
+    
+    // 分页配置
+    PAGINATION: {
+        DEFAULT_PER_PAGE: 40,
+        OPTIONS: [20, 40, 60, 100, 'all']
+    },
+    
+    // 排序选项
+    SORT_OPTIONS: {
+        NAME_ASC: 'name-asc',
+        NAME_DESC: 'name-desc',
+        PRICE_ASC: 'price-asc',
+        PRICE_DESC: 'price-desc',
+        ID_ASC: 'id-asc',
+        ID_DESC: 'id-desc'
+    },
+    
+    // 筛选选项
+    FILTER_OPTIONS: {
+        ALL: 'all',
+        OWNED: 'owned',
+        NOT_OWNED: 'not-owned'
+    },
+    
+    // 分类中文翻译
+    CATEGORY_TRANSLATIONS: {
+        'Housewares': '家具',
+        'Miscellaneous': '杂项',
+        'Wall-mounted': '壁挂',
+        'Wallpaper': '壁纸',
+        'Floors': '地板',
+        'Rugs': '地毯',
+        'Tops': '上衣',
+        'Bottoms': '下装',
+        'Dress-Up': '连衣裙',
+        'Headwear': '帽子',
+        'Accessories': '配饰',
+        'Socks': '袜子',
+        'Shoes': '鞋子',
+        'Bags': '包包',
+        'Umbrellas': '雨伞',
+        'Artwork': '艺术品',
+        'Fossils': '化石',
+        'Photos': '照片',
+        'Posters': '海报',
+        'Fencing': '栅栏',
+        'Tools': '工具',
+        'Music': '音乐',
+        'Other': '其他'
+    },
+    
+    // 来源中文翻译
+    SOURCE_TRANSLATIONS: {
+        'Nook Shopping': '狸猫商店',
+        'Nook Shopping Promotion': '狸猫商店促销',
+        'Nook Shopping Seasonal': '狸猫商店季节限定',
+        'Nook Shopping Daily Selection': '狸猫商店每日精选',
+        'Nook\'s Cranny': '商店',
+        'Able Sisters': '服装店',
+        'Crafting': '制作',
+        'DIY Recipes': 'DIY配方',
+        'Villagers': '村民',
+        'Balloons': '气球',
+        'Picking fruit': '摘水果',
+        'Shaking trees': '摇树',
+        'Fishing': '钓鱼',
+        'Bug catching': '抓虫',
+        'Diving': '潜水',
+        'Redd': '狐利',
+        'Kicks': '踢踢',
+        'Saharah': '然然',
+        'Leif': '然然',
+        'Gulliver': '吕游',
+        'Gullivarrr': '海盗吕游',
+        'Wisp': '幽幽',
+        'Celeste': '傅达',
+        'K.K. Slider': 'K.K.',
+        'Pascal': '吕游',
+        'Label': '绢儿',
+        'C.J.': '然然',
+        'Flick': '龙克斯',
+        'Daisy Mae': '曹卖',
+        'Mom': '妈妈',
+        'Birthday': '生日',
+        'Seasonal Event': '季节活动',
+        'Event': '活动',
+        'Special NPCs': '特殊NPC',
+        'Initial House': '初始房屋',
+        'Nook Miles Redemption': '里程兑换',
+        'HHA': 'HHA',
+        'Message bottle': '漂流瓶',
+        'Trash': '垃圾',
+        'Dig Spot': '挖掘点',
+        'Other': '其他'
+    }
+};

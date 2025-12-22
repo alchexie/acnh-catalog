@@ -2,7 +2,7 @@
  * 物品渲染模块
  */
 
-import { CONFIG } from './config.js';
+import { CONFIG, getSourceName } from './config.js';
 
 /**
  * 创建物品卡片HTML
@@ -70,8 +70,9 @@ export function createItemCard(item) {
     
     // 获取来源信息
     const sources = item.originalData?.source || [];
-    const sourceText = sources.length > 0 ? sources.join(', ') : '';
-    const sourceBadge = sourceText ? `<div class="source-info" title="${sourceText}">📍 ${sourceText}</div>` : '';
+    const sourceTextCN = sources.length > 0 ? sources.map(s => getSourceName(s)).join(', ') : '';
+    const sourceTextEN = sources.length > 0 ? sources.join(', ') : '';
+    const sourceBadge = sourceTextCN ? `<div class="source-info" title="${sourceTextEN}">📍 ${sourceTextCN}</div>` : '';
     
     return `
         <div class="item-card ${item.owned ? 'item-owned' : ''}" id="${itemId}" data-item='${JSON.stringify(item).replace(/'/g, "&apos;")}'>

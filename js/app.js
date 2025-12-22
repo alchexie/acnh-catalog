@@ -2,7 +2,7 @@
  * 主应用入口
  */
 
-import { CONFIG } from './config.js';
+import { CONFIG, loadTranslations } from './config.js';
 import { loadItemsData, loadCatalogData, processItemsData } from './dataLoader.js';
 import { filterItems, sortItems, populateCategoryFilter, populateVersionFilter, populateSourceFilter } from './filters.js';
 import { renderItems, updateStats, updatePagination } from './itemRenderer.js';
@@ -19,6 +19,7 @@ class ACNHCatalogApp {
     
     async init() {
         try {
+            await loadTranslations();
             await this.loadData();
             this.setupEventListeners();
             this.updateDisplay();

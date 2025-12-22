@@ -2,7 +2,7 @@
  * 筛选和排序模块
  */
 
-import { CONFIG } from './config.js';
+import { CONFIG, getCategoryName, getSourceName } from './config.js';
 
 /**
  * 筛选物品
@@ -53,12 +53,12 @@ export function sortItems(items, sortValue) {
  */
 export function populateCategoryFilter(items) {
     const categoryFilter = document.getElementById('categoryFilter');
-    const categories = [...new Set(items.map(item => item.category))];
+    const categories = [...new Set(items.map(item => item.category))].sort();
     
     categories.forEach(category => {
         const option = document.createElement('option');
         option.value = category;
-        option.textContent = category;
+        option.textContent = getCategoryName(category);
         categoryFilter.appendChild(option);
     });
 }
@@ -106,7 +106,7 @@ export function populateSourceFilter(items) {
     [...sources].sort().forEach(source => {
         const option = document.createElement('option');
         option.value = source;
-        option.textContent = source;
+        option.textContent = getSourceName(source);
         sourceFilter.appendChild(option);
     });
 }
