@@ -93,12 +93,7 @@ watch(() => props.allItems, (newItems) => {
 
 <template>
   <div class="controls">
-    <input
-      v-model="searchInput"
-      type="text"
-      class="search-box"
-      placeholder="🔍 搜索物品名称..."
-    >
+    <input v-model="searchInput" type="text" class="search-box" placeholder="🔍 搜索物品名称...">
 
     <div class="filter-section">
       <label>分类：</label>
@@ -184,10 +179,11 @@ watch(() => props.allItems, (newItems) => {
 
 <style scoped>
 .controls {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 20px;
 }
 

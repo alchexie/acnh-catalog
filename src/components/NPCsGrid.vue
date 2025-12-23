@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { NPC } from '../types/npc';
 import { ENTITY_ICONS, UI_TEXT } from '../constants';
-import { getChineseText } from '../utils/common';
+import { getChineseText, lightenColor } from '../utils/common';
 import VersionBadge from './VersionBadge.vue';
 
 interface Props {
@@ -14,17 +14,22 @@ defineProps<Props>();
 const getGenderIcon = (gender: string): string => {
   return gender === 'Male' ? ENTITY_ICONS.MALE : ENTITY_ICONS.FEMALE;
 };
+
 </script>
 
 <template>
   <div class="npcs-grid">
-    <div v-for="npc in npcs" :key="npc.uniqueEntryId" class="npc-card">
+    <div v-for="npc in npcs" :key="npc.uniqueEntryId" class="npc-card"
+      :style="{
+        background: (npc.bubbleColor || '#ffe082'),
+        border: '3px solid ' + lightenColor(npc.bubbleColor || '#ffe082', -0.5)
+      }">
       <VersionBadge :version="npc.versionAdded" />
       <div class="npc-image-wrapper">
         <img :src="npc.iconImage" :alt="npc.name" class="npc-image" />
       </div>
       <div class="npc-info">
-        <h3 class="npc-name">{{ getChineseText(npc) }}</h3>
+        <h3 class="npc-name" :style="{ color: npc.nameColor || '#e67e22' }">{{ getChineseText(npc) }}</h3>
         <div class="npc-details">
           <span class="detail-item">
             {{ getGenderIcon(npc.gender) }}
@@ -48,7 +53,7 @@ const getGenderIcon = (gender: string): string => {
 }
 
 .npc-card {
-  background: white;
+  /* 背景色由动态style控制 */
   border-radius: 15px;
   padding: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);

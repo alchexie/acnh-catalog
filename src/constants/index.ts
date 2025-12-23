@@ -50,15 +50,15 @@ export const UI_TEXT = {
     REACTIONS_UNIT: '个表情'
   },
   LABELS: {
-    PRICE: '售价:',
-    LOCATION: '位置:',
-    SIZE: '大小:',
-    SOURCE: '来源:',
-    VERSION: '版本:',
-    EVENT: '活动:',
-    HOBBY: '爱好:',
-    BIRTHDAY: '生日:',
-    ID: 'ID:'
+    PRICE: '售价',
+    LOCATION: '位置',
+    SIZE: '大小',
+    SOURCE: '来源',
+    VERSION: '版本',
+    EVENT: '活动',
+    HOBBY: '爱好',
+    BIRTHDAY: '生日',
+    ID: 'ID'
   },
   CURRENCY: '铃钱'
 } as const;

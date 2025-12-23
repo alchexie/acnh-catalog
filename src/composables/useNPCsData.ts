@@ -26,7 +26,11 @@ export function useNPCsData(): UseNPCsDataReturn {
       loading.value = true;
       error.value = '';
       
-      allNPCs.value = await loadNPCsData();
+      const npcs = await loadNPCsData();
+      // 过滤掉 iconImage 为 null 的 NPC，并按 internalId 排序
+      allNPCs.value = npcs
+        .filter(npc => npc.iconImage !== null)
+        .sort((a, b) => a.internalId - b.internalId);
       
       loading.value = false;
     } catch (err) {

@@ -26,7 +26,7 @@ defineProps<Props>();
             <span class="detail-value">{{ item.category }}</span>
           </div>
           <div class="detail-row">
-            <span class="detail-label">💰 价格</span>
+            <span class="detail-label">售价</span>
             <span class="detail-value price">{{ formatPrice(item.buy) }} 铃钱</span>
           </div>
           <div class="detail-row">
@@ -42,7 +42,7 @@ defineProps<Props>();
 <style scoped>
 .construction-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
   padding: 20px 0;
 }
@@ -65,7 +65,7 @@ defineProps<Props>();
 .construction-image-wrapper {
   width: 100px;
   height: 100px;
-  border-radius: 50%;
+  border-radius: 8px;
   overflow: hidden;
   margin: 0 auto 15px;
   background: linear-gradient(135deg, #f5f5f5 0%, #eeeeee 100%);

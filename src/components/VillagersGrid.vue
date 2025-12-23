@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Villager } from '../types/villager';
 import { ENTITY_ICONS, PERSONALITY_MAP, UI_TEXT } from '../constants';
-import { getChineseText } from '../utils/common';
+import { getChineseText, lightenColor } from '../utils/common';
 import VersionBadge from './VersionBadge.vue';
 
 interface Props {
@@ -19,30 +19,32 @@ const getGenderIcon = (gender: string): string => {
 const getPersonalityChinese = (personality: string): string => {
   return PERSONALITY_MAP[personality] || personality;
 };
+
 </script>
 
 <template>
   <div class="villagers-grid">
-    <div v-for="villager in villagers" :key="villager.name" class="villager-card">
+    <div v-for="villager in villagers" :key="villager.name" class="villager-card"
+      :style="{
+        background: (villager.bubbleColor || '#4a9b4f'),
+        border: '3px solid ' + lightenColor(villager.bubbleColor || '#4a9b4f', -0.5)
+      }">
       <VersionBadge :version="villager.versionAdded" />
       <div class="villager-image-wrapper">
         <img :src="villager.iconImage" :alt="villager.name" class="villager-image" />
       </div>
       <div class="villager-info">
-        <h3 class="villager-name">{{ getChineseText(villager) }}</h3>
+        <h3 class="villager-name" :style="{ color: villager.nameColor || '#4a9b4f' }">{{ getChineseText(villager) }}</h3>
         <div class="villager-details">
           <span class="detail-item">
             {{ getGenderIcon(villager.gender) }} {{ villager.species }}
           </span>
-          <span class="detail-item personality">
-            {{ getPersonalityChinese(villager.personality) }}
+          <span class="detail-item">
+            {{ getPersonalityChinese(villager.personality) }} / {{ villager.hobby }}
           </span>
           <span class="detail-item">
             🎂 {{ villager.birthday }}
           </span>
-        </div>
-        <div class="villager-hobby">
-          {{ UI_TEXT.LABELS.HOBBY }} {{ villager.hobby }}
         </div>
       </div>
     </div>
@@ -52,13 +54,13 @@ const getPersonalityChinese = (personality: string): string => {
 <style scoped>
 .villagers-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
   padding: 20px 0;
 }
 
 .villager-card {
-  background: white;
+  /* 背景色由动态style控制 */
   border-radius: 15px;
   padding: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);

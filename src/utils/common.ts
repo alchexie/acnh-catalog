@@ -1,4 +1,28 @@
 /**
+ * 颜色变浅工具函数（支持 #RRGGBB 格式），白色边框时返回浅灰色
+ * @param hex 颜色字符串
+ * @param percent 变浅比例，默认0.7
+ */
+export function lightenColor(hex: string, percent = 0.7): string {
+  if (!hex) return '#f5f5f5';
+  const c = hex.replace('#', '').toLowerCase();
+  // 判断常见白色
+  if (c === 'fff' || c === 'ffffff' || c === 'fffce9' || c === 'fffbe6') return '#f5f5f5';
+  if (c.length === 3) {
+    if (c === 'fff') return '#f5f5f5';
+    hex = '#' + c.split('').map(x => x + x).join('');
+  }
+  if (c.length !== 6) return '#f5f5f5';
+  const num = parseInt(c, 16);
+  let r = (num >> 16) & 0xff;
+  let g = (num >> 8) & 0xff;
+  let b = num & 0xff;
+  r = Math.round(r + (255 - r) * percent);
+  g = Math.round(g + (255 - g) * percent);
+  b = Math.round(b + (255 - b) * percent);
+  return `rgb(${r},${g},${b})`;
+}
+/**
  * 通用辅助函数
  * 提供跨模块使用的工具方法
  */

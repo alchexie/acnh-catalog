@@ -12,7 +12,12 @@ export function useConstructionData() {
     loading.value = true;
     error.value = null;
     try {
-      allConstruction.value = await loadConstructionData();
+      const data = await loadConstructionData();
+      // 将 category 为 null 的归类为"未知"
+      allConstruction.value = data.map(item => ({
+        ...item,
+        category: item.category || '未知'
+      }));
     } catch (e) {
       error.value = DATA_LOADING.ERROR_GENERIC;
       console.error('Failed to load construction:', e);

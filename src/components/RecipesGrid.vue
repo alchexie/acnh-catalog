@@ -85,7 +85,7 @@ const goToMaterial = (materialKey: string) => {
 <style scoped>
 .recipes-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
     padding: 20px 0;
 }

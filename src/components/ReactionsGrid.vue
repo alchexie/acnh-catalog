@@ -22,13 +22,13 @@ defineProps<Props>();
       <div class="reaction-info">
         <h3 class="reaction-name">{{ getChineseText(reaction) }}</h3>
         <div class="reaction-details">
-          <div class="detail-item source">
-            <span class="label">{{ UI_TEXT.LABELS.SOURCE }}</span>
-            <span class="value">{{ joinArray(reaction.source) }}</span>
+          <div class="detail-row">
+            <span class="detail-label">{{ UI_TEXT.LABELS.SOURCE }}</span>
+            <span class="detail-value">{{ joinArray(reaction.source) }}</span>
           </div>
-          <div class="detail-item event" v-if="reaction.seasonEvent">
-            <span class="label">{{ UI_TEXT.LABELS.EVENT }}</span>
-            <span class="value">{{ reaction.seasonEvent }}</span>
+          <div class="detail-row" v-if="reaction.seasonEvent">
+            <span class="detail-label">{{ UI_TEXT.LABELS.EVENT }}</span>
+            <span class="detail-value">{{ reaction.seasonEvent }}</span>
           </div>
         </div>
       </div>
@@ -97,36 +97,25 @@ defineProps<Props>();
   display: flex;
   flex-direction: column;
   gap: 8px;
-  text-align: left;
 }
-
-.detail-item {
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   padding: 6px 10px;
   background-color: #f9f9f9;
   border-radius: 8px;
-  font-size: 0.85em;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.detail-item.source {
-  background-color: #f3e5f5;
-}
-
-.detail-item.event {
-  background-color: #ffe0b2;
-}
-
-.detail-item .label {
-  font-weight: 600;
-  color: #666;
   font-size: 0.9em;
 }
-
-.detail-item .value {
+.detail-label {
+  font-weight: 600;
+  color: #666;
+}
+.detail-value {
   color: #333;
+  text-align: right;
   word-wrap: break-word;
+  max-width: 65%;
 }
 
 @media (max-width: 768px) {

@@ -12,7 +12,9 @@ export function useRecipesData() {
     loading.value = true;
     error.value = null;
     try {
-      allRecipes.value = await loadRecipesData();
+      const recipes = await loadRecipesData();
+      allRecipes.value = recipes
+        .sort((a, b) => a.internalId - b.internalId);
     } catch (e) {
       error.value = DATA_LOADING.ERROR_GENERIC;
       console.error('Failed to load recipes:', e);

@@ -85,7 +85,7 @@ const getLocation = (creature: Creature): string => {
 
 .creatures-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
   padding: 20px 0;
 }

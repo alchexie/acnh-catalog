@@ -12,23 +12,30 @@ const { allRecipes, loading, error, loadData } = useRecipesData();
 // 加载物品数据以便查找材料
 const { loadData: loadItemsData } = useItemsData();
 
+
+// 分类筛选
+const selectedCategory = ref('all');
+const categories = computed(() => {
+  const set = new Set<string>();
+  allRecipes.value.forEach(r => r.category && set.add(r.category));
+  return ['all', ...Array.from(set)];
+});
+const filteredRecipes = computed(() => {
+  if (selectedCategory.value === 'all') return allRecipes.value;
+  return allRecipes.value.filter(r => r.category === selectedCategory.value);
+});
+
 // 分页相关
 const itemsPerPage = ref(20);
 const currentPage = ref(1);
-
-// 计算总页数
 const totalPages = computed(() => {
-  return Math.ceil(allRecipes.value.length / itemsPerPage.value);
+  return Math.ceil(filteredRecipes.value.length / itemsPerPage.value);
 });
-
-// 当前页显示的配方
 const recipesToDisplay = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage.value;
   const end = start + itemsPerPage.value;
-  return allRecipes.value.slice(start, end);
+  return filteredRecipes.value.slice(start, end);
 });
-
-// 处理翻页
 const handlePageChange = (page: number) => {
   currentPage.value = page;
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -48,7 +55,14 @@ onMounted(() => {
     
     <template v-else>
       <div class="stats">
-        <p class="stat-item">{{ UI_TEXT.STATS.TOTAL_ITEMS }}{{ allRecipes.length }} 个配方</p>
+        <p class="stat-item">{{ UI_TEXT.STATS.TOTAL_ITEMS }}{{ filteredRecipes.length }} 个配方</p>
+      </div>
+      <div class="category-filter">
+        <button v-for="cat in categories" :key="cat" class="category-btn"
+          :class="{ active: selectedCategory === cat }" @click="selectedCategory = cat">
+          <span class="category-label">{{ cat === 'all' ? '全部' : cat }}</span>
+          <span class="category-count">({{ cat === 'all' ? allRecipes.length : allRecipes.filter(r => r.category === cat).length }})</span>
+        </button>
       </div>
       <RecipesGrid :recipes="recipesToDisplay" />
       <Pagination
@@ -56,7 +70,7 @@ onMounted(() => {
         :current-page="currentPage"
         :total-pages="totalPages"
         :per-page="itemsPerPage"
-        :items-count="allRecipes.length"
+        :items-count="filteredRecipes.length"
         @page-change="handlePageChange"
       />
     </template>
@@ -64,6 +78,44 @@ onMounted(() => {
 </template>
 
 <style scoped>
+.category-filter {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.category-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1em;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.category-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  border-color: #4caf50;
+}
+.category-btn.active {
+  background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+  color: white;
+  border-color: #4caf50;
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+.category-label {
+  font-weight: 600;
+}
+.category-count {
+  font-size: 0.9em;
+  opacity: 0.8;
+}
 .recipes-tab {
   width: 100%;
 }

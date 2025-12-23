@@ -28,4 +28,6 @@ export interface Villager {
   kitchenware?: string;
   versionAdded?: string;
   translations?: Translation;
+  bubbleColor?: string;
+  nameColor?: string;
 }
