@@ -1,3 +1,5 @@
+import type { Translation } from './index';
+
 /**
  * 村民数据类型
  */
@@ -25,22 +27,5 @@ export interface Villager {
   diyWorkbench?: string;
   kitchenware?: string;
   versionAdded?: string;
-  translations?: {
-    sourceSheet: string;
-    id: string;
-    eUde?: string;
-    eUen?: string;
-    eUit?: string;
-    eUnl?: string;
-    eUru?: string;
-    eUfr?: string;
-    eUes?: string;
-    uSen?: string;
-    uSfr?: string;
-    uSes?: string;
-    jPja?: string;
-    kRko?: string;
-    tWzh?: string;
-    cNzh?: string;
-  };
+  translations?: Translation;
 }

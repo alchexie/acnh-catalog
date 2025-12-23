@@ -1,3 +1,5 @@
+import type { Translation } from './index';
+
 /**
  * 生物数据类型（昆虫、鱼类等）
  */
@@ -24,25 +26,7 @@ export interface Creature {
   furnitureFilename: string;
   internalId: number;
   uniqueEntryId: string;
-  translations?: {
-    sourceSheet: string;
-    id: number;
-    eUde?: string;
-    eUen?: string;
-    eUit?: string;
-    eUnl?: string;
-    eUru?: string;
-    eUfr?: string;
-    eUes?: string;
-    uSen?: string;
-    uSfr?: string;
-    uSes?: string;
-    jPja?: string;
-    kRko?: string;
-    tWzh?: string;
-    cNzh?: string;
-    plural?: boolean;
-  };
+  translations?: Translation;
   // 时间相关（会在某些生物中出现）
   nMonths?: string[];
   sMonths?: string[];
