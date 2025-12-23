@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, reactive, onMounted, watch } from 'vue';
+import { computed, ref, onMounted, watch } from 'vue';
 import type { Item } from '../types';
 import { getSourceName, getTagName } from '../services/dataService';
 import { ItemModel } from '../models';
@@ -10,85 +10,28 @@ const props = defineProps<{
   colorFilter?: string;
 }>();
 
-// 直接创建 ItemModel 实例，不使用 ref 包裹
+// 创建 ItemModel 实例
 const itemModel = new ItemModel(props.item);
 
-// 应用颜色筛选的辅助函数
-const applyColorFilter = () => {
-  if (props.colorFilter && props.item.variantGroups && props.item.variantGroups.length > 0) {
-    const match = itemModel.findVariantByColor(props.colorFilter);
-    if (match) {
-      itemModel.setVariantIndex(match.variantIndex);
-      itemModel.setPatternIndex(match.patternIndex);
-      forceUpdate();
-    }
-  }
-};
-
-// 如果有颜色筛选，初始化时切换到匹配的变体
-onMounted(() => {
-  applyColorFilter();
+// 使用简单的 ref 管理响应式状态 - 直接访问 ItemModel 内部的 ref
+const variantIndex = computed({
+  get: () => itemModel.getVariantIndex(),
+  set: (val: number) => itemModel.setVariantIndex(val)
 });
 
-// 监听颜色筛选器变化
-watch(() => props.colorFilter, () => {
-  // 重置为默认变体
-  itemModel.setVariantIndex(0);
-  itemModel.setPatternIndex(0);
-  // 应用新的颜色筛选
-  applyColorFilter();
+const patternIndex = computed({
+  get: () => itemModel.getPatternIndex(),
+  set: (val: number) => itemModel.setPatternIndex(val)
 });
 
-// 创建一个响应式状态来触发更新
-const updateKey = reactive({ value: 0 });
-
-// 强制更新的辅助函数
-const forceUpdate = () => {
-  updateKey.value++;
-};
-
-// 计算属性 - 依赖 updateKey 来确保响应式
-const currentVariant = computed(() => {
-  updateKey.value; // 触发依赖
-  return itemModel.getCurrentVariant();
-});
-
-const displayImage = computed(() => {
-  updateKey.value;
-  return itemModel.getDisplayImage();
-});
-
-const displayId = computed(() => {
-  updateKey.value;
-  return itemModel.getDisplayId();
-});
-
-const displayColors = computed(() => {
-  updateKey.value;
-  return itemModel.getDisplayColors();
-});
-
-const displayName = computed(() => {
-  updateKey.value;
-  return itemModel.getDisplayName();
-});
-
+// 计算属性 - 基于 ItemModel 方法，这些会自动响应内部 ref 的变化
+const currentVariant = computed(() => itemModel.getCurrentVariant());
+const displayImage = computed(() => itemModel.getDisplayImage());
+const displayId = computed(() => itemModel.getDisplayId());
+const displayColors = computed(() => itemModel.getDisplayColors());
+const displayName = computed(() => itemModel.getDisplayName());
 const hasMultipleVariants = computed(() => itemModel.hasMultipleVariants());
-const hasPatterns = computed(() => {
-  updateKey.value;
-  return itemModel.hasPatterns();
-});
-
-// 响应式索引
-const vIndex = computed(() => {
-  updateKey.value;
-  return itemModel.getVariantIndex();
-});
-
-const pIndex = computed(() => {
-  updateKey.value;
-  return itemModel.getPatternIndex();
-});
+const hasPatterns = computed(() => itemModel.hasPatterns());
 
 // 使用颜色显示组合函数
 const { conicGradientStyle: colorBlockStyle } = useColorDisplay(displayColors);
@@ -100,19 +43,31 @@ const sources = computed(() => itemModel.getSources());
 const seriesName = computed(() => itemModel.getSeriesName());
 const tag = computed(() => itemModel.getTag());
 
-// 方法
-const selectVariant = (index: number): void => {
-  itemModel.setVariantIndex(index);
-  forceUpdate();
+// 应用颜色筛选
+const applyColorFilter = () => {
+  if (props.colorFilter && props.item.variantGroups?.length) {
+    const match = itemModel.findVariantByColor(props.colorFilter);
+    if (match) {
+      variantIndex.value = match.variantIndex;
+      patternIndex.value = match.patternIndex;
+    }
+  }
 };
 
-const selectPattern = (index: number): void => {
-  itemModel.setPatternIndex(index);
-  forceUpdate();
-};
+// 初始化时应用颜色筛选
+onMounted(() => {
+  applyColorFilter();
+});
+
+// 监听颜色筛选器变化
+watch(() => props.colorFilter, () => {
+  variantIndex.value = 0;
+  patternIndex.value = 0;
+  applyColorFilter();
+});
 
 // 图片加载错误处理
-const imageError = reactive({ value: false });
+const imageError = ref(false);
 const handleImageError = (): void => {
   imageError.value = true;
 };
@@ -126,7 +81,7 @@ const handleImageError = (): void => {
     
     <div class="image-container">
       <img 
-        v-if="!imageError.value"
+        v-if="!imageError"
         :src="displayImage" 
         :alt="item.name" 
         class="item-image" 
@@ -164,9 +119,9 @@ const handleImageError = (): void => {
           v-for="(vg, vIdx) in item.variantGroups"
           :key="vIdx"
           class="variation-dot variant-dot"
-          :class="{ active: vIdx === vIndex }"
+          :class="{ active: vIdx === variantIndex }"
           :title="vg.variantName || `款式 ${vIdx + 1}`"
-          @click="selectVariant(vIdx)"
+          @click="variantIndex = vIdx"
         >
           {{ vIdx + 1 }}
         </span>
@@ -180,9 +135,9 @@ const handleImageError = (): void => {
           v-for="(p, pIdx) in currentVariant!.patterns"
           :key="pIdx"
           class="variation-dot pattern-dot"
-          :class="{ active: pIdx === pIndex }"
+          :class="{ active: pIdx === patternIndex }"
           :title="p.patternName || `图案 ${pIdx + 1}`"
-          @click="selectPattern(pIdx)"
+          @click="patternIndex = pIdx"
         >
           {{ pIdx + 1 }}
         </span>
