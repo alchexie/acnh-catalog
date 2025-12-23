@@ -7,12 +7,10 @@ import { ref } from 'vue';
 
 interface Props {
   creatures: Creature[];
+  hemisphere: 'north' | 'south';
 }
 
-defineProps<Props>();
-
-// 当前选择的半球（默认北半球）
-const selectedHemisphere = ref<'north' | 'south'>('north');
+const props = defineProps<Props>();
 
 // 获取中文名称
 const getChineseName = (creature: Creature): string => {
@@ -26,7 +24,7 @@ const formatPrice = (price: number): string => {
 
 // 获取月份信息
 const getMonths = (creature: Creature): string => {
-  const hemisphere = creature.hemispheres?.[selectedHemisphere.value];
+  const hemisphere = creature.hemispheres?.[props.hemisphere];
   if (!hemisphere?.months || hemisphere.months.length === 0) {
     return '--';
   }
@@ -35,7 +33,7 @@ const getMonths = (creature: Creature): string => {
 
 // 获取时间信息
 const getTime = (creature: Creature): string => {
-  const hemisphere = creature.hemispheres?.[selectedHemisphere.value];
+  const hemisphere = creature.hemispheres?.[props.hemisphere];
   if (!hemisphere?.time || hemisphere.time.length === 0) {
     return '--';
   }
@@ -55,23 +53,6 @@ const getLocation = (creature: Creature): string => {
 
 <template>
   <div class="creatures-grid-container">
-    <div class="hemisphere-toggle">
-      <button 
-        class="hemisphere-btn"
-        :class="{ active: selectedHemisphere === 'north' }"
-        @click="selectedHemisphere = 'north'"
-      >
-        🌍 北半球
-      </button>
-      <button 
-        class="hemisphere-btn"
-        :class="{ active: selectedHemisphere === 'south' }"
-        @click="selectedHemisphere = 'south'"
-      >
-        🌏 南半球
-      </button>
-    </div>
-
     <div class="creatures-grid">
       <div v-for="creature in creatures" :key="creature.uniqueEntryId" class="creature-card">
         <VersionBadge :version="creature.versionAdded" />
@@ -111,38 +92,6 @@ const getLocation = (creature: Creature): string => {
 <style scoped>
 .creatures-grid-container {
   width: 100%;
-}
-
-.hemisphere-toggle {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.hemisphere-btn {
-  padding: 10px 24px;
-  background: white;
-  border: 2px solid #e0e0e0;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 1em;
-  font-weight: 600;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.hemisphere-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  border-color: #4caf50;
-}
-
-.hemisphere-btn.active {
-  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
-  color: white;
-  border-color: #4caf50;
-  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
 }
 
 .creatures-grid {

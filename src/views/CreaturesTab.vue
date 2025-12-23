@@ -10,6 +10,9 @@ const { allCreatures, loading, error, loadData } = useCreaturesData();
 // 当前选择的分类
 const selectedCategory = ref<string>('all');
 
+// 当前选择的半球（默认北半球）
+const selectedHemisphere = ref<'north' | 'south'>('north');
+
 // 分类选项
 type CategoryValue = 'all' | 'Insects' | 'Fish' | 'Sea Creatures';
 
@@ -78,15 +81,33 @@ onMounted(() => {
       <div class="stats">
         <p class="stat-item">{{ UI_TEXT.STATS.TOTAL_ITEMS }}{{ filteredCreatures.length }}{{ UI_TEXT.STATS.CREATURES_UNIT }}</p>
       </div>
-      <div class="category-filter">
-        <button v-for="category in categories" :key="category.value" class="category-btn"
-          :class="{ active: selectedCategory === category.value }" @click="selectedCategory = category.value">
-          <span class="category-icon">{{ category.icon }}</span>
-          <span class="category-label">{{ category.label }}</span>
-          <span class="category-count">({{ categoryStats[category.value] }})</span>
-        </button>
+      <div class="filter-row">
+        <div class="category-filter">
+          <button v-for="category in categories" :key="category.value" class="category-btn"
+            :class="{ active: selectedCategory === category.value }" @click="selectedCategory = category.value">
+            <span class="category-icon">{{ category.icon }}</span>
+            <span class="category-label">{{ category.label }}</span>
+            <span class="category-count">({{ categoryStats[category.value] }})</span>
+          </button>
+        </div>
+        <div class="hemisphere-toggle">
+          <button 
+            class="hemisphere-btn"
+            :class="{ active: selectedHemisphere === 'north' }"
+            @click="selectedHemisphere = 'north'"
+          >
+            🌍 北
+          </button>
+          <button 
+            class="hemisphere-btn"
+            :class="{ active: selectedHemisphere === 'south' }"
+            @click="selectedHemisphere = 'south'"
+          >
+            🌏 南
+          </button>
+        </div>
       </div>
-      <CreaturesGrid :creatures="filteredCreatures" />
+      <CreaturesGrid :creatures="filteredCreatures" :hemisphere="selectedHemisphere" />
     </template>
   </div>
 </template>
@@ -106,10 +127,52 @@ onMounted(() => {
   color: #e74c3c;
 }
 
+.filter-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+  position: relative;
+  justify-content: center;
+}
+
+.hemisphere-toggle {
+  display: inline-flex;
+  gap: 0;
+  position: absolute;
+  right: 0;
+  background: #e0e0e0;
+  border-radius: 25px;
+  padding: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hemisphere-btn {
+  padding: 8px 20px;
+  background: transparent;
+  border: none;
+  border-radius: 21px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.95em;
+  font-weight: 600;
+  color: #666;
+}
+
+.hemisphere-btn:hover {
+  color: #333;
+}
+
+.hemisphere-btn.active {
+  background: white;
+  color: #4caf50;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
 .category-filter {
   display: flex;
   gap: 12px;
-  margin-bottom: 20px;
   flex-wrap: wrap;
   justify-content: center;
 }
