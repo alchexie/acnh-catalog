@@ -23,11 +23,8 @@ const displayImage = computed(() => itemModel.value.getDisplayImage());
 const displayId = computed(() => itemModel.value.getDisplayId());
 const displayColors = computed(() => itemModel.value.getDisplayColors());
 const displayName = computed(() => itemModel.value.getDisplayName());
-const hasMultipleVariants = computed(() => itemModel.value.getVariantCount() > 1);
-const hasPatterns = computed(() => {
-  const variant = currentVariant.value;
-  return variant ? variant.patterns.length > 1 : false;
-});
+const hasMultipleVariants = computed(() => itemModel.value.hasMultipleVariants());
+const hasPatterns = computed(() => itemModel.value.hasPatterns());
 
 // 响应式索引
 const vIndex = computed({

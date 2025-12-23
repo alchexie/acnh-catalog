@@ -29,7 +29,7 @@ function matchesOwnedFilter(item: Item, ownedFilter: string): boolean {
  * 检查物品是否匹配版本筛选
  */
 function matchesVersion(item: Item, versionFilter: string): boolean {
-  return !versionFilter || item.versionAdded === versionFilter;
+  return !versionFilter || (item.versionAdded === versionFilter);
 }
 
 /**
@@ -43,21 +43,21 @@ function matchesSource(item: Item, sourceFilter: string): boolean {
  * 检查物品是否匹配尺寸筛选
  */
 function matchesSize(item: Item, sizeFilter: string): boolean {
-  return !sizeFilter || item.size === sizeFilter;
+  return !sizeFilter || (item.size === sizeFilter);
 }
 
 /**
  * 检查物品是否匹配标签筛选
  */
 function matchesTag(item: Item, tagFilter: string): boolean {
-  return !tagFilter || item.tag === tagFilter;
+  return !tagFilter || (item.tag === tagFilter);
 }
 
 /**
  * 检查物品是否匹配系列筛选
  */
 function matchesSeries(item: Item, seriesFilter: string): boolean {
-  return !seriesFilter || item.series === seriesFilter;
+  return !seriesFilter || (item.series === seriesFilter);
 }
 
 /**

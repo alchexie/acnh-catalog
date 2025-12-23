@@ -276,6 +276,21 @@ export class ItemModel {
   }
 
   /**
+   * 是否有多个变体
+   */
+  hasMultipleVariants(): boolean {
+    return this.getVariantCount() > 1;
+  }
+
+  /**
+   * 当前变体是否有多个图案
+   */
+  hasPatterns(): boolean {
+    const variant = this.getCurrentVariant();
+    return variant ? variant.patterns.length > 1 : false;
+  }
+
+  /**
    * 获取当前选中的变体索引
    */
   getVariantIndex(): number {
