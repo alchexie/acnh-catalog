@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type { Reaction } from '../types/reaction';
+import { UI_TEXT } from '../constants';
+import { getChineseText, joinArray } from '../utils/common';
 
 interface Props {
   reactions: Reaction[];
@@ -9,13 +11,12 @@ defineProps<Props>();
 
 // 获取中文名称
 const getChineseName = (reaction: Reaction): string => {
-  return reaction.translations?.cNzh || reaction.name;
+  return getChineseText(reaction);
 };
 
 // 获取来源文本
 const getSourceText = (sources: string[]): string => {
-  if (!sources || sources.length === 0) return '未知';
-  return sources.join(', ');
+  return joinArray(sources);
 };
 </script>
 
@@ -29,15 +30,15 @@ const getSourceText = (sources: string[]): string => {
         <h3 class="reaction-name">{{ getChineseName(reaction) }}</h3>
         <div class="reaction-details">
           <div class="detail-item source">
-            <span class="label">来源:</span>
+            <span class="label">{{ UI_TEXT.LABELS.SOURCE }}</span>
             <span class="value">{{ getSourceText(reaction.source) }}</span>
           </div>
           <div class="detail-item version" v-if="reaction.versionAdded">
-            <span class="label">版本:</span>
+            <span class="label">{{ UI_TEXT.LABELS.VERSION }}</span>
             <span class="value">{{ reaction.versionAdded }}</span>
           </div>
           <div class="detail-item event" v-if="reaction.seasonEvent">
-            <span class="label">活动:</span>
+            <span class="label">{{ UI_TEXT.LABELS.EVENT }}</span>
             <span class="value">{{ reaction.seasonEvent }}</span>
           </div>
         </div>

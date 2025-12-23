@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ENTITY_ICONS } from '../constants';
+
 export type TabType = 'items' | 'villagers' | 'npcs' | 'creatures' | 'reactions';
 
 interface Tab {
@@ -18,11 +20,11 @@ const emit = defineEmits<{
 }>();
 
 const tabs: Tab[] = [
-  { id: 'items', label: '物品', icon: '🪑' },
-  { id: 'villagers', label: '村民', icon: '🐾' },
-  { id: 'npcs', label: 'NPC', icon: '✨' },
-  { id: 'creatures', label: '生物', icon: '🦋' },
-  { id: 'reactions', label: '表情', icon: '😊' }
+  { id: 'items', label: '物品', icon: ENTITY_ICONS.ITEMS },
+  { id: 'villagers', label: '村民', icon: ENTITY_ICONS.VILLAGERS },
+  { id: 'npcs', label: 'NPC', icon: ENTITY_ICONS.NPCS },
+  { id: 'creatures', label: '生物', icon: ENTITY_ICONS.CREATURES },
+  { id: 'reactions', label: '表情', icon: ENTITY_ICONS.REACTIONS }
 ];
 
 const selectTab = (tabId: TabType) => {

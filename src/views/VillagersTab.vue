@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import { useVillagersData } from '../composables/useVillagersData';
+import { DATA_LOADING, UI_TEXT } from '../constants';
 import VillagersGrid from '../components/VillagersGrid.vue';
 
 // 使用村民数据加载组合函数
@@ -14,12 +15,12 @@ onMounted(() => {
 
 <template>
   <div class="villagers-tab">
-    <div v-if="loading" class="loading">正在加载村民数据...</div>
+    <div v-if="loading" class="loading">{{ DATA_LOADING.VILLAGERS }}</div>
     <div v-else-if="error" class="error">{{ error }}</div>
     
     <template v-else>
       <div class="stats">
-        <p class="stat-item">共 {{ allVillagers.length }} 位村民</p>
+        <p class="stat-item">{{ UI_TEXT.STATS.TOTAL_ITEMS }}{{ allVillagers.length }}{{ UI_TEXT.STATS.VILLAGERS_UNIT }}</p>
       </div>
       <VillagersGrid :villagers="allVillagers" />
     </template>

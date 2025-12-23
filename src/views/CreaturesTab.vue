@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import { useCreaturesData } from '../composables/useCreaturesData';
+import { DATA_LOADING, UI_TEXT } from '../constants';
 import CreaturesGrid from '../components/CreaturesGrid.vue';
 
 // 使用生物数据加载组合函数
@@ -14,12 +15,12 @@ onMounted(() => {
 
 <template>
   <div class="creatures-tab">
-    <div v-if="loading" class="loading">正在加载生物数据...</div>
+    <div v-if="loading" class="loading">{{ DATA_LOADING.CREATURES }}</div>
     <div v-else-if="error" class="error">{{ error }}</div>
     
     <template v-else>
       <div class="stats">
-        <p class="stat-item">共 {{ allCreatures.length }} 种生物</p>
+        <p class="stat-item">{{ UI_TEXT.STATS.TOTAL_ITEMS }}{{ allCreatures.length }}{{ UI_TEXT.STATS.CREATURES_UNIT }}</p>
       </div>
       <CreaturesGrid :creatures="allCreatures" />
     </template>

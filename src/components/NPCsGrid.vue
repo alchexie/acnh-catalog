@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type { NPC } from '../types/npc';
+import { ENTITY_ICONS, UI_TEXT } from '../constants';
+import { getChineseText } from '../utils/common';
 
 interface Props {
   npcs: NPC[];
@@ -9,12 +11,12 @@ defineProps<Props>();
 
 // 获取中文名称
 const getChineseName = (npc: NPC): string => {
-  return npc.translations?.cNzh || npc.name;
+  return getChineseText(npc);
 };
 
 // 获取性别emoji
 const getGenderIcon = (gender: string): string => {
-  return gender === 'Male' ? '♂️' : '♀️';
+  return gender === 'Male' ? ENTITY_ICONS.MALE : ENTITY_ICONS.FEMALE;
 };
 </script>
 
@@ -34,7 +36,7 @@ const getGenderIcon = (gender: string): string => {
             🎂 {{ npc.birthday }}
           </span>
         </div>
-        <div class="npc-id">ID: {{ npc.npcId }}</div>
+        <div class="npc-id">{{ UI_TEXT.LABELS.ID }} {{ npc.npcId }}</div>
       </div>
     </div>
   </div>

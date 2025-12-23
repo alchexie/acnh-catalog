@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type { Creature } from '../types/creature';
+import { ENTITY_ICONS, UI_TEXT } from '../constants';
+import { getChineseText, formatNumber } from '../utils/common';
 
 interface Props {
   creatures: Creature[];
@@ -9,22 +11,22 @@ defineProps<Props>();
 
 // 获取中文名称
 const getChineseName = (creature: Creature): string => {
-  return creature.translations?.cNzh || creature.name;
+  return getChineseText(creature);
 };
 
 // 获取类型emoji
 const getTypeIcon = (sourceSheet: string): string => {
   const map: Record<string, string> = {
-    'Insects': '🦋',
-    'Fish': '🐟',
-    'Sea Creatures': '🦞'
+    'Insects': ENTITY_ICONS.INSECTS,
+    'Fish': ENTITY_ICONS.FISH,
+    'Sea Creatures': ENTITY_ICONS.SEA_CREATURES
   };
-  return map[sourceSheet] || '🐾';
+  return map[sourceSheet] || ENTITY_ICONS.CREATURES;
 };
 
 // 格式化价格
 const formatPrice = (price: number): string => {
-  return price.toLocaleString();
+  return formatNumber(price);
 };
 </script>
 
@@ -41,15 +43,15 @@ const formatPrice = (price: number): string => {
         </div>
         <div class="creature-details">
           <div class="detail-row">
-            <span class="detail-label">售价:</span>
-            <span class="detail-value price">{{ formatPrice(creature.sell) }} 铃钱</span>
+            <span class="detail-label">{{ UI_TEXT.LABELS.PRICE }}</span>
+            <span class="detail-value price">{{ formatPrice(creature.sell) }} {{ UI_TEXT.CURRENCY }}</span>
           </div>
           <div class="detail-row location">
-            <span class="detail-label">位置:</span>
+            <span class="detail-label">{{ UI_TEXT.LABELS.LOCATION }}</span>
             <span class="detail-value">{{ creature.whereHow }}</span>
           </div>
           <div class="detail-row" v-if="creature.size">
-            <span class="detail-label">大小:</span>
+            <span class="detail-label">{{ UI_TEXT.LABELS.SIZE }}</span>
             <span class="detail-value">{{ creature.size }}</span>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import { ref, type Ref } from 'vue';
 import type { NPC } from '../types';
 import { loadNPCsData } from '../services/dataService';
+import { DATA_LOADING } from '../constants';
 
 export interface UseNPCsDataReturn {
   allNPCs: Ref<NPC[]>;
@@ -30,7 +31,7 @@ export function useNPCsData(): UseNPCsDataReturn {
       loading.value = false;
     } catch (err) {
       console.error('加载NPC数据失败:', err);
-      error.value = '加载NPC数据失败，请确保数据文件存在';
+      error.value = DATA_LOADING.ERROR_GENERIC;
       loading.value = false;
     }
   };

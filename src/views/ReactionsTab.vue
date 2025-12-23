@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import { useReactionsData } from '../composables/useReactionsData';
+import { DATA_LOADING, UI_TEXT } from '../constants';
 import ReactionsGrid from '../components/ReactionsGrid.vue';
 
 // 使用表情反应数据加载组合函数
@@ -14,12 +15,12 @@ onMounted(() => {
 
 <template>
   <div class="reactions-tab">
-    <div v-if="loading" class="loading">正在加载表情反应数据...</div>
+    <div v-if="loading" class="loading">{{ DATA_LOADING.REACTIONS }}</div>
     <div v-else-if="error" class="error">{{ error }}</div>
     
     <template v-else>
       <div class="stats">
-        <p class="stat-item">共 {{ allReactions.length }} 个表情</p>
+        <p class="stat-item">{{ UI_TEXT.STATS.TOTAL_ITEMS }}{{ allReactions.length }}{{ UI_TEXT.STATS.REACTIONS_UNIT }}</p>
       </div>
       <ReactionsGrid :reactions="allReactions" />
     </template>

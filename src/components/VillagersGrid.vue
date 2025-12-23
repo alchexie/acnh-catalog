@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type { Villager } from '../types/villager';
+import { ENTITY_ICONS, PERSONALITY_MAP, UI_TEXT } from '../constants';
+import { getChineseText } from '../utils/common';
 
 interface Props {
   villagers: Villager[];
@@ -9,27 +11,17 @@ defineProps<Props>();
 
 // 获取中文名称
 const getChineseName = (villager: Villager): string => {
-  return villager.translations?.cNzh || villager.name;
+  return getChineseText(villager);
 };
 
 // 获取性别emoji
 const getGenderIcon = (gender: string): string => {
-  return gender === 'Male' ? '♂️' : '♀️';
+  return gender === 'Male' ? ENTITY_ICONS.MALE : ENTITY_ICONS.FEMALE;
 };
 
 // 获取性格中文
 const getPersonalityChinese = (personality: string): string => {
-  const map: Record<string, string> = {
-    'Jock': '运动',
-    'Lazy': '悠闲',
-    'Cranky': '暴躁',
-    'Smug': '自恋',
-    'Normal': '普通',
-    'Peppy': '元气',
-    'Snooty': '大姐姐',
-    'Sisterly': '成熟'
-  };
-  return map[personality] || personality;
+  return PERSONALITY_MAP[personality] || personality;
 };
 </script>
 
@@ -53,7 +45,7 @@ const getPersonalityChinese = (personality: string): string => {
           </span>
         </div>
         <div class="villager-hobby">
-          爱好: {{ villager.hobby }}
+          {{ UI_TEXT.LABELS.HOBBY }} {{ villager.hobby }}
         </div>
       </div>
     </div>

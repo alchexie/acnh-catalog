@@ -2,6 +2,7 @@
 import { onMounted, watch, computed } from 'vue';
 import { useItemsData } from '../composables/useItemsData';
 import { useItemsFilter } from '../composables/useItemsFilter';
+import { DATA_LOADING } from '../constants';
 import FilterControls from '../components/FilterControls.vue';
 import ItemsGrid from '../components/ItemsGrid.vue';
 import Pagination from '../components/Pagination.vue';
@@ -45,7 +46,7 @@ onMounted(() => {
 
 <template>
   <div class="items-tab">
-    <div v-if="loading" class="loading">正在加载物品数据...</div>
+    <div v-if="loading" class="loading">{{ DATA_LOADING.ITEMS }}</div>
     <div v-else-if="error" class="error">{{ error }}</div>
     
     <template v-else>

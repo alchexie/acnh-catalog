@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import { useNPCsData } from '../composables/useNPCsData';
+import { DATA_LOADING, UI_TEXT } from '../constants';
 import NPCsGrid from '../components/NPCsGrid.vue';
 
 // 使用NPC数据加载组合函数
@@ -14,12 +15,12 @@ onMounted(() => {
 
 <template>
   <div class="npcs-tab">
-    <div v-if="loading" class="loading">正在加载NPC数据...</div>
+    <div v-if="loading" class="loading">{{ DATA_LOADING.NPCS }}</div>
     <div v-else-if="error" class="error">{{ error }}</div>
     
     <template v-else>
       <div class="stats">
-        <p class="stat-item">共 {{ allNPCs.length }} 位NPC</p>
+        <p class="stat-item">{{ UI_TEXT.STATS.TOTAL_ITEMS }}{{ allNPCs.length }}{{ UI_TEXT.STATS.NPCS_UNIT }}</p>
       </div>
       <NPCsGrid :npcs="allNPCs" />
     </template>
