@@ -1,6 +1,6 @@
 import type { RawItem, CatalogItem, Translations, Item } from '../types';
 import { CONFIG } from '../config';
-import { ItemFactory } from '../models/ItemModel';
+import * as itemHelpers from '../utils/itemHelpers';
 
 let translationsCache: Translations | null = null;
 
@@ -74,7 +74,7 @@ export async function loadCatalogData(): Promise<{ ownedNames: Set<string>; owne
 
 /**
  * 处理物品数据
- * 使用 ItemFactory.createItem() 创建 Item 数据对象
+ * 使用 itemHelpers.createItem() 创建 Item 数据对象
  * @param acnhItems 原始物品数据数组
  * @param ownedData 拥有物品数据
  * @returns 处理后的物品数组
@@ -84,7 +84,7 @@ export function processItemsData(
   ownedData: { ownedNames: Set<string>; ownedIds: Set<string> }
 ): Item[] {
   return acnhItems
-    .map((rawItem) => ItemFactory.createItem(rawItem, ownedData))
+    .map((rawItem) => itemHelpers.createItem(rawItem, ownedData))
     .sort((a, b) => a.id - b.id);
 }
 

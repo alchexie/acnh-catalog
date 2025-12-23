@@ -43,6 +43,16 @@ const sources = computed(() => itemModel.getSources());
 const seriesName = computed(() => itemModel.getSeriesName());
 const tag = computed(() => itemModel.getTag());
 
+// 价格信息
+const buyPrice = computed(() => itemModel.getBuyPrice());
+const sellPrice = computed(() => itemModel.getSellPrice());
+
+// 格式化价格显示
+const formatPrice = (price: number | undefined): string => {
+  if (price === undefined || price === null) return '';
+  return price.toLocaleString('zh-CN');
+};
+
 // 应用颜色筛选
 const applyColorFilter = () => {
   if (props.colorFilter && props.item.variantGroups?.length) {
@@ -110,6 +120,12 @@ const handleImageError = (): void => {
       <span v-if="tag">🏷️ {{ getTagName(tag) }}</span>
       <span v-if="tag && seriesName !== '无系列'"> · </span>
       <span v-if="seriesName !== '无系列'">📦 {{ seriesName }}</span>
+    </div>
+    
+    <div v-if="buyPrice || sellPrice" class="price-info">
+      <span v-if="buyPrice" class="buy-price" title="购买价格">💰 {{ formatPrice(buyPrice) }}</span>
+      <span v-if="buyPrice && sellPrice" class="price-separator">·</span>
+      <span v-if="sellPrice" class="sell-price" title="出售价格">💵 {{ formatPrice(sellPrice) }}</span>
     </div>
     
     <div v-if="hasMultipleVariants" class="variation-row variant-row">
@@ -266,6 +282,30 @@ const handleImageError = (): void => {
   border-radius: 4px;
   text-align: center;
   font-weight: 500;
+}
+
+.price-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 8px;
+  background: #f0f8ff;
+  border-radius: 4px;
+}
+
+.buy-price {
+  color: #ff6b6b;
+}
+
+.sell-price {
+  color: #51cf66;
+}
+
+.price-separator {
+  color: #ccc;
 }
 
 .color-block {
