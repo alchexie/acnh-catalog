@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useItemsData } from '../composables/useItemsData';
 import { ItemModel } from '../models';
@@ -42,6 +42,35 @@ const isOutdoor = computed(() => itemModel.value?.isOutdoor() || false);
 const isInteractive = computed(() => itemModel.value?.isInteractive() || false);
 const hhaPoints = computed(() => itemModel.value?.getHHAPoints());
 const stackSize = computed(() => itemModel.value?.getStackSize() || 1);
+
+// 获取配方数据
+const recipeData = computed(() => currentItem.value?.recipe);
+const hasMaterials = computed(() => {
+    return recipeData.value?.materials && Object.keys(recipeData.value.materials).length > 0;
+});
+
+// 获取材料信息
+const getMaterialInfo = (materialKey: string) => {
+    // 在所有物品中查找材料名称对应的物品
+    const materialItem = allItems.value.find(item => 
+        item.originalData?.name.toLowerCase() === materialKey.toLowerCase()
+    );
+    
+    // 返回材料的名称、图标和ID
+    return {
+        name: materialItem?.name || materialKey,
+        imageUrl: materialItem?.imageUrl || '',
+        id: materialItem?.id
+    };
+};
+
+// 跳转到材料详情页
+const goToMaterial = (materialKey: string) => {
+    const materialInfo = getMaterialInfo(materialKey);
+    if (materialInfo.id) {
+        router.push(`/item/${materialInfo.id}`);
+    }
+};
 
 // 获取原始数据中的更多信息
 const rawData = computed(() => currentItem.value?.originalData);
@@ -328,6 +357,64 @@ onMounted(() => {
                                 <span>🎁 {{ setName }}</span>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DIY配方展示 - 在变体之上 -->
+            <div v-if="recipeData" class="recipe-section">
+                <h3>🔨 DIY配方</h3>
+                <div class="recipe-content">
+                    <div class="recipe-header">
+                        <div v-if="recipeData.image" class="recipe-image">
+                            <img :src="recipeData.image" :alt="recipeData.name" />
+                        </div>
+                        <div class="recipe-basic-info">
+                            <h4>{{ recipeData.name }}</h4>
+                            <div class="recipe-info-grid">
+                                <div v-if="recipeData.source && recipeData.source.length > 0" class="recipe-info-item">
+                                    <label>配方来源:</label>
+                                    <span>📍 {{ recipeData.source.join(', ') }}</span>
+                                </div>
+                                <div v-if="recipeData.seasonEvent" class="recipe-info-item">
+                                    <label>季节活动:</label>
+                                    <span>🎉 {{ recipeData.seasonEvent }}</span>
+                                </div>
+                                <div v-if="recipeData.sell" class="recipe-info-item">
+                                    <label>出售价格:</label>
+                                    <span class="price">💵 {{ formatPrice(recipeData.sell) }} 铃钱</span>
+                                </div>
+                                <div v-if="recipeData.versionAdded" class="recipe-info-item">
+                                    <label>添加版本:</label>
+                                    <span>{{ recipeData.versionAdded }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 材料列表 -->
+                    <div v-if="hasMaterials" class="materials-section">
+                        <h4>所需材料</h4>
+                        <div class="materials-grid">
+                            <div v-for="(quantity, material) in recipeData.materials" 
+                                 :key="material" 
+                                 class="material-item"
+                                 :class="{ 'material-clickable': getMaterialInfo(material).id }"
+                                 @click="goToMaterial(material)">
+                                <div class="material-info">
+                                    <img v-if="getMaterialInfo(material).imageUrl" 
+                                         :src="getMaterialInfo(material).imageUrl" 
+                                         :alt="getMaterialInfo(material).name"
+                                         class="material-icon" />
+                                    <span class="material-name">{{ getMaterialInfo(material).name }}</span>
+                                </div>
+                                <span class="material-quantity">× {{ quantity }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div v-if="recipeData.sourceNotes" class="recipe-notes">
+                        <strong>备注:</strong> {{ recipeData.sourceNotes }}
                     </div>
                 </div>
             </div>
@@ -661,6 +748,166 @@ onMounted(() => {
     font-weight: 500;
 }
 
+/* DIY配方展示样式 */
+.recipe-section {
+    margin-top: 30px;
+    padding: 30px;
+    background: linear-gradient(135deg, #fff9e6 0%, #ffffff 100%);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 2px solid #ffd54f;
+}
+
+.recipe-section h3 {
+    margin: 0 0 20px 0;
+    color: #e65100;
+    font-size: 1.5em;
+}
+
+.recipe-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.recipe-header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.recipe-image {
+    width: 120px;
+    height: 120px;
+    background: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.recipe-basic-info h4 {
+    margin: 0 0 15px 0;
+    color: #333;
+    font-size: 1.3em;
+}
+
+.recipe-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+}
+
+.recipe-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.recipe-info-item label {
+    font-weight: 600;
+    color: #666;
+    font-size: 13px;
+}
+
+.recipe-info-item span {
+    color: #333;
+    font-size: 15px;
+}
+
+.materials-section {
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.materials-section h4 {
+    margin: 0 0 15px 0;
+    color: #333;
+    font-size: 1.1em;
+}
+
+.materials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+}
+
+.material-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #f5f5f5 0%, #fafafa 100%);
+    border-radius: 8px;
+    border: 2px solid #e0e0e0;
+    transition: all 0.3s;
+}
+
+.material-item.material-clickable {
+    cursor: pointer;
+}
+
+.material-item.material-clickable:hover {
+    border-color: #ffd54f;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #fffbf0 0%, #ffffff 100%);
+}
+
+.material-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.material-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    background: white;
+    border-radius: 6px;
+    padding: 2px;
+}
+
+.material-name {
+    font-weight: 600;
+    color: #333;
+    font-size: 14px;
+}
+
+.material-quantity {
+    background: #e65100;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.recipe-notes {
+    padding: 15px;
+    background: #fff3e0;
+    border-left: 4px solid #ff9800;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #555;
+}
+
+.recipe-notes strong {
+    color: #e65100;
+}
+
 /* 变体展示样式 */
 .variants-section {
     margin-top: 30px;
@@ -810,6 +1057,20 @@ onMounted(() => {
     .variants-grid {
         grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     }
+
+    .recipe-header {
+        grid-template-columns: 1fr;
+    }
+
+    .recipe-image {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+    }
+
+    .materials-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 768px) {
@@ -824,6 +1085,10 @@ onMounted(() => {
 
     .variants-grid {
         grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+
+    .recipe-info-grid {
+        grid-template-columns: 1fr;
     }
 }
 </style>

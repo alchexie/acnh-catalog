@@ -50,6 +50,23 @@ export interface VariantGroup {
 }
 
 /**
+ * 配方数据接口
+ * 表示DIY配方信息
+ */
+export interface RecipeData {
+  name: string;                      // 配方名称
+  image?: string;                    // 配方图片
+  materials?: Record<string, number>; // 材料列表 {材料名: 数量}
+  source?: string[];                 // 配方来源
+  sourceNotes?: string;              // 来源备注
+  seasonEvent?: string;              // 季节活动
+  versionAdded?: string;             // 添加版本
+  category?: string;                 // 配方分类
+  buy?: number;                      // 购买价格
+  sell?: number;                     // 出售价格
+}
+
+/**
  * 物品接口
  * 表示游戏中的一个物品
  */
@@ -66,6 +83,7 @@ export interface Item {
   size?: string;                // 物品尺寸
   tag?: string;                 // 物品标签
   series?: string;              // 所属系列
+  recipe?: RecipeData;          // 配方数据
   originalData?: RawItem;       // 原始数据
 }
 

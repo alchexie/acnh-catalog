@@ -43,7 +43,42 @@ export function createItem(
     size: rawItem.size,
     tag: rawItem.tag,
     series: rawItem.series,
+    recipe: rawItem.recipe ? processRecipeData(rawItem.recipe) : undefined,
     originalData: rawItem,
+  };
+}
+
+/**
+ * 处理配方数据，将材料名称转换为中文
+ */
+function processRecipeData(recipeData: any): any {
+  if (!recipeData) return undefined;
+  
+  // 转换材料名称为中文
+  let materials: Record<string, number> | undefined;
+  if (recipeData.materials && recipeData.materialsTranslations) {
+    materials = {};
+    for (const [materialKey, quantity] of Object.entries(recipeData.materials)) {
+      // 尝试获取中文翻译，如果没有则使用原始名称
+      const translation = recipeData.materialsTranslations[materialKey];
+      const materialName = translation?.cNzh || materialKey;
+      materials[materialName] = quantity as number;
+    }
+  } else if (recipeData.materials) {
+    materials = recipeData.materials;
+  }
+
+  return {
+    name: recipeData.name || '',
+    image: recipeData.image,
+    materials,
+    source: recipeData.source,
+    sourceNotes: recipeData.sourceNotes,
+    seasonEvent: recipeData.seasonEvent,
+    versionAdded: recipeData.versionAdded,
+    category: recipeData.category,
+    buy: recipeData.buy,
+    sell: recipeData.sell,
   };
 }
 
