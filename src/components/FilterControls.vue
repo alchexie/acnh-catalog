@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { watch, computed, onMounted } from 'vue';
+import { watch, computed, onMounted, ref } from 'vue';
 import type { Item, FilterOptions } from '../types';
 import { getCategoryName, getSourceName, getColorName, getTagName } from '../services/dataService';
 import { useFilterOptions } from '../composables/useFilterOptions';
+import { useDebounce } from '../composables/useDebounce';
 
 const props = defineProps<{
   filters: FilterOptions;
@@ -31,6 +32,27 @@ const {
   series: seriesOptions,
   populateFilters
 } = useFilterOptions();
+
+// 搜索框本地状态
+const searchInput = ref(props.filters.searchTerm);
+
+// 使用防抖优化搜索
+const debouncedSearch = useDebounce(searchInput, 300);
+
+// 监听防抖后的搜索词,触发筛选
+watch(debouncedSearch, (newValue) => {
+  if (props.filters.searchTerm !== newValue) {
+    emit('update:filters', { ...props.filters, searchTerm: newValue });
+    emit('filter-change');
+  }
+});
+
+// 监听 props.filters.searchTerm 的外部变化
+watch(() => props.filters.searchTerm, (newValue) => {
+  if (searchInput.value !== newValue) {
+    searchInput.value = newValue;
+  }
+});
 
 // 双向绑定的计算属性
 const localFilters = computed({
@@ -72,11 +94,10 @@ watch(() => props.allItems, (newItems) => {
 <template>
   <div class="controls">
     <input
-      v-model="localFilters.searchTerm"
+      v-model="searchInput"
       type="text"
       class="search-box"
       placeholder="🔍 搜索物品名称..."
-      @input="emit('filter-change')"
     >
 
     <div class="filter-section">

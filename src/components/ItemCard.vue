@@ -1,39 +1,69 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref, watch } from 'vue';
 import type { Item } from '../types';
 import { getSourceName, getTagName } from '../services/dataService';
-import { useItemVariants } from '../composables/useItemVariants';
+import { ItemModel } from '../models';
 import { useColorDisplay } from '../composables/useColorDisplay';
 
 const props = defineProps<{
   item: Item;
 }>();
 
-// 使用物品变体管理组合函数（基于 ItemModel）
-const {
-  itemModel,
-  currentVariant,
-  displayImage,
-  displayId,
-  displayColors,
-  displayName,
-  hasMultipleVariants,
-  hasPatterns,
-  selectVariant,
-  selectPattern,
-  vIndex,
-  pIndex
-} = useItemVariants(props.item);
+// 使用 ref 存储 ItemModel 实例,避免每次都重新创建
+const itemModel = ref(new ItemModel(props.item));
+
+// 当 item prop 变化时更新 itemModel
+watch(() => props.item, (newItem) => {
+  itemModel.value = new ItemModel(newItem);
+});
+
+// 计算属性
+const currentVariant = computed(() => itemModel.value.getCurrentVariant());
+const displayImage = computed(() => itemModel.value.getDisplayImage());
+const displayId = computed(() => itemModel.value.getDisplayId());
+const displayColors = computed(() => itemModel.value.getDisplayColors());
+const displayName = computed(() => itemModel.value.getDisplayName());
+const hasMultipleVariants = computed(() => itemModel.value.getVariantCount() > 1);
+const hasPatterns = computed(() => {
+  const variant = currentVariant.value;
+  return variant ? variant.patterns.length > 1 : false;
+});
+
+// 响应式索引
+const vIndex = computed({
+  get: () => itemModel.value.getVariantIndex(),
+  set: (value: number) => itemModel.value.setVariantIndex(value)
+});
+
+const pIndex = computed({
+  get: () => itemModel.value.getPatternIndex(),
+  set: (value: number) => itemModel.value.setPatternIndex(value)
+});
 
 // 使用颜色显示组合函数
 const { conicGradientStyle: colorBlockStyle } = useColorDisplay(displayColors);
 
-// 使用 ItemModel 的便捷方法获取信息
+// 便捷方法
 const version = computed(() => itemModel.value.getVersion());
 const size = computed(() => itemModel.value.getSize());
 const sources = computed(() => itemModel.value.getSources());
 const seriesName = computed(() => itemModel.value.getSeriesName());
 const tag = computed(() => itemModel.value.getTag());
+
+// 方法
+const selectVariant = (index: number): void => {
+  itemModel.value.setVariantIndex(index);
+};
+
+const selectPattern = (index: number): void => {
+  itemModel.value.setPatternIndex(index);
+};
+
+// 图片加载错误处理
+const imageError = ref(false);
+const handleImageError = (): void => {
+  imageError.value = true;
+};
 </script>
 
 <template>
@@ -42,7 +72,20 @@ const tag = computed(() => itemModel.value.getTag());
       {{ version }}
     </div>
     
-    <img :src="displayImage" :alt="item.name" class="item-image" loading="lazy">
+    <div class="image-container">
+      <img 
+        v-if="!imageError"
+        :src="displayImage" 
+        :alt="item.name" 
+        class="item-image" 
+        loading="lazy"
+        @error="handleImageError"
+      >
+      <div v-else class="image-placeholder">
+        <span>📦</span>
+        <span class="placeholder-text">图片加载失败</span>
+      </div>
+    </div>
     
     <div class="item-name">{{ displayName }}</div>
     <div class="item-id">ID: {{ displayId || 'N/A' }}</div>
@@ -131,11 +174,37 @@ const tag = computed(() => itemModel.value.getTag());
   font-weight: 600;
 }
 
+.image-container {
+  width: 100%;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .item-image {
   width: 100%;
   height: auto;
   object-fit: contain;
   border-radius: 4px;
+}
+
+.image-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #999;
+  padding: 20px;
+}
+
+.image-placeholder span:first-child {
+  font-size: 48px;
+}
+
+.placeholder-text {
+  font-size: 12px;
 }
 
 .item-name {

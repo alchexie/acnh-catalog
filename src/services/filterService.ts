@@ -1,6 +1,5 @@
 import type { Item, FilterOptions } from '../types';
 import { CONFIG } from '../config';
-import { ItemModel } from '../models';
 
 /**
  * 检查物品是否匹配搜索词
@@ -63,7 +62,7 @@ function matchesSeries(item: Item, seriesFilter: string): boolean {
 
 /**
  * 检查物品或其变体是否匹配颜色筛选
- * 使用 ItemModel 简化颜色匹配逻辑
+ * 优化后避免每次创建 ItemModel 实例
  * @returns 是否匹配颜色
  */
 function matchesColor(item: Item, colorFilter: string): boolean {
@@ -74,22 +73,16 @@ function matchesColor(item: Item, colorFilter: string): boolean {
     return true;
   }
   
-  // 使用 ItemModel 查找并切换到匹配颜色的变体
-  const itemModel = new ItemModel(item);
-  return itemModel.switchToColorVariant(colorFilter);
-}
-
-/**
- * 更新物品显示属性以匹配选定的颜色变体
- * 使用 ItemModel 简化更新逻辑
- */
-function updateItemForColorVariant(item: Item, colorFilter: string): void {
-  if (!colorFilter || item.variantGroups.length === 0) {
-    return;
+  // 检查所有变体和图案是否包含该颜色
+  if (item.variantGroups && item.variantGroups.length > 0) {
+    return item.variantGroups.some(variant => 
+      variant.patterns.some(pattern => 
+        pattern.colors?.includes(colorFilter)
+      )
+    );
   }
-
-  // ItemModel 的 switchToColorVariant 已经处理了显示属性更新
-  // 这里不需要额外操作
+  
+  return false;
 }
 
 /**
@@ -101,7 +94,7 @@ function updateItemForColorVariant(item: Item, colorFilter: string): void {
 export function filterItems(allItems: Item[], filters: FilterOptions): Item[] {
   return allItems.filter(item => {
     // 检查所有筛选条件
-    const matches = (
+    return (
       matchesSearchTerm(item, filters.searchTerm) &&
       matchesCategory(item, filters.category) &&
       matchesOwnedFilter(item, filters.ownedFilter) &&
@@ -112,13 +105,6 @@ export function filterItems(allItems: Item[], filters: FilterOptions): Item[] {
       matchesSeries(item, filters.seriesFilter) &&
       matchesColor(item, filters.colorFilter)
     );
-    
-    // 如果匹配且有颜色筛选，更新物品显示属性
-    if (matches) {
-      updateItemForColorVariant(item, filters.colorFilter);
-    }
-    
-    return matches;
   });
 }
 
