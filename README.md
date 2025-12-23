@@ -1,19 +1,47 @@
-# 动物森友会物品目录 🍃
+# 动物森友会物品目录 - Vue 3 + TypeScript
 
-一个用于浏览和管理《集合啦！动物森友会》物品的网页应用。
+这是一个使用 Vue 3 + TypeScript + Vite 构建的动物森友会物品目录应用。
 
 ## 功能特性
 
-- 📱 响应式设计，支持各种屏幕尺寸
-- 🔍 实时搜索物品名称
-- 🏷️ 按分类筛选物品
-- 🔄 多种排序方式（名称、价格、ID）
-- ✅ 标记已拥有的物品
-- 📄 分页显示（可选择每页显示数量）
-- 📊 统计信息（总物品数、已拥有数量、总价值）
-- 🖼️ 从 CDN 加载物品图片（基于 animal-crossing 数据库）
+- ✨ 物品浏览和搜索
+- 🎨 多条件筛选（分类、来源、颜色、标签、系列等）
+- 📄 分页显示
+- 🎭 物品变体选择器
+- 📊 统计信息展示
+- 🌏 中文翻译支持
+- ✅ 已拥有物品追踪
 
-## 快速开始
+## 技术栈
+
+- **Vue 3** - 渐进式JavaScript框架
+- **TypeScript** - 类型安全的JavaScript超集
+- **Vite** - 下一代前端构建工具
+- **Composition API** - Vue 3 组合式 API
+
+## 项目结构
+
+```
+src/
+├── components/          # Vue 组件
+│   ├── FilterControls.vue
+│   ├── ItemCard.vue
+│   ├── ItemsGrid.vue
+│   ├── Pagination.vue
+│   └── StatsDisplay.vue
+├── config/              # 配置文件
+│   └── index.ts
+├── services/            # 服务层
+│   ├── dataService.ts
+│   └── filterService.ts
+├── types/               # TypeScript 类型定义
+│   └── index.ts
+├── App.vue             # 主应用组件
+├── main.ts             # 应用入口
+└── style.css           # 全局样式
+```
+
+## 开发指南
 
 ### 安装依赖
 
@@ -24,21 +52,43 @@ npm install
 ### 启动开发服务器
 
 ```bash
-npm start
+npm run dev
 ```
 
-这将启动一个本地服务器并自动打开浏览器访问 http://localhost:8000
+开发服务器将在 http://localhost:5173 启动
 
-### 其他命令
+### 构建生产版本
 
-- `npm run dev` - 启动服务器但不自动打开浏览器
-- `npm run serve` - 使用 Python 启动服务器（需要安装 Python）
+```bash
+npm run build
+```
 
+### 预览生产构建
 
-## License
+```bash
+npm run preview
+```
+
+## 数据文件
+
+项目需要以下数据文件（需要放在 `public` 目录下）：
+
+- `public/config/acnh-items.json` - 物品数据
+- `public/config/translations.json` - 翻译数据
+- `public/catalog_items.json` - 已拥有物品数据（可选）
+
+## 筛选功能
+
+- **搜索**: 按物品名称搜索
+- **分类**: 家具、服饰、工具等
+- **来源**: 商店、制作、活动等
+- **颜色**: 按物品颜色筛选
+- **标签**: 按标签分类
+- **系列**: 按系列套装筛选
+- **版本**: 按游戏版本筛选
+- **尺寸**: 按物品尺寸筛选
+- **拥有状态**: 已拥有/未拥有
+
+## 许可证
 
 MIT
-
-
-## 相关链接
-https://github.com/Norviah/animal-crossing
