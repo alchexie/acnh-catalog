@@ -141,20 +141,6 @@ export class ItemModel {
   }
 
   /**
-   * 从原始数据创建 ItemModel
-   * @param rawItem 原始物品数据
-   * @param ownedData 拥有物品数据
-   * @returns ItemModel 实例
-   */
-  static fromRawItem(
-    rawItem: RawItem,
-    ownedData?: { ownedNames: Set<string>; ownedIds: Set<string> }
-  ): ItemModel {
-    const item = ItemFactory.createItem(rawItem, ownedData);
-    return new ItemModel(item);
-  }
-
-  /**
    * 获取原始数据
    */
   get raw(): Item {
