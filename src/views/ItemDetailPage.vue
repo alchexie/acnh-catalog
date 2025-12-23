@@ -160,6 +160,16 @@ const goBack = () => {
     router.push('/');
 };
 
+// 跳转到Nookipedia页面
+const goToNookipedia = () => {
+    if (currentItem.value?.originalData?.name) {
+        const itemName = currentItem.value.originalData.name;
+        // 将空格替换为下划线，构建Nookipedia URL格式：Item:ItemName_(New_Horizons)
+        const urlName = itemName.replace(/ /g, '_');
+        window.open(`https://nookipedia.com/wiki/Item:${urlName}_(New_Horizons)`, '_blank');
+    }
+};
+
 // 加载数据
 onMounted(() => {
     if (allItems.value.length === 0) {
@@ -184,7 +194,7 @@ onMounted(() => {
 
             <div class="detail-content">
                 <div class="image-section">
-                    <div class="main-image">
+                    <div class="main-image" @click="goToNookipedia" title="点击查看Nookipedia页面">
                         <img :src="displayImage" :alt="displayName" />
                     </div>
                     <div class="owned-badge" :class="{ owned: isOwned }">
@@ -503,6 +513,35 @@ onMounted(() => {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.main-image:hover {
+    background: #e8f5e9;
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(74, 155, 79, 0.2);
+}
+
+.main-image::after {
+    content: '🔗 查看详情';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(74, 155, 79, 0.9);
+    color: white;
+    padding: 8px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.main-image:hover::after {
+    opacity: 1;
 }
 
 .main-image img {
