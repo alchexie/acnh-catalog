@@ -1,6 +1,16 @@
 import type { Translation } from './index';
 
 /**
+ * 半球时间信息
+ */
+export interface HemisphereInfo {
+  time?: string[];
+  timeArray?: number[];
+  months?: string[];
+  monthsArray?: number[];
+}
+
+/**
  * 生物数据类型（昆虫、鱼类等）
  */
 export interface Creature {
@@ -11,8 +21,8 @@ export interface Creature {
   critterpediaImage: string;
   furnitureImage: string;
   sell: number;
-  whereHow: string;
-  weather: string;
+  whereHow?: string;
+  weather?: string;
   totalCatchesToUnlock: number;
   spawnRates: string;
   size: string;
@@ -28,6 +38,10 @@ export interface Creature {
   uniqueEntryId: string;
   translations?: Translation;
   versionAdded?: string;
+  hemispheres?: {
+    north?: HemisphereInfo;
+    south?: HemisphereInfo;
+  };
   // 时间相关（会在某些生物中出现）
   nMonths?: string[];
   sMonths?: string[];
@@ -35,3 +49,4 @@ export interface Creature {
   isAllDay?: boolean;
   isAllYear?: boolean;
 }
+
