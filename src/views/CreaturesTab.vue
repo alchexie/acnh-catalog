@@ -75,22 +75,16 @@ onMounted(() => {
     <div v-else-if="error" class="error">{{ error }}</div>
     
     <template v-else>
+      <div class="stats">
+        <p class="stat-item">{{ UI_TEXT.STATS.TOTAL_ITEMS }}{{ filteredCreatures.length }}{{ UI_TEXT.STATS.CREATURES_UNIT }}</p>
+      </div>
       <div class="category-filter">
-        <button
-          v-for="category in categories"
-          :key="category.value"
-          class="category-btn"
-          :class="{ active: selectedCategory === category.value }"
-          @click="selectedCategory = category.value"
-        >
+        <button v-for="category in categories" :key="category.value" class="category-btn"
+          :class="{ active: selectedCategory === category.value }" @click="selectedCategory = category.value">
           <span class="category-icon">{{ category.icon }}</span>
           <span class="category-label">{{ category.label }}</span>
           <span class="category-count">({{ categoryStats[category.value] }})</span>
         </button>
-      </div>
-
-      <div class="stats">
-        <p class="stat-item">{{ UI_TEXT.STATS.TOTAL_ITEMS }}{{ filteredCreatures.length }}{{ UI_TEXT.STATS.CREATURES_UNIT }}</p>
       </div>
       <CreaturesGrid :creatures="filteredCreatures" />
     </template>
