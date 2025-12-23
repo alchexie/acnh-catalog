@@ -8,3 +8,5 @@ export { useFilterOptions } from './useFilterOptions';
 export { useItemsData } from './useItemsData';
 export { useItemsFilter } from './useItemsFilter';
 export { useItemVariants } from './useItemVariants';
+export { useItemInfo } from './useItemInfo';
+export type { ItemInfo } from './useItemInfo';

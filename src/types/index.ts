@@ -61,15 +61,11 @@ export interface Item {
   colors: string[];             // 物品颜色列表
   owned: boolean;               // 是否已拥有
   variantGroups: VariantGroup[]; // 变体组列表
-  hasVariations: boolean;       // 是否有变体
-  vIndex: number;               // 当前选中的变体索引
-  pIndex: number;               // 当前选中的图案索引
   versionAdded?: string;        // 添加版本
   source?: string[];            // 获取来源
   size?: string;                // 物品尺寸
   tag?: string;                 // 物品标签
   series?: string;              // 所属系列
-  seriesName?: string;          // 系列名称（翻译后）
   originalData?: RawItem;       // 原始数据
 }
 

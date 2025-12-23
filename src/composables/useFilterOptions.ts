@@ -136,7 +136,9 @@ export function useFilterOptions(): FilterOptionsData {
     
     items.forEach(item => {
       if (item.series && !seriesMap.has(item.series)) {
-        seriesMap.set(item.series, item.seriesName || item.series);
+        // 从原始数据中获取翻译后的系列名称
+        const seriesName = item.originalData?.seriesTranslations?.cNzh || item.series;
+        seriesMap.set(item.series, seriesName);
       }
     });
     

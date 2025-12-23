@@ -1,5 +1,6 @@
 import type { Item, FilterOptions } from '../types';
 import { CONFIG } from '../config';
+import { ItemModel } from '../models';
 
 /**
  * 检查物品是否匹配搜索词
@@ -62,6 +63,7 @@ function matchesSeries(item: Item, seriesFilter: string): boolean {
 
 /**
  * 检查物品或其变体是否匹配颜色筛选
+ * 使用 ItemModel 简化颜色匹配逻辑
  * @returns 是否匹配颜色
  */
 function matchesColor(item: Item, colorFilter: string): boolean {
@@ -72,43 +74,22 @@ function matchesColor(item: Item, colorFilter: string): boolean {
     return true;
   }
   
-  // 检查变体颜色
-  if (item.variantGroups) {
-    for (let i = 0; i < item.variantGroups.length; i++) {
-      const variation = item.variantGroups[i];
-      if (variation) {
-        for (let j = 0; j < variation.patterns.length; j++) {
-          const pattern = variation.patterns[j];
-          if (pattern?.colors?.includes(colorFilter)) {
-            item.vIndex = i;
-            item.pIndex = j;
-            return true;
-          }
-        }
-      }
-    }
-  }
-  
-  return false;
+  // 使用 ItemModel 查找并切换到匹配颜色的变体
+  const itemModel = new ItemModel(item);
+  return itemModel.switchToColorVariant(colorFilter);
 }
 
 /**
  * 更新物品显示属性以匹配选定的颜色变体
+ * 使用 ItemModel 简化更新逻辑
  */
 function updateItemForColorVariant(item: Item, colorFilter: string): void {
-  if (!colorFilter || !item.hasVariations || !item.variantGroups) {
+  if (!colorFilter || item.variantGroups.length === 0) {
     return;
   }
 
-  for (const variantGroup of item.variantGroups) {
-    for (const pattern of variantGroup.patterns) {
-      if (pattern.colors?.includes(colorFilter)) {
-        item.id = pattern.id;
-        item.imageUrl = pattern.imageUrl;
-        return;
-      }
-    }
-  }
+  // ItemModel 的 switchToColorVariant 已经处理了显示属性更新
+  // 这里不需要额外操作
 }
 
 /**

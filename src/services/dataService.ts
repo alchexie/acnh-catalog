@@ -1,5 +1,6 @@
-import type { RawItem, CatalogItem, Translations, Item, VariantGroup } from '../types';
+import type { RawItem, CatalogItem, Translations, Item } from '../types';
 import { CONFIG } from '../config';
+import { ItemFactory } from '../models/ItemModel';
 
 let translationsCache: Translations | null = null;
 
@@ -72,94 +73,8 @@ export async function loadCatalogData(): Promise<{ ownedNames: Set<string>; owne
 }
 
 /**
- * 处理变体数据
- * @param item 原始物品数据
- * @returns 变体组数组和是否有变体的标志
- */
-function processVariations(item: RawItem): { variantGroups: VariantGroup[]; hasVariations: boolean } {
-  if (!item.variations || item.variations.length === 0) {
-    return { variantGroups: [], hasVariations: false };
-  }
-
-  const variantMap = new Map<string, VariantGroup>();
-
-  item.variations.forEach((v) => {
-    const variantName = v.variantTranslations?.cNzh || v.variation || "";
-
-    if (!variantMap.has(variantName)) {
-      variantMap.set(variantName, {
-        variantName: variantName,
-        patterns: [],
-      });
-    }
-    
-    const variant = variantMap.get(variantName)!;
-    variant.patterns.push({
-      patternName: v.patternTranslations?.cNzh || v.pattern || "",
-      imageUrl: v.image || v.storageImage || v.closetImage || v.framedImage || item.inventoryImage || '',
-      id: v.internalId || item.internalId,
-      uniqueEntryId: v.uniqueEntryId,
-      colors: v.colors || item.colors || [],
-    });
-  });
-
-  const variantGroups = Array.from(variantMap.values());
-  return { variantGroups, hasVariations: variantGroups.length > 0 };
-}
-
-/**
- * 获取物品的默认显示属性
- * @param item 原始物品数据
- * @param variantGroups 变体组数组
- * @returns 包含ID、图片URL和颜色的对象
- */
-function getDefaultDisplayProperties(
-  item: RawItem,
-  variantGroups: VariantGroup[]
-): { id: number; imageUrl: string; colors: string[] } {
-  let id = item.internalId;
-  let imageUrl = item.image || item.storageImage || item.closetImage || 
-                 item.framedImage || item.inventoryImage || '';
-  let colors = item.colors || [];
-
-  // 如果有变体，使用第一个变体的第一个图案
-  if (variantGroups.length > 0) {
-    const firstVariant = variantGroups[0];
-    if (firstVariant && firstVariant.patterns.length > 0) {
-      const firstPattern = firstVariant.patterns[0];
-      if (firstPattern) {
-        id = firstPattern.id || id;
-        imageUrl = firstPattern.imageUrl || imageUrl;
-        colors = firstPattern.colors || colors;
-      }
-    }
-  }
-
-  return { id, imageUrl, colors };
-}
-
-/**
- * 检查物品是否被拥有
- * @param name 物品名称
- * @param internalId 内部ID
- * @param uniqueEntryId 唯一条目ID
- * @param ownedData 拥有数据
- * @returns 是否拥有
- */
-function checkIfOwned(
-  name: string,
-  internalId: number,
-  uniqueEntryId: string,
-  ownedData: { ownedNames: Set<string>; ownedIds: Set<string> }
-): boolean {
-  const { ownedNames, ownedIds } = ownedData;
-  return ownedNames.has(name) || 
-         ownedIds.has(String(internalId)) || 
-         ownedIds.has(uniqueEntryId);
-}
-
-/**
  * 处理物品数据
+ * 使用 ItemFactory.createItem() 创建 Item 数据对象
  * @param acnhItems 原始物品数据数组
  * @param ownedData 拥有物品数据
  * @returns 处理后的物品数组
@@ -169,38 +84,7 @@ export function processItemsData(
   ownedData: { ownedNames: Set<string>; ownedIds: Set<string> }
 ): Item[] {
   return acnhItems
-    .map((item) => {
-      const name = item.translations?.cNzh || item.name;
-      
-      // 处理变体
-      const { variantGroups, hasVariations } = processVariations(item);
-      
-      // 获取默认显示属性
-      const { id, imageUrl, colors } = getDefaultDisplayProperties(item, variantGroups);
-      
-      // 检查是否拥有
-      const owned = checkIfOwned(name, item.internalId, item.uniqueEntryId, ownedData);
-
-      return {
-        name,
-        id,
-        category: item.sourceSheet || "Other",
-        imageUrl,
-        colors,
-        owned,
-        variantGroups,
-        hasVariations,
-        vIndex: 0,
-        pIndex: 0,
-        versionAdded: item.versionAdded,
-        source: item.source,
-        size: item.size,
-        tag: item.tag,
-        series: item.series,
-        seriesName: item.seriesTranslations?.cNzh || item.series,
-        originalData: item,
-      };
-    })
+    .map((rawItem) => ItemFactory.createItem(rawItem, ownedData))
     .sort((a, b) => a.id - b.id);
 }
 

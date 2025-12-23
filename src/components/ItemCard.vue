@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import type { Item } from '../types';
 import { getSourceName, getTagName } from '../services/dataService';
 import { useItemVariants } from '../composables/useItemVariants';
@@ -8,8 +9,9 @@ const props = defineProps<{
   item: Item;
 }>();
 
-// 使用物品变体管理组合函数
+// 使用物品变体管理组合函数（基于 ItemModel）
 const {
+  itemModel,
   currentVariant,
   displayImage,
   displayId,
@@ -25,12 +27,19 @@ const {
 
 // 使用颜色显示组合函数
 const { conicGradientStyle: colorBlockStyle } = useColorDisplay(displayColors);
+
+// 使用 ItemModel 的便捷方法获取信息
+const version = computed(() => itemModel.value.getVersion());
+const size = computed(() => itemModel.value.getSize());
+const sources = computed(() => itemModel.value.getSources());
+const seriesName = computed(() => itemModel.value.getSeriesName());
+const tag = computed(() => itemModel.value.getTag());
 </script>
 
 <template>
   <div class="item-card" :class="{ 'item-owned': item.owned }">
-    <div v-if="item.originalData?.versionAdded" class="version-badge">
-      {{ item.originalData.versionAdded }}
+    <div v-if="version !== '未知版本'" class="version-badge">
+      {{ version }}
     </div>
     
     <img :src="displayImage" :alt="item.name" class="item-image" loading="lazy">
@@ -38,19 +47,19 @@ const { conicGradientStyle: colorBlockStyle } = useColorDisplay(displayColors);
     <div class="item-name">{{ displayName }}</div>
     <div class="item-id">ID: {{ displayId || 'N/A' }}</div>
     
-    <div v-if="item.originalData?.source" class="source-info">
-      📍 {{ item.originalData.source.map(s => getSourceName(s)).join(', ') }}
+    <div v-if="sources.length > 0" class="source-info">
+      📍 {{ sources.map(s => getSourceName(s)).join(', ') }}
     </div>
     
-    <div v-if="item.originalData?.size || displayColors.length > 0" class="size-tag-info">
-      <span v-if="item.originalData?.size">📏 {{ item.originalData.size }}</span>
+    <div v-if="size !== '未知尺寸' || displayColors.length > 0" class="size-tag-info">
+      <span v-if="size !== '未知尺寸'">📏 {{ size }}</span>
       <span v-if="displayColors.length > 0" class="color-block" :style="{ background: colorBlockStyle }"></span>
     </div>
     
-    <div v-if="item.originalData?.tag || item.seriesName" class="tag-series-info">
-      <span v-if="item.originalData?.tag">🏷️ {{ getTagName(item.originalData.tag) }}</span>
-      <span v-if="item.originalData?.tag && item.seriesName"> · </span>
-      <span v-if="item.seriesName">📦 {{ item.seriesName }}</span>
+    <div v-if="tag || seriesName !== '无系列'" class="tag-series-info">
+      <span v-if="tag">🏷️ {{ getTagName(tag) }}</span>
+      <span v-if="tag && seriesName !== '无系列'"> · </span>
+      <span v-if="seriesName !== '无系列'">📦 {{ seriesName }}</span>
     </div>
     
     <div v-if="hasMultipleVariants" class="variation-row variant-row">
