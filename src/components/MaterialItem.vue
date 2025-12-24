@@ -64,7 +64,7 @@ const iconSize = computed(() => 24);
 
 .material-item.material-clickable:hover {
   border-color: #ff9800;
-  transform: translateX(3px);
+  transform: translateY(-3px);
   box-shadow: 0 2px 6px rgba(255, 152, 0, 0.15);
 }
 
@@ -77,7 +77,7 @@ const iconSize = computed(() => 24);
 .material-icon {
   object-fit: contain;
   background: #f5f5f5;
-  border-radius: 4px;
+  border-radius: 50%;
   padding: 2px;
 }
 

@@ -134,12 +134,12 @@ function processVariations(rawItem: RawItem): VariantGroup[] {
     variant.patterns.push({
       patternName: v.patternTranslations?.cNzh || v.pattern || "",
       imageUrl:
+        rawItem.inventoryImage ||
         v.image ||
         v.storageImage ||
         v.closetImage ||
         v.framedImage ||
         v.albumImage ||
-        rawItem.inventoryImage ||
         "",
       id: v.internalId || rawItem.internalId,
       uniqueEntryId: v.uniqueEntryId,
@@ -159,11 +159,12 @@ function getDefaultDisplayProperties(
 ): { id: number; imageUrl: string; colors: string[] } {
   let id = rawItem.internalId;
   let imageUrl =
+    rawItem.inventoryImage ||
     rawItem.image ||
     rawItem.storageImage ||
     rawItem.closetImage ||
     rawItem.framedImage ||
-    rawItem.inventoryImage ||
+    rawItem.albumImage ||
     "";
   let colors = [...new Set(rawItem.colors || [])];
 
