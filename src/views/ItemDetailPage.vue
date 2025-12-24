@@ -6,10 +6,11 @@ import { ItemModel } from '../models';
 import { getSourceName, getTagName, getCategoryName, getColorName } from '../services/dataService';
 import { useColorDisplay } from '../composables/useColorDisplay';
 import { COLOR_MAP } from '../config';
+import MaterialItem from '../components/MaterialItem.vue';
 
 const route = useRoute();
 const router = useRouter();
-const { allItems, itemNameMap, loading, error, loadData } = useItemsData();
+const { allItems, loading, error, loadData } = useItemsData();
 
 // 获取物品ID
 const itemId = computed(() => Number(route.params.id));
@@ -48,27 +49,6 @@ const recipeData = computed(() => currentItem.value?.recipe);
 const hasMaterials = computed(() => {
     return recipeData.value?.materials && Object.keys(recipeData.value.materials).length > 0;
 });
-
-// 获取材料信息
-const getMaterialInfo = (materialKey: string) => {
-    // 在所有物品中查找材料名称对应的物品
-    const materialItem = itemNameMap.value[materialKey];
-
-    // 返回材料的名称、图标和ID
-    return {
-        name: materialItem?.name || materialKey,
-        imageUrl: materialItem?.imageUrl || '',
-        id: materialItem?.id
-    };
-};
-
-// 跳转到材料详情页
-const goToMaterial = (materialKey: string) => {
-    const materialInfo = getMaterialInfo(materialKey);
-    if (materialInfo.id) {
-        router.push(`/item/${materialInfo.id}`);
-    }
-};
 
 // 获取原始数据中的更多信息
 const rawData = computed(() => currentItem.value?.originalData);
@@ -402,17 +382,12 @@ onMounted(() => {
                     <div v-if="hasMaterials" class="materials-section">
                         <h4>所需材料</h4>
                         <div class="materials-grid">
-                            <div v-for="(quantity, material) in recipeData.materials" :key="material"
-                                class="material-item" :class="{ 'material-clickable': getMaterialInfo(material).id }"
-                                @click="goToMaterial(material)">
-                                <div class="material-info">
-                                    <img v-if="getMaterialInfo(material).imageUrl"
-                                        :src="getMaterialInfo(material).imageUrl" :alt="getMaterialInfo(material).name"
-                                        class="material-icon" />
-                                    <span class="material-name">{{ getMaterialInfo(material).name }}</span>
-                                </div>
-                                <span class="material-quantity">× {{ quantity }}</span>
-                            </div>
+                            <MaterialItem
+                                v-for="(quantity, material) in recipeData.materials"
+                                :key="material"
+                                :material="material"
+                                :quantity="quantity"
+                            />
                         </div>
                     </div>
 
@@ -876,58 +851,6 @@ onMounted(() => {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 12px;
-}
-
-.material-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 16px;
-    background: linear-gradient(135deg, #f5f5f5 0%, #fafafa 100%);
-    border-radius: 8px;
-    border: 2px solid #e0e0e0;
-    transition: all 0.3s;
-}
-
-.material-item.material-clickable {
-    cursor: pointer;
-}
-
-.material-item.material-clickable:hover {
-    border-color: #ffd54f;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background: linear-gradient(135deg, #fffbf0 0%, #ffffff 100%);
-}
-
-.material-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.material-icon {
-    width: 32px;
-    height: 32px;
-    object-fit: contain;
-    background: white;
-    border-radius: 6px;
-    padding: 2px;
-}
-
-.material-name {
-    font-weight: 600;
-    color: #333;
-    font-size: 14px;
-}
-
-.material-quantity {
-    background: #e65100;
-    color: white;
-    padding: 4px 12px;
-    border-radius: 12px;
-    font-weight: 700;
-    font-size: 13px;
 }
 
 .recipe-notes {

@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import type { Creature } from '../types/creature';
-import { UI_TEXT } from '../constants';
-import { getChineseText, formatPrice } from '../utils/common';
-import BaseCard from './BaseCard.vue';
+import type { Creature } from "../types/creature";
+import { UI_TEXT } from "../constants";
+import { getChineseText, formatPrice } from "../utils/common";
+import BaseCard from "./BaseCard.vue";
 
 interface Props {
   data: Creature;
-  hemisphere: 'north' | 'south';
+  hemisphere: "north" | "south";
 }
 
 const props = defineProps<Props>();
@@ -15,32 +15,32 @@ const props = defineProps<Props>();
 const getMonths = (creature: Creature): string => {
   const hemisphere = creature.hemispheres?.[props.hemisphere];
   if (!hemisphere?.months || hemisphere.months.length === 0) {
-    return '--';
+    return "--";
   }
-  return hemisphere.months.join(', ');
+  return hemisphere.months.join(", ");
 };
 
 // 获取时间信息
 const getTime = (creature: Creature): string => {
   const hemisphere = creature.hemispheres?.[props.hemisphere];
   if (!hemisphere?.time || hemisphere.time.length === 0) {
-    return '--';
+    return "--";
   }
-  return hemisphere.time.join(', ');
+  return hemisphere.time.join(", ");
 };
 
 // 获取天气信息
 const getWeather = (creature: Creature): string => {
-  return creature.weather || '--';
+  return creature.weather || "--";
 };
 
 // 获取位置信息
 const getLocation = (creature: Creature): string => {
-  return creature.whereHow || '--';
+  return creature.whereHow || "--";
 };
 
 const handleClick = () => {
-  window.open(`https://nookipedia.com/wiki/${props.data.name}`, '_blank');
+  window.open(`https://nookipedia.com/wiki/${props.data.name}`, "_blank");
 };
 </script>
 
@@ -54,7 +54,9 @@ const handleClick = () => {
   >
     <div class="detail-row">
       <span class="detail-label">{{ UI_TEXT.LABELS.PRICE }}</span>
-      <span class="detail-value price">{{ formatPrice(props.data.sell) }} {{ UI_TEXT.CURRENCY }}</span>
+      <span class="detail-value price"
+        >{{ formatPrice(props.data.sell) }} {{ UI_TEXT.CURRENCY }}</span
+      >
     </div>
     <div class="detail-row">
       <span class="detail-label">📅 月份</span>

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { Reaction } from '../types/reaction';
-import { UI_TEXT } from '../constants';
-import { getChineseText, joinArray } from '../utils/common';
-import BaseCard from './BaseCard.vue';
+import type { Reaction } from "../types/reaction";
+import { UI_TEXT } from "../constants";
+import { getChineseText, joinArray } from "../utils/common";
+import BaseCard from "./BaseCard.vue";
 
 interface Props {
   data: Reaction;
@@ -11,7 +11,7 @@ interface Props {
 const props = defineProps<Props>();
 
 const handleClick = () => {
-  window.open(`https://nookipedia.com/wiki/${props.data.name}`, '_blank');
+  window.open(`https://nookipedia.com/wiki/${props.data.name}`, "_blank");
 };
 </script>
 

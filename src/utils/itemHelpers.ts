@@ -1,4 +1,4 @@
-import type { Item, VariantGroup, RawItem } from '../types';
+import type { Item, VariantGroup, RawItem } from "../types";
 
 /**
  * Item 相关的纯函数工具集
@@ -18,15 +18,18 @@ export function createItem(
   ownedData?: { ownedNames: Set<string>; ownedIds: Set<string> }
 ): Item {
   const name = rawItem.translations?.cNzh || rawItem.name;
-  
+
   // 处理变体
   const variantGroups = processVariations(rawItem);
-  
+
   // 获取默认显示属性
-  const { id, imageUrl, colors } = getDefaultDisplayProperties(rawItem, variantGroups);
-  
+  const { id, imageUrl, colors } = getDefaultDisplayProperties(
+    rawItem,
+    variantGroups
+  );
+
   // 检查是否拥有
-  const owned = ownedData 
+  const owned = ownedData
     ? checkIfOwned(name, rawItem.internalId, rawItem.uniqueEntryId, ownedData)
     : false;
 
@@ -53,12 +56,14 @@ export function createItem(
  */
 function processRecipeData(recipeData: any): any {
   if (!recipeData) return undefined;
-  
+
   // 转换材料名称为中文
   let materials: Record<string, number> | undefined;
   if (recipeData.materials && recipeData.materialsTranslations) {
     materials = {};
-    for (const [materialKey, quantity] of Object.entries(recipeData.materials)) {
+    for (const [materialKey, quantity] of Object.entries(
+      recipeData.materials
+    )) {
       // 尝试获取中文翻译，如果没有则使用原始名称
       const translation = recipeData.materialsTranslations[materialKey];
       const materialName = translation?.cNzh || materialKey;
@@ -69,7 +74,7 @@ function processRecipeData(recipeData: any): any {
   }
 
   return {
-    name: recipeData.name || '',
+    name: recipeData.name || "",
     image: recipeData.image,
     materials,
     source: recipeData.source,
@@ -101,12 +106,18 @@ function processVariations(rawItem: RawItem): VariantGroup[] {
         patterns: [],
       });
     }
-    
+
     const variant = variantMap.get(variantName)!;
     const patternColors = v.colors || rawItem.colors || [];
     variant.patterns.push({
       patternName: v.patternTranslations?.cNzh || v.pattern || "",
-      imageUrl: v.image || v.storageImage || v.closetImage || v.framedImage || rawItem.inventoryImage || '',
+      imageUrl:
+        v.image ||
+        v.storageImage ||
+        v.closetImage ||
+        v.framedImage ||
+        rawItem.inventoryImage ||
+        "",
       id: v.internalId || rawItem.internalId,
       uniqueEntryId: v.uniqueEntryId,
       colors: [...new Set(patternColors)],
@@ -124,8 +135,13 @@ function getDefaultDisplayProperties(
   variantGroups: VariantGroup[]
 ): { id: number; imageUrl: string; colors: string[] } {
   let id = rawItem.internalId;
-  let imageUrl = rawItem.image || rawItem.storageImage || rawItem.closetImage || 
-                 rawItem.framedImage || rawItem.inventoryImage || '';
+  let imageUrl =
+    rawItem.image ||
+    rawItem.storageImage ||
+    rawItem.closetImage ||
+    rawItem.framedImage ||
+    rawItem.inventoryImage ||
+    "";
   let colors = [...new Set(rawItem.colors || [])];
 
   // 如果有变体，使用第一个变体的第一个图案
@@ -154,9 +170,11 @@ function checkIfOwned(
   ownedData: { ownedNames: Set<string>; ownedIds: Set<string> }
 ): boolean {
   const { ownedNames, ownedIds } = ownedData;
-  return ownedNames.has(name) || 
-         ownedIds.has(String(internalId)) || 
-         ownedIds.has(uniqueEntryId);
+  return (
+    ownedNames.has(name) ||
+    ownedIds.has(String(internalId)) ||
+    ownedIds.has(uniqueEntryId)
+  );
 }
 
 // ============ Item 查询相关 ============
@@ -167,21 +185,19 @@ function checkIfOwned(
  */
 export function itemMatchesColor(item: Item, color: string): boolean {
   if (!color) return true;
-  
+
   // 检查物品本身的颜色
   if (item.colors?.includes(color)) {
     return true;
   }
-  
+
   // 检查所有变体和图案是否包含该颜色
   if (item.variantGroups && item.variantGroups.length > 0) {
-    return item.variantGroups.some(variant => 
-      variant.patterns.some(pattern => 
-        pattern.colors?.includes(color)
-      )
+    return item.variantGroups.some((variant) =>
+      variant.patterns.some((pattern) => pattern.colors?.includes(color))
     );
   }
-  
+
   return false;
 }
 
@@ -189,16 +205,18 @@ export function itemMatchesColor(item: Item, color: string): boolean {
  * 查找匹配颜色的变体和图案索引
  */
 export function findColorVariantIndex(
-  item: Item, 
+  item: Item,
   color: string
 ): { variantIndex: number; patternIndex: number } | null {
   if (!color) return null;
-  
+
   // 遍历所有变体和图案
   const variants = item.variantGroups || [];
   if (variants.length === 0) {
     // 没有变体，检查物品本身的颜色
-    return item.colors?.includes(color) ? { variantIndex: 0, patternIndex: 0 } : null;
+    return item.colors?.includes(color)
+      ? { variantIndex: 0, patternIndex: 0 }
+      : null;
   }
 
   // 有变体的情况
@@ -229,8 +247,10 @@ export function hasMultipleVariants(item: Item): boolean {
  */
 export function hasVariations(item: Item): boolean {
   const groups = item.variantGroups || [];
-  return groups.length > 0 && 
-         (groups.length > 1 || (groups[0]?.patterns.length ?? 0) > 1);
+  return (
+    groups.length > 0 &&
+    (groups.length > 1 || (groups[0]?.patterns.length ?? 0) > 1)
+  );
 }
 
 /**
@@ -251,14 +271,14 @@ export function hasColor(item: Item, color: string): boolean {
  * 获取物品的版本信息（安全访问）
  */
 export function getItemVersion(item: Item): string {
-  return item.versionAdded || '未知版本';
+  return item.versionAdded || "未知版本";
 }
 
 /**
  * 获取物品的尺寸信息（安全访问）
  */
 export function getItemSize(item: Item): string {
-  return item.size || '未知尺寸';
+  return item.size || "未知尺寸";
 }
 
 /**
@@ -272,28 +292,28 @@ export function getItemSources(item: Item): string[] {
  * 检查物品是否匹配指定版本
  */
 export function itemMatchesVersion(item: Item, version: string): boolean {
-  return !version || (item.versionAdded === version);
+  return !version || item.versionAdded === version;
 }
 
 /**
  * 检查物品是否匹配指定尺寸
  */
 export function itemMatchesSize(item: Item, size: string): boolean {
-  return !size || (item.size === size);
+  return !size || item.size === size;
 }
 
 /**
  * 检查物品是否匹配指定标签
  */
 export function itemMatchesTag(item: Item, tag: string): boolean {
-  return !tag || (item.tag === tag);
+  return !tag || item.tag === tag;
 }
 
 /**
  * 检查物品是否匹配指定系列
  */
 export function itemMatchesSeries(item: Item, series: string): boolean {
-  return !series || (item.series === series);
+  return !series || item.series === series;
 }
 
 /**

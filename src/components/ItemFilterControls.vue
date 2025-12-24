@@ -1,24 +1,29 @@
 <script setup lang="ts">
-import { watch, computed, onMounted, ref } from 'vue';
-import type { Item, FilterOptions } from '../types';
-import { getCategoryName, getSourceName, getColorName, getTagName } from '../services/dataService';
-import { useFilterOptions } from '../composables/useFilterOptions';
-import { useDebounce } from '../composables/useDebounce';
+import { watch, computed, onMounted, ref } from "vue";
+import type { Item, FilterOptions } from "../types";
+import {
+  getCategoryName,
+  getSourceName,
+  getColorName,
+  getTagName,
+} from "../services/dataService";
+import { useFilterOptions } from "../composables/useFilterOptions";
+import { useDebounce } from "../composables/useDebounce";
 
 const props = defineProps<{
   filters: FilterOptions;
   sortValue: string;
-  perPage: number | 'all';
+  perPage: number | "all";
   allItems: Item[];
 }>();
 
 const emit = defineEmits<{
-  (e: 'update:filters', value: FilterOptions): void;
-  (e: 'update:sortValue', value: string): void;
-  (e: 'update:perPage', value: number | 'all'): void;
-  (e: 'filter-change'): void;
-  (e: 'sort-change'): void;
-  (e: 'per-page-change', value: number | 'all'): void;
+  (e: "update:filters", value: FilterOptions): void;
+  (e: "update:sortValue", value: string): void;
+  (e: "update:perPage", value: number | "all"): void;
+  (e: "filter-change"): void;
+  (e: "sort-change"): void;
+  (e: "per-page-change", value: number | "all"): void;
 }>();
 
 // 使用组合函数管理筛选器选项
@@ -30,7 +35,7 @@ const {
   tags,
   colors,
   series: seriesOptions,
-  populateFilters
+  populateFilters,
 } = useFilterOptions();
 
 // 搜索框本地状态
@@ -42,42 +47,45 @@ const debouncedSearch = useDebounce(searchInput, 300);
 // 监听防抖后的搜索词,触发筛选
 watch(debouncedSearch, (newValue) => {
   if (props.filters.searchTerm !== newValue) {
-    emit('update:filters', { ...props.filters, searchTerm: newValue });
-    emit('filter-change');
+    emit("update:filters", { ...props.filters, searchTerm: newValue });
+    emit("filter-change");
   }
 });
 
 // 监听 props.filters.searchTerm 的外部变化
-watch(() => props.filters.searchTerm, (newValue) => {
-  if (searchInput.value !== newValue) {
-    searchInput.value = newValue;
+watch(
+  () => props.filters.searchTerm,
+  (newValue) => {
+    if (searchInput.value !== newValue) {
+      searchInput.value = newValue;
+    }
   }
-});
+);
 
 // 双向绑定的计算属性
 const localFilters = computed({
   get: () => props.filters,
   set: (value) => {
-    emit('update:filters', value);
-    emit('filter-change');
-  }
+    emit("update:filters", value);
+    emit("filter-change");
+  },
 });
 
 const localSort = computed({
   get: () => props.sortValue,
   set: (value) => {
-    emit('update:sortValue', value);
-    emit('sort-change');
-  }
+    emit("update:sortValue", value);
+    emit("sort-change");
+  },
 });
 
 const localPerPage = computed({
   get: () => props.perPage,
   set: (value) => {
-    const numValue = value === 'all' ? 'all' : Number(value);
-    emit('update:perPage', numValue);
-    emit('per-page-change', numValue);
-  }
+    const numValue = value === "all" ? "all" : Number(value);
+    emit("update:perPage", numValue);
+    emit("per-page-change", numValue);
+  },
 });
 
 // 组件挂载时填充筛选器
@@ -86,14 +94,22 @@ onMounted(() => {
 });
 
 // 监听物品列表变化
-watch(() => props.allItems, (newItems) => {
-  populateFilters(newItems);
-});
+watch(
+  () => props.allItems,
+  (newItems) => {
+    populateFilters(newItems);
+  }
+);
 </script>
 
 <template>
   <div class="controls">
-    <input v-model="searchInput" type="text" class="search-box" placeholder="🔍 搜索物品名称...">
+    <input
+      v-model="searchInput"
+      type="text"
+      class="search-box"
+      placeholder="🔍 搜索物品名称..."
+    />
 
     <div class="filter-section">
       <label>分类：</label>
@@ -122,28 +138,41 @@ watch(() => props.allItems, (newItems) => {
       </select>
 
       <label>筛选：</label>
-      <select v-model="localFilters.ownedFilter" @change="emit('filter-change')">
+      <select
+        v-model="localFilters.ownedFilter"
+        @change="emit('filter-change')"
+      >
         <option value="all">全部物品</option>
         <option value="owned">仅已拥有</option>
         <option value="not-owned">仅未拥有</option>
       </select>
 
       <label>版本：</label>
-      <select v-model="localFilters.versionFilter" @change="emit('filter-change')">
+      <select
+        v-model="localFilters.versionFilter"
+        @change="emit('filter-change')"
+      >
         <option value="">全部版本</option>
-        <option v-for="ver in versions" :key="ver" :value="ver">{{ ver }}</option>
+        <option v-for="ver in versions" :key="ver" :value="ver">
+          {{ ver }}
+        </option>
       </select>
 
       <label>尺寸：</label>
       <select v-model="localFilters.sizeFilter" @change="emit('filter-change')">
         <option value="">全部尺寸</option>
-        <option v-for="size in sizes" :key="size" :value="size">{{ size }}</option>
+        <option v-for="size in sizes" :key="size" :value="size">
+          {{ size }}
+        </option>
       </select>
     </div>
 
     <div class="filter-section">
       <label>颜色：</label>
-      <select v-model="localFilters.colorFilter" @change="emit('filter-change')">
+      <select
+        v-model="localFilters.colorFilter"
+        @change="emit('filter-change')"
+      >
         <option value="">全部颜色</option>
         <option v-for="color in colors" :key="color" :value="color">
           {{ getColorName(color) }}
@@ -159,15 +188,25 @@ watch(() => props.allItems, (newItems) => {
       </select>
 
       <label>系列：</label>
-      <select v-model="localFilters.seriesFilter" @change="emit('filter-change')">
+      <select
+        v-model="localFilters.seriesFilter"
+        @change="emit('filter-change')"
+      >
         <option value="">全部系列</option>
-        <option v-for="series in seriesOptions" :key="series.value" :value="series.value">
+        <option
+          v-for="series in seriesOptions"
+          :key="series.value"
+          :value="series.value"
+        >
           {{ series.name }}
         </option>
       </select>
 
       <label>来源：</label>
-      <select v-model="localFilters.sourceFilter" @change="emit('filter-change')">
+      <select
+        v-model="localFilters.sourceFilter"
+        @change="emit('filter-change')"
+      >
         <option value="">全部来源</option>
         <option v-for="source in sources" :key="source" :value="source">
           {{ getSourceName(source) }}

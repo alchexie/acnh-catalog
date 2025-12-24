@@ -1,7 +1,14 @@
 <script setup lang="ts">
-import { ENTITY_ICONS } from '../constants';
+import { ENTITY_ICONS } from "../constants";
 
-export type TabType = 'items' | 'villagers' | 'npcs' | 'creatures' | 'reactions' | 'recipes' | 'construction';
+export type TabType =
+  | "items"
+  | "villagers"
+  | "npcs"
+  | "creatures"
+  | "reactions"
+  | "recipes"
+  | "construction";
 
 interface Tab {
   id: TabType;
@@ -16,28 +23,32 @@ interface Props {
 defineProps<Props>();
 
 const emit = defineEmits<{
-  'update:activeTab': [tab: TabType];
+  "update:activeTab": [tab: TabType];
 }>();
 
 const tabs: Tab[] = [
-  { id: 'items', label: '物品', icon: ENTITY_ICONS.ITEMS },
-  { id: 'villagers', label: '村民', icon: ENTITY_ICONS.VILLAGERS },
-  { id: 'npcs', label: 'NPC', icon: ENTITY_ICONS.NPCS },
-  { id: 'creatures', label: '生物', icon: ENTITY_ICONS.CREATURES },
-  { id: 'reactions', label: '表情', icon: ENTITY_ICONS.REACTIONS },
-  { id: 'recipes', label: 'DIY配方', icon: ENTITY_ICONS.RECIPES },
-  { id: 'construction', label: '改建', icon: ENTITY_ICONS.CONSTRUCTION }
+  { id: "items", label: "物品", icon: ENTITY_ICONS.ITEMS },
+  { id: "villagers", label: "村民", icon: ENTITY_ICONS.VILLAGERS },
+  { id: "npcs", label: "NPC", icon: ENTITY_ICONS.NPCS },
+  { id: "creatures", label: "生物", icon: ENTITY_ICONS.CREATURES },
+  { id: "reactions", label: "表情", icon: ENTITY_ICONS.REACTIONS },
+  { id: "recipes", label: "DIY配方", icon: ENTITY_ICONS.RECIPES },
+  { id: "construction", label: "改建", icon: ENTITY_ICONS.CONSTRUCTION },
 ];
 
 const selectTab = (tabId: TabType) => {
-  emit('update:activeTab', tabId);
+  emit("update:activeTab", tabId);
 };
 </script>
 
 <template>
   <div class="tab-selector">
-    <button v-for="tab in tabs" :key="tab.id" :class="['tab-button', { active: activeTab === tab.id }]"
-      @click="selectTab(tab.id)">
+    <button
+      v-for="tab in tabs"
+      :key="tab.id"
+      :class="['tab-button', { active: activeTab === tab.id }]"
+      @click="selectTab(tab.id)"
+    >
       <span class="tab-icon">{{ tab.icon }}</span>
       <span class="tab-label">{{ tab.label }}</span>
     </button>

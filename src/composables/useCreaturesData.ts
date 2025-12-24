@@ -1,7 +1,7 @@
-import { ref, type Ref } from 'vue';
-import type { Creature } from '../types';
-import { loadCreaturesData } from '../services/dataService';
-import { DATA_LOADING } from '../constants';
+import { ref, type Ref } from "vue";
+import type { Creature } from "../types";
+import { loadCreaturesData } from "../services/dataService";
+import { DATA_LOADING } from "../constants";
 
 export interface UseCreaturesDataReturn {
   allCreatures: Ref<Creature[]>;
@@ -16,7 +16,7 @@ export interface UseCreaturesDataReturn {
 export function useCreaturesData(): UseCreaturesDataReturn {
   const allCreatures = ref<Creature[]>([]);
   const loading = ref(false);
-  const error = ref('');
+  const error = ref("");
 
   /**
    * 加载生物数据
@@ -24,13 +24,13 @@ export function useCreaturesData(): UseCreaturesDataReturn {
   const loadData = async (): Promise<void> => {
     try {
       loading.value = true;
-      error.value = '';
-      
+      error.value = "";
+
       allCreatures.value = await loadCreaturesData();
-      
+
       loading.value = false;
     } catch (err) {
-      console.error('加载生物数据失败:', err);
+      console.error("加载生物数据失败:", err);
       error.value = DATA_LOADING.ERROR_GENERIC;
       loading.value = false;
     }
@@ -40,6 +40,6 @@ export function useCreaturesData(): UseCreaturesDataReturn {
     allCreatures,
     loading,
     error,
-    loadData
+    loadData,
   };
 }

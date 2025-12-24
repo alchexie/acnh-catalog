@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { computed, onMounted, watch } from 'vue';
-import { useRouter } from 'vue-router';
-import type { Item } from '../types';
-import { getSeriesName, getTagName } from '../services/dataService';
-import { formatPrice, joinArray } from '../utils/common';
-import { ItemModel } from '../models';
-import { useColorDisplay } from '../composables/useColorDisplay';
-import VersionBadge from './VersionBadge.vue';
-import { UI_TEXT } from '../constants';
+import { computed, onMounted, watch } from "vue";
+import { useRouter } from "vue-router";
+import type { Item } from "../types";
+import { getSeriesName, getTagName } from "../services/dataService";
+import { formatPrice, joinArray } from "../utils/common";
+import { ItemModel } from "../models";
+import { useColorDisplay } from "../composables/useColorDisplay";
+import VersionBadge from "./VersionBadge.vue";
+import { UI_TEXT } from "../constants";
 
 const props = defineProps<{
   data: Item;
@@ -22,12 +22,12 @@ const itemModel = new ItemModel(props.data);
 // 使用简单的 ref 管理响应式状态 - 直接访问 ItemModel 内部的 ref
 const variantIndex = computed({
   get: () => itemModel.getVariantIndex(),
-  set: (val: number) => itemModel.setVariantIndex(val)
+  set: (val: number) => itemModel.setVariantIndex(val),
 });
 
 const patternIndex = computed({
   get: () => itemModel.getPatternIndex(),
-  set: (val: number) => itemModel.setPatternIndex(val)
+  set: (val: number) => itemModel.setPatternIndex(val),
 });
 
 // 计算属性 - 基于 ItemModel 方法，这些会自动响应内部 ref 的变化
@@ -69,17 +69,20 @@ onMounted(() => {
 });
 
 // 监听颜色筛选器变化
-watch(() => props.colorFilter, () => {
-  variantIndex.value = 0;
-  patternIndex.value = 0;
-  applyColorFilter();
-});
+watch(
+  () => props.colorFilter,
+  () => {
+    variantIndex.value = 0;
+    patternIndex.value = 0;
+    applyColorFilter();
+  }
+);
 
 // 点击卡片跳转到详情页
 const handleCardClick = (event: MouseEvent) => {
   // 如果点击的是款式或图案切换按钮，不跳转
   const target = event.target as HTMLElement;
-  if (target.classList.contains('variation-dot')) {
+  if (target.classList.contains("variation-dot")) {
     return;
   }
 
@@ -88,7 +91,11 @@ const handleCardClick = (event: MouseEvent) => {
 </script>
 
 <template>
-  <div class="card card--green" :class="{ 'item-owned': props.data.owned }" @click="handleCardClick">
+  <div
+    class="card card--green"
+    :class="{ 'item-owned': props.data.owned }"
+    @click="handleCardClick"
+  >
     <VersionBadge :version="version !== '未知版本' ? version : undefined" />
     <div class="card-image-wrapper">
       <img :src="displayImage" :alt="displayName" class="card-image" />
@@ -98,8 +105,12 @@ const handleCardClick = (event: MouseEvent) => {
       <div class="item-id"></div>
       <div class="card-details">
         <span class="detail-row detail-center">
-          ID: {{ displayId || 'N/A' }}
-          <span v-if="displayColors.length > 0" class="color-block" :style="{ background: colorBlockStyle }"></span>
+          ID: {{ displayId || "N/A" }}
+          <span
+            v-if="displayColors.length > 0"
+            class="color-block"
+            :style="{ background: colorBlockStyle }"
+          ></span>
         </span>
         <div class="detail-row">
           <span class="detail-label">尺寸</span>
@@ -118,16 +129,25 @@ const handleCardClick = (event: MouseEvent) => {
           <span class="detail-value">{{ joinArray(props.data.source) }}</span>
         </div>
         <div class="detail-row">
-          <span class="buy-price" title="购买价格">💰 {{ formatPrice(buyPrice) }}</span>
-          <span class="sell-price" title="出售价格">💵 {{ formatPrice(sellPrice) }}</span>
+          <span class="buy-price" title="购买价格"
+            >💰 {{ formatPrice(buyPrice) }}</span
+          >
+          <span class="sell-price" title="出售价格"
+            >💵 {{ formatPrice(sellPrice) }}</span
+          >
         </div>
       </div>
       <div v-if="hasMultipleVariants" class="variation-row variant-row">
         <span class="variation-label">款式:</span>
         <div class="variation-dots">
-          <span v-for="(vg, vIdx) in props.data.variantGroups" :key="vIdx" class="variation-dot variant-dot"
-            :class="{ active: vIdx === variantIndex }" :title="vg.variantName || `款式 ${vIdx + 1}`"
-            @click="variantIndex = vIdx">
+          <span
+            v-for="(vg, vIdx) in props.data.variantGroups"
+            :key="vIdx"
+            class="variation-dot variant-dot"
+            :class="{ active: vIdx === variantIndex }"
+            :title="vg.variantName || `款式 ${vIdx + 1}`"
+            @click="variantIndex = vIdx"
+          >
             {{ vIdx + 1 }}
           </span>
         </div>
@@ -135,9 +155,14 @@ const handleCardClick = (event: MouseEvent) => {
       <div v-if="hasPatterns" class="variation-row pattern-row">
         <span class="variation-label">图案:</span>
         <div class="variation-dots">
-          <span v-for="(p, pIdx) in currentVariant!.patterns" :key="pIdx" class="variation-dot pattern-dot"
-            :class="{ active: pIdx === patternIndex }" :title="p.patternName || `图案 ${pIdx + 1}`"
-            @click="patternIndex = pIdx">
+          <span
+            v-for="(p, pIdx) in currentVariant!.patterns"
+            :key="pIdx"
+            class="variation-dot pattern-dot"
+            :class="{ active: pIdx === patternIndex }"
+            :title="p.patternName || `图案 ${pIdx + 1}`"
+            @click="patternIndex = pIdx"
+          >
             {{ pIdx + 1 }}
           </span>
         </div>
@@ -147,7 +172,7 @@ const handleCardClick = (event: MouseEvent) => {
 </template>
 
 <style scoped>
-@import '../styles/Card.css';
+@import "../styles/Card.css";
 
 .item-owned {
   background: #e8f5e9;

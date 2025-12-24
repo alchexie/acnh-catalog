@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import VersionBadge from './VersionBadge.vue';
+import VersionBadge from "./VersionBadge.vue";
 
 interface Props {
   colorClass: string;
@@ -29,5 +29,5 @@ defineProps<Props>();
 </template>
 
 <style>
-@import '../styles/Card.css';
+@import "../styles/Card.css";
 </style>

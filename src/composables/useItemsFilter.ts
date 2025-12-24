@@ -1,12 +1,12 @@
-import { ref, computed, type Ref, type ComputedRef } from 'vue';
-import type { Item, FilterOptions } from '../types';
-import { filterItems, sortItems } from '../services/filterService';
-import { CONFIG } from '../config';
+import { ref, computed, type Ref, type ComputedRef } from "vue";
+import type { Item, FilterOptions } from "../types";
+import { filterItems, sortItems } from "../services/filterService";
+import { CONFIG } from "../config";
 
 export interface UseItemsFilterReturn {
   filters: Ref<FilterOptions>;
   sortValue: Ref<string>;
-  itemsPerPage: Ref<number | 'all'>;
+  itemsPerPage: Ref<number | "all">;
   currentPage: Ref<number>;
   filteredItems: Ref<Item[]>;
   totalPages: ComputedRef<number>;
@@ -14,7 +14,7 @@ export interface UseItemsFilterReturn {
   handleFilterChange: () => void;
   handleSortChange: () => void;
   handlePageChange: (page: number) => void;
-  handlePerPageChange: (value: number | 'all') => void;
+  handlePerPageChange: (value: number | "all") => void;
 }
 
 /**
@@ -22,19 +22,19 @@ export interface UseItemsFilterReturn {
  */
 export function useItemsFilter(allItems: Ref<Item[]>): UseItemsFilterReturn {
   const filters = ref<FilterOptions>({
-    searchTerm: '',
-    category: '',
-    ownedFilter: 'all',
-    versionFilter: '',
-    sourceFilter: '',
-    sizeFilter: '',
-    tagFilter: '',
-    colorFilter: '',
-    seriesFilter: ''
+    searchTerm: "",
+    category: "",
+    ownedFilter: "all",
+    versionFilter: "",
+    sourceFilter: "",
+    sizeFilter: "",
+    tagFilter: "",
+    colorFilter: "",
+    seriesFilter: "",
   });
 
   const sortValue = ref(CONFIG.SORT_OPTIONS.ID_ASC);
-  const itemsPerPage = ref<number | 'all'>(CONFIG.PAGINATION.DEFAULT_PER_PAGE);
+  const itemsPerPage = ref<number | "all">(CONFIG.PAGINATION.DEFAULT_PER_PAGE);
   const currentPage = ref(1);
   const filteredItems = ref<Item[]>([]);
 
@@ -42,7 +42,7 @@ export function useItemsFilter(allItems: Ref<Item[]>): UseItemsFilterReturn {
    * 计算总页数
    */
   const totalPages = computed(() => {
-    if (itemsPerPage.value === 'all') return 1;
+    if (itemsPerPage.value === "all") return 1;
     return Math.ceil(filteredItems.value.length / itemsPerPage.value);
   });
 
@@ -50,12 +50,15 @@ export function useItemsFilter(allItems: Ref<Item[]>): UseItemsFilterReturn {
    * 计算当前页要显示的物品
    */
   const itemsToDisplay = computed(() => {
-    if (itemsPerPage.value === 'all') {
+    if (itemsPerPage.value === "all") {
       return filteredItems.value;
     }
-    
+
     const startIndex = (currentPage.value - 1) * itemsPerPage.value;
-    const endIndex = Math.min(startIndex + itemsPerPage.value, filteredItems.value.length);
+    const endIndex = Math.min(
+      startIndex + itemsPerPage.value,
+      filteredItems.value.length
+    );
     return filteredItems.value.slice(startIndex, endIndex);
   });
 
@@ -85,7 +88,7 @@ export function useItemsFilter(allItems: Ref<Item[]>): UseItemsFilterReturn {
   /**
    * 处理每页显示数量变化
    */
-  const handlePerPageChange = (value: number | 'all'): void => {
+  const handlePerPageChange = (value: number | "all"): void => {
     itemsPerPage.value = value;
     currentPage.value = 1; // 改变每页数量后重置到第一页
   };
@@ -104,6 +107,6 @@ export function useItemsFilter(allItems: Ref<Item[]>): UseItemsFilterReturn {
     handleFilterChange,
     handleSortChange,
     handlePageChange,
-    handlePerPageChange
+    handlePerPageChange,
   };
 }

@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import type { TabType } from '../components/TabSelector.vue';
-import TabSelector from '../components/TabSelector.vue';
-import ItemsTab from './ItemsTab.vue';
-import VillagersTab from './VillagersTab.vue';
-import NPCsTab from './NPCsTab.vue';
-import CreaturesTab from './CreaturesTab.vue';
-import ReactionsTab from './ReactionsTab.vue';
-import RecipesTab from './RecipesTab.vue';
-import ConstructionTab from './ConstructionTab.vue';
+import { ref } from "vue";
+import type { TabType } from "../components/TabSelector.vue";
+import TabSelector from "../components/TabSelector.vue";
+import ItemsTab from "./ItemsTab.vue";
+import VillagersTab from "./VillagersTab.vue";
+import NPCsTab from "./NPCsTab.vue";
+import CreaturesTab from "./CreaturesTab.vue";
+import ReactionsTab from "./ReactionsTab.vue";
+import RecipesTab from "./RecipesTab.vue";
+import ConstructionTab from "./ConstructionTab.vue";
 
 // 当前选中的标签
-const activeTab = ref<TabType>('items');
+const activeTab = ref<TabType>("items");
 </script>
 
 <template>

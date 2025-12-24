@@ -1,4 +1,4 @@
-import { ref, watch, type Ref } from 'vue';
+import { ref, watch, type Ref } from "vue";
 
 /**
  * 防抖组合函数
@@ -14,7 +14,7 @@ export function useDebounce<T>(value: Ref<T>, delay = 300): Ref<T> {
     if (timeoutId !== undefined) {
       clearTimeout(timeoutId);
     }
-    
+
     timeoutId = window.setTimeout(() => {
       debouncedValue.value = newValue;
     }, delay);

@@ -4,6 +4,7 @@ import { useCreaturesData } from '../composables/useCreaturesData';
 import { DATA_LOADING, UI_TEXT } from '../constants';
 import Grid from '../components/Grid.vue';
 import CreatureCard from '../components/CreatureCard.vue';
+import ToggleGroup from '../components/ToggleGroup.vue';
 
 // 使用生物数据加载组合函数
 const { allCreatures, loading, error, loadData } = useCreaturesData();
@@ -13,6 +14,12 @@ const selectedCategory = ref<string>('all');
 
 // 当前选择的半球（默认北半球）
 const selectedHemisphere = ref<'north' | 'south'>('north');
+
+// 半球切换选项
+const hemisphereOptions = [
+  { value: 'north', label: '北', icon: '🌍' },
+  { value: 'south', label: '南', icon: '🌏' }
+];
 
 // 分类选项
 type CategoryValue = 'all' | 'Insects' | 'Fish' | 'Sea Creatures';
@@ -91,21 +98,11 @@ onMounted(() => {
             <span class="category-count">({{ categoryStats[category.value] }})</span>
           </button>
         </div>
-        <div class="hemisphere-toggle">
-          <button 
-            class="hemisphere-btn"
-            :class="{ active: selectedHemisphere === 'north' }"
-            @click="selectedHemisphere = 'north'"
-          >
-            🌍 北
-          </button>
-          <button 
-            class="hemisphere-btn"
-            :class="{ active: selectedHemisphere === 'south' }"
-            @click="selectedHemisphere = 'south'"
-          >
-            🌏 南
-          </button>
+        <div class="toggle-group">
+          <ToggleGroup
+            v-model="selectedHemisphere"
+            :options="hemisphereOptions"
+          />
         </div>
       </div>
       <Grid :datas="filteredCreatures" :card-component="CreatureCard" :card-props="{ hemisphere: selectedHemisphere }" />
@@ -122,33 +119,12 @@ onMounted(() => {
   margin-bottom: 20px;
   flex-wrap: wrap;
   align-items: center;
-  position: relative;
   justify-content: center;
 }
 
-.hemisphere-toggle {
-  display: inline-flex;
-  gap: 0;
-  position: absolute;
-  right: 0;
-  background: #e0e0e0;
-  border-radius: 25px;
-  padding: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-@media (max-width: 768px) {
-  .category-filter {
-    gap: 8px;
-  }
-
-  .category-btn {
-    padding: 10px 16px;
-    font-size: 0.9em;
-  }
-
-  .category-icon {
-    font-size: 1.2em;
-  }
+.category-filter {
+  display: flex;
+  justify-content: center;
+  flex: 1;
 }
 </style>

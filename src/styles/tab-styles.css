@@ -3,7 +3,8 @@
   width: 100%;
 }
 
-.loading, .error {
+.loading,
+.error {
   text-align: center;
   padding: 40px;
   font-size: 1.2em;
@@ -174,14 +175,18 @@
   z-index: 1;
 }
 
-/* 半球切换按钮样式 */
-.hemisphere-toggle {
-  display: flex;
-  gap: 8px;
-  align-items: center;
+/* 通用toggle样式 */
+.toggle-group {
+  display: inline-flex;
+  gap: 0;
+  margin-left: auto;
+  background: #e0e0e0;
+  border-radius: 25px;
+  padding: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.hemisphere-btn {
+.toggle-btn {
   padding: 8px 20px;
   background: transparent;
   border: none;
@@ -193,11 +198,11 @@
   color: #666;
 }
 
-.hemisphere-btn:hover {
+.toggle-btn:hover {
   color: #333;
 }
 
-.hemisphere-btn.active {
+.toggle-btn.active {
   background: white;
   color: #4caf50;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);

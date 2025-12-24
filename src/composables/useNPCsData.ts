@@ -1,7 +1,7 @@
-import { ref, type Ref } from 'vue';
-import type { NPC } from '../types';
-import { loadNPCsData } from '../services/dataService';
-import { DATA_LOADING } from '../constants';
+import { ref, type Ref } from "vue";
+import type { NPC } from "../types";
+import { loadNPCsData } from "../services/dataService";
+import { DATA_LOADING } from "../constants";
 
 export interface UseNPCsDataReturn {
   allNPCs: Ref<NPC[]>;
@@ -16,7 +16,7 @@ export interface UseNPCsDataReturn {
 export function useNPCsData(): UseNPCsDataReturn {
   const allNPCs = ref<NPC[]>([]);
   const loading = ref(false);
-  const error = ref('');
+  const error = ref("");
 
   /**
    * 加载NPC数据
@@ -24,17 +24,17 @@ export function useNPCsData(): UseNPCsDataReturn {
   const loadData = async (): Promise<void> => {
     try {
       loading.value = true;
-      error.value = '';
-      
+      error.value = "";
+
       const npcs = await loadNPCsData();
       // 过滤掉 iconImage 为 null 的 NPC，并按 internalId 排序
       allNPCs.value = npcs
-        .filter(npc => npc.iconImage !== null)
+        .filter((npc) => npc.iconImage !== null)
         .sort((a, b) => a.internalId - b.internalId);
-      
+
       loading.value = false;
     } catch (err) {
-      console.error('加载NPC数据失败:', err);
+      console.error("加载NPC数据失败:", err);
       error.value = DATA_LOADING.ERROR_GENERIC;
       loading.value = false;
     }
@@ -44,6 +44,6 @@ export function useNPCsData(): UseNPCsDataReturn {
     allNPCs,
     loading,
     error,
-    loadData
+    loadData,
   };
 }

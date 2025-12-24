@@ -1,13 +1,13 @@
-import type { Item, FilterOptions } from '../types';
-import { CONFIG } from '../config';
-import { 
-  itemMatchesColor, 
+import type { Item, FilterOptions } from "../types";
+import { CONFIG } from "../config";
+import {
+  itemMatchesColor,
   itemMatchesVersion,
   itemMatchesSource,
   itemMatchesSize,
   itemMatchesTag,
-  itemMatchesSeries 
-} from '../utils/itemHelpers';
+  itemMatchesSeries,
+} from "../utils/itemHelpers";
 
 /**
  * 检查物品是否匹配搜索词
@@ -84,7 +84,7 @@ function matchesColor(item: Item, colorFilter: string): boolean {
  * @returns 筛选后的物品列表
  */
 export function filterItems(allItems: Item[], filters: FilterOptions): Item[] {
-  return allItems.filter(item => {
+  return allItems.filter((item) => {
     // 检查所有筛选条件
     return (
       matchesSearchTerm(item, filters.searchTerm) &&
@@ -104,14 +104,14 @@ export function filterItems(allItems: Item[], filters: FilterOptions): Item[] {
  * 比较函数：按名称升序
  */
 function compareByNameAsc(a: Item, b: Item): number {
-  return a.name.localeCompare(b.name, 'zh-CN');
+  return a.name.localeCompare(b.name, "zh-CN");
 }
 
 /**
  * 比较函数：按名称降序
  */
 function compareByNameDesc(a: Item, b: Item): number {
-  return b.name.localeCompare(a.name, 'zh-CN');
+  return b.name.localeCompare(a.name, "zh-CN");
 }
 
 /**

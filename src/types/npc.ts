@@ -1,4 +1,4 @@
-import type { Translation } from './index';
+import type { Translation } from "./index";
 
 /**
  * NPC数据类型

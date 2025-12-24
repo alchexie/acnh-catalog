@@ -126,26 +126,62 @@
 }
 
 /* 应用主题变量 */
-.card--brown .card-name { color: var(--card-name-color); }
-.card--green .card-name { color: var(--card-name-color); }
-.card--orange .card-name { color: var(--card-name-color); }
-.card--purple .card-name { color: var(--card-name-color); }
-.card--green-dark .card-name { color: var(--card-name-color); }
-.card--orange-dark .card-name { color: var(--card-name-color); }
+.card--brown .card-name {
+  color: var(--card-name-color);
+}
+.card--green .card-name {
+  color: var(--card-name-color);
+}
+.card--orange .card-name {
+  color: var(--card-name-color);
+}
+.card--purple .card-name {
+  color: var(--card-name-color);
+}
+.card--green-dark .card-name {
+  color: var(--card-name-color);
+}
+.card--orange-dark .card-name {
+  color: var(--card-name-color);
+}
 
-.card--brown .detail-value.price { color: var(--card-price-color); }
-.card--green .detail-value.price { color: var(--card-price-color); }
-.card--orange .detail-value.price { color: var(--card-price-color); }
-.card--purple .detail-value.price { color: var(--card-price-color); }
-.card--green-dark .detail-value.price { color: var(--card-price-color); }
-.card--orange-dark .detail-value.price { color: var(--card-price-color); }
+.card--brown .detail-value.price {
+  color: var(--card-price-color);
+}
+.card--green .detail-value.price {
+  color: var(--card-price-color);
+}
+.card--orange .detail-value.price {
+  color: var(--card-price-color);
+}
+.card--purple .detail-value.price {
+  color: var(--card-price-color);
+}
+.card--green-dark .detail-value.price {
+  color: var(--card-price-color);
+}
+.card--orange-dark .detail-value.price {
+  color: var(--card-price-color);
+}
 
-.card--brown:hover { box-shadow: 0 6px 20px var(--card-hover-shadow); }
-.card--green:hover { box-shadow: 0 6px 20px var(--card-hover-shadow); }
-.card--orange:hover { box-shadow: 0 6px 20px var(--card-hover-shadow); }
-.card--purple:hover { box-shadow: 0 6px 20px var(--card-hover-shadow); }
-.card--green-dark:hover { box-shadow: 0 6px 20px var(--card-hover-shadow); }
-.card--orange-dark:hover { box-shadow: 0 6px 20px var(--card-hover-shadow); }
+.card--brown:hover {
+  box-shadow: 0 6px 20px var(--card-hover-shadow);
+}
+.card--green:hover {
+  box-shadow: 0 6px 20px var(--card-hover-shadow);
+}
+.card--orange:hover {
+  box-shadow: 0 6px 20px var(--card-hover-shadow);
+}
+.card--purple:hover {
+  box-shadow: 0 6px 20px var(--card-hover-shadow);
+}
+.card--green-dark:hover {
+  box-shadow: 0 6px 20px var(--card-hover-shadow);
+}
+.card--orange-dark:hover {
+  box-shadow: 0 6px 20px var(--card-hover-shadow);
+}
 
 /* 特殊样式覆盖 */
 .card--brown .card-image-wrapper {

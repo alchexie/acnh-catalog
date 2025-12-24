@@ -1,4 +1,4 @@
-import type { Translation } from './index';
+import type { Translation } from "./index";
 
 /**
  * 改建数据类型

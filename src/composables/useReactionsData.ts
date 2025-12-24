@@ -1,7 +1,7 @@
-import { ref, type Ref } from 'vue';
-import type { Reaction } from '../types';
-import { loadReactionsData } from '../services/dataService';
-import { DATA_LOADING } from '../constants';
+import { ref, type Ref } from "vue";
+import type { Reaction } from "../types";
+import { loadReactionsData } from "../services/dataService";
+import { DATA_LOADING } from "../constants";
 
 export interface UseReactionsDataReturn {
   allReactions: Ref<Reaction[]>;
@@ -16,7 +16,7 @@ export interface UseReactionsDataReturn {
 export function useReactionsData(): UseReactionsDataReturn {
   const allReactions = ref<Reaction[]>([]);
   const loading = ref(false);
-  const error = ref('');
+  const error = ref("");
 
   /**
    * 加载表情反应数据
@@ -24,13 +24,15 @@ export function useReactionsData(): UseReactionsDataReturn {
   const loadData = async (): Promise<void> => {
     try {
       loading.value = true;
-      error.value = '';
-      
+      error.value = "";
+
       const reactions = await loadReactionsData();
-      allReactions.value = reactions.sort((a, b) => a.internalId - b.internalId);
+      allReactions.value = reactions.sort(
+        (a, b) => a.internalId - b.internalId
+      );
       loading.value = false;
     } catch (err) {
-      console.error('加载表情反应数据失败:', err);
+      console.error("加载表情反应数据失败:", err);
       error.value = DATA_LOADING.ERROR_GENERIC;
       loading.value = false;
     }
@@ -40,6 +42,6 @@ export function useReactionsData(): UseReactionsDataReturn {
     allReactions,
     loading,
     error,
-    loadData
+    loadData,
   };
 }

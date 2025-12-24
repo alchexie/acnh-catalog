@@ -1,7 +1,7 @@
-import { ref } from 'vue';
-import type { Recipe } from '../types/recipe';
-import { loadRecipesData } from '../services/dataService';
-import { DATA_LOADING } from '../constants';
+import { ref } from "vue";
+import type { Recipe } from "../types/recipe";
+import { loadRecipesData } from "../services/dataService";
+import { DATA_LOADING } from "../constants";
 
 export function useRecipesData() {
   const allRecipes = ref<Recipe[]>([]);
@@ -13,11 +13,10 @@ export function useRecipesData() {
     error.value = null;
     try {
       const recipes = await loadRecipesData();
-      allRecipes.value = recipes
-        .sort((a, b) => a.internalId - b.internalId);
+      allRecipes.value = recipes.sort((a, b) => a.internalId - b.internalId);
     } catch (e) {
       error.value = DATA_LOADING.ERROR_GENERIC;
-      console.error('Failed to load recipes:', e);
+      console.error("Failed to load recipes:", e);
     } finally {
       loading.value = false;
     }
@@ -27,6 +26,6 @@ export function useRecipesData() {
     allRecipes,
     loading,
     error,
-    loadData
+    loadData,
   };
 }

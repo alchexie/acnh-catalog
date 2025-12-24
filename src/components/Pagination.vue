@@ -1,19 +1,22 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed } from "vue";
 
 const props = defineProps<{
   currentPage: number;
   totalPages: number;
-  perPage: number | 'all';
+  perPage: number | "all";
   itemsCount: number;
 }>();
 
 const emit = defineEmits<{
-  (e: 'page-change', page: number): void;
+  (e: "page-change", page: number): void;
 }>();
 
 const showPagination = computed(() => {
-  return props.perPage !== 'all' && props.itemsCount > (typeof props.perPage === 'number' ? props.perPage : 0);
+  return (
+    props.perPage !== "all" &&
+    props.itemsCount > (typeof props.perPage === "number" ? props.perPage : 0)
+  );
 });
 </script>
 
@@ -22,14 +25,25 @@ const showPagination = computed(() => {
     <button :disabled="currentPage === 1" @click="emit('page-change', 1)">
       首页
     </button>
-    <button :disabled="currentPage === 1" @click="emit('page-change', currentPage - 1)">
+    <button
+      :disabled="currentPage === 1"
+      @click="emit('page-change', currentPage - 1)"
+    >
       上一页
     </button>
-    <span class="page-info">第 {{ currentPage }} 页 / 共 {{ totalPages }} 页</span>
-    <button :disabled="currentPage === totalPages" @click="emit('page-change', currentPage + 1)">
+    <span class="page-info"
+      >第 {{ currentPage }} 页 / 共 {{ totalPages }} 页</span
+    >
+    <button
+      :disabled="currentPage === totalPages"
+      @click="emit('page-change', currentPage + 1)"
+    >
       下一页
     </button>
-    <button :disabled="currentPage === totalPages" @click="emit('page-change', totalPages)">
+    <button
+      :disabled="currentPage === totalPages"
+      @click="emit('page-change', totalPages)"
+    >
       末页
     </button>
   </div>

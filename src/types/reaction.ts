@@ -1,4 +1,4 @@
-import type { Translation } from './index';
+import type { Translation } from "./index";
 
 /**
  * 表情反应数据类型

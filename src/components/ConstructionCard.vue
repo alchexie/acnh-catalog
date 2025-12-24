@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { Construction } from '../types/construction';
-import { getChineseText, formatPrice, joinArray } from '../utils/common';
-import BaseCard from './BaseCard.vue';
+import type { Construction } from "../types/construction";
+import { getChineseText, formatPrice, joinArray } from "../utils/common";
+import BaseCard from "./BaseCard.vue";
 
 interface Props {
   data: Construction;
@@ -10,7 +10,7 @@ interface Props {
 const props = defineProps<Props>();
 
 const handleClick = () => {
-  window.open(`https://nookipedia.com/wiki/${props.data.name}`, '_blank');
+  window.open(`https://nookipedia.com/wiki/${props.data.name}`, "_blank");
 };
 </script>
 
@@ -28,7 +28,9 @@ const handleClick = () => {
     </div>
     <div class="detail-row">
       <span class="detail-label">售价</span>
-      <span class="detail-value price">{{ formatPrice(props.data.buy) }} 铃钱</span>
+      <span class="detail-value price"
+        >{{ formatPrice(props.data.buy) }} 铃钱</span
+      >
     </div>
     <div class="detail-row">
       <span class="detail-label">来源</span>

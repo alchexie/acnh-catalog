@@ -1,8 +1,17 @@
-import type { RawItem, CatalogItem, Translations, Item, Villager, NPC, Creature, Reaction } from '../types';
-import type { Recipe } from '../types/recipe';
-import type { Construction } from '../types/construction';
-import { CONFIG } from '../config';
-import * as itemHelpers from '../utils/itemHelpers';
+import type {
+  RawItem,
+  CatalogItem,
+  Translations,
+  Item,
+  Villager,
+  NPC,
+  Creature,
+  Reaction,
+} from "../types";
+import type { Recipe } from "../types/recipe";
+import type { Construction } from "../types/construction";
+import { CONFIG } from "../config";
+import * as itemHelpers from "../utils/itemHelpers";
 
 let translationsCache: Translations | null = null;
 
@@ -14,7 +23,7 @@ export async function loadTranslations(): Promise<Translations> {
   if (translationsCache) {
     return translationsCache;
   }
-  
+
   try {
     const response = await fetch(CONFIG.DATA_FILES.TRANSLATIONS);
     if (!response.ok) {
@@ -23,7 +32,7 @@ export async function loadTranslations(): Promise<Translations> {
     translationsCache = await response.json();
     return translationsCache!;
   } catch (error) {
-    console.error('加载翻译数据失败:', error);
+    console.error("加载翻译数据失败:", error);
     // 返回空翻译对象作为降级方案
     return { categories: {}, sources: {}, colors: {}, tags: {}, series: {} };
   }
@@ -41,7 +50,7 @@ export async function loadItemsData(): Promise<RawItem[]> {
     }
     return await response.json();
   } catch (error) {
-    console.error('加载物品数据失败:', error);
+    console.error("加载物品数据失败:", error);
     throw error;
   }
 }
@@ -50,23 +59,26 @@ export async function loadItemsData(): Promise<RawItem[]> {
  * 加载目录数据（用户拥有的物品）
  * @returns 包含拥有物品名称和ID集合的对象
  */
-export async function loadCatalogData(): Promise<{ ownedNames: Set<string>; ownedIds: Set<string> }> {
+export async function loadCatalogData(): Promise<{
+  ownedNames: Set<string>;
+  ownedIds: Set<string>;
+}> {
   try {
     const response = await fetch(CONFIG.DATA_FILES.CATALOG);
     if (!response.ok) {
       console.log("无法加载 catalog_items.json，将不显示拥有状态");
       return { ownedNames: new Set(), ownedIds: new Set() };
     }
-    
+
     const data: { items: CatalogItem[] } = await response.json();
     const ownedNames = new Set<string>();
     const ownedIds = new Set<string>();
-    
-    data.items.forEach(item => {
+
+    data.items.forEach((item) => {
       ownedNames.add(item.label);
       ownedIds.add(item.unique_id);
     });
-    
+
     return { ownedNames, ownedIds };
   } catch (error) {
     console.log("无法加载 catalog_items.json，将不显示拥有状态");
@@ -96,7 +108,10 @@ export function processItemsData(
  * @param translationMap 翻译映射表
  * @returns 翻译后的文本，如果没有找到则返回原键
  */
-function getTranslation(key: string, translationMap: Record<string, string> | undefined): string {
+function getTranslation(
+  key: string,
+  translationMap: Record<string, string> | undefined
+): string {
   return translationMap?.[key] || key;
 }
 
@@ -181,7 +196,7 @@ export async function loadVillagersData(): Promise<Villager[]> {
     }
     return await response.json();
   } catch (error) {
-    console.error('加载村民数据失败:', error);
+    console.error("加载村民数据失败:", error);
     throw error;
   }
 }
@@ -198,7 +213,7 @@ export async function loadNPCsData(): Promise<NPC[]> {
     }
     return await response.json();
   } catch (error) {
-    console.error('加载NPC数据失败:', error);
+    console.error("加载NPC数据失败:", error);
     throw error;
   }
 }
@@ -215,7 +230,7 @@ export async function loadCreaturesData(): Promise<Creature[]> {
     }
     return await response.json();
   } catch (error) {
-    console.error('加载生物数据失败:', error);
+    console.error("加载生物数据失败:", error);
     throw error;
   }
 }
@@ -232,7 +247,7 @@ export async function loadReactionsData(): Promise<Reaction[]> {
     }
     return await response.json();
   } catch (error) {
-    console.error('加载表情反应数据失败:', error);
+    console.error("加载表情反应数据失败:", error);
     throw error;
   }
 }
@@ -249,7 +264,7 @@ export async function loadRecipesData(): Promise<Recipe[]> {
     }
     return await response.json();
   } catch (error) {
-    console.error('加载DIY配方数据失败:', error);
+    console.error("加载DIY配方数据失败:", error);
     throw error;
   }
 }
@@ -266,7 +281,7 @@ export async function loadConstructionData(): Promise<Construction[]> {
     }
     return await response.json();
   } catch (error) {
-    console.error('加载改建数据失败:', error);
+    console.error("加载改建数据失败:", error);
     throw error;
   }
 }

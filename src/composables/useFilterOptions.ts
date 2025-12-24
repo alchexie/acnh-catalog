@@ -1,12 +1,12 @@
-import { ref, type Ref } from 'vue';
-import type { Item } from '../types';
+import { ref, type Ref } from "vue";
+import type { Item } from "../types";
 import {
   getTagName,
   getCategoryOrder,
   getSourceOrder,
-  getColorOrder
-} from '../services/dataService';
-import { getItemVersion, getItemSources } from '../utils/itemHelpers';
+  getColorOrder,
+} from "../services/dataService";
+import { getItemVersion, getItemSources } from "../utils/itemHelpers";
 
 export interface FilterOption {
   value: string;
@@ -42,11 +42,11 @@ export function useFilterOptions(): FilterOptionsData {
    */
   const populateCategories = (items: Item[]): void => {
     const categoryOrder = getCategoryOrder();
-    const itemCategories = new Set(items.map(item => item.category));
-    
+    const itemCategories = new Set(items.map((item) => item.category));
+
     categories.value = [
-      ...categoryOrder.filter(cat => itemCategories.has(cat)),
-      ...[...itemCategories].filter(cat => !categoryOrder.includes(cat))
+      ...categoryOrder.filter((cat) => itemCategories.has(cat)),
+      ...[...itemCategories].filter((cat) => !categoryOrder.includes(cat)),
     ];
   };
 
@@ -54,11 +54,13 @@ export function useFilterOptions(): FilterOptionsData {
    * 从物品列表中填充版本选项
    */
   const populateVersions = (items: Item[]): void => {
-    versions.value = [...new Set(
-      items
-        .map(item => getItemVersion(item))
-        .filter(v => v !== '未知版本')
-    )].sort();
+    versions.value = [
+      ...new Set(
+        items
+          .map((item) => getItemVersion(item))
+          .filter((v) => v !== "未知版本")
+      ),
+    ].sort();
   };
 
   /**
@@ -67,14 +69,14 @@ export function useFilterOptions(): FilterOptionsData {
   const populateSources = (items: Item[]): void => {
     const sourceOrder = getSourceOrder();
     const itemSources = new Set<string>();
-    
-    items.forEach(item => {
-      getItemSources(item).forEach(s => itemSources.add(s));
+
+    items.forEach((item) => {
+      getItemSources(item).forEach((s) => itemSources.add(s));
     });
-    
+
     sources.value = [
-      ...sourceOrder.filter(src => itemSources.has(src)),
-      ...[...itemSources].filter(src => !sourceOrder.includes(src))
+      ...sourceOrder.filter((src) => itemSources.has(src)),
+      ...[...itemSources].filter((src) => !sourceOrder.includes(src)),
     ];
   };
 
@@ -82,14 +84,14 @@ export function useFilterOptions(): FilterOptionsData {
    * 从物品列表中填充尺寸选项
    */
   const populateSizes = (items: Item[]): void => {
-    sizes.value = [...new Set(
-      items
-        .map(item => item.size)
-        .filter((s): s is string => !!s)
-    )].sort((a, b) => {
-      const [aWidth, aHeight] = a.split('x').map(Number);
-      const [bWidth, bHeight] = b.split('x').map(Number);
-      
+    sizes.value = [
+      ...new Set(
+        items.map((item) => item.size).filter((s): s is string => !!s)
+      ),
+    ].sort((a, b) => {
+      const [aWidth, aHeight] = a.split("x").map(Number);
+      const [bWidth, bHeight] = b.split("x").map(Number);
+
       if (aWidth !== undefined && bWidth !== undefined && aWidth !== bWidth) {
         return aWidth - bWidth;
       }
@@ -102,13 +104,11 @@ export function useFilterOptions(): FilterOptionsData {
    */
   const populateTags = (items: Item[]): void => {
     const tagsSet = new Set(
-      items
-        .map(item => item.tag)
-        .filter((t): t is string => !!t)
+      items.map((item) => item.tag).filter((t): t is string => !!t)
     );
-    
-    tags.value = [...tagsSet].sort((a, b) => 
-      getTagName(a).localeCompare(getTagName(b), 'zh-CN')
+
+    tags.value = [...tagsSet].sort((a, b) =>
+      getTagName(a).localeCompare(getTagName(b), "zh-CN")
     );
   };
 
@@ -118,14 +118,14 @@ export function useFilterOptions(): FilterOptionsData {
   const populateColors = (items: Item[]): void => {
     const colorOrder = getColorOrder();
     const itemColors = new Set<string>();
-    
-    items.forEach(item => {
-      item.colors?.forEach(c => itemColors.add(c));
+
+    items.forEach((item) => {
+      item.colors?.forEach((c) => itemColors.add(c));
     });
-    
+
     colors.value = [
-      ...colorOrder.filter(color => itemColors.has(color)),
-      ...[...itemColors].filter(color => !colorOrder.includes(color))
+      ...colorOrder.filter((color) => itemColors.has(color)),
+      ...[...itemColors].filter((color) => !colorOrder.includes(color)),
     ];
   };
 
@@ -134,18 +134,19 @@ export function useFilterOptions(): FilterOptionsData {
    */
   const populateSeries = (items: Item[]): void => {
     const seriesMap = new Map<string, string>();
-    
-    items.forEach(item => {
+
+    items.forEach((item) => {
       if (item.series && !seriesMap.has(item.series)) {
         // 从原始数据中获取翻译后的系列名称
-        const seriesName = item.originalData?.seriesTranslations?.cNzh || item.series;
+        const seriesName =
+          item.originalData?.seriesTranslations?.cNzh || item.series;
         seriesMap.set(item.series, seriesName);
       }
     });
-    
+
     series.value = [...seriesMap.entries()]
       .map(([value, name]) => ({ value, name }))
-      .sort((a, b) => a.name.localeCompare(b.name, 'zh-CN'));
+      .sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
   };
 
   /**
@@ -169,6 +170,6 @@ export function useFilterOptions(): FilterOptionsData {
     tags,
     colors,
     series,
-    populateFilters
+    populateFilters,
   };
 }

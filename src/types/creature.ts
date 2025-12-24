@@ -1,4 +1,4 @@
-import type { Translation } from './index';
+import type { Translation } from "./index";
 
 /**
  * 半球时间信息
@@ -49,4 +49,3 @@ export interface Creature {
   isAllDay?: boolean;
   isAllYear?: boolean;
 }
-

@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import { onMounted, watch, computed, ref } from 'vue';
-import { useItemsData } from '../composables/useItemsData';
-import { useItemsFilter } from '../composables/useItemsFilter';
-import { DATA_LOADING } from '../constants';
-import ItemFilterControls from '../components/ItemFilterControls.vue';
-import Grid from '../components/Grid.vue';
-import ItemCard from '../components/ItemCard.vue';
-import Pagination from '../components/Pagination.vue';
-import CatalogUploader from '../components/CatalogUploader.vue';
+import { onMounted, watch, computed, ref } from "vue";
+import { useItemsData } from "../composables/useItemsData";
+import { useItemsFilter } from "../composables/useItemsFilter";
+import { DATA_LOADING } from "../constants";
+import ItemFilterControls from "../components/ItemFilterControls.vue";
+import Grid from "../components/Grid.vue";
+import ItemCard from "../components/ItemCard.vue";
+import Pagination from "../components/Pagination.vue";
+import CatalogUploader from "../components/CatalogUploader.vue";
 
 // 使用数据加载组合函数
-const { allItems, loading, error, loadData, updateCatalogData } = useItemsData();
+const { allItems, loading, error, loadData, updateCatalogData } =
+  useItemsData();
 
 // 使用筛选和分页组合函数
 const {
@@ -24,12 +25,12 @@ const {
   handleFilterChange,
   handleSortChange,
   handlePageChange,
-  handlePerPageChange
+  handlePerPageChange,
 } = useItemsFilter(allItems);
 
 // 计算拥有的物品数量
-const ownedItemsCount = computed(() => 
-  allItems.value.filter(item => item.owned).length
+const ownedItemsCount = computed(
+  () => allItems.value.filter((item) => item.owned).length
 );
 
 // 监听数据加载完成，初始化筛选列表
@@ -45,7 +46,9 @@ onMounted(() => {
 });
 
 // 处理目录文件上传
-const handleCatalogUpload = (data: { items: Array<{ label: string; unique_id: string }> }) => {
+const handleCatalogUpload = (data: {
+  items: Array<{ label: string; unique_id: string }>;
+}) => {
   updateCatalogData(data);
 };
 
@@ -61,24 +64,34 @@ const toggleFilter = () => {
   <div class="tab">
     <div v-if="loading" class="loading">{{ DATA_LOADING.ITEMS }}</div>
     <div v-else-if="error" class="error">{{ error }}</div>
-    
+
     <template v-else>
-      <div class="filter-section" :class="{ 'filter-expanded': isFilterExpanded }">
+      <div
+        class="filter-section"
+        :class="{ 'filter-expanded': isFilterExpanded }"
+      >
         <div class="stats stats-layout-flex">
           <div class="stats-content">
-            <div class="stat-item">总物品数: <strong>{{ allItems.length.toLocaleString() }}</strong></div>
-            <div class="stat-item">当前显示: <strong>{{ filteredItems.length.toLocaleString() }}</strong></div>
-            <div class="stat-item">已拥有: <strong>{{ ownedItemsCount.toLocaleString() }}</strong></div>
+            <div class="stat-item">
+              总物品数: <strong>{{ allItems.length.toLocaleString() }}</strong>
+            </div>
+            <div class="stat-item">
+              当前显示:
+              <strong>{{ filteredItems.length.toLocaleString() }}</strong>
+            </div>
+            <div class="stat-item">
+              已拥有: <strong>{{ ownedItemsCount.toLocaleString() }}</strong>
+            </div>
           </div>
           <div class="action-buttons">
             <button class="toggle-filter-btn" @click="toggleFilter">
-              <span>{{ isFilterExpanded ? '收起筛选' : '展开筛选' }}</span>
-              <span class="icon">{{ isFilterExpanded ? '▲' : '▼' }}</span>
+              <span>{{ isFilterExpanded ? "收起筛选" : "展开筛选" }}</span>
+              <span class="icon">{{ isFilterExpanded ? "▲" : "▼" }}</span>
             </button>
             <CatalogUploader @catalog-uploaded="handleCatalogUpload" />
           </div>
         </div>
-        
+
         <div v-if="isFilterExpanded" class="filter-controls-wrapper">
           <ItemFilterControls
             v-model:filters="filters"
@@ -92,7 +105,11 @@ const toggleFilter = () => {
         </div>
       </div>
 
-      <Grid :datas="itemsToDisplay" :card-component="ItemCard" :card-props="{ colorFilter: filters.colorFilter }" />
+      <Grid
+        :datas="itemsToDisplay"
+        :card-component="ItemCard"
+        :card-props="{ colorFilter: filters.colorFilter }"
+      />
 
       <Pagination
         v-if="totalPages > 1 || itemsPerPage !== filteredItems.length"
@@ -107,7 +124,7 @@ const toggleFilter = () => {
 </template>
 
 <style scoped>
-@import '../styles/tab-styles.css';
+@import "../styles/tab-styles.css";
 
 .filter-section {
   margin-bottom: 20px;

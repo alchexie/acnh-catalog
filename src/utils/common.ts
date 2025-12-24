@@ -4,15 +4,21 @@
  * @param percent 变浅比例，默认0.7
  */
 export function lightenColor(hex: string, percent = 0.7): string {
-  if (!hex) return '#f5f5f5';
-  const c = hex.replace('#', '').toLowerCase();
+  if (!hex) return "#f5f5f5";
+  const c = hex.replace("#", "").toLowerCase();
   // 判断常见白色
-  if (c === 'fff' || c === 'ffffff' || c === 'fffce9' || c === 'fffbe6') return '#f5f5f5';
+  if (c === "fff" || c === "ffffff" || c === "fffce9" || c === "fffbe6")
+    return "#f5f5f5";
   if (c.length === 3) {
-    if (c === 'fff') return '#f5f5f5';
-    hex = '#' + c.split('').map(x => x + x).join('');
+    if (c === "fff") return "#f5f5f5";
+    hex =
+      "#" +
+      c
+        .split("")
+        .map((x) => x + x)
+        .join("");
   }
-  if (c.length !== 6) return '#f5f5f5';
+  if (c.length !== 6) return "#f5f5f5";
   const num = parseInt(c, 16);
   let r = (num >> 16) & 0xff;
   let g = (num >> 8) & 0xff;
@@ -35,7 +41,7 @@ import type { Translation } from "../types";
  * @returns 格式化后的字符串，如 "1,234"
  */
 export function formatPrice(price: number | null | undefined): string {
-  if (price == null || price === -1) return '--';
+  if (price == null || price === -1) return "--";
   return price.toLocaleString();
 }
 
@@ -45,9 +51,9 @@ export function formatPrice(price: number | null | undefined): string {
  * @param fallback 回退值
  * @returns 中文文本或回退值
  */
-export function getChineseText<T extends { translations?: Translation; name: string }>(
-  obj: T
-): string {
+export function getChineseText<
+  T extends { translations?: Translation; name: string }
+>(obj: T): string {
   return obj.translations?.cNzh || obj.name;
 }
 
@@ -67,7 +73,11 @@ export function first<T>(arr: T[] | undefined): T | undefined {
  * @param fallback 数组为空时的回退值
  * @returns 连接后的字符串
  */
-export function joinArray(arr: string[] | undefined, separator = ', ', fallback = '--'): string {
+export function joinArray(
+  arr: string[] | undefined,
+  separator = ", ",
+  fallback = "--"
+): string {
   if (!arr || arr.length === 0) return fallback;
   return arr.join(separator);
 }
@@ -79,9 +89,9 @@ export function joinArray(arr: string[] | undefined, separator = ', ', fallback 
  */
 export function isEmpty(value: any): boolean {
   if (value == null) return true;
-  if (typeof value === 'string') return value.trim() === '';
+  if (typeof value === "string") return value.trim() === "";
   if (Array.isArray(value)) return value.length === 0;
-  if (typeof value === 'object') return Object.keys(value).length === 0;
+  if (typeof value === "object") return Object.keys(value).length === 0;
   return false;
 }
 
@@ -91,7 +101,7 @@ export function isEmpty(value: any): boolean {
  * @returns Promise
  */
 export function delay(ms: number): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 /**

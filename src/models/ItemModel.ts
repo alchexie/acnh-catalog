@@ -1,6 +1,6 @@
-import type { Item, VariantGroup, Pattern } from '../types';
-import { ref, type Ref } from 'vue';
-import * as itemHelpers from '../utils/itemHelpers';
+import type { Item, VariantGroup, Pattern } from "../types";
+import { ref, type Ref } from "vue";
+import * as itemHelpers from "../utils/itemHelpers";
 
 /**
  * 物品模型类
@@ -83,14 +83,14 @@ export class ItemModel {
    * 获取标签（安全访问）
    */
   getTag(): string {
-    return this._data.tag || '';
+    return this._data.tag || "";
   }
 
   /**
    * 获取系列ID（安全访问）
    */
   getSeries(): string {
-    return this._data.series || '';
+    return this._data.series || "";
   }
 
   /**
@@ -98,7 +98,7 @@ export class ItemModel {
    * 注意：需要配合翻译服务使用，这里只返回原始 series 值
    */
   getSeriesName(): string {
-    return this._data.series || '无系列';
+    return this._data.series || "无系列";
   }
 
   /**
@@ -196,7 +196,11 @@ export class ItemModel {
    */
   setPatternIndex(index: number): void {
     const currentVariant = this.getCurrentVariant();
-    if (currentVariant && index >= 0 && index < currentVariant.patterns.length) {
+    if (
+      currentVariant &&
+      index >= 0 &&
+      index < currentVariant.patterns.length
+    ) {
       this._currentPatternIndex.value = index;
     }
   }
@@ -207,8 +211,11 @@ export class ItemModel {
   getCurrentVariant(): VariantGroup | null {
     const variants = this.getVariantGroups();
     if (variants.length === 0) return null;
-    
-    const index = Math.max(0, Math.min(this._currentVariantIndex.value, variants.length - 1));
+
+    const index = Math.max(
+      0,
+      Math.min(this._currentVariantIndex.value, variants.length - 1)
+    );
     return variants[index] || null;
   }
 
@@ -218,8 +225,11 @@ export class ItemModel {
   getCurrentPattern(): Pattern | null {
     const variant = this.getCurrentVariant();
     if (!variant || variant.patterns.length === 0) return null;
-    
-    const index = Math.max(0, Math.min(this._currentPatternIndex.value, variant.patterns.length - 1));
+
+    const index = Math.max(
+      0,
+      Math.min(this._currentPatternIndex.value, variant.patterns.length - 1)
+    );
     return variant.patterns[index] || null;
   }
 
@@ -235,7 +245,7 @@ export class ItemModel {
    * 根据名称获取变体
    */
   getVariantByName(name: string): VariantGroup | null {
-    return this.getVariantGroups().find(v => v.variantName === name) || null;
+    return this.getVariantGroups().find((v) => v.variantName === name) || null;
   }
 
   // ============ 显示属性（根据当前选中的变体/图案） ============
@@ -269,18 +279,18 @@ export class ItemModel {
    */
   getDisplayName(): string {
     const parts = [this.name];
-    
+
     const variant = this.getCurrentVariant();
     if (variant?.variantName) {
       parts.push(variant.variantName);
     }
-    
+
     const pattern = this.getCurrentPattern();
     if (pattern?.patternName) {
       parts.push(pattern.patternName);
     }
-    
-    return parts.join(' - ');
+
+    return parts.join(" - ");
   }
 
   // ============ 原始数据访问 ============
@@ -348,7 +358,9 @@ export class ItemModel {
   /**
    * 根据颜色筛选查找匹配的变体和图案
    */
-  findVariantByColor(color: string): { variantIndex: number; patternIndex: number } | null {
+  findVariantByColor(
+    color: string
+  ): { variantIndex: number; patternIndex: number } | null {
     return itemHelpers.findColorVariantIndex(this._data, color);
   }
 
@@ -396,6 +408,6 @@ export class ItemModel {
    * 批量创建物品模型
    */
   static fromArray(items: Item[]): ItemModel[] {
-    return items.map(item => new ItemModel(item));
+    return items.map((item) => new ItemModel(item));
   }
 }
