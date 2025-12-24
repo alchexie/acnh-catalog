@@ -145,7 +145,7 @@ const handleFileChange = async (event: Event) => {
 }
 
 .upload-button .icon {
-  font-size: 18px;
+  font-size: 12px;
 }
 
 .upload-status {
