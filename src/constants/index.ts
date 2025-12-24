@@ -67,14 +67,14 @@ export const UI_TEXT = {
  * 性格翻译映射
  */
 export const PERSONALITY_MAP: Record<string, string> = {
+  Cranky: "暴躁",
   Jock: "运动",
   Lazy: "悠闲",
-  Cranky: "暴躁",
   Smug: "自恋",
   Normal: "普通",
   Peppy: "元气",
   Snooty: "大姐姐",
-  Sisterly: "成熟",
+  "Big Sister": "大姐头",
 } as const;
 
 /**

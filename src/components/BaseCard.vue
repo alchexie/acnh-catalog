@@ -51,10 +51,10 @@ const nextImage = () => {
 </script>
 
 <template>
-  <div class="card" :class="colorClass" @click="$emit('click', $event)">
+  <div class="card" :class="colorClass">
     <VersionBadge :version="version" />
     <div class="card-image-container">
-      <div class="card-image-wrapper" :class="{ 'rounded': currentShape === 'rounded', 'square': currentShape === 'square' }">
+      <div class="card-image-wrapper" :class="{ 'rounded': currentShape === 'rounded', 'square': currentShape === 'square' }" @click="$emit('click', $event)">
         <img :src="currentImage" :alt="displayName" class="card-image" />
       </div>
       

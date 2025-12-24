@@ -77,13 +77,7 @@ watch(
   resetAndApplyColorFilter
 );
 
-// 点击卡片跳转到详情页
-const handleCardClick = (event: Event) => {
-  // 如果点击的是款式或图案切换按钮，不跳转
-  if ((event.target as HTMLElement)?.closest('.variation-dot')) {
-    return;
-  }
-
+const handleClick = () => {
   router.push(`/item/${props.data.id}`);
 };
 </script>
@@ -96,7 +90,7 @@ const handleCardClick = (event: Event) => {
     :images="props.data.imageUrls"
     :displayName="displayName"
     :shape="'rounded'"
-    @click="handleCardClick"
+    @click="handleClick"
   >
     <span class="detail-row detail-center">
       ID: {{ displayId || "N/A" }}
