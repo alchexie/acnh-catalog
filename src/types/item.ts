@@ -50,6 +50,7 @@ export interface RawVariation {
   storageImage?: string; // 存储图片
   closetImage?: string; // 衣柜图片
   framedImage?: string; // 框架图片
+  albumImage?: string; // 相册图片
   inventoryImage?: string; // 库存图片
   internalId?: number; // 内部ID
   uniqueEntryId: string; // 唯一条目ID
@@ -69,6 +70,7 @@ export interface RawItem {
   storageImage?: string; // 存储图片
   closetImage?: string; // 衣柜图片
   framedImage?: string; // 框架图片
+  albumImage?: string; // 相册图片
   inventoryImage?: string; // 库存图片
   variation?: string; // 变体
   bodyTitle?: string; // 主体标题
@@ -125,6 +127,7 @@ export interface Item {
   id: number; // 物品ID
   category: string; // 物品分类
   imageUrl: string; // 物品图片URL
+  imageUrls: string[]; // 物品所有图片URL
   colors: string[]; // 物品颜色列表
   owned: boolean; // 是否已拥有
   variantGroups: VariantGroup[]; // 变体组列表

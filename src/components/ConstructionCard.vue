@@ -18,8 +18,9 @@ const handleClick = () => {
   <BaseCard
     colorClass="card--brown"
     :version="props.data.versionAdded"
-    :image="props.data.image"
+    :images="[props.data.image]"
     :displayName="getChineseText(props.data)"
+    :shape="'rounded'"
     @click="handleClick"
   >
     <div class="detail-row">

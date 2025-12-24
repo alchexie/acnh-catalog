@@ -32,7 +32,6 @@ const patternIndex = computed({
 
 // 计算属性 - 基于 ItemModel 方法，这些会自动响应内部 ref 的变化
 const currentVariant = computed(() => itemModel.getCurrentVariant());
-const displayImage = computed(() => itemModel.getDisplayImage());
 const displayId = computed(() => itemModel.getDisplayId());
 const displayColors = computed(() => itemModel.getDisplayColors());
 const displayName = computed(() => itemModel.getDisplayName());
@@ -79,7 +78,7 @@ watch(
 );
 
 // 点击卡片跳转到详情页
-const handleCardClick = (event: MouseEvent) => {
+const handleCardClick = (event: Event) => {
   // 如果点击的是款式或图案切换按钮，不跳转
   if ((event.target as HTMLElement)?.closest('.variation-dot')) {
     return;
@@ -94,8 +93,9 @@ const handleCardClick = (event: MouseEvent) => {
     colorClass="card--green"
     :class="{ 'item-owned': props.data.owned }"
     :version="version !== '未知版本' ? version : undefined"
-    :image="displayImage"
+    :images="props.data.imageUrls"
     :displayName="displayName"
+    :shape="'rounded'"
     @click="handleCardClick"
   >
     <span class="detail-row detail-center">

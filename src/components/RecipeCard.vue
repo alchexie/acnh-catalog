@@ -19,7 +19,7 @@ const handleClick = () => {
   <BaseCard
     colorClass="card--orange"
     :version="props.data.versionAdded"
-    :image="props.data.image"
+    :images="[props.data.image]"
     :displayName="getChineseText(props.data)"
     @click="handleClick"
   >

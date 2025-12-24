@@ -28,6 +28,27 @@ export function createItem(
     variantGroups
   );
 
+  let imageUrls = [];
+  if (rawItem.inventoryImage) imageUrls.push(rawItem.inventoryImage);
+  if (rawItem.image) imageUrls.push(rawItem.image);
+  if (rawItem.storageImage) imageUrls.push(rawItem.storageImage);
+  if (rawItem.closetImage) imageUrls.push(rawItem.closetImage);
+  if (rawItem.framedImage) imageUrls.push(rawItem.framedImage);
+  if (rawItem.albumImage) imageUrls.push(rawItem.albumImage);
+
+  if (imageUrls.length === 0) {
+    let variation = rawItem.variations?.[0];
+    if (variation) {
+      if (variation.image) imageUrls.push(variation.image);
+      if (variation.storageImage) imageUrls.push(variation.storageImage);
+      if (variation.closetImage) imageUrls.push(variation.closetImage);
+      if (variation.framedImage) imageUrls.push(variation.framedImage);
+      if (variation.albumImage) imageUrls.push(rawItem.albumImage);
+    }
+  }
+  if (rawItem.recipe) {
+    imageUrls.push(rawItem.recipe.image);
+  }
   // 检查是否拥有
   const owned = ownedData
     ? checkIfOwned(name, rawItem.internalId, rawItem.uniqueEntryId, ownedData)
@@ -38,6 +59,7 @@ export function createItem(
     id,
     category: rawItem.sourceSheet || "Other",
     imageUrl,
+    imageUrls,
     colors,
     owned,
     variantGroups,
@@ -116,6 +138,7 @@ function processVariations(rawItem: RawItem): VariantGroup[] {
         v.storageImage ||
         v.closetImage ||
         v.framedImage ||
+        v.albumImage ||
         rawItem.inventoryImage ||
         "",
       id: v.internalId || rawItem.internalId,

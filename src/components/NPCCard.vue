@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref, computed } from "vue";
 import type { NPC } from "../types/npc";
 import { ENTITY_ICONS } from "../constants";
 import { getChineseText, lightenColor } from "../utils/common";
@@ -10,6 +11,12 @@ interface Props {
 
 const props = defineProps<Props>();
 
+// 当前图片索引
+const currentImageIndex = ref(0);
+
+// 当前形状
+const currentShape = computed(() => currentImageIndex.value === 0 ? 'circle' : 'rounded');
+
 // 获取性别emoji
 const getGenderIcon = (gender: string): string => {
   return gender === "Male" ? ENTITY_ICONS.MALE : ENTITY_ICONS.FEMALE;
@@ -18,20 +25,26 @@ const getGenderIcon = (gender: string): string => {
 const handleClick = () => {
   window.open(`https://nookipedia.com/wiki/${props.data.name}`, "_blank");
 };
+
+const handleImageIndexChanged = (index: number) => {
+  currentImageIndex.value = index;
+};
 </script>
 
 <template>
   <BaseCard
     colorClass="card--orange-dark"
     :version="props.data.versionAdded"
-    :image="props.data.iconImage"
+    :images="[props.data.iconImage, props.data.photoImage]"
     :displayName="getChineseText(props.data)"
+    :shape="currentShape"
     :style="{
       background: props.data.bubbleColor || '#ffe082',
       border:
         '3px solid ' + lightenColor(props.data.bubbleColor || '#ffe082', -0.5),
     }"
     @click="handleClick"
+    @image-index-changed="handleImageIndexChanged"
   >
     <template #name>
       <h3
