@@ -5,6 +5,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { COLOR_MAP } from "../config";
+import { Color } from "../types";
 
 // 彩虹颜色常量
 const RAINBOW_COLORS = [
@@ -18,7 +19,7 @@ const RAINBOW_COLORS = [
 ];
 
 interface Props {
-  displayColors?: string[];
+  displayColors?: string[] | Color[];
   size?: number;
 }
 
@@ -28,7 +29,15 @@ const props = defineProps<Props>();
  * 生成圆锥渐变样式
  */
 const blockStyle = computed(() => {
-  const colors = props.displayColors || [];
+  // 如果时Color数组，转换为string数组
+  const colors: string[] = (props.displayColors || []).map((c) => {
+    if (typeof c === "string") {
+      return c;
+    } else {
+      return Object.entries(Color).find(([_, v]) => v === c)?.[0] || "";
+    }
+  });
+
   if (colors.length === 0) return {};
 
   const sectionDeg = 360 / colors.length;

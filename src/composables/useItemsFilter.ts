@@ -1,5 +1,6 @@
 import { ref, computed, type Ref, type ComputedRef } from "vue";
-import type { Item, FilterOptions } from "../types";
+import type { FilterOptions } from "../types";
+import { ItemModel } from "../models/ItemModel";
 import { filterItems, sortItems } from "../services/filterService";
 import { CONFIG } from "../config";
 
@@ -8,9 +9,9 @@ export interface UseItemsFilterReturn {
   sortValue: Ref<string>;
   itemsPerPage: Ref<number | "all">;
   currentPage: Ref<number>;
-  filteredItems: Ref<Item[]>;
+  filteredItems: Ref<ItemModel[]>;
   totalPages: ComputedRef<number>;
-  itemsToDisplay: ComputedRef<Item[]>;
+  itemsToDisplay: ComputedRef<ItemModel[]>;
   handleFilterChange: () => void;
   handleSortChange: () => void;
   handlePageChange: (page: number) => void;
@@ -20,23 +21,23 @@ export interface UseItemsFilterReturn {
 /**
  * 组合函数：管理物品筛选、排序和分页
  */
-export function useItemsFilter(allItems: Ref<Item[]>): UseItemsFilterReturn {
+export function useItemsFilter(allItems: Ref<ItemModel[]>): UseItemsFilterReturn {
   const filters = ref<FilterOptions>({
     searchTerm: "",
-    category: "",
-    ownedFilter: "all",
-    versionFilter: "",
+    category: undefined,
+    ownedFilter: undefined,
+    versionFilter: undefined,
     sourceFilter: "",
-    sizeFilter: "",
+    sizeFilter: undefined,
     tagFilter: "",
-    colorFilter: "",
+    colorFilter: undefined,
     seriesFilter: "",
   });
 
   const sortValue = ref(CONFIG.SORT_OPTIONS.ID_ASC);
   const itemsPerPage = ref<number | "all">(CONFIG.PAGINATION.DEFAULT_PER_PAGE);
   const currentPage = ref(1);
-  const filteredItems = ref<Item[]>([]);
+  const filteredItems = ref<ItemModel[]>([]);
 
   /**
    * 计算总页数
@@ -62,20 +63,14 @@ export function useItemsFilter(allItems: Ref<Item[]>): UseItemsFilterReturn {
     return filteredItems.value.slice(startIndex, endIndex);
   });
 
-  /**
-   * 处理筛选变化
-   */
   const handleFilterChange = (): void => {
     filteredItems.value = filterItems(allItems.value, filters.value);
-    filteredItems.value = sortItems(filteredItems.value, sortValue.value);
+    filteredItems.value = sortItems(filteredItems.value as ItemModel[], sortValue.value);
     currentPage.value = 1; // 筛选后重置到第一页
   };
 
-  /**
-   * 处理排序变化
-   */
   const handleSortChange = (): void => {
-    filteredItems.value = sortItems(filteredItems.value, sortValue.value);
+    filteredItems.value = sortItems(filteredItems.value as ItemModel[], sortValue.value);
   };
 
   /**
@@ -101,9 +96,9 @@ export function useItemsFilter(allItems: Ref<Item[]>): UseItemsFilterReturn {
     sortValue,
     itemsPerPage,
     currentPage,
-    filteredItems,
+    filteredItems: filteredItems as Ref<ItemModel[]>,
     totalPages,
-    itemsToDisplay,
+    itemsToDisplay: itemsToDisplay as ComputedRef<ItemModel[]>,
     handleFilterChange,
     handleSortChange,
     handlePageChange,

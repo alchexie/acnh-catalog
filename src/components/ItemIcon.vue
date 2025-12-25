@@ -18,9 +18,7 @@ const router = useRouter();
 const { itemNameMap } = useItemsData();
 
 const item = computed(() => itemNameMap.value[props.itemName]);
-const chineseName = computed(
-  () => item.value?.originalData?.translations?.cNzh || ""
-);
+const chineseName = computed(() => item.value?.name || "");
 
 const showPreview = ref(false);
 
@@ -47,8 +45,8 @@ const handleClick = () => {
     @mouseleave="handleMouseLeave"
   >
     <img
-      v-if="item?.imageUrl"
-      :src="item.imageUrl"
+      v-if="item?.getDisplayImage()"
+      :src="item.getDisplayImage()"
       :alt="props.itemName"
       :style="{ width: props.size + 'px', height: props.size + 'px' }"
       class="item-icon"
@@ -57,8 +55,8 @@ const handleClick = () => {
     <transition name="preview">
       <div v-if="showPreview" class="preview-overlay">
         <img
-          v-if="item?.imageUrl"
-          :src="item.imageUrl"
+          v-if="item?.getDisplayImage()"
+          :src="item.getDisplayImage()"
           alt="preview"
           class="preview-icon"
           loading="lazy"

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
+import { processImageUrl } from "../utils/imageUtils";
 import VersionBadge from "./VersionBadge.vue";
 
 interface Props {
@@ -25,7 +26,7 @@ const currentImageIndex = ref(0);
 
 // 当前显示的图片
 const currentImage = computed(
-  () => props.images[currentImageIndex.value] || ""
+  () => processImageUrl(props.images[currentImageIndex.value] || "")
 );
 
 // 是否有多个图片

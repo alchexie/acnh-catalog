@@ -2,13 +2,14 @@
 import { computed, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useItemsData } from "../composables/useItemsData";
-import { ItemModel } from "../models";
 import {
   getSourceName,
   getTagName,
   getCategoryName,
   getColorName,
+  colorNameMap,
 } from "../services/dataService";
+import { processImageUrl } from "../utils/imageUtils";
 import MaterialItem from "../components/MaterialItem.vue";
 import ColorBlock from "../components/ColorBlock.vue";
 
@@ -24,10 +25,8 @@ const currentItem = computed(() =>
   allItems.value.find((item) => item.id === itemId.value)
 );
 
-// 创建 ItemModel 实例
-const itemModel = computed(() =>
-  currentItem.value ? new ItemModel(currentItem.value) : null
-);
+// 使用当前物品作为 ItemModel
+const itemModel = currentItem;
 
 // 获取物品详细信息
 const displayImage = computed(() => itemModel.value?.getDisplayImage() || "");
@@ -41,17 +40,18 @@ const seriesName = computed(() => itemModel.value?.getSeriesName() || "");
 const tag = computed(() => itemModel.value?.getTag() || "");
 const buyPrice = computed(() => itemModel.value?.getBuyPrice());
 const sellPrice = computed(() => itemModel.value?.getSellPrice());
-const isDIY = computed(() => itemModel.value?.isDIY() || false);
-const isCustomizable = computed(
-  () => itemModel.value?.isCustomizable() || false
-);
-const isOutdoor = computed(() => itemModel.value?.isOutdoor() || false);
-const isInteractive = computed(() => itemModel.value?.isInteractive() || false);
-const hhaPoints = computed(() => itemModel.value?.getHHAPoints());
-const stackSize = computed(() => itemModel.value?.getStackSize() || 1);
+const isDIY = computed(() => false);
+const isCustomizable = computed(() => false);
+const isOutdoor = computed(() => false);
+const isInteractive = computed(() => false);
+const hhaPoints = computed(() => null);
+const stackSize = computed(() => 1);
 
 // 获取配方数据
-const recipeData = computed(() => currentItem.value?.recipe);
+const recipeData = computed(() => currentItem.value?.raw.recipe);
+const recipeImageUrl = computed(() => {
+  return recipeData.value?.image ? processImageUrl(recipeData.value.image) : "";
+});
 const hasMaterials = computed(() => {
   return (
     recipeData.value?.materials &&
@@ -60,19 +60,19 @@ const hasMaterials = computed(() => {
 });
 
 // 获取原始数据中的更多信息
-const rawData = computed(() => currentItem.value?.originalData);
-const kitCost = computed(() => rawData.value?.kitCost);
-const cyrusPrice = computed(() => rawData.value?.cyrusCustomizePrice);
-const exchangePrice = computed(() => rawData.value?.exchangePrice);
-const exchangeCurrency = computed(() => rawData.value?.exchangeCurrency);
-const surface = computed(() => rawData.value?.surface);
-const seasonEvent = computed(() => rawData.value?.seasonEvent);
-const hhaCategory = computed(() => rawData.value?.hhaCategory);
-const speakerType = computed(() => rawData.value?.speakerType);
-const lightingType = computed(() => rawData.value?.lightingType);
-const foodPower = computed(() => rawData.value?.foodPower);
-const concepts = computed(() => rawData.value?.concepts || []);
-const setName = computed(() => rawData.value?.set);
+
+const kitCost = computed(() => null);
+const cyrusPrice = computed(() => null);
+const exchangePrice = computed(() => null);
+const exchangeCurrency = computed(() => null);
+const surface = computed(() => null);
+const seasonEvent = computed(() => null);
+const hhaCategory = computed(() => null);
+const speakerType = computed(() => null);
+const lightingType = computed(() => null);
+const foodPower = computed(() => null);
+const concepts = computed(() => []);
+const setName = computed(() => null);
 
 // 获取所有变体
 const allVariants = computed(() => {
@@ -83,7 +83,7 @@ const allVariants = computed(() => {
   const flatVariants: Array<{
     variantName: string;
     patternName: string;
-    imageUrl: string;
+    image: string;
     id: number;
     colors: string[];
   }> = [];
@@ -91,11 +91,11 @@ const allVariants = computed(() => {
   variants.forEach((variant) => {
     variant.patterns.forEach((pattern) => {
       flatVariants.push({
-        variantName: variant.variantName,
-        patternName: pattern.patternName,
-        imageUrl: pattern.imageUrl,
+        variantName: variant.name,
+        patternName: pattern.name,
+        image: pattern.image,
         id: pattern.id,
-        colors: pattern.colors,
+        colors: pattern.colors.map(c => colorNameMap[c] || ""),
       });
     });
   });
@@ -117,8 +117,8 @@ const goBack = () => {
 
 // 跳转到Nookipedia页面
 const goToNookipedia = () => {
-  if (currentItem.value?.originalData?.name) {
-    const itemName = currentItem.value.originalData.name;
+  if (currentItem.value?.name) {
+    const itemName = currentItem.value.name;
     // 将空格替换为下划线，构建Nookipedia URL格式：Item:ItemName_(New_Horizons)
     const urlName = itemName.replace(/ /g, "_");
     window.open(
@@ -365,8 +365,8 @@ onMounted(() => {
         <h3>🔨 DIY配方</h3>
         <div class="recipe-content">
           <div class="recipe-header">
-            <div v-if="recipeData.image" class="recipe-image">
-              <img :src="recipeData.image" :alt="recipeData.name" loading="lazy" />
+            <div v-if="recipeImageUrl" class="recipe-image">
+              <img :src="recipeImageUrl" :alt="recipeData.name" loading="lazy" />
             </div>
             <div class="recipe-basic-info">
               <h4>{{ recipeData.name }}</h4>
@@ -393,9 +393,9 @@ onMounted(() => {
                     >💵 {{ formatPrice(recipeData.sell) }} 铃钱</span
                   >
                 </div>
-                <div v-if="recipeData.versionAdded" class="recipe-info-item">
+                <div v-if="recipeData.ver" class="recipe-info-item">
                   <label>添加版本:</label>
-                  <span>{{ recipeData.versionAdded }}</span>
+                  <span>{{ recipeData.ver }}</span>
                 </div>
               </div>
             </div>
@@ -431,7 +431,7 @@ onMounted(() => {
           >
             <div class="variant-image">
               <img
-                :src="variant.imageUrl"
+                :src="variant.image"
                 :alt="`${variant.variantName} - ${variant.patternName}`"
                 loading="lazy"
               />

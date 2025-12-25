@@ -37,8 +37,8 @@ const iconSize = computed(() => 24);
   <div :class="themeClasses" @click="handleClick">
     <div class="material-info">
       <img
-        v-if="materialItem?.imageUrl"
-        :src="materialItem.imageUrl"
+        v-if="materialItem?.getDisplayImage()"
+        :src="materialItem.getDisplayImage()"
         :alt="materialItem?.name || material"
         class="material-icon"
         :style="{ width: iconSize + 'px', height: iconSize + 'px' }"

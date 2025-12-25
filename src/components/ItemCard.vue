@@ -1,23 +1,22 @@
 <script setup lang="ts">
 import { computed, onMounted, watch } from "vue";
 import { useRouter } from "vue-router";
-import type { Item } from "../types";
-import { getSeriesName, getTagName } from "../services/dataService";
 import { formatPrice, joinArray } from "../utils/common";
 import { ItemModel } from "../models";
 import BaseCard from "./BaseCard.vue";
 import ColorBlock from "./ColorBlock.vue";
 import { UI_TEXT } from "../constants";
+import { Color } from "../types/item";
 
 const props = defineProps<{
-  data: Item;
-  colorFilter?: string;
+  data: ItemModel;
+  colorFilter?: Color;
 }>();
 
 const router = useRouter();
 
-// 创建 ItemModel 实例
-const itemModel = new ItemModel(props.data);
+// 使用传入的 ItemModel 实例
+const itemModel = props.data;
 
 // 使用简单的 ref 管理响应式状态 - 直接访问 ItemModel 内部的 ref
 const variantIndex = computed({
@@ -35,6 +34,7 @@ const currentVariant = computed(() => itemModel.getCurrentVariant());
 const displayId = computed(() => itemModel.getDisplayId());
 const displayColors = computed(() => itemModel.getDisplayColors());
 const displayName = computed(() => itemModel.getDisplayName());
+const displayImage = computed(() => itemModel.getDisplayImage());
 const hasMultipleVariants = computed(() => itemModel.hasMultipleVariants());
 const hasPatterns = computed(() => itemModel.hasPatterns());
 
@@ -50,7 +50,7 @@ const sellPrice = computed(() => itemModel.getSellPrice());
 
 // 应用颜色筛选
 const applyColorFilter = () => {
-  if (props.colorFilter && props.data.variantGroups?.length) {
+  if (props.colorFilter !== undefined && itemModel.hasVariations) {
     const match = itemModel.findVariantByColor(props.colorFilter);
     if (match) {
       variantIndex.value = match.variantIndex;
@@ -87,7 +87,7 @@ const handleClick = () => {
     colorClass="card--green"
     :class="{ 'item-owned': props.data.owned }"
     :version="version !== '未知版本' ? version : undefined"
-    :images="props.data.imageUrls"
+    :images="props.data.images"
     :displayName="displayName"
     :shape="'rounded'"
     @click="handleClick"
@@ -106,15 +106,15 @@ const handleClick = () => {
     </div>
     <div class="detail-row">
       <span class="detail-label">系列</span>
-      <span class="detail-value">{{ getSeriesName(seriesName) }}</span>
+      <span class="detail-value">{{ seriesName }}</span>
     </div>
     <div class="detail-row">
       <span class="detail-label">标签</span>
-      <span class="detail-value">{{ getTagName(tag) }}</span>
+      <span class="detail-value">{{ tag }}</span>
     </div>
     <div class="detail-row">
       <span class="detail-label">{{ UI_TEXT.LABELS.SOURCE }}</span>
-      <span class="detail-value">{{ joinArray(props.data.source) }}</span>
+      <span class="detail-value">{{ joinArray(props.data.getSources()) }}</span>
     </div>
     <div class="detail-row">
       <span class="buy-price" title="购买价格">
@@ -129,11 +129,11 @@ const handleClick = () => {
       <span class="variants-label">款式</span>
       <div class="variants-list">
         <span
-          v-for="(vg, vIdx) in props.data.variantGroups"
+          v-for="(vg, vIdx) in props.data.getVariantGroups()"
           :key="vIdx"
           class="variation-dot variant-dot"
           :class="{ active: vIdx === variantIndex }"
-          :title="vg.variantName || `款式 ${vIdx + 1}`"
+          :title="vg.name || `款式 ${vIdx + 1}`"
           @click="variantIndex = vIdx"
         >
           {{ vIdx + 1 }}
@@ -148,7 +148,7 @@ const handleClick = () => {
           :key="pIdx"
           class="variation-dot pattern-dot"
           :class="{ active: pIdx === patternIndex }"
-          :title="p.patternName || `图案 ${pIdx + 1}`"
+          :title="p.name || `图案 ${pIdx + 1}`"
           @click="patternIndex = pIdx"
         >
           {{ pIdx + 1 }}

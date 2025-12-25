@@ -1,27 +1,22 @@
 import { ref, type Ref } from "vue";
-import type { Item } from "../types";
-import {
-  getTagName,
-  getCategoryOrder,
-  getSourceOrder,
-  getColorOrder,
-} from "../services/dataService";
-import { getItemVersion, getItemSources } from "../utils/itemHelpers";
+import { ItemModel } from "../models/ItemModel";
+import { Color, ItemCategory, ItemSize, Version } from "../types/item";
+import { getCategoryName, getColorName, getSizeName, getVersionName } from "../services/dataService";
 
-export interface FilterOption {
-  value: string;
+export interface FilterOption<T = string> {
+  value?: T;
   name: string;
 }
 
 export interface FilterOptionsData {
-  categories: Ref<string[]>;
-  versions: Ref<string[]>;
-  sources: Ref<string[]>;
-  sizes: Ref<string[]>;
-  tags: Ref<string[]>;
-  colors: Ref<string[]>;
+  categories: Ref<FilterOption<ItemCategory>[]>;
+  versions: Ref<FilterOption<Version>[]>;
+  sources: Ref<FilterOption[]>;
+  sizes: Ref<FilterOption<ItemSize>[]>;
+  tags: Ref<FilterOption[]>;
+  colors: Ref<FilterOption<Color>[]>;
   series: Ref<FilterOption[]>;
-  populateFilters: (items: Item[]) => void;
+  populateFilters: (items: ItemModel[]) => void;
 }
 
 /**
@@ -29,118 +24,81 @@ export interface FilterOptionsData {
  * 从物品列表中提取并维护各种筛选器选项
  */
 export function useFilterOptions(): FilterOptionsData {
-  const categories = ref<string[]>([]);
-  const versions = ref<string[]>([]);
-  const sources = ref<string[]>([]);
-  const sizes = ref<string[]>([]);
-  const tags = ref<string[]>([]);
-  const colors = ref<string[]>([]);
+  const categories = ref<FilterOption<ItemCategory>[]>([]);
+  const versions = ref<FilterOption<Version>[]>([]);
+  const sources = ref<FilterOption[]>([]);
+  const sizes = ref<FilterOption<ItemSize>[]>([]);
+  const tags = ref<FilterOption[]>([]);
+  const colors = ref<FilterOption<Color>[]>([]);
   const series = ref<FilterOption[]>([]);
 
-  /**
-   * 从物品列表中填充分类选项
-   */
-  const populateCategories = (items: Item[]): void => {
-    const categoryOrder = getCategoryOrder();
-    const itemCategories = new Set(items.map((item) => item.category));
+  const populateCategories = (): void => {
+    categories.value = Object.values(ItemCategory).map((category) => ({
+      value: category,
+      name: getCategoryName(category),
+    }));
+  }
 
-    categories.value = [
-      ...categoryOrder.filter((cat) => itemCategories.has(cat)),
-      ...[...itemCategories].filter((cat) => !categoryOrder.includes(cat)),
-    ];
-  };
+  const populateVersions = (): void => {
+    versions.value = Object.values(Version).map((version) => ({
+      value: version,
+      name: getVersionName(version),
+    }));
+  }
 
-  /**
-   * 从物品列表中填充版本选项
-   */
-  const populateVersions = (items: Item[]): void => {
-    versions.value = [
-      ...new Set(
-        items
-          .map((item) => getItemVersion(item))
-          .filter((v) => v !== "未知版本")
-      ),
-    ].sort();
-  };
-
-  /**
-   * 从物品列表中填充来源选项
-   */
-  const populateSources = (items: Item[]): void => {
-    const sourceOrder = getSourceOrder();
+  const populateSources = (items: ItemModel[]): void => {
     const itemSources = new Set<string>();
 
     items.forEach((item) => {
-      getItemSources(item).forEach((s) => itemSources.add(s));
+      item.getSources().forEach((s) => itemSources.add(s));
     });
 
-    sources.value = [
-      ...sourceOrder.filter((src) => itemSources.has(src)),
-      ...[...itemSources].filter((src) => !sourceOrder.includes(src)),
-    ];
+    sources.value = [...itemSources].sort().map((source) => ({
+      value: source,
+      name: source,
+    }));
   };
 
-  /**
-   * 从物品列表中填充尺寸选项
-   */
-  const populateSizes = (items: Item[]): void => {
-    sizes.value = [
-      ...new Set(
-        items.map((item) => item.size).filter((s): s is string => !!s)
-      ),
-    ].sort((a, b) => {
-      const [aWidth, aHeight] = a.split("x").map(Number);
-      const [bWidth, bHeight] = b.split("x").map(Number);
-
-      if (aWidth !== undefined && bWidth !== undefined && aWidth !== bWidth) {
-        return aWidth - bWidth;
-      }
-      return (aHeight || 0) - (bHeight || 0);
-    });
-  };
+  const populateSizes = (): void => {
+    sizes.value = Object.values(ItemSize).map((size) => ({
+      value: size,
+      name: getSizeName(size),
+    }));
+  }
 
   /**
    * 从物品列表中填充标签选项
    */
-  const populateTags = (items: Item[]): void => {
+  const populateTags = (items: ItemModel[]): void => {
     const tagsSet = new Set(
-      items.map((item) => item.tag).filter((t): t is string => !!t)
+      items.map((item) => item.getTag()).filter((t): t is string => !!t)
     );
 
-    tags.value = [...tagsSet].sort((a, b) =>
-      getTagName(a).localeCompare(getTagName(b), "zh-CN")
-    );
+    tags.value = [...tagsSet].sort().map((tag) => ({
+      value: tag,
+      name: tag,
+    })).sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
   };
 
-  /**
-   * 从物品列表中填充颜色选项
-   */
-  const populateColors = (items: Item[]): void => {
-    const colorOrder = getColorOrder();
-    const itemColors = new Set<string>();
-
-    items.forEach((item) => {
-      item.colors?.forEach((c) => itemColors.add(c));
-    });
-
-    colors.value = [
-      ...colorOrder.filter((color) => itemColors.has(color)),
-      ...[...itemColors].filter((color) => !colorOrder.includes(color)),
-    ];
-  };
+  const populateColors = (): void => {
+    colors.value = Object.values(Color).map((color) => ({
+      value: color,
+      name: getColorName(color),
+    }));
+  }
 
   /**
    * 从物品列表中填充系列选项
    */
-  const populateSeries = (items: Item[]): void => {
+  const populateSeries = (items: ItemModel[]): void => {
     const seriesMap = new Map<string, string>();
 
     items.forEach((item) => {
-      if (item.series && !seriesMap.has(item.series)) {
+      const series = item.getSeries();
+      if (series && !seriesMap.has(series)) {
         // 从原始数据中获取翻译后的系列名称
-        const seriesName =
-          item.originalData?.seriesTranslations?.cNzh || item.series;
-        seriesMap.set(item.series, seriesName);
+        const seriesName = series;
+        seriesMap.set(series, seriesName);
       }
     });
 
@@ -152,13 +110,13 @@ export function useFilterOptions(): FilterOptionsData {
   /**
    * 填充所有筛选器选项
    */
-  const populateFilters = (items: Item[]): void => {
-    populateCategories(items);
-    populateVersions(items);
+  const populateFilters = (items: ItemModel[]): void => {
+    populateCategories();
+    populateVersions();
     populateSources(items);
-    populateSizes(items);
+    populateSizes();
     populateTags(items);
-    populateColors(items);
+    populateColors();
     populateSeries(items);
   };
 

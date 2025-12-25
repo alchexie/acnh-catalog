@@ -1,6 +1,12 @@
-import type { Item, VariantGroup, Pattern } from "../types";
-import { ref, type Ref } from "vue";
-import * as itemHelpers from "../utils/itemHelpers";
+import type { Item, VariantGroup, Pattern, ItemCategory } from "../types";
+import { reactive } from "vue";
+import { processImageUrl } from "../utils/imageUtils";
+import {
+  ItemCategoryNameMap,
+  versionNameMap,
+  itemSizeNameMap,
+} from "../services/dataService";
+import { Color, Version, ItemSize } from "../types/item";
 
 /**
  * 物品模型类
@@ -10,13 +16,19 @@ import * as itemHelpers from "../utils/itemHelpers";
 export class ItemModel {
   private readonly _data: Item;
   // 响应式状态
-  private _currentVariantIndex: Ref<number>;
-  private _currentPatternIndex: Ref<number>;
+  private _state: {
+    currentVariantIndex: number;
+    currentPatternIndex: number;
+    owned: boolean;
+  };
 
   constructor(item: Item) {
     this._data = item;
-    this._currentVariantIndex = ref(0);
-    this._currentPatternIndex = ref(0);
+    this._state = reactive({
+      currentVariantIndex: 0,
+      currentPatternIndex: 0,
+      owned: false, // 初始未拥有
+    });
   }
 
   /**
@@ -45,7 +57,7 @@ export class ItemModel {
   /**
    * 物品分类
    */
-  get category(): string {
+  get category(): ItemCategory {
     return this._data.category;
   }
 
@@ -53,37 +65,39 @@ export class ItemModel {
    * 是否已拥有
    */
   get owned(): boolean {
-    return this._data.owned;
+    return this._state.owned;
   }
 
   /**
    * 设置拥有状态
    */
   set owned(value: boolean) {
-    this._data.owned = value;
+    this._state.owned = value;
   }
 
   // ============ 可选属性安全访问 ============
 
   /**
+   * 获取分类名称
+   */
+  getCategoryName(): string {
+    return ItemCategoryNameMap[this._data.category] || "未知分类";
+  }
+
+  /**
    * 获取版本信息（安全访问）
    */
   getVersion(): string {
-    return itemHelpers.getItemVersion(this._data);
+    if (this._data.ver === undefined) return "未知版本";
+    return versionNameMap[this._data.ver] || "未知版本";
   }
 
   /**
    * 获取尺寸信息（安全访问）
    */
   getSize(): string {
-    return itemHelpers.getItemSize(this._data);
-  }
-
-  /**
-   * 获取标签（安全访问）
-   */
-  getTag(): string {
-    return this._data.tag || "";
+    if (this._data.size === undefined) return "未知尺寸";
+    return itemSizeNameMap[this._data.size] || "未知尺寸";
   }
 
   /**
@@ -102,31 +116,38 @@ export class ItemModel {
   }
 
   /**
+   * 获取标签（安全访问）
+   */
+  getTag(): string {
+    return this._data.tag || "";
+  }
+
+  /**
    * 获取来源列表（安全访问）
    */
   getSources(): string[] {
-    return itemHelpers.getItemSources(this._data);
+    return this._data.source || [];
   }
 
   /**
    * 检查是否有指定来源
    */
   hasSource(source: string): boolean {
-    return itemHelpers.hasSource(this._data, source);
+    return this.getSources().includes(source);
   }
 
   /**
    * 获取颜色列表（安全访问）
    */
-  getColors(): string[] {
-    return this._data.colors || [];
+  getColors(): Color[] {
+    return this._data.colors;
   }
 
   /**
    * 检查是否包含指定颜色
    */
-  hasColor(color: string): boolean {
-    return itemHelpers.hasColor(this._data, color);
+  hasColor(color: Color): boolean {
+    return this.getColors().includes(color);
   }
 
   // ============ 变体相关 ============
@@ -135,14 +156,18 @@ export class ItemModel {
    * 是否有变体
    */
   get hasVariations(): boolean {
-    return itemHelpers.hasVariations(this._data);
+    const groups = this.getVariantGroups();
+    return (
+      groups.length > 0 &&
+      (groups.length > 1 || (groups[0]?.patterns.length ?? 0) > 1)
+    );
   }
 
   /**
    * 获取变体组列表
    */
   getVariantGroups(): VariantGroup[] {
-    return this._data.variantGroups || [];
+    return this._data.variants || [];
   }
 
   /**
@@ -156,7 +181,7 @@ export class ItemModel {
    * 是否有多个变体
    */
   hasMultipleVariants(): boolean {
-    return itemHelpers.hasMultipleVariants(this._data);
+    return this.getVariantGroups().length > 1;
   }
 
   /**
@@ -171,7 +196,7 @@ export class ItemModel {
    * 获取当前选中的变体索引
    */
   getVariantIndex(): number {
-    return this._currentVariantIndex.value;
+    return this._state.currentVariantIndex;
   }
 
   /**
@@ -179,8 +204,8 @@ export class ItemModel {
    */
   setVariantIndex(index: number): void {
     if (index >= 0 && index < this.getVariantCount()) {
-      this._currentVariantIndex.value = index;
-      this._currentPatternIndex.value = 0; // 切换变体时重置图案
+      this._state.currentVariantIndex = index;
+      this._state.currentPatternIndex = 0; // 切换变体时重置图案
     }
   }
 
@@ -188,7 +213,7 @@ export class ItemModel {
    * 获取当前选中的图案索引
    */
   getPatternIndex(): number {
-    return this._currentPatternIndex.value;
+    return this._state.currentPatternIndex;
   }
 
   /**
@@ -201,7 +226,7 @@ export class ItemModel {
       index >= 0 &&
       index < currentVariant.patterns.length
     ) {
-      this._currentPatternIndex.value = index;
+      this._state.currentPatternIndex = index;
     }
   }
 
@@ -214,7 +239,7 @@ export class ItemModel {
 
     const index = Math.max(
       0,
-      Math.min(this._currentVariantIndex.value, variants.length - 1)
+      Math.min(this._state.currentVariantIndex, variants.length - 1)
     );
     return variants[index] || null;
   }
@@ -228,7 +253,7 @@ export class ItemModel {
 
     const index = Math.max(
       0,
-      Math.min(this._currentPatternIndex.value, variant.patterns.length - 1)
+      Math.min(this._state.currentPatternIndex, variant.patterns.length - 1)
     );
     return variant.patterns[index] || null;
   }
@@ -245,7 +270,7 @@ export class ItemModel {
    * 根据名称获取变体
    */
   getVariantByName(name: string): VariantGroup | null {
-    return this.getVariantGroups().find((v) => v.variantName === name) || null;
+    return this.getVariantGroups().find((v) => v.name === name) || null;
   }
 
   // ============ 显示属性（根据当前选中的变体/图案） ============
@@ -255,7 +280,8 @@ export class ItemModel {
    */
   getDisplayImage(): string {
     const pattern = this.getCurrentPattern();
-    return pattern?.imageUrl || this._data.imageUrl;
+    const imageUrl = pattern?.image || this._data.images[0] || "";
+    return processImageUrl(imageUrl);
   }
 
   /**
@@ -269,9 +295,9 @@ export class ItemModel {
   /**
    * 获取当前显示的颜色列表
    */
-  getDisplayColors(): string[] {
+  getDisplayColors(): Color[] {
     const pattern = this.getCurrentPattern();
-    return pattern?.colors || this.getColors();
+    return pattern?.colors || this._data.colors;
   }
 
   /**
@@ -281,13 +307,13 @@ export class ItemModel {
     const parts = [this.name];
 
     const variant = this.getCurrentVariant();
-    if (variant?.variantName) {
-      parts.push(variant.variantName);
+    if (variant?.name) {
+      parts.push(variant.name);
     }
 
     const pattern = this.getCurrentPattern();
-    if (pattern?.patternName) {
-      parts.push(pattern.patternName);
+    if (pattern?.name) {
+      parts.push(pattern.name);
     }
 
     return parts.join(" - ");
@@ -299,59 +325,66 @@ export class ItemModel {
    * 获取购买价格
    */
   getBuyPrice(): number | null {
-    return this._data.originalData?.buy ?? null;
+    return this._data.buy ?? null;
   }
 
   /**
    * 获取出售价格
    */
   getSellPrice(): number | null {
-    return this._data.originalData?.sell ?? null;
+    return this._data.sell ?? null;
   }
 
   /**
-   * 是否可DIY
+   * 获取图片URL列表
    */
-  isDIY(): boolean {
-    return this._data.originalData?.diy ?? false;
+  get images(): string[] {
+    return this._data.images;
   }
 
-  /**
-   * 是否可定制
-   */
-  isCustomizable(): boolean {
-    const bodyCustomize = this._data.originalData?.bodyCustomize ?? false;
-    const patternCustomize = this._data.originalData?.patternCustomize ?? false;
-    return bodyCustomize || patternCustomize;
-  }
+  // /**
+  //  * 是否可DIY
+  //  */
+  // isDIY(): boolean {
+  //   return this._data.originalData?.diy ?? false;
+  // }
 
-  /**
-   * 是否为户外物品
-   */
-  isOutdoor(): boolean {
-    return this._data.originalData?.outdoor ?? false;
-  }
+  // /**
+  //  * 是否可定制
+  //  */
+  // isCustomizable(): boolean {
+  //   const bodyCustomize = this._data.originalData?.bodyCustomize ?? false;
+  //   const patternCustomize = this._data.originalData?.patternCustomize ?? false;
+  //   return bodyCustomize || patternCustomize;
+  // }
 
-  /**
-   * 是否可交互
-   */
-  isInteractive(): boolean {
-    return this._data.originalData?.interact ?? false;
-  }
+  // /**
+  //  * 是否为户外物品
+  //  */
+  // isOutdoor(): boolean {
+  //   return this._data.originalData?.outdoor ?? false;
+  // }
 
-  /**
-   * 获取HHA基础分数
-   */
-  getHHAPoints(): number | null {
-    return this._data.originalData?.hhaBasePoints ?? null;
-  }
+  // /**
+  //  * 是否可交互
+  //  */
+  // isInteractive(): boolean {
+  //   return this._data.originalData?.interact ?? false;
+  // }
 
-  /**
-   * 获取堆叠数量
-   */
-  getStackSize(): number {
-    return this._data.originalData?.stackSize ?? 1;
-  }
+  // /**
+  //  * 获取HHA基础分数
+  //  */
+  // getHHAPoints(): number | null {
+  //   return this._data.originalData?.hhaBasePoints ?? null;
+  // }
+
+  // /**
+  //  * 获取堆叠数量
+  //  */
+  // getStackSize(): number {
+  //   return this._data.originalData?.stackSize ?? 1;
+  // }
 
   // ============ 工具方法 ============
 
@@ -359,25 +392,41 @@ export class ItemModel {
    * 根据颜色筛选查找匹配的变体和图案
    */
   findVariantByColor(
-    color: string
+    color: Color
   ): { variantIndex: number; patternIndex: number } | null {
-    return itemHelpers.findColorVariantIndex(this._data, color);
+    if (!color) return null;
+    // 遍历所有变体和图案
+    const variants = this.getVariantGroups();
+    if (variants.length === 0) {
+      // 没有变体，检查物品本身的颜色
+      return this.hasColor(color)
+        ? { variantIndex: 0, patternIndex: 0 }
+        : null;
+    }
+    // 有变体的情况
+    for (let vIdx = 0; vIdx < variants.length; vIdx++) {
+      const variant = variants[vIdx];
+      if (variant) {
+        for (let pIdx = 0; pIdx < variant.patterns.length; pIdx++) {
+          const pattern = variant.patterns[pIdx];
+          if (pattern?.colors?.includes(color)) {
+            return { variantIndex: vIdx, patternIndex: pIdx };
+          }
+        }
+      }
+    }
+
+    return null;
   }
 
   /**
    * 切换到指定颜色的变体
    */
-  switchToColorVariant(color: string): boolean {
+  switchToColorVariant(color: Color): boolean {
     const match = this.findVariantByColor(color);
     if (match) {
       this.setVariantIndex(match.variantIndex);
       this.setPatternIndex(match.patternIndex);
-      // 更新显示属性
-      const pattern = this.getCurrentPattern();
-      if (pattern) {
-        this._data.id = pattern.id;
-        this._data.imageUrl = pattern.imageUrl;
-      }
       return true;
     }
     return false;
@@ -409,5 +458,61 @@ export class ItemModel {
    */
   static fromArray(items: Item[]): ItemModel[] {
     return items.map((item) => new ItemModel(item));
+  }
+
+  // ============ 匹配筛选方法 ============
+
+  /**
+   * 检查物品是否匹配指定颜色
+   */
+  matchesColor(color: Color): boolean {
+    // 检查物品本身的颜色
+    if (this._data.colors?.includes(color)) {
+      return true;
+    }
+
+    // 检查所有变体和图案是否包含该颜色
+    if (this.getVariantGroups() && this.getVariantGroups().length > 0) {
+      return this.getVariantGroups().some((variant) =>
+        variant.patterns.some((pattern) => pattern.colors?.includes(color))
+      );
+    }
+
+    return false;
+  }
+
+  /**
+   * 检查物品是否匹配指定版本
+   */
+  matchesVersion(version: Version): boolean {
+    return this.raw.ver === version;
+  }
+
+  /**
+   * 检查物品是否匹配指定尺寸
+   */
+  matchesSize(size: ItemSize): boolean {
+    return this.raw.size === size;
+  }
+
+  /**
+   * 检查物品是否匹配指定标签
+   */
+  matchesTag(tag: string): boolean {
+    return !tag || this.raw.tag === tag;
+  }
+
+  /**
+   * 检查物品是否匹配指定系列
+   */
+  matchesSeries(series: string): boolean {
+    return !series || this.raw.series === series;
+  }
+
+  /**
+   * 检查物品是否匹配指定来源
+   */
+  matchesSource(source: string): boolean {
+    return !source || this.getSources().includes(source);
   }
 }

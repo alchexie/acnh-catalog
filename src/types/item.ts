@@ -1,15 +1,115 @@
-import type { Translation } from "./index";
+/**
+ * 物品分类枚举（数字枚举）
+ */
+export const ItemCategory = {
+  Housewares: 1,
+  Miscellaneous: 2,
+  WallMounted: 3,
+  CeilingDecor: 4,
+  Tops: 5,
+  Bottoms: 6,
+  DressUp: 7,
+  Headwear: 8,
+  Accessories: 9,
+  Socks: 10,
+  Shoes: 11,
+  Bags: 12,
+  Umbrellas: 13,
+  ClothingOther: 14,
+  ToolsGoods: 15,
+  Fencing: 16,
+  Wallpaper: 17,
+  Floors: 18,
+  Rugs: 19,
+  Fossils: 20,
+  Gyroids: 21,
+  Artwork: 22,
+  Music: 23,
+  Photos: 24,
+  Posters: 25,
+  MessageCards: 26,
+  Other: 27
+} as const;
+
+export type ItemCategory = typeof ItemCategory[keyof typeof ItemCategory];
+
+/**
+ * 版本添加枚举（数字枚举）
+ */
+export const Version = {
+  The100: 1,
+  The110: 2,
+  The120: 3,
+  The130: 4,
+  The140: 5,
+  The150: 6,
+  The160: 7,
+  The170: 8,
+  The180: 9,
+  The190: 10,
+  The1100: 11,
+  The1110: 12,
+  The200: 13,
+  The204: 14,
+} as const;
+
+export type Version = typeof Version[keyof typeof Version];
+
+/**
+ * 尺寸枚举（数字枚举）
+ */
+export const ItemSize = {
+  The05X1: 1,
+  The1X05: 2,
+  The1X1: 3,
+  The1X15: 4,
+  The1X2: 5,
+  The15X15: 6,
+  The2X05: 7,
+  The2X1: 8,
+  The2X15: 9,
+  The2X2: 10,
+  The3X1: 11,
+  The3X2: 12,
+  The3X3: 13,
+  The4X3: 14,
+  The4X4: 15,
+  The5X5: 16,
+} as const;
+
+export type ItemSize = typeof ItemSize[keyof typeof ItemSize];
+
+/**
+ * 颜色枚举（数字枚举）
+ */
+export const Color = {
+  Red: 1,
+  Orange: 2,
+  Yellow: 3,
+  Green: 4,
+  Blue: 5,
+  Aqua: 6,
+  Purple: 7,
+  Pink: 8,
+  White: 9,
+  Black: 10,
+  Gray: 11,
+  Brown: 12,
+  Beige: 13,
+  Colorful: 14
+} as const;
+
+export type Color = typeof Color[keyof typeof Color];
 
 /**
  * 图案接口
  * 表示物品的一个具体图案（如家具的不同花纹）
  */
 export interface Pattern {
-  patternName: string; // 图案名称
-  imageUrl: string; // 图案图片URL
+  name: string; // 图案名称
+  image: string; // 图案图片URL
   id: number; // 图案ID
-  uniqueEntryId: string; // 唯一条目ID
-  colors: string[]; // 图案颜色列表
+  colors: Color[]; // 图案颜色列表 (Color[])
 }
 
 /**
@@ -18,7 +118,7 @@ export interface Pattern {
  * 一个变体可以包含多个图案
  */
 export interface VariantGroup {
-  variantName: string; // 变体名称
+  name: string; // 变体名称
   patterns: Pattern[]; // 该变体的所有图案
 }
 
@@ -33,89 +133,10 @@ export interface RecipeData {
   source?: string[]; // 配方来源
   sourceNotes?: string; // 来源备注
   seasonEvent?: string; // 季节活动
-  versionAdded?: string; // 添加版本
+  ver?: Version; // 添加版本 (Version)
   category?: string; // 配方分类
   buy?: number; // 购买价格
   sell?: number; // 出售价格
-}
-
-/**
- * 原始变体数据接口
- * 物品变体的原始数据结构
- */
-export interface RawVariation {
-  variation?: string; // 变体名称
-  pattern?: string; // 图案名称
-  image?: string; // 图片
-  storageImage?: string; // 存储图片
-  closetImage?: string; // 衣柜图片
-  framedImage?: string; // 框架图片
-  albumImage?: string; // 相册图片
-  inventoryImage?: string; // 库存图片
-  internalId?: number; // 内部ID
-  uniqueEntryId: string; // 唯一条目ID
-  colors?: string[]; // 颜色列表
-  variantTranslations?: Translation; // 变体翻译
-  patternTranslations?: Translation; // 图案翻译
-}
-
-/**
- * 原始物品数据接口
- * 从 JSON 文件中直接加载的物品数据结构
- */
-export interface RawItem {
-  sourceSheet: string; // 数据来源表
-  name: string; // 物品名称
-  image?: string; // 物品图片
-  storageImage?: string; // 存储图片
-  closetImage?: string; // 衣柜图片
-  framedImage?: string; // 框架图片
-  albumImage?: string; // 相册图片
-  inventoryImage?: string; // 库存图片
-  variation?: string; // 变体
-  bodyTitle?: string; // 主体标题
-  pattern?: string; // 图案
-  patternTitle?: string; // 图案标题
-  diy: boolean; // 是否可DIY
-  bodyCustomize: boolean; // 主体可定制
-  patternCustomize: boolean; // 图案可定制
-  stackSize?: number; // 堆叠数量
-  kitCost?: number; // 套件成本
-  kitType?: string; // 套件类型
-  cyrusCustomizePrice?: number; // Cyrus定制价格
-  buy?: number; // 购买价格
-  sell?: number; // 出售价格
-  size?: string; // 尺寸
-  surface: boolean; // 是否可放置在表面
-  exchangePrice?: number; // 兑换价格
-  exchangeCurrency?: string; // 兑换货币
-  source?: string[]; // 获取来源
-  sourceNotes?: string; // 来源备注
-  seasonEvent?: string; // 季节活动
-  seasonEventExclusive?: boolean; // 是否为活动专属
-  hhaBasePoints?: number; // HHA基础分数
-  hhaCategory?: string; // HHA分类
-  interact: boolean; // 是否可交互
-  tag?: string; // 标签
-  outdoor: boolean; // 是否为户外物品
-  speakerType?: string; // 音响类型
-  lightingType?: string; // 照明类型
-  foodPower?: number; // 食物能量
-  catalog?: string; // 目录
-  versionAdded?: string; // 添加版本
-  unlocked: boolean; // 是否已解锁
-  filename: string; // 文件名
-  variantId?: string; // 变体ID
-  internalId: number; // 内部ID
-  uniqueEntryId: string; // 唯一条目ID
-  seriesTranslations?: Translation; // 系列翻译
-  translations?: Translation; // 物品翻译
-  colors?: string[]; // 颜色列表
-  concepts?: string[]; // 概念列表
-  set?: string; // 套装
-  series?: string; // 系列
-  recipe?: any; // 配方
-  variations?: RawVariation[]; // 变体列表
 }
 
 /**
@@ -124,20 +145,20 @@ export interface RawItem {
  */
 export interface Item {
   name: string; // 物品名称
+  rawName: string; // 物品原始名称
   id: number; // 物品ID
-  category: string; // 物品分类
-  imageUrl: string; // 物品图片URL
-  imageUrls: string[]; // 物品所有图片URL
-  colors: string[]; // 物品颜色列表
-  owned: boolean; // 是否已拥有
-  variantGroups: VariantGroup[]; // 变体组列表
-  versionAdded?: string; // 添加版本
+  category: ItemCategory; // 物品分类 (ItemCategory)
+  images: string[]; // 物品所有图片URL
+  colors: Color[]; // 物品颜色列表 (Color[])
+  variants?: VariantGroup[]; // 变体组列表
+  ver?: Version; // 添加版本 (Version)
+  buy?: number; // 购买价格
+  sell?: number; // 出售价格
   source?: string[]; // 获取来源
-  size?: string; // 物品尺寸
+  size?: ItemSize; // 物品尺寸 (ItemSize)
   tag?: string; // 物品标签
   series?: string; // 所属系列
   recipe?: RecipeData; // 配方数据
-  originalData?: RawItem; // 原始数据
 }
 
 /**
@@ -146,7 +167,21 @@ export interface Item {
  */
 export interface CatalogItem {
   label: string; // 物品标签
-  unique_id: string; // 唯一ID
+  unique_id: number; // 唯一ID
+  kind_id?: string;
+  price?: number;
+  catalog_type?: string;
+  item_size_id?: string;
+  ui_category?: string;
+  icon?: string;
+  item_fossil_set_id?: number;
+  hha_theme?: number;
+  can_sell?: number;
+  remakable?: boolean;
+  color1?: string;
+  color2?: string;
+  from?: string;
+  shop_remakable?: boolean;
 }
 
 /**
@@ -155,12 +190,12 @@ export interface CatalogItem {
  */
 export interface FilterOptions {
   searchTerm: string; // 搜索关键词
-  category: string; // 分类筛选
-  ownedFilter: "all" | "owned" | "not-owned"; // 拥有状态筛选
-  versionFilter: string; // 版本筛选
+  category?: ItemCategory; // 分类筛选（枚举键名）
+  ownedFilter?: boolean; // 拥有状态筛选
+  versionFilter?: Version; // 版本筛选（枚举键名）
   sourceFilter: string; // 来源筛选
-  sizeFilter: string; // 尺寸筛选
+  sizeFilter?: ItemSize; // 尺寸筛选（枚举键名）
   tagFilter: string; // 标签筛选
-  colorFilter: string; // 颜色筛选
+  colorFilter?: Color; // 颜色筛选（枚举键名）
   seriesFilter: string; // 系列筛选
 }

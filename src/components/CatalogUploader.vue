@@ -3,7 +3,7 @@ import { ref } from "vue";
 
 const emit = defineEmits<{
   "catalog-uploaded": [
-    data: { items: Array<{ label: string; unique_id: string }> }
+    data: { items: Array<{ label: string; unique_id: number }> }
   ];
 }>();
 

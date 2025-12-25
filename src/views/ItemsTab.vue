@@ -47,7 +47,7 @@ onMounted(() => {
 
 // 处理目录文件上传
 const handleCatalogUpload = (data: {
-  items: Array<{ label: string; unique_id: string }>;
+  items: Array<{ label: string; unique_id: number }>;
 }) => {
   updateCatalogData(data);
 };

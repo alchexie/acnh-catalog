@@ -8,7 +8,7 @@ const BASE_PATH = import.meta.env.BASE_URL;
  */
 export const CONFIG = {
   DATA_FILES: {
-    ITEMS: `${BASE_PATH}config/acnh-items.json`,
+    ITEMS: `${BASE_PATH}config/acnh-items.small.json`,
     CATALOG: `${BASE_PATH}catalog_items.json`,
     TRANSLATIONS: `${BASE_PATH}config/translations.json`,
     VILLAGERS: `${BASE_PATH}config/acnh-villagers.json`,

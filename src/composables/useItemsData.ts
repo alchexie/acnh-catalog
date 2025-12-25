@@ -1,27 +1,26 @@
 import { ref, type Ref } from "vue";
-import type { Item } from "../types";
+import { ItemModel } from "../models/ItemModel";
 import {
   loadTranslations,
   loadItemsData,
   loadCatalogData,
-  processItemsData,
 } from "../services/dataService";
 import { DATA_LOADING } from "../constants";
 
 export interface UseItemsDataReturn {
-  allItems: Ref<Item[]>;
-  itemNameMap: Ref<Record<string, Item>>;
+  allItems: Ref<ItemModel[]>;
+  itemNameMap: Ref<Record<string, ItemModel>>;
   loading: Ref<boolean>;
   error: Ref<string>;
   loadData: () => Promise<void>;
   updateCatalogData: (catalogData: {
-    items: Array<{ label: string; unique_id: string }>;
+    items: Array<{ label: string; unique_id: number }>;
   }) => void;
 }
 
 // 全局状态，所有组件共享
-const allItems = ref<Item[]>([]);
-const itemNameMap = ref<Record<string, Item>>({});
+const allItems = ref<ItemModel[]>([]) as Ref<ItemModel[]>;
+const itemNameMap = ref<Record<string, ItemModel>>({});
 const loading = ref(true);
 const error = ref("");
 let isDataLoaded = false; // 标记数据是否已加载
@@ -45,20 +44,26 @@ export function useItemsData(): UseItemsDataReturn {
       error.value = "";
 
       // 并行加载翻译和物品数据
-      const [, acnhItems, ownedData] = await Promise.all([
+      const [, acnhItems, ownedIds] = await Promise.all([
         loadTranslations(),
         loadItemsData(),
         loadCatalogData(),
       ]);
 
       // 处理物品数据
-      allItems.value = processItemsData(acnhItems, ownedData);
+      allItems.value = acnhItems
+        .map((item) => {
+          const model = new ItemModel(item);
+          model.owned = ownedIds.has(item.id);
+          return model;
+        })
+        .sort((a, b) => a.id - b.id);
 
-      const itemMap: Record<string, Item> = {};
+      const itemMap: Record<string, ItemModel> = {};
       allItems.value.forEach((item) => {
-        const name = item.originalData?.name;
+        const name = item.raw.rawName;
         if (name) {
-          itemMap[name] = item;
+          itemMap[name] = item as ItemModel;
         }
       });
       itemNameMap.value = itemMap;
@@ -76,28 +81,16 @@ export function useItemsData(): UseItemsDataReturn {
    * 使用上传的目录数据更新物品拥有状态
    */
   const updateCatalogData = (catalogData: {
-    items: Array<{ label: string; unique_id: string }>;
+    items: Array<{ label: string; unique_id: number }>;
   }): void => {
-    const ownedNames = new Set<string>();
-    const ownedIds = new Set<string>();
-
+    const ownedIds = new Set<number>();
     catalogData.items.forEach((item) => {
-      ownedNames.add(item.label);
       ownedIds.add(item.unique_id);
     });
 
     // 更新所有物品的拥有状态
-    allItems.value = allItems.value.map((item) => {
-      const uniqueEntryId = item.originalData?.uniqueEntryId || "";
-      const internalId = item.originalData?.internalId?.toString() || "";
-
-      return {
-        ...item,
-        owned:
-          ownedNames.has(item.name) ||
-          ownedIds.has(internalId) ||
-          ownedIds.has(uniqueEntryId),
-      };
+    allItems.value.forEach((item) => {
+      item.owned = ownedIds.has(item.id);
     });
   };
 

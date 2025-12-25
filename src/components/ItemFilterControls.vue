@@ -1,12 +1,7 @@
 <script setup lang="ts">
 import { watch, computed, onMounted, ref } from "vue";
-import type { Item, FilterOptions } from "../types";
-import {
-  getCategoryName,
-  getSourceName,
-  getColorName,
-  getTagName,
-} from "../services/dataService";
+import type { FilterOptions } from "../types";
+import { ItemModel } from "../models/ItemModel";
 import { useFilterOptions } from "../composables/useFilterOptions";
 import { useDebounce } from "../composables/useDebounce";
 
@@ -14,7 +9,7 @@ const props = defineProps<{
   filters: FilterOptions;
   sortValue: string;
   perPage: number | "all";
-  allItems: Item[];
+  allItems: ItemModel[];
 }>();
 
 const emit = defineEmits<{
@@ -114,9 +109,9 @@ watch(
     <div class="filter-section">
       <label>分类：</label>
       <select v-model="localFilters.category" @change="emit('filter-change')">
-        <option value="">全部分类</option>
-        <option v-for="cat in categories" :key="cat" :value="cat">
-          {{ getCategoryName(cat) }}
+        <option :value="undefined">全部分类</option>
+        <option v-for="cat in categories" :key="cat.value" :value="cat.value">
+          {{cat.name}}
         </option>
       </select>
 
@@ -142,9 +137,9 @@ watch(
         v-model="localFilters.ownedFilter"
         @change="emit('filter-change')"
       >
-        <option value="all">全部物品</option>
-        <option value="owned">仅已拥有</option>
-        <option value="not-owned">仅未拥有</option>
+        <option :value="undefined">全部物品</option>
+        <option :value="true">仅已拥有</option>
+        <option :value="false">仅未拥有</option>
       </select>
 
       <label>版本：</label>
@@ -152,17 +147,17 @@ watch(
         v-model="localFilters.versionFilter"
         @change="emit('filter-change')"
       >
-        <option value="">全部版本</option>
-        <option v-for="ver in versions" :key="ver" :value="ver">
-          {{ ver }}
+        <option :value="undefined">全部版本</option>
+        <option v-for="ver in versions" :key="ver.value" :value="ver.value">
+          {{ ver.name }}
         </option>
       </select>
 
       <label>尺寸：</label>
       <select v-model="localFilters.sizeFilter" @change="emit('filter-change')">
-        <option value="">全部尺寸</option>
-        <option v-for="size in sizes" :key="size" :value="size">
-          {{ size }}
+        <option :value="undefined">全部尺寸</option>
+        <option v-for="size in sizes" :key="size.value" :value="size.value">
+          {{ size.name }}
         </option>
       </select>
     </div>
@@ -173,17 +168,17 @@ watch(
         v-model="localFilters.colorFilter"
         @change="emit('filter-change')"
       >
-        <option value="">全部颜色</option>
-        <option v-for="color in colors" :key="color" :value="color">
-          {{ getColorName(color) }}
+        <option :value="undefined">全部颜色</option>
+        <option v-for="color in colors" :key="color.value" :value="color.value">
+          {{ color.name }}
         </option>
       </select>
 
       <label>标签：</label>
       <select v-model="localFilters.tagFilter" @change="emit('filter-change')">
         <option value="">全部标签</option>
-        <option v-for="tag in tags" :key="tag" :value="tag">
-          {{ getTagName(tag) }}
+        <option v-for="tag in tags" :key="tag.value" :value="tag.value">
+          {{ tag.name }}
         </option>
       </select>
 
@@ -208,8 +203,8 @@ watch(
         @change="emit('filter-change')"
       >
         <option value="">全部来源</option>
-        <option v-for="source in sources" :key="source" :value="source">
-          {{ getSourceName(source) }}
+        <option v-for="source in sources" :key="source.value" :value="source.value">
+          {{ source.name }}
         </option>
       </select>
     </div>

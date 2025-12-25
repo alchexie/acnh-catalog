@@ -1,6 +1,6 @@
 import { ref } from "vue";
 import type { Construction } from "../types/construction";
-import { loadConstructionData } from "../services/dataService";
+import { loadConstructionData, getCategoryName } from "../services/dataService";
 import { DATA_LOADING } from "../constants";
 
 export function useConstructionData() {
@@ -16,7 +16,7 @@ export function useConstructionData() {
       // 将 category 为 null 的归类为"未知"
       allConstruction.value = data.map((item) => ({
         ...item,
-        category: item.category || "未知",
+        category: getCategoryName(item.category) || "未知",
       }));
     } catch (e) {
       error.value = DATA_LOADING.ERROR_GENERIC;
