@@ -2,7 +2,7 @@ import type { Item, Variant, Pattern } from "../types";
 import { reactive } from "vue";
 import { processImageUrl } from "../utils/imageUtils";
 import {
-  ItemCategoryNameMap,
+  ItemTypeNameMap,
   versionNameMap,
   itemSizeNameMap,
   getSeriesName,
@@ -13,8 +13,9 @@ import {
   getConceptName,
   getSetName,
   getThemeName,
+  getCategoryName,
 } from "../services/dataService";
-import { Color, Version, ItemSize, FurnitureCategories, ClothingCategories, ItemCategory } from "../types/item";
+import { Color, Version, ItemSize, FurnitureTypes, ClothingTypes, ItemType } from "../types/item";
 import { formatPrice } from "../utils/common";
 
 export class ItemModel {
@@ -66,24 +67,24 @@ export class ItemModel {
     return this.images[0] || "";
   }
 
-  get category(): ItemCategory {
-    return this._data.category;
+  get type(): ItemType {
+    return this._data.type;
   }
 
   get isFurniture(): boolean {
-    return FurnitureCategories.includes(this.category);
+    return FurnitureTypes.includes(this.type);
   }
 
   get isClothing(): boolean {
-    return ClothingCategories.includes(this.category);
+    return ClothingTypes.includes(this.type);
   }
 
   get isMaterial(): boolean {
-    return this.category === ItemCategory.Other;
+    return this.type === ItemType.Other;
   }
 
-  get categoryName(): string {
-    return ItemCategoryNameMap[this.category] || "未知分类";
+  get typeName(): string {
+    return ItemTypeNameMap[this.type] || "未知类型";
   }
 
   get version(): Version | undefined {
@@ -189,6 +190,14 @@ export class ItemModel {
 
   get conceptNames(): string[] {
     return this.concepts.map((concept) => getConceptName(concept) || "");
+  }
+
+  get category(): string {
+    return this._data.category || "";
+  }
+
+  get categoryName(): string {
+    return getCategoryName(this.category) || "--";
   }
 
   get canDIY(): boolean {
@@ -300,53 +309,6 @@ export class ItemModel {
     }
     return parts.join(" - ");
   }
-
-  // ============ 原始数据访问 ============
-
-  // /**
-  //  * 是否可DIY
-  //  */
-  // isDIY(): boolean {
-  //   return this._data.originalData?.diy ?? false;
-  // }
-
-  // /**
-  //  * 是否可定制
-  //  */
-  // isCustomizable(): boolean {
-  //   const bodyCustomize = this._data.originalData?.bodyCustomize ?? false;
-  //   const patternCustomize = this._data.originalData?.patternCustomize ?? false;
-  //   return bodyCustomize || patternCustomize;
-  // }
-
-  // /**
-  //  * 是否为户外物品
-  //  */
-  // isOutdoor(): boolean {
-  //   return this._data.originalData?.outdoor ?? false;
-  // }
-
-  // /**
-  //  * 是否可交互
-  //  */
-  // isInteractive(): boolean {
-  //   return this._data.originalData?.interact ?? false;
-  // }
-
-  // /**
-  //  * 获取HHA基础分数
-  //  */
-  // getHHAPoints(): number | null {
-  //   return this._data.originalData?.hhaBasePoints ?? null;
-  // }
-
-  // /**
-  //  * 获取堆叠数量
-  //  */
-  // getStackSize(): number {
-  //   return this._data.originalData?.stackSize ?? 1;
-  // }
-
   // ============ 工具方法 ============
 
   /**
@@ -396,9 +358,9 @@ export class ItemModel {
     return !!this.findVariantByColor(color);
   }
 
-  matchesCategory(category?: ItemCategory): boolean {
-    if (category === undefined) return true;
-    return this.category === category;
+  matchesType(type?: ItemType): boolean {
+    if (type === undefined) return true;
+    return this.type === type;
   }
 
   matchesVersion(version?: Version): boolean {
@@ -434,5 +396,20 @@ export class ItemModel {
   matchesStyle(style: string): boolean {
     if (!style) return true;
     return this.styles.includes(style);
+  }
+
+  matchesConcept(concept: string): boolean {
+    if (!concept) return true;
+    return this.concepts.includes(concept);
+  }
+
+  matchesSet(set: string): boolean {
+    if (!set) return true;
+    return this.set === set;
+  }
+
+  matchesCategory(category: string): boolean {
+    if (!category) return true;
+    return this.category === category;
   }
 }

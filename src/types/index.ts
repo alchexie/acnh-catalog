@@ -21,5 +21,7 @@ export interface Translations {
   species: Record<string, string>;
   concepts: Record<string, string>;
   styles: Record<string, string>;
+  themes: Record<string, string>;
   sets: Record<string, string>;
+  categories: Record<string, string>;
 }

@@ -1,7 +1,7 @@
 /**
  * 物品分类枚举（数字枚举）
  */
-export const ItemCategory = {
+export const ItemType = {
   Housewares: 1,
   Miscellaneous: 2,
   WallMounted: 3,
@@ -32,35 +32,35 @@ export const ItemCategory = {
   Other: 28,
 } as const;
 
-export type ItemCategory = (typeof ItemCategory)[keyof typeof ItemCategory];
-export const FurnitureCategories: ItemCategory[] = [
-  ItemCategory.Housewares,
-  ItemCategory.Miscellaneous,
-  ItemCategory.WallMounted,
-  ItemCategory.CeilingDecor,
-  ItemCategory.InteriorStructures,
+export type ItemType = (typeof ItemType)[keyof typeof ItemType];
+export const FurnitureTypes: ItemType[] = [
+  ItemType.Housewares,
+  ItemType.Miscellaneous,
+  ItemType.WallMounted,
+  ItemType.CeilingDecor,
+  ItemType.InteriorStructures,
 ];
-export const ClothingCategories: ItemCategory[] = [
-  ItemCategory.Tops,
-  ItemCategory.Bottoms,
-  ItemCategory.DressUp,
-  ItemCategory.Headwear,
-  ItemCategory.Accessories,
-  ItemCategory.Socks,
-  ItemCategory.Shoes,
-  ItemCategory.Bags,
-  ItemCategory.Umbrellas,
-  ItemCategory.ClothingOther,
+export const ClothingTypes: ItemType[] = [
+  ItemType.Tops,
+  ItemType.Bottoms,
+  ItemType.DressUp,
+  ItemType.Headwear,
+  ItemType.Accessories,
+  ItemType.Socks,
+  ItemType.Shoes,
+  ItemType.Bags,
+  ItemType.Umbrellas,
+  ItemType.ClothingOther,
 ];
-export const MiscCategories: ItemCategory[] = [
-  ItemCategory.ToolsGoods,
-  ItemCategory.Fencing,
-  ItemCategory.Wallpaper,
-  ItemCategory.Floors,
-  ItemCategory.Rugs,
-  ItemCategory.Fossils,
-  ItemCategory.Gyroids,
-  ItemCategory.Music,
+export const MiscTypes: ItemType[] = [
+  ItemType.ToolsGoods,
+  ItemType.Fencing,
+  ItemType.Wallpaper,
+  ItemType.Floors,
+  ItemType.Rugs,
+  ItemType.Fossils,
+  ItemType.Gyroids,
+  ItemType.Music,
 ];
 /**
  * 版本添加枚举（数字枚举）
@@ -177,7 +177,7 @@ export interface Item {
   name: string; // 物品名称
   rawName: string; // 物品原始名称
   images: string[]; // 物品所有图片
-  category: ItemCategory; // 物品分类
+  type: ItemType; // 物品类型
   ver?: Version; // 添加版本
   size?: ItemSize; // 物品尺寸
   colors: Color[]; // 物品颜色列表
@@ -186,9 +186,11 @@ export interface Item {
   source?: string[]; // 获取来源
 
   tag?: string; // 标签（家具）
-  series?: string; // HHA主题（家具）
-  concepts?: string[]; // HHA场景（家具/工具）
-  set?: string; // HHA套组（家具/工具）
+  series?: string; // HHA主题
+  concepts?: string[]; // HHA场景
+  set?: string; // HHA套组
+  category?: string; // HHA分类
+
   themes?: string[]; // 服饰主题（棉儿要求）
   styles?: string[]; // 服饰风格（村民喜好）
 
@@ -226,7 +228,7 @@ export interface CatalogItem {
 export interface FilterOptions {
   searchTerm: string; // 搜索关键词
   ownedFilter?: boolean; // 拥有状态筛选
-  category?: ItemCategory; // 分类筛选（枚举键名）
+  typesFilter?: ItemType; // 类型筛选（枚举键名）
   versionFilter?: Version; // 版本筛选（枚举键名）
   colorFilter?: Color; // 颜色筛选（枚举键名）
   sizeFilter?: ItemSize; // 尺寸筛选（枚举键名）
@@ -235,4 +237,7 @@ export interface FilterOptions {
   seriesFilter: string; // 系列筛选
   themeFilter: string; // 主题筛选
   styleFilter: string; // 风格筛选
+  conceptsFilter: string; // HHA场景筛选
+  setFilter: string; // HHA套组筛选
+  categoryFilter: string; // HHA分类筛选
 }

@@ -11,41 +11,41 @@ import type { Recipe } from "../types/recipe";
 import type { Construction } from "../types/construction";
 import type { MessageCard } from "../types/messagecard";
 import { CONFIG } from "../config";
-import { ItemCategory, Version, ItemSize, Color } from "../types/item";
+import { ItemType, Version, ItemSize, Color } from "../types/item";
 import { PERSONALITY_MAP } from "../constants";
 
 let translationsCache: Translations | null = null;
 
 // 反向映射：数字到字符串
-export const ItemCategoryNameMap: Record<ItemCategory, string> = {
-  [ItemCategory.Housewares]: "家具/家具",
-  [ItemCategory.Miscellaneous]: "家具/小物件",
-  [ItemCategory.WallMounted]: "家具/壁挂物",
-  [ItemCategory.CeilingDecor]: "家具/天花板",
-  [ItemCategory.InteriorStructures]: "家具/其他",
-  [ItemCategory.Tops]: "服饰/上装",
-  [ItemCategory.Bottoms]: "服饰/下装",
-  [ItemCategory.DressUp]: "服饰/套装",
-  [ItemCategory.Headwear]: "服饰/头戴物",
-  [ItemCategory.Accessories]: "服饰/饰品",
-  [ItemCategory.Socks]: "服饰/袜子",
-  [ItemCategory.Shoes]: "服饰/鞋子",
-  [ItemCategory.Bags]: "服饰/包包",
-  [ItemCategory.Umbrellas]: "服饰/雨伞",
-  [ItemCategory.ClothingOther]: "服饰/其他",
-  [ItemCategory.ToolsGoods]: "工具",
-  [ItemCategory.Fencing]: "栅栏",
-  [ItemCategory.Wallpaper]: "壁纸",
-  [ItemCategory.Floors]: "地板",
-  [ItemCategory.Rugs]: "地垫",
-  [ItemCategory.Fossils]: "化石",
-  [ItemCategory.Gyroids]: "陶俑",
-  [ItemCategory.Artwork]: "艺术品",
-  [ItemCategory.Music]: "音乐",
-  [ItemCategory.Photos]: "照片",
-  [ItemCategory.Posters]: "海报",
-  [ItemCategory.MessageCards]: "留言卡",
-  [ItemCategory.Other]: "其他",
+export const ItemTypeNameMap: Record<ItemType, string> = {
+  [ItemType.Housewares]: "家具/家具",
+  [ItemType.Miscellaneous]: "家具/小物件",
+  [ItemType.WallMounted]: "家具/壁挂物",
+  [ItemType.CeilingDecor]: "家具/天花板",
+  [ItemType.InteriorStructures]: "家具/其他",
+  [ItemType.Tops]: "服饰/上装",
+  [ItemType.Bottoms]: "服饰/下装",
+  [ItemType.DressUp]: "服饰/套装",
+  [ItemType.Headwear]: "服饰/头戴物",
+  [ItemType.Accessories]: "服饰/饰品",
+  [ItemType.Socks]: "服饰/袜子",
+  [ItemType.Shoes]: "服饰/鞋子",
+  [ItemType.Bags]: "服饰/包包",
+  [ItemType.Umbrellas]: "服饰/雨伞",
+  [ItemType.ClothingOther]: "服饰/其他",
+  [ItemType.ToolsGoods]: "工具",
+  [ItemType.Fencing]: "栅栏",
+  [ItemType.Wallpaper]: "壁纸",
+  [ItemType.Floors]: "地板",
+  [ItemType.Rugs]: "地垫",
+  [ItemType.Fossils]: "化石",
+  [ItemType.Gyroids]: "陶俑",
+  [ItemType.Artwork]: "艺术品",
+  [ItemType.Music]: "音乐",
+  [ItemType.Photos]: "照片",
+  [ItemType.Posters]: "海报",
+  [ItemType.MessageCards]: "留言卡",
+  [ItemType.Other]: "其他",
 };
 
 export const versionNameMap: Record<Version, string> = {
@@ -120,7 +120,18 @@ export async function loadTranslations(): Promise<Translations> {
   } catch (error) {
     console.error("加载翻译数据失败:", error);
     // 返回空翻译对象作为降级方案
-    return { sources: {}, tags: {}, series: {}, hobbys: {}, species: {}, concepts: {}, styles: {}, sets: {} };
+    return {
+      sources: {},
+      tags: {},
+      series: {},
+      hobbys: {},
+      species: {},
+      concepts: {},
+      styles: {},
+      themes: {},
+      sets: {},
+      categories: {},
+    };
   }
 }
 
@@ -181,12 +192,12 @@ function getTranslation(
 }
 
 /**
- * 获取分类名称
- * @param category 分类键（数字或字符串）
+ * 获取类型名称
+ * @param type 类型键（数字或字符串）
  * @returns 枚举键名
  */
-export function getCategoryName(category: ItemCategory): string {
-  return ItemCategoryNameMap[category] || "";
+export function getTypeName(type: ItemType): string {
+  return ItemTypeNameMap[type] || "";
 }
 
 /**
@@ -215,7 +226,7 @@ export function getSizeName(size: ItemSize): string {
 export function getColorName(color: Color | string): string {
   if (typeof color === "string") {
     color = Object.entries(Color).find(([k]) => k === color)?.[1] as Color;
-  } 
+  }
   return colorNameMap[color] || "";
 }
 
@@ -288,7 +299,7 @@ export function getStyleName(style: string): string {
  * @returns 翻译后的主题名称
  */
 export function getThemeName(theme: string): string {
-  return getTranslation(theme, translationsCache?.series);
+  return getTranslation(theme, translationsCache?.themes);
 }
 
 /**
@@ -300,9 +311,18 @@ export function getSetName(set: string): string {
   return getTranslation(set, translationsCache?.sets);
 }
 
+/**
+ * 获取HHA分类名称
+ * @param category 分类键
+ * @returns 翻译后的分类名称
+ */
+export function getCategoryName(category: string): string {
+  return getTranslation(category, translationsCache?.categories);
+}
+
 export function getPersonalityName(personality: string): string {
   return PERSONALITY_MAP[personality] || personality;
-};
+}
 export function getGenderName(gender: string): string {
   if (gender === "Male") return "男性";
   if (gender === "Female") return "女性";

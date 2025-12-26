@@ -23,15 +23,18 @@ const emit = defineEmits<{
 
 // 使用组合函数管理筛选器选项
 const {
+  types,
   categories,
   versions,
   sources,
   sizes,
   tags,
   colors,
-  series: seriesOptions,
+  series,
   themes,
   styles,
+  concepts,
+  sets,
   populateFilters,
 } = useFilterOptions();
 
@@ -102,7 +105,7 @@ watch(
 const clearAllFilters = () => {
   const clearedFilters: FilterOptions = {
     searchTerm: "",
-    category: undefined,
+    typesFilter: undefined,
     ownedFilter: undefined,
     versionFilter: undefined,
     sourceFilter: "",
@@ -112,6 +115,9 @@ const clearAllFilters = () => {
     seriesFilter: "",
     themeFilter: "",
     styleFilter: "",
+    conceptsFilter: "",
+    setFilter: "",
+    categoryFilter: "",
   };
 
   // 清空搜索框
@@ -161,9 +167,9 @@ const clearAllFilters = () => {
       </select>
 
       <label>分类：</label>
-      <select v-model="localFilters.category" @change="emit('filter-change')">
+      <select v-model="localFilters.typesFilter" @change="emit('filter-change')">
         <option :value="undefined">全部</option>
-        <option v-for="cat in categories" :key="cat.value" :value="cat.value">
+        <option v-for="cat in types" :key="cat.value" :value="cat.value">
           {{ cat.name }}
         </option>
       </select>
@@ -215,14 +221,56 @@ const clearAllFilters = () => {
       >
         <option value="">全部</option>
         <option
-          v-for="series in seriesOptions"
-          :key="series.value"
-          :value="series.value"
+          v-for="se in series"
+          :key="se.value"
+          :value="se.value"
         >
-          {{ series.name }}
+          {{ se.name }}
         </option>
       </select>
 
+      <label>HHA场景：</label>
+      <select
+        v-model="localFilters.conceptsFilter"
+        @change="emit('filter-change')"
+      >
+        <option value="">全部</option>
+        <option
+          v-for="concept in concepts"
+          :key="concept.value"
+          :value="concept.value"
+        >
+          {{ concept.name }}
+        </option>
+      </select>
+
+      <label>HHA套组：</label>
+      <select v-model="localFilters.setFilter" @change="emit('filter-change')">
+        <option value="">全部</option>
+        <option v-for="set in sets" :key="set.value" :value="set.value">
+          {{ set.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-section">
+      <label>HHA分类：</label>
+      <select
+        v-model="localFilters.categoryFilter"
+        @change="emit('filter-change')"
+      >
+        <option value="">全部</option>
+        <option
+          v-for="category in categories"
+          :key="category.value"
+          :value="category.value"
+        >
+          {{ category.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-section">
       <label>服饰主题：</label>
       <select
         v-model="localFilters.themeFilter"

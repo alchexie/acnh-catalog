@@ -24,7 +24,7 @@ export interface UseItemsFilterReturn {
 export function useItemsFilter(allItems: Ref<ItemModel[]>): UseItemsFilterReturn {
   const filters = ref<FilterOptions>({
     searchTerm: "",
-    category: undefined,
+    typesFilter: undefined,
     ownedFilter: undefined,
     versionFilter: undefined,
     sourceFilter: "",
@@ -34,6 +34,9 @@ export function useItemsFilter(allItems: Ref<ItemModel[]>): UseItemsFilterReturn
     seriesFilter: "",
     themeFilter: "",
     styleFilter: "",
+    conceptsFilter: "",
+    setFilter: "",
+    categoryFilter: "",
   });
 
   const sortValue = ref(CONFIG.SORT_OPTIONS.ID_ASC);

@@ -1,8 +1,8 @@
 import { ref, type Ref } from "vue";
 import { ItemModel } from "../models/ItemModel";
-import { Color, ItemCategory, ItemSize, Version } from "../types/item";
+import { Color, ItemType, ItemSize, Version } from "../types/item";
 import {
-  getCategoryName,
+  getTypeName,
   getColorName,
   getSeriesName,
   getSizeName,
@@ -11,6 +11,9 @@ import {
   getVersionName,
   getStyleName,
   getThemeName,
+  getConceptName,
+  getSetName,
+  getCategoryName,
 } from "../services/dataService";
 
 export interface FilterOption<T = string> {
@@ -19,7 +22,8 @@ export interface FilterOption<T = string> {
 }
 
 export interface FilterOptionsData {
-  categories: Ref<FilterOption<ItemCategory>[]>;
+  types: Ref<FilterOption<ItemType>[]>; // 类型
+  categories: Ref<FilterOption[]>; // HHA分类
   versions: Ref<FilterOption<Version>[]>;
   sources: Ref<FilterOption[]>;
   sizes: Ref<FilterOption<ItemSize>[]>;
@@ -28,6 +32,8 @@ export interface FilterOptionsData {
   series: Ref<FilterOption[]>;
   themes: Ref<FilterOption[]>;
   styles: Ref<FilterOption[]>;
+  concepts: Ref<FilterOption[]>;
+  sets: Ref<FilterOption[]>;
   populateFilters: (items: ItemModel[]) => void;
 }
 
@@ -36,7 +42,8 @@ export interface FilterOptionsData {
  * 从物品列表中提取并维护各种筛选器选项
  */
 export function useFilterOptions(): FilterOptionsData {
-  const categories = ref<FilterOption<ItemCategory>[]>([]);
+  const types = ref<FilterOption<ItemType>[]>([]);
+  const categories = ref<FilterOption[]>([]);
   const versions = ref<FilterOption<Version>[]>([]);
   const sources = ref<FilterOption[]>([]);
   const sizes = ref<FilterOption<ItemSize>[]>([]);
@@ -45,10 +52,12 @@ export function useFilterOptions(): FilterOptionsData {
   const series = ref<FilterOption[]>([]);
   const themes = ref<FilterOption[]>([]);
   const styles = ref<FilterOption[]>([]);
+  const concepts = ref<FilterOption[]>([]);
+  const sets = ref<FilterOption[]>([]);
 
-  categories.value = Object.values(ItemCategory).map((category) => ({
+  types.value = Object.values(ItemType).map((category) => ({
     value: category,
-    name: getCategoryName(category),
+    name: getTypeName(category),
   }));
 
   versions.value = Object.values(Version).map((version) => ({
@@ -132,15 +141,56 @@ export function useFilterOptions(): FilterOptionsData {
       .sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
   };
 
+  const populateConcepts = (items: ItemModel[]): void => {
+    const conceptsSet = new Set<string>();
+    items.forEach((item) => {
+      item.concepts.forEach((concept) => conceptsSet.add(concept));
+    });
+    concepts.value = [...conceptsSet]
+      .map((concept) => ({
+        value: concept,
+        name: getConceptName(concept),
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
+  };
+
+  const populateSets = (items: ItemModel[]): void => {
+    const setsSet = new Set(
+      items.map((item) => item.set).filter((s): s is string => !!s)
+    );
+    sets.value = [...setsSet]
+      .map((set) => ({
+        value: set,
+        name: getSetName(set),
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
+  };
+
+  const populateCategories = (items: ItemModel[]): void => {
+    const categoriesSet = new Set(
+      items.map((item) => item.category).filter((c): c is string => !!c)
+    );
+    categories.value = [...categoriesSet]
+      .map((category) => ({
+        value: category,
+        name: getCategoryName(category),
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
+  };
+
   const populateFilters = (items: ItemModel[]): void => {
     populateSources(items);
     populateTags(items);
     populateSeries(items);
     populateThemes(items);
     populateStyles(items);
+    populateConcepts(items);
+    populateSets(items);
+    populateCategories(items);
   };
 
   return {
+    types,
     categories,
     versions,
     sources,
@@ -150,6 +200,8 @@ export function useFilterOptions(): FilterOptionsData {
     series,
     themes,
     styles,
+    concepts,
+    sets,
     populateFilters,
   };
 }

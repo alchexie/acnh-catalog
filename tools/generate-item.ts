@@ -4,7 +4,7 @@
 
 import { items as oldItems } from "animal-crossing";
 import type { Item as NewItem, RecipeData, Variant } from "../src/types/item";
-import { ItemCategory, Version, ItemSize, Color } from "../src/types/item";
+import { ItemType, Version, ItemSize, Color } from "../src/types/item";
 import * as fs from "fs";
 import * as path from "path";
 import {
@@ -46,34 +46,34 @@ const __dirname = path.join(process.cwd(), "tools");
 const outputPath = path.join(__dirname, "..", "public", "config");
 
 // 映射对象：字符串到数字枚举
-const sourceSheetMap: Record<string, ItemCategory> = {
-  Accessories: ItemCategory.Accessories,
-  Artwork: ItemCategory.Artwork,
-  Bags: ItemCategory.Bags,
-  Bottoms: ItemCategory.Bottoms,
-  "Ceiling Decor": ItemCategory.CeilingDecor,
-  "Clothing Other": ItemCategory.ClothingOther,
-  "Dress-Up": ItemCategory.DressUp,
-  Fencing: ItemCategory.Fencing,
-  Floors: ItemCategory.Floors,
-  Fossils: ItemCategory.Fossils,
-  Gyroids: ItemCategory.Gyroids,
-  Headwear: ItemCategory.Headwear,
-  Housewares: ItemCategory.Housewares,
-  "Message Cards": ItemCategory.MessageCards,
-  Miscellaneous: ItemCategory.Miscellaneous,
-  Music: ItemCategory.Music,
-  Other: ItemCategory.Other,
-  Photos: ItemCategory.Photos,
-  Posters: ItemCategory.Posters,
-  Rugs: ItemCategory.Rugs,
-  Shoes: ItemCategory.Shoes,
-  Socks: ItemCategory.Socks,
-  "Tools/Goods": ItemCategory.ToolsGoods,
-  Tops: ItemCategory.Tops,
-  Umbrellas: ItemCategory.Umbrellas,
-  "Wall-mounted": ItemCategory.WallMounted,
-  Wallpaper: ItemCategory.Wallpaper,
+const sourceSheetMap: Record<string, ItemType> = {
+  Accessories: ItemType.Accessories,
+  Artwork: ItemType.Artwork,
+  Bags: ItemType.Bags,
+  Bottoms: ItemType.Bottoms,
+  "Ceiling Decor": ItemType.CeilingDecor,
+  "Clothing Other": ItemType.ClothingOther,
+  "Dress-Up": ItemType.DressUp,
+  Fencing: ItemType.Fencing,
+  Floors: ItemType.Floors,
+  Fossils: ItemType.Fossils,
+  Gyroids: ItemType.Gyroids,
+  Headwear: ItemType.Headwear,
+  Housewares: ItemType.Housewares,
+  "Message Cards": ItemType.MessageCards,
+  Miscellaneous: ItemType.Miscellaneous,
+  Music: ItemType.Music,
+  Other: ItemType.Other,
+  Photos: ItemType.Photos,
+  Posters: ItemType.Posters,
+  Rugs: ItemType.Rugs,
+  Shoes: ItemType.Shoes,
+  Socks: ItemType.Socks,
+  "Tools/Goods": ItemType.ToolsGoods,
+  Tops: ItemType.Tops,
+  Umbrellas: ItemType.Umbrellas,
+  "Wall-mounted": ItemType.WallMounted,
+  Wallpaper: ItemType.Wallpaper,
 };
 
 const versionAddedMap: Record<string, Version> = {
@@ -264,11 +264,16 @@ function convertItem(oldItem: OldItem): NewItem {
     images.push(processImageUrlForStorage(oldItem.recipe.image));
   }
 
+  let concepts =
+    oldItem.concepts || oldItem.variations?.[0].concepts || undefined;
+  concepts = concepts && concepts.length > 0 ? concepts : undefined;
+  let category =
+    oldItem.hhaCategory || oldItem.variations?.[0].hhaCategory || undefined;
   return {
     name,
     rawName: oldItem.name,
     id,
-    category: sourceSheetMap[oldItem.sourceSheet],
+    type: sourceSheetMap[oldItem.sourceSheet],
     images,
     colors,
     ver: oldItem.versionAdded
@@ -278,10 +283,13 @@ function convertItem(oldItem: OldItem): NewItem {
     size: oldItem.size ? sizeMap[oldItem.size] : undefined,
     tag: oldItem.tag,
     series: oldItem.series ?? undefined,
-    themes: oldItem.themes && oldItem.themes.length > 0 ? oldItem.themes : undefined,
+    themes:
+      oldItem.themes && oldItem.themes.length > 0 ? oldItem.themes : undefined,
     set: oldItem.set ?? undefined,
-    styles: oldItem.styles && oldItem.styles.length > 0 ? oldItem.styles : undefined,
-    concepts: oldItem.concepts && oldItem.concepts.length > 0 ? oldItem.concepts : undefined,
+    styles:
+      oldItem.styles && oldItem.styles.length > 0 ? oldItem.styles : undefined,
+    concepts,
+    category,
     recipe: oldItem.recipe ? processRecipeData(oldItem.recipe) : undefined,
     buy: oldItem.buy ?? undefined,
     sell: oldItem.sell ?? undefined,
@@ -315,7 +323,7 @@ for (const structure of interiorStructures) {
     }
   }
   const newItem = convertItem(structure);
-  newItem.category = ItemCategory.InteriorStructures;
+  newItem.type = ItemType.InteriorStructures;
   newItems.push(newItem);
 }
 newItems.sort((a, b) => a.id - b.id);
@@ -332,18 +340,3 @@ fs.writeFileSync(
   JSON.stringify(messageCards.map(removeNullFields), null, 2),
   "utf-8"
 );
-
-
-// let catSet = new Set();
-// for (const item of newItems) {
-//   if (item.styles) {
-//     const cat = Object.keys(sourceSheetMap).find(
-//       (key) => sourceSheetMap[key] === item.category
-//     );
-//     catSet.add(cat);
-//     // console.log(
-//     //   `Item with set: Category=${cat}, Name=${item.name}, Set=${item.concepts}`
-//     // );
-//   }
-// }
-// console.log(catSet);

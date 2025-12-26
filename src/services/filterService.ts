@@ -19,7 +19,7 @@ export function filterItems(
     return (
       matchesSearchTerm(item, filters.searchTerm) &&
       matchesOwnedFilter(item, filters.ownedFilter) &&
-      item.matchesCategory(filters.category) &&
+      item.matchesType(filters.typesFilter) &&
       item.matchesVersion(filters.versionFilter) &&
       item.matchesSource(filters.sourceFilter) &&
       item.matchesSize(filters.sizeFilter) &&
@@ -27,7 +27,10 @@ export function filterItems(
       item.matchesSeries(filters.seriesFilter) &&
       item.matchesColor(filters.colorFilter) &&
       item.matchesTheme(filters.themeFilter) &&
-      item.matchesStyle(filters.styleFilter)
+      item.matchesStyle(filters.styleFilter) &&
+      item.matchesConcept(filters.conceptsFilter) &&
+      item.matchesSet(filters.setFilter) &&
+      item.matchesCategory(filters.categoryFilter)
     );
   });
 }

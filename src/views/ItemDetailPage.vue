@@ -154,7 +154,7 @@ onMounted(() => {
 
             <div class="info-item">
               <label>分类:</label>
-              <span>{{ itemModel.categoryName }}</span>
+              <span>{{ itemModel.typeName }}</span>
             </div>
 
             <div v-if="itemModel.size" class="info-item">

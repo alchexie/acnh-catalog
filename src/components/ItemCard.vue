@@ -108,6 +108,10 @@ const handleClick = () => {
       <span class="detail-label">HHA套组</span>
       <span class="detail-value">{{ itemModel.setName }}</span>
     </div>
+    <div v-if="!itemModel.isClothing" class="detail-row">
+      <span class="detail-label">HHA分类</span>
+      <span class="detail-value">{{ itemModel.categoryName }}</span>
+    </div>
 
     <div v-if="itemModel.isClothing" class="detail-row">
       <span class="detail-label">服饰风格</span>

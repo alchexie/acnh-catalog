@@ -331,15 +331,15 @@
         "Work Bench": "工作台"
     },
     "series": {
-        "bamboo": "竹制",
+        "bamboo": "竹子",
         "frozen": "冰块",
-        "diner": "餐厅",
+        "diner": "美式复古",
         "mush": "蘑菇",
         "wooden": "木制",
-        "festive": "节日",
+        "festive": "圣诞节",
         "Turkey Day": "感恩节",
         "fruits": "水果",
-        "tree's bounty or leaves": "树叶",
+        "tree's bounty or leaves": "树果·落叶",
         "pirate": "海盗",
         "plaza": "广场",
         "wooden block": "积木",
@@ -356,8 +356,8 @@
         "log": "圆木",
         "rattan": "藤编",
         "spooky": "万圣节",
-        "flowers": "花朵",
-        "throwback": "复古",
+        "flowers": "花",
+        "throwback": "玩具",
         "Moroccan": "摩洛哥",
         "simple": "简约",
         "cherry blossoms": "樱花",
@@ -373,24 +373,26 @@
         "wedding": "婚礼",
         "mermaid": "人鱼",
         "cool": "酷感",
-        "Nordic": "北欧",
+        "Nordic": "北欧风",
         "vintage": "怀旧",
         "elegant": "优雅",
-        "dreamy": "梦幻",
+        "dreamy": "梦幻可爱",
         "patchwork": "拼布",
         "Festivale": "狂欢节",
-        "Mario": "马力欧",
-        "comfy": "舒适",
-        "everyday": "日常",
-        "fairy tale": "童话",
-        "formal": "正式",
-        "goth": "哥特",
-        "outdoorsy": "户外",
-        "party": "派对",
-        "sporty": "运动",
-        "theatrical": "戏剧",
+        "Mario": "马力欧"
+    },
+    "themes": {
         "vacation": "度假",
-        "work": "工作"
+        "work": "工作",
+        "outdoorsy": "户外",
+        "goth": "恐怖",
+        "party": "派对",
+        "everyday": "日常",
+        "fairy tale": "童话世界",
+        "theatrical": "舞台",
+        "comfy": "休闲",
+        "sporty": "运动",
+        "formal": "正式"
     },
     "species": {
         "Bird": "鸟",
@@ -486,12 +488,12 @@
         "workshop": "工作室"
     },
     "styles": {
-        "Active": "活力",
-        "Cool": "酷感",
+        "Active": "运动",
+        "Cool": "时髦",
         "Cute": "可爱",
         "Elegant": "优雅",
         "Gorgeous": "华丽",
-        "Simple": "简约"
+        "Simple": "简单"
     },
     "sets": {
         "Colorful Tools": "多彩工具",
@@ -525,5 +527,22 @@
         "standee": "立牌",
         "stone": "石头",
         "study": "书房"
+    },
+    "categories": {
+        "AC": "空调",
+        "Appliance": "电器",
+        "Audio": "音响",
+        "Clock": "时钟",
+        "Doll": "玩偶",
+        "Dresser": "梳妆台",
+        "Food": "食物",
+        "Kitchen": "厨房用品",
+        "Lighting": "照明",
+        "MusicalInstrument": "乐器",
+        "Pet": "宠物",
+        "Plant": "植物",
+        "SmallGoods": "小物件",
+        "Trash": "垃圾",
+        "TV": "电视"
     }
 }
