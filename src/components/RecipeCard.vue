@@ -1,31 +1,40 @@
 <script setup lang="ts">
 import type { Recipe } from "../types/recipe";
 import { UI_TEXT } from "../constants";
-import { getChineseText, formatPrice, joinArray } from "../utils/common";
+import { formatPrice, joinArray } from "../utils/common";
 import BaseCard from "./BaseCard.vue";
 import MaterialItem from "./MaterialItem.vue";
+import { processImageUrl } from "../utils/imageUtils";
+import {
+  getRecipeTypeName,
+  getSeasonName,
+  getSourceName,
+} from "../services/dataService";
+import { useRouter } from "vue-router";
 
 interface Props {
   data: Recipe;
 }
 
 const props = defineProps<Props>();
+const router = useRouter();
+
 const handleClick = () => {
-  window.open(`https://nookipedia.com/wiki/${props.data.name}`, "_blank");
+  router.push(`/item/${props.data.itemId}`);
 };
 </script>
 
 <template>
   <BaseCard
     colorClass="card--orange"
-    :version="props.data.versionAdded"
-    :images="[props.data.image]"
-    :displayName="getChineseText(props.data)"
+    :version="props.data.ver"
+    :images="props.data.images.map(processImageUrl)"
+    :displayName="props.data.name"
     @click="handleClick"
   >
     <div class="detail-row">
       <span class="detail-label">分类</span>
-      <span class="detail-value">{{ props.data.category }}</span>
+      <span class="detail-value">{{ getRecipeTypeName(props.data.type) }}</span>
     </div>
     <div class="detail-row">
       <span class="detail-label">{{ UI_TEXT.LABELS.PRICE }}</span>
@@ -34,13 +43,19 @@ const handleClick = () => {
       </span>
     </div>
     <div class="detail-row">
+      <span class="detail-label">{{ "季节" }}</span>
+      <span class="detail-value">{{
+        getSeasonName(props.data.season || "") || "--"
+      }}</span>
+    </div>
+    <div class="detail-row">
       <span class="detail-label">{{ UI_TEXT.LABELS.SOURCE }}</span>
-      <span class="detail-value">{{ joinArray(props.data.source) }}</span>
+      <span class="detail-value">{{
+        joinArray(props.data.source.map(getSourceName))
+      }}</span>
     </div>
     <div
-      v-if="
-        props.data.materials && Object.keys(props.data.materials).length > 0
-      "
+      v-if="Object.keys(props.data.materials).length > 0"
       class="materials-section"
     >
       <span class="materials-label">所需材料</span>

@@ -2,7 +2,7 @@ import { ref, type Ref } from "vue";
 import { ItemModel } from "../models/ItemModel";
 import { Color, ItemType, ItemSize, Version } from "../types/item";
 import {
-  getTypeName,
+  getItemTypeName,
   getColorName,
   getSeriesName,
   getSizeName,
@@ -57,7 +57,7 @@ export function useFilterOptions(): FilterOptionsData {
 
   types.value = Object.values(ItemType).map((category) => ({
     value: category,
-    name: getTypeName(category),
+    name: getItemTypeName(category),
   }));
 
   versions.value = Object.values(Version).map((version) => ({

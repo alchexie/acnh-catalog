@@ -11,7 +11,7 @@ import { joinArray } from "../utils";
 
 const route = useRoute();
 const router = useRouter();
-const { itemIdMap, loading, error, loadData } = useItemsData();
+const { itemIdMap, itemNameMap, loading, error, loadData } = useItemsData();
 
 const itemId = computed(() => Number(route.params.id));
 const itemModel = computed(() => itemIdMap.value[itemId.value]);
@@ -24,14 +24,14 @@ const hhaPoints = computed(() => null);
 const stackSize = computed(() => 1);
 
 // 获取配方数据
-const recipeData = computed(() => itemModel.value?.raw.recipe);
+const recipe = computed(() => itemModel.value?.recipe);
 const recipeImageUrl = computed(() => {
-  return recipeData.value?.image ? processImageUrl(recipeData.value.image) : "";
+  return recipe.value?.images && recipe.value.images[0] ? processImageUrl(recipe.value.images[0]) : "";
 });
 const hasMaterials = computed(() => {
   return (
-    recipeData.value?.materials &&
-    Object.keys(recipeData.value.materials).length > 0
+    recipe.value?.materials &&
+    Object.keys(recipe.value.materials).length > 0
   );
 });
 
@@ -328,45 +328,45 @@ onMounted(() => {
       </div>
 
       <!-- DIY配方展示 - 在变体之上 -->
-      <div v-if="recipeData" class="recipe-section">
+      <div v-if="recipe" class="recipe-section">
         <h3>🔨 DIY配方</h3>
         <div class="recipe-content">
           <div class="recipe-header">
             <div v-if="recipeImageUrl" class="recipe-image">
               <img
                 :src="recipeImageUrl"
-                :alt="recipeData.name"
+                :alt="recipe.name"
                 loading="lazy"
               />
             </div>
             <div class="recipe-basic-info">
-              <h4>{{ recipeData.name }}</h4>
+              <h4>{{ recipe.name }}</h4>
               <div class="recipe-info-grid">
                 <div
-                  v-if="recipeData.source && recipeData.source.length > 0"
+                  v-if="recipe.source && recipe.source.length > 0"
                   class="recipe-info-item"
                 >
                   <label>配方来源:</label>
                   <span
                     >📍
                     {{
-                      recipeData.source.map((s) => getSourceName(s)).join(", ")
+                      recipe.source.map((s) => getSourceName(s)).join(", ")
                     }}</span
                   >
                 </div>
-                <div v-if="recipeData.seasonEvent" class="recipe-info-item">
+                <div v-if="recipe.season" class="recipe-info-item">
                   <label>季节活动:</label>
-                  <span>🎉 {{ recipeData.seasonEvent }}</span>
+                  <span>🎉 {{ recipe.season }}</span>
                 </div>
-                <div v-if="recipeData.sell" class="recipe-info-item">
+                <div v-if="recipe.sell" class="recipe-info-item">
                   <label>出售价格:</label>
                   <span class="price"
-                    >💵 {{ formatPrice(recipeData.sell) }} 铃钱</span
+                    >💵 {{ formatPrice(recipe.sell) }} 铃钱</span
                   >
                 </div>
-                <div v-if="recipeData.ver" class="recipe-info-item">
+                <div v-if="recipe.ver" class="recipe-info-item">
                   <label>添加版本:</label>
-                  <span>{{ recipeData.ver }}</span>
+                  <span>{{ recipe.ver }}</span>
                 </div>
               </div>
             </div>
@@ -377,7 +377,7 @@ onMounted(() => {
             <h4>所需材料</h4>
             <div class="materials-grid">
               <MaterialItem
-                v-for="(quantity, material) in recipeData.materials"
+                v-for="(quantity, material) in recipe.materials"
                 :key="material"
                 :material="material"
                 :quantity="quantity"
@@ -385,8 +385,8 @@ onMounted(() => {
             </div>
           </div>
 
-          <div v-if="recipeData.sourceNotes" class="recipe-notes">
-            <strong>备注:</strong> {{ recipeData.sourceNotes }}
+          <div v-if="recipe.sourceNotes" class="recipe-notes">
+            <strong>备注:</strong> {{ recipe.sourceNotes }}
           </div>
         </div>
       </div>

@@ -7,7 +7,8 @@ import type {
   Creature,
   Reaction,
 } from "../types";
-import type { Recipe } from "../types/recipe";
+import { RecipeType, type Recipe } from "../types/recipe";
+
 import type { Construction } from "../types/construction";
 import type { MessageCard } from "../types/messagecard";
 import { CONFIG } from "../config";
@@ -101,6 +102,21 @@ export const colorNameMap: Record<Color, string> = {
   [Color.Colorful]: "彩色",
 };
 
+export const RecipeTypeNameMap: Record<RecipeType, string> = {
+  [RecipeType.Tools]: "工具",
+  [RecipeType.Housewares]: "家具",
+  [RecipeType.Miscellaneous]: "小物件",
+  [RecipeType.WallMounted]: "壁挂物",
+  [RecipeType.CeilingDecor]: "天花板",
+  [RecipeType.Wallpaper]: "墙壁",
+  [RecipeType.Floors]: "地板",
+  [RecipeType.Rugs]: "地垫",
+  [RecipeType.Equipment]: "装备",
+  [RecipeType.Other]: "其他",
+  [RecipeType.Savory]: "食物",
+  [RecipeType.Sweet]: "点心",
+};
+
 /**
  * 加载翻译数据
  * @returns 翻译数据对象
@@ -131,6 +147,7 @@ export async function loadTranslations(): Promise<Translations> {
       themes: {},
       sets: {},
       categories: {},
+      seasons: {},
     };
   }
 }
@@ -196,7 +213,7 @@ function getTranslation(
  * @param type 类型键（数字或字符串）
  * @returns 枚举键名
  */
-export function getTypeName(type: ItemType): string {
+export function getItemTypeName(type: ItemType): string {
   return ItemTypeNameMap[type] || "";
 }
 
@@ -323,10 +340,19 @@ export function getCategoryName(category: string): string {
 export function getPersonalityName(personality: string): string {
   return PERSONALITY_MAP[personality] || personality;
 }
+
 export function getGenderName(gender: string): string {
   if (gender === "Male") return "男性";
   if (gender === "Female") return "女性";
   return gender;
+}
+
+export function getRecipeTypeName(type: RecipeType): string {
+  return RecipeTypeNameMap[type] || "";
+}
+
+export function getSeasonName(season: string): string {
+  return getTranslation(season, translationsCache?.seasons);
 }
 
 /**

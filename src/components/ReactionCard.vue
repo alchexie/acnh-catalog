@@ -3,6 +3,7 @@ import type { Reaction } from "../types/reaction";
 import { UI_TEXT } from "../constants";
 import { getChineseText, joinArray } from "../utils/common";
 import BaseCard from "./BaseCard.vue";
+import { getSourceName } from "../services/dataService";
 
 interface Props {
   data: Reaction;
@@ -25,7 +26,7 @@ const handleClick = () => {
   >
     <div class="detail-row">
       <span class="detail-label">{{ UI_TEXT.LABELS.SOURCE }}</span>
-      <span class="detail-value">{{ joinArray(props.data.source) }}</span>
+      <span class="detail-value">{{ joinArray(props.data.source.map(getSourceName)) }}</span>
     </div>
     <div class="detail-row" v-if="props.data.seasonEvent">
       <span class="detail-label">{{ UI_TEXT.LABELS.EVENT }}</span>

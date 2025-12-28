@@ -17,7 +17,10 @@ import {
 } from "../services/dataService";
 import { Color, Version, ItemSize, FurnitureTypes, ClothingTypes, ItemType } from "../types/item";
 import { formatPrice } from "../utils/common";
+import type { Recipe } from "../types/recipe";
+import { useRecipesData } from "../composables/useRecipesData";
 
+const { recipeIdMap } = useRecipesData();
 export class ItemModel {
   private readonly _data: Item;
   private _state: {
@@ -200,9 +203,19 @@ export class ItemModel {
     return getCategoryName(this.category) || "--";
   }
 
-  get canDIY(): boolean {
-    return !!this._data.recipe;
+  get recipeId(): number | null {
+    return this._data.recipe || null;
   }
+
+  get canDIY(): boolean {
+    return !!this.recipeId;
+  }
+
+  get recipe(): Recipe | null {
+    if (!this.recipeId) return null;
+    return recipeIdMap.value[this.recipeId] || null;
+  }
+
   // ============ 变体相关 ============
   get hasVariations(): boolean {
     const groups = this.variantGroups;

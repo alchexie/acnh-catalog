@@ -1,33 +1,40 @@
-import type { Translation } from "./index";
-
 /**
  * DIY配方数据类型
  */
+export const RecipeType = {
+  Tools: 1,
+  Housewares: 2,
+  Miscellaneous: 3,
+  WallMounted: 4,
+  CeilingDecor: 5,
+  Wallpaper: 6,
+  Floors: 7,
+  Rugs: 8,
+  Equipment: 9,
+  Other: 10,
+  Savory: 11,
+  Sweet: 12,
+} as const;
+
+export type RecipeType = (typeof RecipeType)[keyof typeof RecipeType];
+
+export const RecipeColor = {} as const;
+
+export type RecipeColor = (typeof RecipeColor)[keyof typeof RecipeColor];
+
 export interface Recipe {
-  sourceSheet: string;
+  id: number;
+  type: RecipeType;
   name: string;
-  image: string;
-  imageSh: string | null;
-  buy: number;
-  sell: number;
-  exchangePrice: number | null;
-  exchangeCurrency: string | null;
+  rawName: string;
+  images: string[];
+  ver: string;
+  buy?: number;
+  sell?: number;
+  color?: string
+  itemId: number;
+  season?: string;
   source: string[];
-  sourceNotes: string | null;
-  seasonEvent: string | null;
-  seasonEventExclusive: boolean | null;
-  versionAdded: string;
-  unlocked: boolean;
-  recipesToUnlock: number;
-  category: string;
-  craftedItemInternalId: number;
-  cardColor: string;
-  diyIconFilename: string;
-  diyIconFilenameSh: string | null;
-  serialId: number;
-  internalId: number;
-  uniqueEntryId: string;
-  translations?: Translation;
-  materials?: Record<string, number>;
-  materialsTranslations?: Record<string, string | null>;
+  sourceNotes?: string[];
+  materials: Record<string, number>;
 }

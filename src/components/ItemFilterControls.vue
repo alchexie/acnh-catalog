@@ -28,7 +28,7 @@ const {
   versions,
   sources,
   sizes,
-  tags,
+  // tags,
   colors,
   series,
   themes,
@@ -206,13 +206,13 @@ const clearAllFilters = () => {
     </div>
 
     <div class="filter-section">
-      <label>标签：</label>
+      <!-- <label>标签：</label>
       <select v-model="localFilters.tagFilter" @change="emit('filter-change')">
         <option value="">全部</option>
         <option v-for="tag in tags" :key="tag.value" :value="tag.value">
           {{ tag.name }}
         </option>
-      </select>
+      </select> -->
 
       <label>HHA主题：</label>
       <select

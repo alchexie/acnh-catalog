@@ -15,7 +15,7 @@ export const CONFIG = {
     NPCS: `${BASE_PATH}config/acnh-npcs.json`,
     CREATURES: `${BASE_PATH}config/acnh-creatures.json`,
     REACTIONS: `${BASE_PATH}config/acnh-reactions.json`,
-    RECIPES: `${BASE_PATH}config/acnh-recipes.json`,
+    RECIPES: `${BASE_PATH}config/acnh-recipes.small.json`,
     CONSTRUCTION: `${BASE_PATH}config/acnh-construction.json`,
     MESSAGE_CARDS: `${BASE_PATH}config/acnh-message-cards.json`,
   },

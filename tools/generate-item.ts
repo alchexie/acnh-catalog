@@ -1,17 +1,17 @@
 /**
  * 从 animal-crossing 包生成数据文件
  */
-
-import { items as oldItems } from "animal-crossing";
-import type { Item as NewItem, RecipeData, Variant } from "../src/types/item";
-import { ItemType, Version, ItemSize, Color } from "../src/types/item";
 import * as fs from "fs";
 import * as path from "path";
 import {
   ItemSourceSheet as OldItemSourceSheet,
   type Item as OldItem,
-  type Recipe,
 } from "animal-crossing/lib/types/Item";
+import { items as oldItems, recipes as oldRecipes } from "animal-crossing";
+import type { Item as NewItem, Variant } from "../src/types/item";
+import { ItemType, Version, ItemSize, Color } from "../src/types/item";
+import type { Recipe as NewRecipe } from "../src/types/recipe";
+import { RecipeType } from "../src/types/recipe";
 
 /**
  * 递归移除对象中的 null 和 undefined 字段
@@ -76,6 +76,21 @@ const sourceSheetMap: Record<string, ItemType> = {
   Wallpaper: ItemType.Wallpaper,
 };
 
+const recipeCategoryMap: Record<string, RecipeType> = {
+  Housewares: RecipeType.Housewares,
+  Miscellaneous: RecipeType.Miscellaneous,
+  "Wall-mounted": RecipeType.WallMounted,
+  "Ceiling Decor": RecipeType.CeilingDecor,
+  Equipment: RecipeType.Equipment,
+  Other: RecipeType.Other,
+  Floors: RecipeType.Floors,
+  Rugs: RecipeType.Rugs,
+  Wallpaper: RecipeType.Wallpaper,
+  Tools: RecipeType.Tools,
+  Sweet: RecipeType.Sweet,
+  Savory: RecipeType.Savory,
+};
+
 const versionAddedMap: Record<string, Version> = {
   "1.0.0": Version.The100,
   "1.1.0": Version.The110,
@@ -129,41 +144,39 @@ const colorMap: Record<string, Color> = {
   Yellow: Color.Yellow,
 };
 
-/**
- * 处理配方数据，将材料名称转换为中文
- */
-function processRecipeData(recipeData: Recipe): RecipeData {
-  // 转换材料名称为中文
-  let materials: Record<string, number> | undefined;
-  if (recipeData.materials && recipeData.materialsTranslations) {
-    materials = {};
-    for (const [materialKey, quantity] of Object.entries(
-      recipeData.materials
-    )) {
-      // 尝试获取中文翻译，如果没有则使用原始名称
-      const translation = recipeData.materialsTranslations[materialKey];
-      const materialName = translation?.cNzh || materialKey;
-      materials[materialName] = quantity as number;
-    }
-  } else if (recipeData.materials) {
-    materials = recipeData.materials;
-  }
+let newRecipes: NewRecipe[] = [];
+let newRecipeIdMap = new Map<number, NewRecipe>();
+let newRecipeNameMap = new Map<string, NewRecipe>();
+for (const oldRecipe of oldRecipes) {
+  let images = [];
+  images.push(processImageUrlForStorage(oldRecipe.image));
+  if (oldRecipe.imageSh)
+    images.push(processImageUrlForStorage(oldRecipe.imageSh));
 
-  return {
-    name: recipeData.name || "",
-    image: recipeData.image,
-    materials,
-    source: recipeData.source,
-    sourceNotes: recipeData.sourceNotes || undefined,
-    seasonEvent: recipeData.seasonEvent || undefined,
-    ver: recipeData.versionAdded
-      ? versionAddedMap[recipeData.versionAdded]
-      : undefined,
-    category: recipeData.category,
-    buy: recipeData.buy,
-    sell: recipeData.sell || undefined,
+  if (oldRecipe.seasonEvent && !oldRecipe.seasonEventExclusive) {
+    oldRecipe.seasonEvent = null; // 非专属季节活动配方不记录季节活动,仅有树篱
+  }
+  const newRecipe: NewRecipe = {
+    id: oldRecipe.internalId,
+    type: recipeCategoryMap[oldRecipe.category],
+    name: oldRecipe.translations.cNzh,
+    rawName: oldRecipe.name,
+    images: images,
+    ver: oldRecipe.versionAdded,
+    buy: oldRecipe.buy ?? undefined,
+    sell: oldRecipe.sell ?? undefined,
+    source: oldRecipe.source,
+    sourceNotes: oldRecipe.sourceNotes ?? undefined,
+    season: oldRecipe.seasonEvent ?? undefined,
+    itemId: oldRecipe.craftedItemInternalId,
+    color: oldRecipe.cardColor ?? undefined,
+    materials: oldRecipe.materials,
   };
+  newRecipes.push(newRecipe);
+  newRecipeIdMap.set(newRecipe.id, newRecipe);
+  newRecipeNameMap.set(newRecipe.rawName, newRecipe);
 }
+newRecipes.sort((a, b) => a.id - b.id);
 
 /**
  * 处理变体数据
@@ -195,7 +208,11 @@ function processVariations(oldItem: OldItem): Variant[] {
         v.image || v.storageImage || v.closetImage || ""
       ),
       id: v.internalId,
-      colors: Array.from(new Set(patternColors.map((c) => colorMap[c]))),
+      colors: Array.from(
+        new Set(
+          patternColors.map((c) => colorMap[c]).filter((c) => c !== undefined)
+        )
+      ),
     });
   });
 
@@ -208,7 +225,11 @@ function getDefaultDisplayProperties(
 ): { id: number; colors: Color[] } {
   let id = oldItem.internalId ?? 0;
   let colors = Array.from(
-    new Set((oldItem.colors || []).map((c) => colorMap[c]))
+    new Set(
+      (oldItem.colors || [])
+        .map((c) => colorMap[c])
+        .filter((c) => c !== undefined)
+    )
   );
 
   // 如果有变体，使用第一个变体的第一个图案
@@ -270,9 +291,9 @@ function convertItem(oldItem: OldItem): NewItem {
   let category =
     oldItem.hhaCategory || oldItem.variations?.[0].hhaCategory || undefined;
   return {
+    id,
     name,
     rawName: oldItem.name,
-    id,
     type: sourceSheetMap[oldItem.sourceSheet],
     images,
     colors,
@@ -290,7 +311,9 @@ function convertItem(oldItem: OldItem): NewItem {
       oldItem.styles && oldItem.styles.length > 0 ? oldItem.styles : undefined,
     concepts,
     category,
-    recipe: oldItem.recipe ? processRecipeData(oldItem.recipe) : undefined,
+    recipe: oldItem.recipe
+      ? newRecipeIdMap.get(oldItem.recipe.internalId)?.id
+      : undefined,
     buy: oldItem.buy ?? undefined,
     sell: oldItem.sell ?? undefined,
     variants: variants.length > 0 ? variants : undefined,
@@ -298,6 +321,8 @@ function convertItem(oldItem: OldItem): NewItem {
 }
 
 let newItems: NewItem[] = [];
+let newItemIdMap = new Map<number, NewItem>();
+let newItemNameMap = new Map<string, NewItem>();
 let messageCards = [];
 // 遍历 animal-crossing 包中的 oldItems 数据，转换为newItems 结构
 for (const oldItem of oldItems) {
@@ -307,6 +332,8 @@ for (const oldItem of oldItems) {
   } else {
     const newItem = convertItem(oldItem);
     newItems.push(newItem);
+    newItemIdMap.set(newItem.id, newItem);
+    newItemNameMap.set(newItem.rawName, newItem);
   }
 }
 
@@ -325,6 +352,8 @@ for (const structure of interiorStructures) {
   const newItem = convertItem(structure);
   newItem.type = ItemType.InteriorStructures;
   newItems.push(newItem);
+  newItemIdMap.set(newItem.id, newItem);
+  newItemNameMap.set(newItem.rawName, newItem);
 }
 newItems.sort((a, b) => a.id - b.id);
 
@@ -338,5 +367,11 @@ fs.writeFileSync(
 fs.writeFileSync(
   path.join(outputPath, "acnh-message-cards.json"),
   JSON.stringify(messageCards.map(removeNullFields), null, 2),
+  "utf-8"
+);
+
+fs.writeFileSync(
+  path.join(outputPath, "acnh-recipes.small.json"),
+  JSON.stringify(newRecipes.map(removeNullFields), null, 2),
   "utf-8"
 );

@@ -152,23 +152,6 @@ export interface Variant {
 }
 
 /**
- * 配方数据接口
- * 表示DIY配方信息
- */
-export interface RecipeData {
-  name: string; // 配方名称
-  image?: string; // 配方图片
-  materials?: Record<string, number>; // 材料列表 {材料名: 数量}
-  source?: string[]; // 配方来源
-  sourceNotes?: string[]; // 来源备注
-  seasonEvent?: string; // 季节活动
-  ver?: Version; // 添加版本
-  category?: string; // 配方分类
-  buy?: number; // 购买价格
-  sell?: number; // 出售价格
-}
-
-/**
  * 物品接口
  * 表示游戏中的一个物品
  */
@@ -195,7 +178,7 @@ export interface Item {
   styles?: string[]; // 服饰风格（村民喜好）
 
   variants?: Variant[]; // 变体组列表
-  recipe?: RecipeData; // 配方数据
+  recipe?: number; // 配方数据
 }
 
 /**

@@ -3,17 +3,32 @@ import type { Recipe } from "../types/recipe";
 import { loadRecipesData } from "../services/dataService";
 import { DATA_LOADING } from "../constants";
 
-export function useRecipesData() {
-  const allRecipes = ref<Recipe[]>([]);
-  const loading = ref(false);
-  const error = ref<string | null>(null);
+const allRecipes = ref<Recipe[]>([]);
+const recipeIdMap = ref<Record<number, Recipe>>({});
+const recipeNameMap = ref<Record<string, Recipe>>({});
+const loading = ref(false);
+const error = ref<string | null>(null);
+let isDataLoaded = false; // 标记数据是否已加载
 
+export function useRecipesData() {
   const loadData = async () => {
-    loading.value = true;
-    error.value = null;
+    if (isDataLoaded) {
+      loading.value = false;
+      return;
+    }
     try {
-      const recipes = await loadRecipesData();
-      allRecipes.value = recipes.sort((a, b) => a.internalId - b.internalId);
+      loading.value = true;
+      error.value = "";
+
+      allRecipes.value = await loadRecipesData();
+
+      recipeIdMap.value = {};
+      recipeNameMap.value = {};
+      allRecipes.value.forEach((recipe) => {
+        recipeIdMap.value[recipe.id] = recipe;
+        recipeNameMap.value[recipe.name] = recipe;
+      });
+      isDataLoaded = true;
     } catch (e) {
       error.value = DATA_LOADING.ERROR_GENERIC;
       console.error("Failed to load recipes:", e);
@@ -24,6 +39,8 @@ export function useRecipesData() {
 
   return {
     allRecipes,
+    recipeIdMap,
+    recipeNameMap,
     loading,
     error,
     loadData,

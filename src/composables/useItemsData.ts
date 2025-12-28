@@ -62,16 +62,12 @@ export function useItemsData(): UseItemsDataReturn {
         .sort((a, b) => a.id - b.id);
 
       let _itemIdMap: Record<number, ItemModel> = {};
+      let _itemNameMap: Record<string, ItemModel> = {};
       allItems.value.forEach((item) => {
         _itemIdMap[item.id] = item;
+        _itemNameMap[item.rawName] = item;
       });
       itemIdMap.value = _itemIdMap;
-
-      const _itemNameMap: Record<string, ItemModel> = {};
-      allItems.value.forEach((item) => {
-        const name = item.raw.rawName;
-        _itemNameMap[name] = item;
-      });
       itemNameMap.value = _itemNameMap;
 
       loading.value = false;
