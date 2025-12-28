@@ -1,51 +1,40 @@
-import type { Translation } from "./index";
+import { Color, type ItemSize, type Version } from "./index";
 
+export const CreatureType = {
+  Insects: 1,
+  Fish: 2,
+  SeaCreatures: 3,
+} as const;
+
+export type CreatureType = (typeof CreatureType)[keyof typeof CreatureType];
 /**
  * 半球时间信息
  */
 export interface HemisphereInfo {
-  time?: string[];
-  timeArray?: number[];
-  months?: string[];
-  monthsArray?: number[];
+  time: string[];
+  timeArray: Array<number[] | number>;
+  months: string[];
+  monthsArray: number[];
 }
 
 /**
  * 生物数据类型（昆虫、鱼类等）
  */
 export interface Creature {
-  sourceSheet: string;
-  num: number;
+  type: CreatureType;
+  id: number;
+  order: number;
   name: string;
-  iconImage: string;
-  critterpediaImage: string;
-  furnitureImage: string;
+  rawName: string;
+  images: string[];
+  ver: Version;
+  size: ItemSize;
+  colors: Color[];
   sell: number;
   whereHow?: string;
   weather?: string;
-  totalCatchesToUnlock: number;
-  spawnRates: string;
-  size: string;
-  surface?: boolean;
-  description?: string[];
-  catchPhrase?: string[];
-  hhaBasePoints: number;
-  hhaCategory: string;
-  iconFilename: string;
-  critterpediaFilename: string;
-  furnitureFilename: string;
-  internalId: number;
-  uniqueEntryId: string;
-  translations?: Translation;
-  versionAdded?: string;
-  hemispheres?: {
-    north?: HemisphereInfo;
-    south?: HemisphereInfo;
+  hemispheres: {
+    north: HemisphereInfo;
+    south: HemisphereInfo;
   };
-  // 时间相关（会在某些生物中出现）
-  nMonths?: string[];
-  sMonths?: string[];
-  time?: string;
-  isAllDay?: boolean;
-  isAllYear?: boolean;
 }

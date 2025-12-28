@@ -1,3 +1,5 @@
+import type { Version } from "./item";
+
 /**
  * DIY配方数据类型
  */
@@ -28,7 +30,7 @@ export interface Recipe {
   name: string;
   rawName: string;
   images: string[];
-  ver: string;
+  ver: Version;
   buy?: number;
   sell?: number;
   color?: string

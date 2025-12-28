@@ -161,9 +161,9 @@ export interface Item {
   rawName: string; // 物品原始名称
   images: string[]; // 物品所有图片
   type: ItemType; // 物品类型
-  ver?: Version; // 添加版本
-  size?: ItemSize; // 物品尺寸
+  ver: Version; // 添加版本
   colors: Color[]; // 物品颜色列表
+  size?: ItemSize; // 物品尺寸
   buy?: number; // 购买价格
   sell?: number; // 出售价格
   source?: string[]; // 获取来源

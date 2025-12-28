@@ -2,10 +2,11 @@
 import { ref, computed } from "vue";
 import { processImageUrl } from "../utils/imageUtils";
 import VersionBadge from "./VersionBadge.vue";
+import type { Version } from "../types/item";
 
 interface Props {
   colorClass: string;
-  version?: string | null;
+  version?: Version | string | null;
   images: string[];
   displayName: string;
   shape?: "circle" | "rounded" | "square";

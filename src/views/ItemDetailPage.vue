@@ -140,7 +140,7 @@ onMounted(() => {
         <div class="info-section">
           <div class="title-section">
             <h2>{{ itemModel.name }}</h2>
-            <div v-if="itemModel.version" class="version-badge">
+            <div class="version-badge">
               {{ itemModel.versionName }}
             </div>
           </div>

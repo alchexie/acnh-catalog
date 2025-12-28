@@ -13,7 +13,7 @@ export const CONFIG = {
     TRANSLATIONS: `${BASE_PATH}config/translations.json`,
     VILLAGERS: `${BASE_PATH}config/acnh-villagers.json`,
     NPCS: `${BASE_PATH}config/acnh-npcs.json`,
-    CREATURES: `${BASE_PATH}config/acnh-creatures.json`,
+    CREATURES: `${BASE_PATH}config/acnh-creatures.small.json`,
     REACTIONS: `${BASE_PATH}config/acnh-reactions.json`,
     RECIPES: `${BASE_PATH}config/acnh-recipes.small.json`,
     CONSTRUCTION: `${BASE_PATH}config/acnh-construction.json`,

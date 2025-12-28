@@ -7,11 +7,16 @@ import {
   ItemSourceSheet as OldItemSourceSheet,
   type Item as OldItem,
 } from "animal-crossing/lib/types/Item";
-import { items as oldItems, recipes as oldRecipes } from "animal-crossing";
+import {
+  items as oldItems,
+  recipes as oldRecipes,
+  creatures as oldCreatures,
+} from "animal-crossing";
 import type { Item as NewItem, Variant } from "../src/types/item";
 import { ItemType, Version, ItemSize, Color } from "../src/types/item";
 import type { Recipe as NewRecipe } from "../src/types/recipe";
 import { RecipeType } from "../src/types/recipe";
+import { CreatureType, type Creature as NewCreature } from "../src/types/creature";
 
 /**
  * 递归移除对象中的 null 和 undefined 字段
@@ -91,6 +96,12 @@ const recipeCategoryMap: Record<string, RecipeType> = {
   Savory: RecipeType.Savory,
 };
 
+const creatureTypeMap: Record<string, CreatureType> = {
+  Insects: CreatureType.Insects,
+  Fish: CreatureType.Fish,
+  "Sea Creatures": CreatureType.SeaCreatures,
+};
+
 const versionAddedMap: Record<string, Version> = {
   "1.0.0": Version.The100,
   "1.1.0": Version.The110,
@@ -162,7 +173,7 @@ for (const oldRecipe of oldRecipes) {
     name: oldRecipe.translations.cNzh,
     rawName: oldRecipe.name,
     images: images,
-    ver: oldRecipe.versionAdded,
+    ver: versionAddedMap[oldRecipe.versionAdded],
     buy: oldRecipe.buy ?? undefined,
     sell: oldRecipe.sell ?? undefined,
     source: oldRecipe.source,
@@ -299,7 +310,7 @@ function convertItem(oldItem: OldItem): NewItem {
     colors,
     ver: oldItem.versionAdded
       ? versionAddedMap[oldItem.versionAdded]
-      : undefined,
+      : Version.The100,
     source: oldItem.source,
     size: oldItem.size ? sizeMap[oldItem.size] : undefined,
     tag: oldItem.tag,
@@ -324,7 +335,6 @@ let newItems: NewItem[] = [];
 let newItemIdMap = new Map<number, NewItem>();
 let newItemNameMap = new Map<string, NewItem>();
 let messageCards = [];
-// 遍历 animal-crossing 包中的 oldItems 数据，转换为newItems 结构
 for (const oldItem of oldItems) {
   if (oldItem.sourceSheet === OldItemSourceSheet.MessageCards) {
     oldItem.version = undefined; // 消息卡片不需要版本信息
@@ -357,6 +367,33 @@ for (const structure of interiorStructures) {
 }
 newItems.sort((a, b) => a.id - b.id);
 
+let newCreatures: NewCreature[] = [];
+for (const oldCreature of oldCreatures) {
+  const newCreature: NewCreature = {
+    id: oldCreature.internalId,
+    order: oldCreature.num,
+    type: creatureTypeMap[oldCreature.sourceSheet],
+    name: oldCreature.translations?.cNzh || oldCreature.name,
+    rawName: oldCreature.name,
+    images: [
+      processImageUrlForStorage(oldCreature.iconImage),
+      processImageUrlForStorage(oldCreature.critterpediaImage),
+      processImageUrlForStorage(oldCreature.furnitureImage),
+    ],
+    ver: oldCreature.versionAdded
+      ? versionAddedMap[oldCreature.versionAdded]
+      : Version.The100,
+    colors: Array.from(new Set(oldCreature.colors.map((c) => colorMap[c]))),
+    size: sizeMap[oldCreature.size],
+    sell: oldCreature.sell,
+    whereHow: oldCreature.whereHow ?? undefined,
+    weather: oldCreature.weather ?? undefined,
+    hemispheres: oldCreature.hemispheres,
+  };
+  newCreatures.push(newCreature);
+}
+newCreatures.sort((a, b) => a.id - b.id);
+
 // 输出到文件
 fs.writeFileSync(
   path.join(outputPath, "acnh-items.small.json"),
@@ -373,5 +410,11 @@ fs.writeFileSync(
 fs.writeFileSync(
   path.join(outputPath, "acnh-recipes.small.json"),
   JSON.stringify(newRecipes.map(removeNullFields), null, 2),
+  "utf-8"
+);
+
+fs.writeFileSync(
+  path.join(outputPath, "acnh-creatures.small.json"),
+  JSON.stringify(newCreatures.map(removeNullFields), null, 2),
   "utf-8"
 );

@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useItemsData } from "../composables/useItemsData";
+import { useCreaturesData } from "../composables/useCreaturesData";
 
 interface Props {
   material: string;
@@ -11,16 +12,37 @@ interface Props {
 const props = defineProps<Props>();
 const router = useRouter();
 const { itemNameMap } = useItemsData();
+const { creatureNameMap, converCreateureToItemModel, loadData } =
+  useCreaturesData();
 
-const materialItem = computed(() => itemNameMap.value[props.material]);
+const material = computed(() => {
+  let itemModel = itemNameMap.value[props.material];
+  if (itemModel) {
+    return itemModel;
+  }
+  let creature = creatureNameMap.value[props.material];
+  if (creature) {
+    return converCreateureToItemModel(creature);
+  }
+  // let name = props.material;
+  // let l = props.material.split(" ");
+  // if (l.length >= 2 && Number.isInteger(Number(l[0]))) {
+  //   name = l.slice(1).join(" ");
+  // }
+  return {
+    id: null,
+    name: props.material,
+    image: null,
+  };
+});
 
 const handleClick = () => {
-  if (materialItem.value?.id) {
-    router.push(`/item/${materialItem.value.id}`);
+  if (material.value?.id) {
+    router.push(`/item/${material.value.id}`);
   }
 };
 
-const isClickable = computed(() => !!materialItem.value?.id);
+const isClickable = computed(() => !!material.value?.id);
 
 const themeClasses = computed(() => {
   const baseClasses = ["material-item"];
@@ -31,20 +53,24 @@ const themeClasses = computed(() => {
 });
 
 const iconSize = computed(() => 24);
+
+onMounted(() => {
+  loadData();
+});
 </script>
 
 <template>
   <div :class="themeClasses" @click="handleClick">
     <div class="material-info">
       <img
-        v-if="materialItem?.image"
-        :src="materialItem.image"
-        :alt="materialItem?.name"
+        v-if="material?.image"
+        :src="material.image"
+        :alt="material?.name"
         class="material-icon"
         :style="{ width: iconSize + 'px', height: iconSize + 'px' }"
         loading="lazy"
       />
-      <span class="material-name">{{ materialItem?.name }}</span>
+      <span class="material-name">{{ material?.name }}</span>
     </div>
     <span class="material-quantity">× {{ quantity }}</span>
   </div>

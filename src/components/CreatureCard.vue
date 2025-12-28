@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import type { Creature } from "../types/creature";
 import { UI_TEXT } from "../constants";
-import { getChineseText, formatPrice } from "../utils/common";
+import { formatPrice } from "../utils/common";
 import BaseCard from "./BaseCard.vue";
 import { ref, computed } from "vue";
+import { processImageUrl } from "../utils/imageUtils";
+import { getCreatureTypeName } from "../services/dataService";
 
 interface Props {
   data: Creature;
@@ -20,19 +22,13 @@ const currentShape = computed(() => (currentImageIndex.value === 0 ? "circle" : 
 
 // 获取月份信息
 const getMonths = (creature: Creature): string => {
-  const hemisphere = creature.hemispheres?.[props.hemisphere];
-  if (!hemisphere?.months || hemisphere.months.length === 0) {
-    return "--";
-  }
+  const hemisphere = creature.hemispheres[props.hemisphere];
   return hemisphere.months.join(", ");
 };
 
 // 获取时间信息
 const getTime = (creature: Creature): string => {
-  const hemisphere = creature.hemispheres?.[props.hemisphere];
-  if (!hemisphere?.time || hemisphere.time.length === 0) {
-    return "--";
-  }
+  const hemisphere = creature.hemispheres[props.hemisphere];
   return hemisphere.time.join(", ");
 };
 
@@ -44,17 +40,6 @@ const getWeather = (creature: Creature): string => {
 // 获取位置信息
 const getLocation = (creature: Creature): string => {
   return creature.whereHow || "--";
-};
-
-// 获取分类信息
-const getCategory = (creature: Creature): string => {
-  const categoryMap: Record<string, string> = {
-    Insects: "昆虫",
-    Bugs: "昆虫",
-    Fish: "鱼类",
-    "Sea Creatures": "海底生物",
-  };
-  return categoryMap[creature.sourceSheet] || creature.sourceSheet;
 };
 
 const handleClick = () => {
@@ -70,16 +55,16 @@ const handleImageIndexChanged = (index: number) => {
 <template>
   <BaseCard
     colorClass="card--green"
-    :version="props.data.versionAdded"
-    :images="[props.data.iconImage, props.data.critterpediaImage, props.data.furnitureImage].filter(Boolean)"
-    :displayName="getChineseText(props.data)"
+    :version="props.data.ver"
+    :images="props.data.images.map(processImageUrl)"
+    :displayName="props.data.name"
     :shape="currentShape"
     @click="handleClick"
     @image-index-changed="handleImageIndexChanged"
   >
     <div class="detail-row">
       <span class="detail-label">分类</span>
-      <span class="detail-value">{{ getCategory(props.data) }}</span>
+      <span class="detail-value">{{ getCreatureTypeName(props.data.type) }}</span>
     </div>
     <div class="detail-row">
       <span class="detail-label">{{ UI_TEXT.LABELS.PRICE }}</span>

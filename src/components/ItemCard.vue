@@ -71,7 +71,7 @@ const handleClick = () => {
   <BaseCard
     colorClass="card--green"
     :class="{ 'item-owned': itemModel.owned }"
-    :version="itemModel.version ? itemModel.versionName : undefined"
+    :version="itemModel.version"
     :images="displayImages"
     :displayName="displayName"
     :shape="'rounded'"

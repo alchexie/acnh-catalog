@@ -90,12 +90,11 @@ export class ItemModel {
     return ItemTypeNameMap[this.type] || "未知类型";
   }
 
-  get version(): Version | undefined {
+  get version(): Version {
     return this._data.ver;
   }
 
   get versionName(): string {
-    if (this.version === undefined) return "未知版本";
     return versionNameMap[this.version] || "未知版本";
   }
 

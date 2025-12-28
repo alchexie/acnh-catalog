@@ -1,11 +1,12 @@
-import type {
-  CatalogItem,
-  Translations,
-  Item,
-  Villager,
-  NPC,
-  Creature,
-  Reaction,
+import {
+  type CatalogItem,
+  type Translations,
+  type Item,
+  type Villager,
+  type NPC,
+  type Creature,
+  type Reaction,
+  CreatureType,
 } from "../types";
 import { RecipeType, type Recipe } from "../types/recipe";
 
@@ -117,6 +118,11 @@ export const RecipeTypeNameMap: Record<RecipeType, string> = {
   [RecipeType.Sweet]: "点心",
 };
 
+export const CreatureTypeNameMap: Record<CreatureType, string> = {
+  [CreatureType.Insects]: "昆虫",
+  [CreatureType.Fish]: "鱼类",
+  [CreatureType.SeaCreatures]: "海洋生物",
+};
 /**
  * 加载翻译数据
  * @returns 翻译数据对象
@@ -353,6 +359,10 @@ export function getRecipeTypeName(type: RecipeType): string {
 
 export function getSeasonName(season: string): string {
   return getTranslation(season, translationsCache?.seasons);
+}
+
+export function getCreatureTypeName(type: CreatureType): string {
+  return CreatureTypeNameMap[type] || "";
 }
 
 /**

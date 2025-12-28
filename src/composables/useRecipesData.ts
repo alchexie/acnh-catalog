@@ -7,21 +7,18 @@ const allRecipes = ref<Recipe[]>([]);
 const recipeIdMap = ref<Record<number, Recipe>>({});
 const recipeNameMap = ref<Record<string, Recipe>>({});
 const loading = ref(false);
-const error = ref<string | null>(null);
-let isDataLoaded = false; // 标记数据是否已加载
+const error = ref("");
+let isDataLoaded = false;
 
 export function useRecipesData() {
   const loadData = async () => {
     if (isDataLoaded) {
-      loading.value = false;
       return;
     }
     try {
       loading.value = true;
       error.value = "";
-
       allRecipes.value = await loadRecipesData();
-
       recipeIdMap.value = {};
       recipeNameMap.value = {};
       allRecipes.value.forEach((recipe) => {
