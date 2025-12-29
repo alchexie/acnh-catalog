@@ -1,8 +1,7 @@
 import { ref, type Ref } from "vue";
-import { ItemType, Version, type Creature, type Item } from "../types";
+import { type Creature } from "../types";
 import { loadCreaturesData } from "../services/dataService";
 import { DATA_LOADING } from "../constants";
-import { ItemModel } from "../models";
 
 const allCreatures = ref<Creature[]>([]);
 const creatureIdMap: Ref<Record<number, Creature>> = ref({});
@@ -35,22 +34,6 @@ export function useCreaturesData() {
     }
   };
 
-  const converCreateureToItemModel = (creature: Creature) => {
-    const item: Item = {
-      id: creature.id,
-      name: creature.name,
-      rawName: creature.name,
-      images: creature.images,
-      type: ItemType.Miscellaneous,
-      ver: Version.The100,
-      size: creature.size,
-      colors: creature.colors,
-      sell: creature.sell,
-    };
-
-    return new ItemModel(item);
-  };
-
   return {
     allCreatures,
     creatureIdMap,
@@ -58,6 +41,5 @@ export function useCreaturesData() {
     loading,
     error,
     loadData,
-    converCreateureToItemModel,
   };
 }

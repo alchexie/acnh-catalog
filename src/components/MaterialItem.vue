@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { computed, onMounted } from "vue";
+import { computed } from "vue";
 import { useRouter } from "vue-router";
 import { useItemsData } from "../composables/useItemsData";
-import { useCreaturesData } from "../composables/useCreaturesData";
 
 interface Props {
   material: string;
@@ -12,17 +11,11 @@ interface Props {
 const props = defineProps<Props>();
 const router = useRouter();
 const { itemNameMap } = useItemsData();
-const { creatureNameMap, converCreateureToItemModel, loadData } =
-  useCreaturesData();
 
 const material = computed(() => {
   let itemModel = itemNameMap.value[props.material];
   if (itemModel) {
     return itemModel;
-  }
-  let creature = creatureNameMap.value[props.material];
-  if (creature) {
-    return converCreateureToItemModel(creature);
   }
   // let name = props.material;
   // let l = props.material.split(" ");
@@ -53,10 +46,6 @@ const themeClasses = computed(() => {
 });
 
 const iconSize = computed(() => 24);
-
-onMounted(() => {
-  loadData();
-});
 </script>
 
 <template>

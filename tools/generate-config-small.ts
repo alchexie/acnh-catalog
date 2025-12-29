@@ -65,7 +65,6 @@ const sourceSheetMap: Record<string, ItemType> = {
   Gyroids: ItemType.Gyroids,
   Headwear: ItemType.Headwear,
   Housewares: ItemType.Housewares,
-  "Message Cards": ItemType.MessageCards,
   Miscellaneous: ItemType.Miscellaneous,
   Music: ItemType.Music,
   Other: ItemType.Other,
@@ -79,6 +78,7 @@ const sourceSheetMap: Record<string, ItemType> = {
   Umbrellas: ItemType.Umbrellas,
   "Wall-mounted": ItemType.WallMounted,
   Wallpaper: ItemType.Wallpaper,
+  Creature: ItemType.Creature,
 };
 
 const recipeCategoryMap: Record<string, RecipeType> = {
@@ -365,7 +365,6 @@ for (const structure of interiorStructures) {
   newItemIdMap.set(newItem.id, newItem);
   newItemNameMap.set(newItem.rawName, newItem);
 }
-newItems.sort((a, b) => a.id - b.id);
 
 let newCreatures: NewCreature[] = [];
 for (const oldCreature of oldCreatures) {
@@ -391,9 +390,25 @@ for (const oldCreature of oldCreatures) {
     hemispheres: oldCreature.hemispheres,
   };
   newCreatures.push(newCreature);
+
+  const newItem: NewItem = {
+    id: newCreature.id,
+    name: newCreature.name,
+    rawName: newCreature.rawName,
+    images: newCreature.images,
+    type: ItemType.Creature,
+    ver: newCreature.ver,
+    colors: newCreature.colors,
+    size: newCreature.size,
+    sell: newCreature.sell,
+    category: oldCreature.hhaCategory ?? undefined,
+  };
+  newItems.push(newItem);
+  newItemIdMap.set(newItem.id, newItem);
+  newItemNameMap.set(newItem.rawName, newItem);
 }
 newCreatures.sort((a, b) => a.id - b.id);
-
+newItems.sort((a, b) => a.id - b.id);
 // 输出到文件
 fs.writeFileSync(
   path.join(outputPath, "acnh-items.small.json"),

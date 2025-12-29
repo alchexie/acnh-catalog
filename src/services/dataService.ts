@@ -40,13 +40,13 @@ export const ItemTypeNameMap: Record<ItemType, string> = {
   [ItemType.Wallpaper]: "壁纸",
   [ItemType.Floors]: "地板",
   [ItemType.Rugs]: "地垫",
+  [ItemType.Creature]: "生物",
   [ItemType.Fossils]: "化石",
   [ItemType.Gyroids]: "陶俑",
   [ItemType.Artwork]: "艺术品",
   [ItemType.Music]: "音乐",
   [ItemType.Photos]: "照片",
   [ItemType.Posters]: "海报",
-  [ItemType.MessageCards]: "留言卡",
   [ItemType.Other]: "其他",
 };
 
