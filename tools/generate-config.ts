@@ -59,13 +59,18 @@ function removeNullFields(obj: any): any {
   }
   return cleaned;
 }
-function processImageUrlForStorage(imageUrl: string): string {
+
+function processFurnitureString(imageUrl: string): string {
   if (!imageUrl) return "";
   const CDN_PREFIX = "https://acnhcdn.com/";
-  if (imageUrl.startsWith(CDN_PREFIX)) {
-    return imageUrl.substring(CDN_PREFIX.length);
+  let url = imageUrl;
+  if (url.startsWith(CDN_PREFIX)) {
+    url = url.substring(CDN_PREFIX.length);
   }
-  return imageUrl;
+  if (url.endsWith(".png")) {
+     url = url.substring(0, url.length - 4);
+  }
+  return url;
 }
 
 const __dirname = path.join(process.cwd(), "tools");
@@ -181,9 +186,9 @@ let newRecipeIdMap = new Map<number, NewRecipe>();
 let newRecipeNameMap = new Map<string, NewRecipe>();
 for (const oldRecipe of oldRecipes) {
   let images = [];
-  images.push(processImageUrlForStorage(oldRecipe.image));
+  images.push(processFurnitureString(oldRecipe.image));
   if (oldRecipe.imageSh)
-    images.push(processImageUrlForStorage(oldRecipe.imageSh));
+    images.push(processFurnitureString(oldRecipe.imageSh));
 
   if (oldRecipe.seasonEvent && !oldRecipe.seasonEventExclusive) {
     oldRecipe.seasonEvent = null; // 非专属季节活动配方不记录季节活动,仅有树篱
@@ -236,7 +241,7 @@ function processVariations(oldItem: OldItem): Variant[] {
     const patternColors = v.colors || oldItem.colors || [];
     variant.patterns.push({
       name: v.patternTranslations?.cNzh || v.pattern || "",
-      image: processImageUrlForStorage(
+      image: processFurnitureString(
         v.image || v.storageImage || v.closetImage || ""
       ),
       id: v.internalId,
@@ -291,30 +296,30 @@ function convertItem(oldItem: OldItem): NewItem {
 
   let images = [];
   if (oldItem.inventoryImage)
-    images.push(processImageUrlForStorage(oldItem.inventoryImage));
-  if (oldItem.image) images.push(processImageUrlForStorage(oldItem.image));
+    images.push(processFurnitureString(oldItem.inventoryImage));
+  if (oldItem.image) images.push(processFurnitureString(oldItem.image));
   if (oldItem.storageImage)
-    images.push(processImageUrlForStorage(oldItem.storageImage));
+    images.push(processFurnitureString(oldItem.storageImage));
   if (oldItem.closetImage)
-    images.push(processImageUrlForStorage(oldItem.closetImage));
+    images.push(processFurnitureString(oldItem.closetImage));
   if (oldItem.framedImage)
-    images.push(processImageUrlForStorage(oldItem.framedImage));
+    images.push(processFurnitureString(oldItem.framedImage));
   if (oldItem.albumImage)
-    images.push(processImageUrlForStorage(oldItem.albumImage));
+    images.push(processFurnitureString(oldItem.albumImage));
 
   if (images.length === 0) {
     let variation = oldItem.variations?.[0];
     if (variation) {
       if (variation.image)
-        images.push(processImageUrlForStorage(variation.image));
+        images.push(processFurnitureString(variation.image));
       if (variation.storageImage)
-        images.push(processImageUrlForStorage(variation.storageImage));
+        images.push(processFurnitureString(variation.storageImage));
       if (variation.closetImage)
-        images.push(processImageUrlForStorage(variation.closetImage));
+        images.push(processFurnitureString(variation.closetImage));
     }
   }
   if (oldItem.recipe) {
-    images.push(processImageUrlForStorage(oldItem.recipe.image));
+    images.push(processFurnitureString(oldItem.recipe.image));
   }
 
   let concepts =
@@ -343,7 +348,9 @@ function convertItem(oldItem: OldItem): NewItem {
       oldItem.themes && oldItem.themes.length > 0 ? oldItem.themes : undefined,
     set: oldItem.set ?? undefined,
     styles:
-      oldItem.styles && oldItem.styles.length > 0 ? oldItem.styles : undefined,
+      oldItem.styles && oldItem.styles.length > 0
+        ? Array.from(new Set(oldItem.styles))
+        : undefined,
     concepts,
     category,
     recipe: oldItem.recipe
@@ -365,7 +372,7 @@ for (const oldItem of oldItems) {
       id: oldItem.internalId || 0,
       name: oldItem.translations?.cNzh || oldItem.name,
       rawName: oldItem.name,
-      image: processImageUrlForStorage(oldItem.image || ""),
+      image: processFurnitureString(oldItem.image || ""),
       ver: versionAddedMap[oldItem.version!] || Version.The200,
       buy: oldItem.buy ?? undefined,
       backColor: oldItem.backColor || undefined,
@@ -421,9 +428,9 @@ for (const oldCreature of oldCreatures) {
     name: oldCreature.translations?.cNzh || oldCreature.name,
     rawName: oldCreature.name,
     images: [
-      processImageUrlForStorage(oldCreature.iconImage),
-      processImageUrlForStorage(oldCreature.critterpediaImage),
-      processImageUrlForStorage(oldCreature.furnitureImage),
+      processFurnitureString(oldCreature.iconImage),
+      processFurnitureString(oldCreature.critterpediaImage),
+      processFurnitureString(oldCreature.furnitureImage),
     ],
     ver: oldCreature.versionAdded
       ? versionAddedMap[oldCreature.versionAdded]
@@ -520,6 +527,24 @@ const speciesMap: Record<string, Species> = {
   Wolf: Species.Wolf,
 };
 
+/**
+ * 从字符串中提取3个数字，如果缺少后两个则用0填充
+ * @param str 输入字符串，如 "3122,2_0" 或 "7142"
+ * @returns 三个数字的数组
+ */
+function parseNumbersFromString(
+  str: string | number
+): [number, number, number] {
+  const parts = String(str).split(",");
+  const first = Number(parts[0]);
+  if (parts.length > 1) {
+    const secondParts = parts[1].split("_");
+    return [first, Number(secondParts[0] || 0), Number(secondParts[1] || 0)];
+  } else {
+    return [first, 0, 0];
+  }
+}
+
 let newVillagers: NewVillager[] = [];
 for (const oldVillager of oldVillagers) {
   const newVillager: NewVillager = {
@@ -527,8 +552,8 @@ for (const oldVillager of oldVillagers) {
     name: oldVillager.translations?.cNzh || oldVillager.name,
     rawName: oldVillager.name,
     images: [
-      processImageUrlForStorage(oldVillager.iconImage),
-      processImageUrlForStorage(oldVillager.photoImage),
+      processFurnitureString(oldVillager.iconImage),
+      processFurnitureString(oldVillager.photoImage),
     ].filter((url) => url !== ""),
     ver: versionAddedMap[oldVillager.versionAdded],
     species: speciesMap[oldVillager.species],
@@ -537,7 +562,7 @@ for (const oldVillager of oldVillagers) {
     subtype: oldVillager.subtype,
     hobby: hobbyMap[oldVillager.hobby],
     birthday: oldVillager.birthday,
-    styles: oldVillager.styles,
+    styles: Array.from(new Set(oldVillager.styles)),
     colors: Array.from(new Set(oldVillager.colors.map((c) => colorMap[c]))),
     catchphrase: oldVillager.catchphrases.cNzh,
     saying: oldVillager.favoriteSaying,
@@ -548,14 +573,10 @@ for (const oldVillager of oldVillagers) {
     wallpaper: newItemNameMap.get(oldVillager.wallpaper)?.id || 0,
     flooring: newItemNameMap.get(oldVillager.flooring)?.id || 0,
     furnitures: oldVillager.furnitureList,
-    diyWorkbench:
-      newItemIdMap.get(Number(oldVillager.diyWorkbench.split(",")[0]))?.id || 0,
-    kitchenware:
-      newItemIdMap.get(
-        Number(String(oldVillager.kitchenEquipment).split(",")[0])
-      )?.id || 0,
+    diyWorkbench: parseNumbersFromString(String(oldVillager.diyWorkbench)),
+    kitchenware: parseNumbersFromString(String(oldVillager.kitchenEquipment)),
     houseImage: oldVillager.houseImage
-      ? processImageUrlForStorage(oldVillager.houseImage)
+      ? processFurnitureString(oldVillager.houseImage)
       : undefined,
     bubbleColor: oldVillager.bubbleColor,
     nameColor: oldVillager.nameColor,
@@ -573,8 +594,8 @@ for (const oldNpc of oldNpcs) {
     name: oldNpc.translations?.cNzh || oldNpc.name,
     rawName: oldNpc.name,
     images: [
-      processImageUrlForStorage(oldNpc.iconImage),
-      processImageUrlForStorage(oldNpc.photoImage || ""),
+      processFurnitureString(oldNpc.iconImage),
+      processFurnitureString(oldNpc.photoImage || ""),
     ].filter((url) => url !== ""),
     ver: oldNpc.versionAdded
       ? versionAddedMap[oldNpc.versionAdded]
@@ -595,7 +616,7 @@ for (const oldReaction of oldReactions) {
     order: oldReaction.num,
     name: oldReaction.translations?.cNzh || oldReaction.name,
     rawName: oldReaction.name,
-    image: processImageUrlForStorage(oldReaction.image),
+    image: processFurnitureString(oldReaction.image),
     ver: versionAddedMap[oldReaction.versionAdded],
     source: oldReaction.source,
     sourceNotes: oldReaction.sourceNotes || undefined,
@@ -622,7 +643,7 @@ for (const oldConstruction of oldConstructions) {
     id: id,
     name: oldConstruction.translations?.cNzh || oldConstruction.name || "",
     rawName: oldConstruction.name || "",
-    image: processImageUrlForStorage(oldConstruction.image),
+    image: processFurnitureString(oldConstruction.image),
     ver: versionAddedMap[oldConstruction.versionAdded] || Version.The200,
     buy: oldConstruction.buy || undefined,
     type: constructionTypeMap[oldConstruction.category || "Other"],

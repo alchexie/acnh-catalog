@@ -4,7 +4,7 @@
     "order": 1,
     "name": "你好！",
     "rawName": "Greetings",
-    "image": "latest/ManpuIcon/Greeting.png",
+    "image": "latest/ManpuIcon/Greeting",
     "ver": 1,
     "source": [
       "All villagers"
@@ -15,7 +15,7 @@
     "order": 2,
     "name": "点头",
     "rawName": "Agreement",
-    "image": "latest/ManpuIcon/Nodding.png",
+    "image": "latest/ManpuIcon/Nodding",
     "ver": 1,
     "source": [
       "Cranky villagers"
@@ -26,7 +26,7 @@
     "order": 3,
     "name": "不行不行",
     "rawName": "Disagreement",
-    "image": "latest/ManpuIcon/Negative.png",
+    "image": "latest/ManpuIcon/Negative",
     "ver": 1,
     "source": [
       "Big Sister villagers"
@@ -37,7 +37,7 @@
     "order": 4,
     "name": "对吧！",
     "rawName": "Pleased",
-    "image": "latest/ManpuIcon/Hello.png",
+    "image": "latest/ManpuIcon/Hello",
     "ver": 1,
     "source": [
       "Normal villagers"
@@ -48,7 +48,7 @@
     "order": 5,
     "name": "笑眯眯",
     "rawName": "Happiness",
-    "image": "latest/ManpuIcon/Smiling.png",
+    "image": "latest/ManpuIcon/Smiling",
     "ver": 1,
     "source": [
       "Peppy villagers"
@@ -59,7 +59,7 @@
     "order": 6,
     "name": "开心",
     "rawName": "Joy",
-    "image": "latest/ManpuIcon/HappyFlower.png",
+    "image": "latest/ManpuIcon/HappyFlower",
     "ver": 1,
     "source": [
       "All villagers"
@@ -70,7 +70,7 @@
     "order": 7,
     "name": "兴高采烈",
     "rawName": "Glee",
-    "image": "latest/ManpuIcon/HappyDance.png",
+    "image": "latest/ManpuIcon/HappyDance",
     "ver": 1,
     "source": [
       "Normal villagers"
@@ -81,7 +81,7 @@
     "order": 8,
     "name": "笑哈哈",
     "rawName": "Laughter",
-    "image": "latest/ManpuIcon/Laughing.png",
+    "image": "latest/ManpuIcon/Laughing",
     "ver": 1,
     "source": [
       "Big Sister villagers"
@@ -92,7 +92,7 @@
     "order": 9,
     "name": "喜欢",
     "rawName": "Love",
-    "image": "latest/ManpuIcon/Love.png",
+    "image": "latest/ManpuIcon/Love",
     "ver": 1,
     "source": [
       "Snooty villagers"
@@ -106,7 +106,7 @@
     "order": 10,
     "name": "交给我",
     "rawName": "Confident",
-    "image": "latest/ManpuIcon/Assent.png",
+    "image": "latest/ManpuIcon/Assent",
     "ver": 1,
     "source": [
       "Big Sister villagers"
@@ -120,7 +120,7 @@
     "order": 11,
     "name": "看我的",
     "rawName": "Showmanship",
-    "image": "latest/ManpuIcon/Shaki.png",
+    "image": "latest/ManpuIcon/Shaki",
     "ver": 1,
     "source": [
       "Smug villagers"
@@ -134,7 +134,7 @@
     "order": 12,
     "name": "舞动",
     "rawName": "Flourish",
-    "image": "latest/ManpuIcon/Dance.png",
+    "image": "latest/ManpuIcon/Dance",
     "ver": 1,
     "source": [
       "Jock villagers"
@@ -148,7 +148,7 @@
     "order": 13,
     "name": "得意！",
     "rawName": "Pride",
-    "image": "latest/ManpuIcon/SmugFace.png",
+    "image": "latest/ManpuIcon/SmugFace",
     "ver": 1,
     "source": [
       "Lazy villagers"
@@ -162,7 +162,7 @@
     "order": 14,
     "name": "加油～！",
     "rawName": "Encouraging",
-    "image": "latest/ManpuIcon/Cheering.png",
+    "image": "latest/ManpuIcon/Cheering",
     "ver": 1,
     "source": [
       "Jock villagers"
@@ -173,7 +173,7 @@
     "order": 15,
     "name": "拍手",
     "rawName": "Delight",
-    "image": "latest/ManpuIcon/Clapping.png",
+    "image": "latest/ManpuIcon/Clapping",
     "ver": 1,
     "source": [
       "All villagers"
@@ -184,7 +184,7 @@
     "order": 16,
     "name": "鞠躬",
     "rawName": "Apologetic",
-    "image": "latest/ManpuIcon/Apologize.png",
+    "image": "latest/ManpuIcon/Apologize",
     "ver": 1,
     "source": [
       "Big Sister villagers"
@@ -195,7 +195,7 @@
     "order": 17,
     "name": "嗯？",
     "rawName": "Bewilderment",
-    "image": "latest/ManpuIcon/Pardon.png",
+    "image": "latest/ManpuIcon/Pardon",
     "ver": 1,
     "source": [
       "Cranky villagers"
@@ -206,7 +206,7 @@
     "order": 18,
     "name": "什么？",
     "rawName": "Curiosity",
-    "image": "latest/ManpuIcon/QuestionMark.png",
+    "image": "latest/ManpuIcon/QuestionMark",
     "ver": 1,
     "source": [
       "Peppy villagers"
@@ -217,7 +217,7 @@
     "order": 19,
     "name": "啊！",
     "rawName": "Surprise",
-    "image": "latest/ManpuIcon/Aha.png",
+    "image": "latest/ManpuIcon/Aha",
     "ver": 1,
     "source": [
       "All villagers"
@@ -228,7 +228,7 @@
     "order": 20,
     "name": "惊！",
     "rawName": "Amazed",
-    "image": "latest/ManpuIcon/Shocked.png",
+    "image": "latest/ManpuIcon/Shocked",
     "ver": 1,
     "source": [
       "Snooty villagers"
@@ -239,7 +239,7 @@
     "order": 21,
     "name": "灵光一闪",
     "rawName": "Inspiration",
-    "image": "latest/ManpuIcon/IdeaBulb.png",
+    "image": "latest/ManpuIcon/IdeaBulb",
     "ver": 1,
     "source": [
       "Cranky villagers"
@@ -253,7 +253,7 @@
     "order": 22,
     "name": "吓一跳！",
     "rawName": "Shocked",
-    "image": "latest/ManpuIcon/Surprised.png",
+    "image": "latest/ManpuIcon/Surprised",
     "ver": 1,
     "source": [
       "Jock villagers"
@@ -264,7 +264,7 @@
     "order": 23,
     "name": "糟糕！",
     "rawName": "Mistaken",
-    "image": "latest/ManpuIcon/Oops.png",
+    "image": "latest/ManpuIcon/Oops",
     "ver": 1,
     "source": [
       "Lazy villagers"
@@ -275,7 +275,7 @@
     "order": 24,
     "name": "害羞",
     "rawName": "Bashfulness",
-    "image": "latest/ManpuIcon/Blushing.png",
+    "image": "latest/ManpuIcon/Blushing",
     "ver": 1,
     "source": [
       "Lazy villagers"
@@ -286,7 +286,7 @@
     "order": 25,
     "name": "不好意思",
     "rawName": "Shyness",
-    "image": "latest/ManpuIcon/Hesitate.png",
+    "image": "latest/ManpuIcon/Hesitate",
     "ver": 1,
     "source": [
       "Lazy villagers"
@@ -297,7 +297,7 @@
     "order": 26,
     "name": "苦笑",
     "rawName": "Sheepishness",
-    "image": "latest/ManpuIcon/WrySmile.png",
+    "image": "latest/ManpuIcon/WrySmile",
     "ver": 1,
     "source": [
       "Cranky villagers"
@@ -308,7 +308,7 @@
     "order": 27,
     "name": "微笑",
     "rawName": "Smirking",
-    "image": "latest/ManpuIcon/Grin.png",
+    "image": "latest/ManpuIcon/Grin",
     "ver": 1,
     "source": [
       "Smug villagers"
@@ -319,7 +319,7 @@
     "order": 28,
     "name": "坏笑",
     "rawName": "Mischief",
-    "image": "latest/ManpuIcon/Scheming.png",
+    "image": "latest/ManpuIcon/Scheming",
     "ver": 1,
     "source": [
       "Peppy villagers"
@@ -333,7 +333,7 @@
     "order": 29,
     "name": "好了好了",
     "rawName": "Resignation",
-    "image": "latest/ManpuIcon/OhGeez.png",
+    "image": "latest/ManpuIcon/OhGeez",
     "ver": 1,
     "source": [
       "Smug villagers"
@@ -344,7 +344,7 @@
     "order": 30,
     "name": "想象中",
     "rawName": "Daydreaming",
-    "image": "latest/ManpuIcon/AbsentMindedness.png",
+    "image": "latest/ManpuIcon/AbsentMindedness",
     "ver": 1,
     "source": [
       "Normal villagers"
@@ -358,7 +358,7 @@
     "order": 31,
     "name": "思考",
     "rawName": "Thought",
-    "image": "latest/ManpuIcon/Thinking.png",
+    "image": "latest/ManpuIcon/Thinking",
     "ver": 1,
     "source": [
       "Snooty villagers"
@@ -369,7 +369,7 @@
     "order": 32,
     "name": "打哈欠",
     "rawName": "Sleepy",
-    "image": "latest/ManpuIcon/Sleepy.png",
+    "image": "latest/ManpuIcon/Sleepy",
     "ver": 1,
     "source": [
       "Peppy villagers"
@@ -380,7 +380,7 @@
     "order": 33,
     "name": "睡着了",
     "rawName": "Dozing",
-    "image": "latest/ManpuIcon/Sleep.png",
+    "image": "latest/ManpuIcon/Sleep",
     "ver": 1,
     "source": [
       "Smug villagers"
@@ -391,7 +391,7 @@
     "order": 34,
     "name": "烦恼",
     "rawName": "Worry",
-    "image": "latest/ManpuIcon/Worried.png",
+    "image": "latest/ManpuIcon/Worried",
     "ver": 1,
     "source": [
       "Cranky villagers"
@@ -402,7 +402,7 @@
     "order": 35,
     "name": "叹气",
     "rawName": "Sighing",
-    "image": "latest/ManpuIcon/Sighing.png",
+    "image": "latest/ManpuIcon/Sighing",
     "ver": 1,
     "source": [
       "Snooty villagers"
@@ -413,7 +413,7 @@
     "order": 36,
     "name": "失落",
     "rawName": "Sadness",
-    "image": "latest/ManpuIcon/SadSpiral.png",
+    "image": "latest/ManpuIcon/SadSpiral",
     "ver": 1,
     "source": [
       "Normal villagers"
@@ -424,7 +424,7 @@
     "order": 37,
     "name": "心碎",
     "rawName": "Heartbreak",
-    "image": "latest/ManpuIcon/BrokenHeart.png",
+    "image": "latest/ManpuIcon/BrokenHeart",
     "ver": 1,
     "source": [
       "Smug villagers"
@@ -435,7 +435,7 @@
     "order": 38,
     "name": "大哭",
     "rawName": "Sorrow",
-    "image": "latest/ManpuIcon/Crying.png",
+    "image": "latest/ManpuIcon/Crying",
     "ver": 1,
     "source": [
       "Lazy villagers"
@@ -446,7 +446,7 @@
     "order": 39,
     "name": "瞪",
     "rawName": "Intense",
-    "image": "latest/ManpuIcon/Silent.png",
+    "image": "latest/ManpuIcon/Silent",
     "ver": 1,
     "source": [
       "Snooty villagers"
@@ -457,7 +457,7 @@
     "order": 40,
     "name": "生气",
     "rawName": "Aggravation",
-    "image": "latest/ManpuIcon/Outraged.png",
+    "image": "latest/ManpuIcon/Outraged",
     "ver": 1,
     "source": [
       "Peppy villagers"
@@ -468,7 +468,7 @@
     "order": 41,
     "name": "咻～",
     "rawName": "Cold Chill",
-    "image": "latest/ManpuIcon/ColdChill.png",
+    "image": "latest/ManpuIcon/ColdChill",
     "ver": 1,
     "source": [
       "Big Sister villagers"
@@ -479,7 +479,7 @@
     "order": 42,
     "name": "紧张",
     "rawName": "Distress",
-    "image": "latest/ManpuIcon/Frantic.png",
+    "image": "latest/ManpuIcon/Frantic",
     "ver": 1,
     "source": [
       "Jock villagers"
@@ -490,7 +490,7 @@
     "order": 43,
     "name": "瑟瑟发抖",
     "rawName": "Fearful",
-    "image": "latest/ManpuIcon/Shaking.png",
+    "image": "latest/ManpuIcon/Shaking",
     "ver": 1,
     "source": [
       "Normal villagers"
@@ -501,7 +501,7 @@
     "order": 44,
     "name": "阿嚏",
     "rawName": "Sneezing",
-    "image": "latest/ManpuIcon/Sneezing.png",
+    "image": "latest/ManpuIcon/Sneezing",
     "ver": 1,
     "source": [
       "Jock villagers"
@@ -512,7 +512,7 @@
     "order": 45,
     "name": "惊吓",
     "rawName": "Haunt",
-    "image": "latest/ManpuIcon/AddScaring.png",
+    "image": "latest/ManpuIcon/AddScaring",
     "ver": 6,
     "source": [
       "Jack"
@@ -524,7 +524,7 @@
     "order": 46,
     "name": "吓唬",
     "rawName": "Scare",
-    "image": "latest/ManpuIcon/AddPrank.png",
+    "image": "latest/ManpuIcon/AddPrank",
     "ver": 6,
     "source": [
       "All villagers"
@@ -536,7 +536,7 @@
     "order": 47,
     "name": "坐",
     "rawName": "Sit Down",
-    "image": "latest/ManpuIcon/AddSitDown.png",
+    "image": "latest/ManpuIcon/AddSitDown",
     "ver": 7,
     "source": [
       "Hip Reaction Collection"
@@ -547,7 +547,7 @@
     "order": 48,
     "name": "再见",
     "rawName": "Wave Goodbye",
-    "image": "latest/ManpuIcon/AddWaveHands.png",
+    "image": "latest/ManpuIcon/AddWaveHands",
     "ver": 7,
     "source": [
       "Hip Reaction Collection"
@@ -558,7 +558,7 @@
     "order": 49,
     "name": "拍照",
     "rawName": "Take a Picture",
-    "image": "latest/ManpuIcon/AddTakePictures.png",
+    "image": "latest/ManpuIcon/AddTakePictures",
     "ver": 7,
     "source": [
       "Hip Reaction Collection"
@@ -569,7 +569,7 @@
     "order": 50,
     "name": "闻闻",
     "rawName": "Sniff Sniff",
-    "image": "latest/ManpuIcon/AddSmell.png",
+    "image": "latest/ManpuIcon/AddSmell",
     "ver": 7,
     "source": [
       "Hip Reaction Collection"
@@ -580,7 +580,7 @@
     "order": 51,
     "name": "体操",
     "rawName": "Work Out",
-    "image": "latest/ManpuIcon/AddGymnastics.png",
+    "image": "latest/ManpuIcon/AddGymnastics",
     "ver": 7,
     "source": [
       "Hip Reaction Collection"
@@ -591,7 +591,7 @@
     "order": 52,
     "name": "瑜伽姿势",
     "rawName": "Yoga",
-    "image": "latest/ManpuIcon/AddYoga.png",
+    "image": "latest/ManpuIcon/AddYoga",
     "ver": 7,
     "source": [
       "Hip Reaction Collection"
@@ -602,7 +602,7 @@
     "order": 53,
     "name": "请",
     "rawName": "Here You Go",
-    "image": "latest/ManpuIcon/AddHereYouGo.png",
+    "image": "latest/ManpuIcon/AddHereYouGo",
     "ver": 7,
     "source": [
       "Hip Reaction Collection"
@@ -613,7 +613,7 @@
     "order": 54,
     "name": "期待",
     "rawName": "Excited",
-    "image": "latest/ManpuIcon/AddExcited.png",
+    "image": "latest/ManpuIcon/AddExcited",
     "ver": 7,
     "source": [
       "Hip Reaction Collection"
@@ -624,7 +624,7 @@
     "order": 55,
     "name": "夸奖",
     "rawName": "Ta-da",
-    "image": "latest/ManpuIcon/AddPraise.png",
+    "image": "latest/ManpuIcon/AddPraise",
     "ver": 7,
     "source": [
       "Hip Reaction Collection"
@@ -635,7 +635,7 @@
     "order": 56,
     "name": "撒纸片",
     "rawName": "Confetti",
-    "image": "latest/ManpuIcon/AddConfetti.png",
+    "image": "latest/ManpuIcon/AddConfetti",
     "ver": 8,
     "source": [
       "Viva Festivale Reaction Set"
@@ -647,7 +647,7 @@
     "order": 57,
     "name": "欢乐！",
     "rawName": "Viva",
-    "image": "latest/ManpuIcon/AddViva.png",
+    "image": "latest/ManpuIcon/AddViva",
     "ver": 8,
     "source": [
       "Viva Festivale Reaction Set"
@@ -659,7 +659,7 @@
     "order": 58,
     "name": "炒热气氛",
     "rawName": "Let's Go",
-    "image": "latest/ManpuIcon/AddEntice.png",
+    "image": "latest/ManpuIcon/AddEntice",
     "ver": 8,
     "source": [
       "Viva Festivale Reaction Set"
@@ -671,7 +671,7 @@
     "order": 59,
     "name": "跟着节奏",
     "rawName": "Feelin' It",
-    "image": "latest/ManpuIcon/AddDance.png",
+    "image": "latest/ManpuIcon/AddDance",
     "ver": 8,
     "source": [
       "Viva Festivale Reaction Set"
@@ -683,7 +683,7 @@
     "order": 60,
     "name": "伸展背部",
     "rawName": "Posture Warm-Up",
-    "image": "latest/ManpuIcon/AddRadioGymnastics01.png",
+    "image": "latest/ManpuIcon/AddRadioGymnastics01",
     "ver": 13,
     "source": [
       "Group Stretching"
@@ -697,7 +697,7 @@
     "order": 61,
     "name": "转动手臂",
     "rawName": "Arm Circles",
-    "image": "latest/ManpuIcon/AddRadioGymnastics02.png",
+    "image": "latest/ManpuIcon/AddRadioGymnastics02",
     "ver": 13,
     "source": [
       "Group Stretching"
@@ -711,7 +711,7 @@
     "order": 62,
     "name": "体侧伸展",
     "rawName": "Side Bends",
-    "image": "latest/ManpuIcon/AddRadioGymnastics03.png",
+    "image": "latest/ManpuIcon/AddRadioGymnastics03",
     "ver": 13,
     "source": [
       "Group Stretching"
@@ -725,7 +725,7 @@
     "order": 63,
     "name": "扭转身体",
     "rawName": "Body Twists",
-    "image": "latest/ManpuIcon/AddRadioGymnastics04.png",
+    "image": "latest/ManpuIcon/AddRadioGymnastics04",
     "ver": 13,
     "source": [
       "Group Stretching"
@@ -739,7 +739,7 @@
     "order": 64,
     "name": "扩胸",
     "rawName": "Wide Arm Stretch",
-    "image": "latest/ManpuIcon/AddRadioGymnastics05.png",
+    "image": "latest/ManpuIcon/AddRadioGymnastics05",
     "ver": 13,
     "source": [
       "Group Stretching"
@@ -753,7 +753,7 @@
     "order": 65,
     "name": "转动上半身",
     "rawName": "Upper-Body Circles",
-    "image": "latest/ManpuIcon/AddRadioGymnastics06.png",
+    "image": "latest/ManpuIcon/AddRadioGymnastics06",
     "ver": 13,
     "source": [
       "Group Stretching"
@@ -767,7 +767,7 @@
     "order": 66,
     "name": "双脚跳",
     "rawName": "Jump",
-    "image": "latest/ManpuIcon/AddRadioGymnastics07.png",
+    "image": "latest/ManpuIcon/AddRadioGymnastics07",
     "ver": 13,
     "source": [
       "Group Stretching"
@@ -781,7 +781,7 @@
     "order": 67,
     "name": "挥手再见",
     "rawName": "Double Wave",
-    "image": "latest/ManpuIcon/AddGreetingBothHands.png",
+    "image": "latest/ManpuIcon/AddGreetingBothHands",
     "ver": 13,
     "source": [
       "New Reactions Notebook"
@@ -792,7 +792,7 @@
     "order": 68,
     "name": "伸懒腰",
     "rawName": "Stretch",
-    "image": "latest/ManpuIcon/AddStretch.png",
+    "image": "latest/ManpuIcon/AddStretch",
     "ver": 13,
     "source": [
       "New Reactions Notebook"
@@ -803,7 +803,7 @@
     "order": 69,
     "name": "听音乐摇摆",
     "rawName": "Jammin'",
-    "image": "latest/ManpuIcon/AddRhythm.png",
+    "image": "latest/ManpuIcon/AddRhythm",
     "ver": 13,
     "source": [
       "New Reactions Notebook"
@@ -814,7 +814,7 @@
     "order": 70,
     "name": "聆听",
     "rawName": "Listening Ears",
-    "image": "latest/ManpuIcon/AddListen.png",
+    "image": "latest/ManpuIcon/AddListen",
     "ver": 13,
     "source": [
       "New Reactions Notebook"
@@ -825,7 +825,7 @@
     "order": 71,
     "name": "笑一个",
     "rawName": "Say Cheese",
-    "image": "latest/ManpuIcon/RequestWillingness.png",
+    "image": "latest/ManpuIcon/RequestWillingness",
     "ver": 13,
     "source": [
       "New Reactions Notebook"
@@ -836,7 +836,7 @@
     "order": 72,
     "name": "在这里",
     "rawName": "Behold",
-    "image": "latest/ManpuIcon/AddRequestLook.png",
+    "image": "latest/ManpuIcon/AddRequestLook",
     "ver": 13,
     "source": [
       "New Reactions Notebook"
@@ -847,7 +847,7 @@
     "order": 73,
     "name": "我会加油的",
     "rawName": "Eager",
-    "image": "latest/ManpuIcon/RequestOkay.png",
+    "image": "latest/ManpuIcon/RequestOkay",
     "ver": 13,
     "source": [
       "New Reactions Notebook"
@@ -858,7 +858,7 @@
     "order": 74,
     "name": "健美姿势",
     "rawName": "Flex",
-    "image": "latest/ManpuIcon/AddMusclePose.png",
+    "image": "latest/ManpuIcon/AddMusclePose",
     "ver": 13,
     "source": [
       "New Reactions Notebook"
@@ -869,7 +869,7 @@
     "order": 75,
     "name": "酷感姿势",
     "rawName": "Work It",
-    "image": "latest/ManpuIcon/AddPoseCool.png",
+    "image": "latest/ManpuIcon/AddPoseCool",
     "ver": 13,
     "source": [
       "New Reactions Notebook"
@@ -880,7 +880,7 @@
     "order": 76,
     "name": "优雅姿势",
     "rawName": "Act Natural",
-    "image": "latest/ManpuIcon/AddPoseNaturel.png",
+    "image": "latest/ManpuIcon/AddPoseNaturel",
     "ver": 13,
     "source": [
       "New Reactions Notebook"
@@ -891,7 +891,7 @@
     "order": 77,
     "name": "草裙舞",
     "rawName": "Hula",
-    "image": "latest/ManpuIcon/AddHula.png",
+    "image": "latest/ManpuIcon/AddHula",
     "ver": 13,
     "source": [
       "New Reactions Notebook"
@@ -902,7 +902,7 @@
     "order": 78,
     "name": "上下跳动",
     "rawName": "Grooving Hop",
-    "image": "latest/ManpuIcon/AddKKFesUpper.png",
+    "image": "latest/ManpuIcon/AddKKFesUpper",
     "ver": 13,
     "source": [
       "DJ KK concert"
@@ -914,7 +914,7 @@
     "order": 79,
     "name": "向右舞动",
     "rawName": "Groove Right",
-    "image": "latest/ManpuIcon/AddKKFesRight.png",
+    "image": "latest/ManpuIcon/AddKKFesRight",
     "ver": 13,
     "source": [
       "DJ KK concert"
@@ -926,7 +926,7 @@
     "order": 80,
     "name": "向左舞动",
     "rawName": "Groove Left",
-    "image": "latest/ManpuIcon/AddKKFesLeft.png",
+    "image": "latest/ManpuIcon/AddKKFesLeft",
     "ver": 13,
     "source": [
       "DJ KK concert"
@@ -938,7 +938,7 @@
     "order": 81,
     "name": "享受",
     "rawName": "Soak It In",
-    "image": "latest/ManpuIcon/AddKKFesLower.png",
+    "image": "latest/ManpuIcon/AddKKFesLower",
     "ver": 13,
     "source": [
       "DJ KK concert"
@@ -950,7 +950,7 @@
     "order": 82,
     "name": "左右踏步舞动",
     "rawName": "Side-to-Side",
-    "image": "latest/ManpuIcon/AddKKFesPosing05.png",
+    "image": "latest/ManpuIcon/AddKKFesPosing05",
     "ver": 13,
     "source": [
       "DJ KK concert"
@@ -962,7 +962,7 @@
     "order": 83,
     "name": "踏脚舞动",
     "rawName": "Island Stomp",
-    "image": "latest/ManpuIcon/AddKKFesPosing04.png",
+    "image": "latest/ManpuIcon/AddKKFesPosing04",
     "ver": 13,
     "source": [
       "DJ KK concert"
@@ -974,7 +974,7 @@
     "order": 84,
     "name": "飞机翼舞动",
     "rawName": "Airplane",
-    "image": "latest/ManpuIcon/AddKKFesPosing01.png",
+    "image": "latest/ManpuIcon/AddKKFesPosing01",
     "ver": 13,
     "source": [
       "DJ KK concert"
@@ -986,7 +986,7 @@
     "order": 85,
     "name": "扭扭舞",
     "rawName": "Twisty Dance",
-    "image": "latest/ManpuIcon/AddKKFesPosing02.png",
+    "image": "latest/ManpuIcon/AddKKFesPosing02",
     "ver": 13,
     "source": [
       "DJ KK concert"
@@ -998,7 +998,7 @@
     "order": 86,
     "name": "左右舞动",
     "rawName": "Shimmy",
-    "image": "latest/ManpuIcon/AddKKFesPosing00.png",
+    "image": "latest/ManpuIcon/AddKKFesPosing00",
     "ver": 13,
     "source": [
       "DJ KK concert"
@@ -1010,7 +1010,7 @@
     "order": 87,
     "name": "伸手臂舞动",
     "rawName": "Turnip Patch",
-    "image": "latest/ManpuIcon/AddKKFesPosing06.png",
+    "image": "latest/ManpuIcon/AddKKFesPosing06",
     "ver": 13,
     "source": [
       "DJ KK concert"
@@ -1022,7 +1022,7 @@
     "order": 88,
     "name": "摆手舞动",
     "rawName": "Arm-Swing Dance",
-    "image": "latest/ManpuIcon/AddKKFesPosing03.png",
+    "image": "latest/ManpuIcon/AddKKFesPosing03",
     "ver": 13,
     "source": [
       "DJ KK concert"

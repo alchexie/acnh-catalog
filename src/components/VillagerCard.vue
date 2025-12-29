@@ -33,13 +33,7 @@ const currentShape = computed(() =>
 );
 
 const furnitureList = computed(() => {
-  return [
-    ...props.data.furnitures,
-    props.data.wallpaper,
-    props.data.flooring,
-    props.data.diyWorkbench,
-    props.data.kitchenware,
-  ];
+  return [...props.data.furnitures, props.data.wallpaper, props.data.flooring];
 });
 
 const defaultItems = computed(() => {
@@ -128,6 +122,18 @@ const toggleFurnitureExpanded = () => {
         <div v-for="furniture in furnitureList" :key="furniture">
           <ItemIcon :itemId="furniture" :size="60" />
         </div>
+        <ItemIcon
+          :itemId="props.data.diyWorkbench[0]"
+          :vIndex="props.data.diyWorkbench[1]"
+          :pIndex="props.data.diyWorkbench[2]"
+          :size="60"
+        />
+        <ItemIcon
+          :itemId="props.data.kitchenware[0]"
+          :vIndex="props.data.kitchenware[1]"
+          :pIndex="props.data.kitchenware[2]"
+          :size="60"
+        />
         <img
           v-if="props.data.houseImage"
           :src="processImageUrl(props.data.houseImage)"

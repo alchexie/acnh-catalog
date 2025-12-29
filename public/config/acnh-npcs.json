@@ -5,8 +5,8 @@
     "name": "健兆",
     "rawName": "Cyrus",
     "images": [
-      "latest/NpcIcon/alp.png",
-      "latest/NpcPoster/NpcSpAlp.png"
+      "latest/NpcIcon/alp",
+      "latest/NpcPoster/NpcSpAlp"
     ],
     "ver": 3,
     "gender": 2,
@@ -20,8 +20,8 @@
     "name": "莉咏",
     "rawName": "Reese",
     "images": [
-      "latest/NpcIcon/alw.png",
-      "latest/NpcPoster/NpcSpAlw.png"
+      "latest/NpcIcon/alw",
+      "latest/NpcPoster/NpcSpAlw"
     ],
     "ver": 3,
     "gender": 1,
@@ -35,8 +35,8 @@
     "name": "俞正",
     "rawName": "Chip",
     "images": [
-      "latest/NpcIcon/bev.png",
-      "latest/NpcPoster/NpcSpBev.png"
+      "latest/NpcIcon/bev",
+      "latest/NpcPoster/NpcSpBev"
     ],
     "ver": 1,
     "gender": 2,
@@ -50,8 +50,8 @@
     "name": "博陆恩",
     "rawName": "Phineas",
     "images": [
-      "latest/NpcIcon/fsl.png",
-      "latest/NpcPoster/NpcSpFsl.png"
+      "latest/NpcIcon/fsl",
+      "latest/NpcPoster/NpcSpFsl"
     ],
     "ver": 1,
     "gender": 2,
@@ -65,8 +65,8 @@
     "name": "曹谷",
     "rawName": "Joan",
     "images": [
-      "latest/NpcIcon/boa.png",
-      "latest/NpcPoster/NpcSpBoa.png"
+      "latest/NpcIcon/boa",
+      "latest/NpcPoster/NpcSpBoa"
     ],
     "ver": 1,
     "gender": 1,
@@ -80,8 +80,8 @@
     "name": "星薇",
     "rawName": "Katrina",
     "images": [
-      "latest/NpcIcon/bpt.png",
-      "latest/NpcPoster/NpcSpBpt.png"
+      "latest/NpcIcon/bpt",
+      "latest/NpcPoster/NpcSpBpt"
     ],
     "ver": 13,
     "gender": 1,
@@ -95,8 +95,8 @@
     "name": "龙山先生",
     "rawName": "Nat",
     "images": [
-      "latest/NpcIcon/chm.png",
-      "latest/NpcPoster/NpcSpChm.png"
+      "latest/NpcIcon/chm",
+      "latest/NpcPoster/NpcSpChm"
     ],
     "ver": 1,
     "gender": 2,
@@ -110,8 +110,8 @@
     "name": "骆岚",
     "rawName": "Saharah",
     "images": [
-      "latest/NpcIcon/cml.png",
-      "latest/NpcBromide/NpcSpCml.png"
+      "latest/NpcIcon/cml",
+      "latest/NpcBromide/NpcSpCml"
     ],
     "ver": 1,
     "gender": 1,
@@ -125,8 +125,8 @@
     "name": "K.K.",
     "rawName": "K.K.",
     "images": [
-      "latest/NpcIcon/tkkA.png",
-      "latest/NpcBromide/NpcSpTkkA.png"
+      "latest/NpcIcon/tkkA",
+      "latest/NpcBromide/NpcSpTkkA"
     ],
     "ver": 1,
     "gender": 2,
@@ -140,8 +140,8 @@
     "name": "狐利",
     "rawName": "Redd",
     "images": [
-      "latest/NpcIcon/fox.png",
-      "latest/NpcPoster/NpcSpFox.png"
+      "latest/NpcIcon/fox",
+      "latest/NpcPoster/NpcSpFox"
     ],
     "ver": 3,
     "gender": 2,
@@ -155,8 +155,8 @@
     "name": "葛瑞斯",
     "rawName": "Gracie",
     "images": [
-      "latest/NpcIcon/grf.png",
-      "latest/NpcPoster/NpcSpGrf.png"
+      "latest/NpcIcon/grf",
+      "latest/NpcPoster/NpcSpGrf"
     ],
     "ver": 1,
     "gender": 1,
@@ -170,8 +170,8 @@
     "name": "绵儿",
     "rawName": "Label",
     "images": [
-      "latest/NpcIcon/hgc.png",
-      "latest/NpcBromide/NpcSpHgc.png"
+      "latest/NpcIcon/hgc",
+      "latest/NpcBromide/NpcSpHgc"
     ],
     "ver": 1,
     "gender": 1,
@@ -185,8 +185,8 @@
     "name": "绢儿",
     "rawName": "Mabel",
     "images": [
-      "latest/NpcIcon/hgh.png",
-      "latest/NpcBromide/NpcSpHgh.png"
+      "latest/NpcIcon/hgh",
+      "latest/NpcBromide/NpcSpHgh"
     ],
     "ver": 1,
     "gender": 1,
@@ -200,8 +200,8 @@
     "name": "麻儿",
     "rawName": "Sable",
     "images": [
-      "latest/NpcIcon/hgs.png",
-      "latest/NpcBromide/NpcSpHgs.png"
+      "latest/NpcIcon/hgs",
+      "latest/NpcBromide/NpcSpHgs"
     ],
     "ver": 1,
     "gender": 1,
@@ -215,8 +215,8 @@
     "name": "阿玉婆婆",
     "rawName": "Grams",
     "images": [
-      "latest/NpcIcon/kpg.png",
-      "latest/NpcPoster/NpcSpKpg.png"
+      "latest/NpcIcon/kpg",
+      "latest/NpcPoster/NpcSpKpg"
     ],
     "ver": 1,
     "gender": 1,
@@ -230,8 +230,8 @@
     "name": "沽玉",
     "rawName": "Leilani",
     "images": [
-      "latest/NpcIcon/kpm.png",
-      "latest/NpcPoster/NpcSpKpm.png"
+      "latest/NpcIcon/kpm",
+      "latest/NpcPoster/NpcSpKpm"
     ],
     "ver": 1,
     "gender": 1,
@@ -245,8 +245,8 @@
     "name": "航平",
     "rawName": "Kapp'n",
     "images": [
-      "latest/NpcIcon/kpp.png",
-      "latest/NpcPoster/NpcSpKpp.png"
+      "latest/NpcIcon/kpp",
+      "latest/NpcPoster/NpcSpKpp"
     ],
     "ver": 13,
     "gender": 2,
@@ -260,8 +260,8 @@
     "name": "沽沽",
     "rawName": "Leila",
     "images": [
-      "latest/NpcIcon/kps.png",
-      "latest/NpcPoster/NpcSpKps.png"
+      "latest/NpcIcon/kps",
+      "latest/NpcPoster/NpcSpKps"
     ],
     "ver": 1,
     "gender": 1,
@@ -275,8 +275,8 @@
     "name": "车长叔叔",
     "rawName": "Porter",
     "images": [
-      "latest/NpcIcon/mnk.png",
-      "latest/NpcPoster/NpcSpMnk.png"
+      "latest/NpcIcon/mnk",
+      "latest/NpcPoster/NpcSpMnk"
     ],
     "ver": 1,
     "gender": 2,
@@ -290,8 +290,8 @@
     "name": "开关叔叔",
     "rawName": "Don",
     "images": [
-      "latest/NpcIcon/mob.png",
-      "latest/NpcPoster/NpcSpMob.png"
+      "latest/NpcIcon/mob",
+      "latest/NpcPoster/NpcSpMob"
     ],
     "ver": 1,
     "gender": 2,
@@ -305,8 +305,8 @@
     "name": "电源叔叔",
     "rawName": "Resetti",
     "images": [
-      "latest/NpcIcon/mol.png",
-      "latest/NpcPoster/NpcSpMol.png"
+      "latest/NpcIcon/mol",
+      "latest/NpcPoster/NpcSpMol"
     ],
     "ver": 1,
     "gender": 2,
@@ -320,8 +320,8 @@
     "name": "阿本先生",
     "rawName": "Lyle",
     "images": [
-      "latest/NpcIcon/ott.png",
-      "latest/NpcPoster/NpcSpOtt.png"
+      "latest/NpcIcon/ott",
+      "latest/NpcPoster/NpcSpOtt"
     ],
     "ver": 1,
     "gender": 2,
@@ -335,8 +335,8 @@
     "name": "傅达",
     "rawName": "Blathers",
     "images": [
-      "latest/NpcIcon/owl.png",
-      "latest/NpcBromide/NpcSpOwl.png"
+      "latest/NpcIcon/owl",
+      "latest/NpcBromide/NpcSpOwl"
     ],
     "ver": 1,
     "gender": 2,
@@ -350,8 +350,8 @@
     "name": "傅珂",
     "rawName": "Celeste",
     "images": [
-      "latest/NpcIcon/ows.png",
-      "latest/NpcBromide/NpcSpOws.png"
+      "latest/NpcIcon/ows",
+      "latest/NpcBromide/NpcSpOws"
     ],
     "ver": 1,
     "gender": 1,
@@ -365,8 +365,8 @@
     "name": "阿欢",
     "rawName": "Pavé",
     "images": [
-      "latest/NpcIcon/pck.png",
-      "latest/NpcPoster/NpcSpPck.png"
+      "latest/NpcIcon/pck",
+      "latest/NpcPoster/NpcSpPck"
     ],
     "ver": 8,
     "gender": 2,
@@ -380,8 +380,8 @@
     "name": "宋信子",
     "rawName": "Pelly",
     "images": [
-      "latest/NpcIcon/plk.png",
-      "latest/NpcPoster/NpcSpPlk.png"
+      "latest/NpcIcon/plk",
+      "latest/NpcPoster/NpcSpPlk"
     ],
     "ver": 1,
     "gender": 1,
@@ -395,8 +395,8 @@
     "name": "宋信美",
     "rawName": "Phyllis",
     "images": [
-      "latest/NpcIcon/plm.png",
-      "latest/NpcPoster/NpcSpPlm.png"
+      "latest/NpcIcon/plm",
+      "latest/NpcPoster/NpcSpPlm"
     ],
     "ver": 1,
     "gender": 1,
@@ -410,8 +410,8 @@
     "name": "老板",
     "rawName": "Brewster",
     "images": [
-      "latest/NpcIcon/pge.png",
-      "latest/NpcPoster/NpcSpPge.png"
+      "latest/NpcIcon/pge",
+      "latest/NpcPoster/NpcSpPge"
     ],
     "ver": 13,
     "gender": 2,
@@ -425,8 +425,8 @@
     "name": "警察叔叔",
     "rawName": "Copper",
     "images": [
-      "latest/NpcIcon/dga.png",
-      "latest/NpcPoster/NpcSpDga.png"
+      "latest/NpcIcon/dga",
+      "latest/NpcPoster/NpcSpDga"
     ],
     "ver": 1,
     "gender": 2,
@@ -440,8 +440,8 @@
     "name": "程信雄",
     "rawName": "Pete",
     "images": [
-      "latest/NpcIcon/plo.png",
-      "latest/NpcPoster/NpcSpPlo.png"
+      "latest/NpcIcon/plo",
+      "latest/NpcPoster/NpcSpPlo"
     ],
     "ver": 1,
     "gender": 2,
@@ -455,8 +455,8 @@
     "name": "警察叔叔",
     "rawName": "Booker",
     "images": [
-      "latest/NpcIcon/dgb.png",
-      "latest/NpcPoster/NpcSpDgb.png"
+      "latest/NpcIcon/dgb",
+      "latest/NpcPoster/NpcSpDgb"
     ],
     "ver": 1,
     "gender": 2,
@@ -470,8 +470,8 @@
     "name": "刀丽茹",
     "rawName": "Harriet",
     "images": [
-      "latest/NpcIcon/poo.png",
-      "latest/NpcPoster/NpcSpPoo.png"
+      "latest/NpcIcon/poo",
+      "latest/NpcPoster/NpcSpPoo"
     ],
     "ver": 13,
     "gender": 1,
@@ -485,8 +485,8 @@
     "name": "狸克",
     "rawName": "Tom Nook",
     "images": [
-      "latest/NpcIcon/rco.png",
-      "latest/NpcBromide/NpcSpRco.png"
+      "latest/NpcIcon/rco",
+      "latest/NpcBromide/NpcSpRco"
     ],
     "ver": 1,
     "gender": 2,
@@ -500,8 +500,8 @@
     "name": "吕游",
     "rawName": "Gulliver",
     "images": [
-      "latest/NpcIcon/gul.png",
-      "latest/NpcBromide/NpcSpGul.png"
+      "latest/NpcIcon/gul",
+      "latest/NpcBromide/NpcSpGul"
     ],
     "ver": 1,
     "gender": 2,
@@ -515,8 +515,8 @@
     "name": "阿獭",
     "rawName": "Pascal",
     "images": [
-      "latest/NpcIcon/seo.png",
-      "latest/NpcPoster/NpcSpSeo.png"
+      "latest/NpcIcon/seo",
+      "latest/NpcPoster/NpcSpSeo"
     ],
     "ver": 4,
     "gender": 2,
@@ -530,8 +530,8 @@
     "name": "薛革",
     "rawName": "Kicks",
     "images": [
-      "latest/NpcIcon/skk.png",
-      "latest/NpcBromide/NpcSpSkk.png"
+      "latest/NpcIcon/skk",
+      "latest/NpcBromide/NpcSpSkk"
     ],
     "ver": 1,
     "gender": 2,
@@ -545,8 +545,8 @@
     "name": "西施惠",
     "rawName": "Isabelle",
     "images": [
-      "latest/NpcIcon/sza.png",
-      "latest/NpcBromide/NpcSpSza.png"
+      "latest/NpcIcon/sza",
+      "latest/NpcBromide/NpcSpSza"
     ],
     "ver": 1,
     "gender": 1,
@@ -560,8 +560,8 @@
     "name": "寿伯",
     "rawName": "Tortimer",
     "images": [
-      "latest/NpcIcon/ttlA.png",
-      "latest/NpcPoster/NpcSpTtlA.png"
+      "latest/NpcIcon/ttlA",
+      "latest/NpcPoster/NpcSpTtlA"
     ],
     "ver": 13,
     "gender": 2,
@@ -575,8 +575,8 @@
     "name": "富蓝",
     "rawName": "Franklin",
     "images": [
-      "latest/NpcIcon/tuk.png",
-      "latest/NpcPoster/NpcSpTuk.png"
+      "latest/NpcIcon/tuk",
+      "latest/NpcPoster/NpcSpTuk"
     ],
     "ver": 7,
     "gender": 2,
@@ -590,8 +590,8 @@
     "name": "笑匠",
     "rawName": "Shrunk",
     "images": [
-      "latest/NpcIcon/upa.png",
-      "latest/NpcPoster/NpcSpUpa.png"
+      "latest/NpcIcon/upa",
+      "latest/NpcPoster/NpcSpUpa"
     ],
     "ver": 1,
     "gender": 2,
@@ -605,8 +605,8 @@
     "name": "陌陌",
     "rawName": "Rover",
     "images": [
-      "latest/NpcIcon/xct.png",
-      "latest/NpcPoster/NpcSpXct.png"
+      "latest/NpcIcon/xct",
+      "latest/NpcPoster/NpcSpXct"
     ],
     "ver": 3,
     "gender": 2,
@@ -620,8 +620,8 @@
     "name": "然然",
     "rawName": "Leif",
     "images": [
-      "latest/NpcIcon/slo.png",
-      "latest/NpcPoster/NpcSpSlo.png"
+      "latest/NpcIcon/slo",
+      "latest/NpcPoster/NpcSpSlo"
     ],
     "ver": 3,
     "gender": 2,
@@ -635,8 +635,8 @@
     "name": "无脸猫",
     "rawName": "Blanca",
     "images": [
-      "latest/NpcIcon/mka.png",
-      "latest/NpcPoster/NpcSpMka.png"
+      "latest/NpcIcon/mka",
+      "latest/NpcPoster/NpcSpMka"
     ],
     "ver": 1,
     "gender": 1,
@@ -650,8 +650,8 @@
     "name": "梦美",
     "rawName": "Luna",
     "images": [
-      "latest/NpcIcon/tap.png",
-      "latest/NpcPoster/NpcSpTap.png"
+      "latest/NpcIcon/tap",
+      "latest/NpcPoster/NpcSpTap"
     ],
     "ver": 5,
     "gender": 1,
@@ -665,8 +665,8 @@
     "name": "咪露",
     "rawName": "Katie",
     "images": [
-      "latest/NpcIcon/lom.png",
-      "latest/NpcPoster/NpcSpLom.png"
+      "latest/NpcIcon/lom",
+      "latest/NpcPoster/NpcSpLom"
     ],
     "ver": 1,
     "gender": 1,
@@ -680,8 +680,8 @@
     "name": "蹦蹦",
     "rawName": "Zipper",
     "images": [
-      "latest/NpcIcon/pyn.png",
-      "latest/NpcPoster/NpcSpPyn.png"
+      "latest/NpcIcon/pyn",
+      "latest/NpcPoster/NpcSpPyn"
     ],
     "ver": 2,
     "gender": 2,
@@ -695,8 +695,8 @@
     "name": "铃铃鹿",
     "rawName": "Jingle",
     "images": [
-      "latest/NpcIcon/rei.png",
-      "latest/NpcPoster/NpcSpRei.png"
+      "latest/NpcIcon/rei",
+      "latest/NpcPoster/NpcSpRei"
     ],
     "ver": 7,
     "gender": 2,
@@ -710,8 +710,8 @@
     "name": "西施德",
     "rawName": "Digby",
     "images": [
-      "latest/NpcIcon/szo.png",
-      "latest/NpcPoster/NpcSpSzo.png"
+      "latest/NpcIcon/szo",
+      "latest/NpcPoster/NpcSpSzo"
     ],
     "ver": 1,
     "gender": 2,
@@ -725,8 +725,8 @@
     "name": "海项",
     "rawName": "Wendell",
     "images": [
-      "latest/NpcIcon/wrl.png",
-      "latest/NpcPoster/NpcSpWrl.png"
+      "latest/NpcIcon/wrl",
+      "latest/NpcPoster/NpcSpWrl"
     ],
     "ver": 1,
     "gender": 2,
@@ -740,8 +740,8 @@
     "name": "粒狸",
     "rawName": "Tommy",
     "images": [
-      "latest/NpcIcon/rct.png",
-      "latest/NpcBromide/NpcSpRct.png"
+      "latest/NpcIcon/rct",
+      "latest/NpcBromide/NpcSpRct"
     ],
     "ver": 1,
     "gender": 2,
@@ -755,8 +755,8 @@
     "name": "豆狸",
     "rawName": "Timmy",
     "images": [
-      "latest/NpcIcon/rcm.png",
-      "latest/NpcBromide/NpcSpRcm.png"
+      "latest/NpcIcon/rcm",
+      "latest/NpcBromide/NpcSpRcm"
     ],
     "ver": 1,
     "gender": 2,
@@ -770,8 +770,8 @@
     "name": "幽幽",
     "rawName": "Wisp",
     "images": [
-      "latest/NpcIcon/gstA.png",
-      "latest/NpcPoster/NpcSpGst.png"
+      "latest/NpcIcon/gstA",
+      "latest/NpcPoster/NpcSpGst"
     ],
     "ver": 1,
     "gender": 2,
@@ -785,8 +785,8 @@
     "name": "巧美",
     "rawName": "Lottie",
     "images": [
-      "latest/NpcIcon/otg.png",
-      "latest/NpcPoster/NpcSpOtg.png"
+      "latest/NpcIcon/otg",
+      "latest/NpcPoster/NpcSpOtg"
     ],
     "ver": 13,
     "gender": 1,
@@ -800,8 +800,8 @@
     "name": "南瓜王",
     "rawName": "Jack",
     "images": [
-      "latest/NpcIcon/pkn.png",
-      "latest/NpcPoster/NpcSpPkn.png"
+      "latest/NpcIcon/pkn",
+      "latest/NpcPoster/NpcSpPkn"
     ],
     "ver": 6,
     "gender": 2,
@@ -815,8 +815,8 @@
     "name": "巴猎",
     "rawName": "Harvey",
     "images": [
-      "latest/NpcIcon/spn.png",
-      "latest/NpcPoster/NpcSpSpn.png"
+      "latest/NpcIcon/spn",
+      "latest/NpcPoster/NpcSpSpn"
     ],
     "ver": 1,
     "gender": 2,
@@ -830,8 +830,8 @@
     "name": "俞司廷",
     "rawName": "C.J.",
     "images": [
-      "latest/NpcIcon/bey.png",
-      "latest/NpcPoster/NpcSpBey.png"
+      "latest/NpcIcon/bey",
+      "latest/NpcPoster/NpcSpBey"
     ],
     "ver": 1,
     "gender": 2,
@@ -845,8 +845,8 @@
     "name": "曹卖",
     "rawName": "Daisy Mae",
     "images": [
-      "latest/NpcIcon/boc.png",
-      "latest/NpcPoster/NpcSpBoc.png"
+      "latest/NpcIcon/boc",
+      "latest/NpcPoster/NpcSpBoc"
     ],
     "ver": 1,
     "gender": 1,
@@ -860,8 +860,8 @@
     "name": "莫里",
     "rawName": "Orville",
     "images": [
-      "latest/NpcIcon/dod.png",
-      "latest/NpcPoster/NpcSpDod.png"
+      "latest/NpcIcon/dod",
+      "latest/NpcPoster/NpcSpDod"
     ],
     "ver": 1,
     "gender": 2,
@@ -875,8 +875,8 @@
     "name": "龙克斯",
     "rawName": "Flick",
     "images": [
-      "latest/NpcIcon/chy.png",
-      "latest/NpcPoster/NpcSpChy.png"
+      "latest/NpcIcon/chy",
+      "latest/NpcPoster/NpcSpChy"
     ],
     "ver": 1,
     "gender": 2,
@@ -890,8 +890,8 @@
     "name": "DJ KK",
     "rawName": "DJ KK",
     "images": [
-      "latest/NpcIcon/tkkB.png",
-      "latest/NpcPoster/NpcSpTkkB.png"
+      "latest/NpcIcon/tkkB",
+      "latest/NpcPoster/NpcSpTkkB"
     ],
     "ver": 13,
     "gender": 2,
@@ -905,8 +905,8 @@
     "name": "陆德里",
     "rawName": "Wilbur",
     "images": [
-      "latest/NpcIcon/doc.png",
-      "latest/NpcPoster/NpcSpDoc.png"
+      "latest/NpcIcon/doc",
+      "latest/NpcPoster/NpcSpDoc"
     ],
     "ver": 1,
     "gender": 2,
@@ -920,8 +920,8 @@
     "name": "纳提",
     "rawName": "Wardell",
     "images": [
-      "latest/NpcIcon/man.png",
-      "latest/NpcPoster/NpcSpMan.png"
+      "latest/NpcIcon/man",
+      "latest/NpcPoster/NpcSpMan"
     ],
     "ver": 13,
     "gender": 2,
@@ -933,8 +933,8 @@
     "name": "尼可",
     "rawName": "Niko",
     "images": [
-      "latest/NpcIcon/mnc.png",
-      "latest/NpcPoster/NpcSpMnc.png"
+      "latest/NpcIcon/mnc",
+      "latest/NpcPoster/NpcSpMnc"
     ],
     "ver": 13,
     "gender": 2,
@@ -946,7 +946,7 @@
     "name": "海盗",
     "rawName": "Gullivarrr",
     "images": [
-      "latest/NpcIcon/gulB.png"
+      "latest/NpcIcon/gulB"
     ],
     "ver": 4,
     "gender": 2,

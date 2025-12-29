@@ -15,11 +15,18 @@ const CDN_HOST = "https://acnhcdn.com/";
 export function processImageUrl(imageUrl: string): string {
   if (!imageUrl) return "";
 
-  // 如果已经是完整 URL（包含 http/https），直接返回
-  if (imageUrl.startsWith("http://") || imageUrl.startsWith("https://")) {
-    return imageUrl;
+  let url = imageUrl;
+  if (!imageUrl.startsWith("http://") && !imageUrl.startsWith("https://")) {
+    url = CDN_HOST + imageUrl;
   }
 
-  // 否则添加 CDN 前缀
-  return CDN_HOST + imageUrl;
+  if (
+    !url.endsWith(".png") &&
+    !url.endsWith(".jpg") &&
+    !url.endsWith(".jpeg") &&
+    !url.endsWith(".gif")
+  ) {
+    url += ".png";
+  }
+  return url;
 }

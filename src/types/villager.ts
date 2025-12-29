@@ -100,8 +100,8 @@ export interface Villager {
   furnitures: number[];
   wallpaper: number;
   flooring: number;
-  diyWorkbench: number;
-  kitchenware: number;
+  diyWorkbench: [number, number, number];
+  kitchenware: [number, number, number];
   houseImage?: string;
 
   nameColor: string;

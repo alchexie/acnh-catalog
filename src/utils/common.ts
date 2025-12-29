@@ -29,13 +29,6 @@ export function lightenColor(hex: string, percent = 0.7): string {
   return `rgb(${r},${g},${b})`;
 }
 /**
- * 通用辅助函数
- * 提供跨模块使用的工具方法
- */
-
-import type { Translation } from "../types";
-
-/**
  * 格式化数字为带千位分隔符的字符串
  * @param num 数字
  * @returns 格式化后的字符串，如 "1,234"
@@ -43,27 +36,6 @@ import type { Translation } from "../types";
 export function formatPrice(price: number | null | undefined): string {
   if (price == null || price === -1) return "--";
   return price.toLocaleString();
-}
-
-/**
- * 获取中文翻译文本
- * @param obj 包含translations的对象
- * @param fallback 回退值
- * @returns 中文文本或回退值
- */
-export function getChineseText<
-  T extends { translations?: Translation; name: string }
->(obj: T): string {
-  return obj.translations?.cNzh || obj.name || "--";
-}
-
-/**
- * 安全获取数组第一个元素
- * @param arr 数组
- * @returns 第一个元素或undefined
- */
-export function first<T>(arr: T[] | undefined): T | undefined {
-  return arr?.[0];
 }
 
 /**
@@ -80,19 +52,6 @@ export function joinArray(
 ): string {
   if (!arr || arr.length === 0) return fallback;
   return arr.join(separator);
-}
-
-/**
- * 检查值是否为空
- * @param value 任意值
- * @returns 是否为空
- */
-export function isEmpty(value: any): boolean {
-  if (value == null) return true;
-  if (typeof value === "string") return value.trim() === "";
-  if (Array.isArray(value)) return value.length === 0;
-  if (typeof value === "object") return Object.keys(value).length === 0;
-  return false;
 }
 
 /**
