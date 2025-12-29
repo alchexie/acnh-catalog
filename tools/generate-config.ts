@@ -60,7 +60,7 @@ function removeNullFields(obj: any): any {
   return cleaned;
 }
 
-function processFurnitureString(imageUrl: string): string {
+function processImageUrl(imageUrl: string): string {
   if (!imageUrl) return "";
   const CDN_PREFIX = "https://acnhcdn.com/";
   let url = imageUrl;
@@ -186,9 +186,9 @@ let newRecipeIdMap = new Map<number, NewRecipe>();
 let newRecipeNameMap = new Map<string, NewRecipe>();
 for (const oldRecipe of oldRecipes) {
   let images = [];
-  images.push(processFurnitureString(oldRecipe.image));
+  images.push(processImageUrl(oldRecipe.image));
   if (oldRecipe.imageSh)
-    images.push(processFurnitureString(oldRecipe.imageSh));
+    images.push(processImageUrl(oldRecipe.imageSh));
 
   if (oldRecipe.seasonEvent && !oldRecipe.seasonEventExclusive) {
     oldRecipe.seasonEvent = null; // 非专属季节活动配方不记录季节活动,仅有树篱
@@ -241,7 +241,7 @@ function processVariations(oldItem: OldItem): Variant[] {
     const patternColors = v.colors || oldItem.colors || [];
     variant.patterns.push({
       name: v.patternTranslations?.cNzh || v.pattern || "",
-      image: processFurnitureString(
+      image: processImageUrl(
         v.image || v.storageImage || v.closetImage || ""
       ),
       id: v.internalId,
@@ -296,30 +296,30 @@ function convertItem(oldItem: OldItem): NewItem {
 
   let images = [];
   if (oldItem.inventoryImage)
-    images.push(processFurnitureString(oldItem.inventoryImage));
-  if (oldItem.image) images.push(processFurnitureString(oldItem.image));
+    images.push(processImageUrl(oldItem.inventoryImage));
+  if (oldItem.image) images.push(processImageUrl(oldItem.image));
   if (oldItem.storageImage)
-    images.push(processFurnitureString(oldItem.storageImage));
+    images.push(processImageUrl(oldItem.storageImage));
   if (oldItem.closetImage)
-    images.push(processFurnitureString(oldItem.closetImage));
+    images.push(processImageUrl(oldItem.closetImage));
   if (oldItem.framedImage)
-    images.push(processFurnitureString(oldItem.framedImage));
+    images.push(processImageUrl(oldItem.framedImage));
   if (oldItem.albumImage)
-    images.push(processFurnitureString(oldItem.albumImage));
+    images.push(processImageUrl(oldItem.albumImage));
 
   if (images.length === 0) {
     let variation = oldItem.variations?.[0];
     if (variation) {
       if (variation.image)
-        images.push(processFurnitureString(variation.image));
+        images.push(processImageUrl(variation.image));
       if (variation.storageImage)
-        images.push(processFurnitureString(variation.storageImage));
+        images.push(processImageUrl(variation.storageImage));
       if (variation.closetImage)
-        images.push(processFurnitureString(variation.closetImage));
+        images.push(processImageUrl(variation.closetImage));
     }
   }
   if (oldItem.recipe) {
-    images.push(processFurnitureString(oldItem.recipe.image));
+    images.push(processImageUrl(oldItem.recipe.image));
   }
 
   let concepts =
@@ -372,7 +372,7 @@ for (const oldItem of oldItems) {
       id: oldItem.internalId || 0,
       name: oldItem.translations?.cNzh || oldItem.name,
       rawName: oldItem.name,
-      image: processFurnitureString(oldItem.image || ""),
+      image: processImageUrl(oldItem.image || ""),
       ver: versionAddedMap[oldItem.version!] || Version.The200,
       buy: oldItem.buy ?? undefined,
       backColor: oldItem.backColor || undefined,
@@ -428,9 +428,9 @@ for (const oldCreature of oldCreatures) {
     name: oldCreature.translations?.cNzh || oldCreature.name,
     rawName: oldCreature.name,
     images: [
-      processFurnitureString(oldCreature.iconImage),
-      processFurnitureString(oldCreature.critterpediaImage),
-      processFurnitureString(oldCreature.furnitureImage),
+      processImageUrl(oldCreature.iconImage),
+      processImageUrl(oldCreature.critterpediaImage),
+      processImageUrl(oldCreature.furnitureImage),
     ],
     ver: oldCreature.versionAdded
       ? versionAddedMap[oldCreature.versionAdded]
@@ -532,7 +532,7 @@ const speciesMap: Record<string, Species> = {
  * @param str 输入字符串，如 "3122,2_0" 或 "7142"
  * @returns 三个数字的数组
  */
-function parseNumbersFromString(
+function processFurnitureString(
   str: string | number
 ): [number, number, number] {
   const parts = String(str).split(",");
@@ -552,8 +552,8 @@ for (const oldVillager of oldVillagers) {
     name: oldVillager.translations?.cNzh || oldVillager.name,
     rawName: oldVillager.name,
     images: [
-      processFurnitureString(oldVillager.iconImage),
-      processFurnitureString(oldVillager.photoImage),
+      processImageUrl(oldVillager.iconImage),
+      processImageUrl(oldVillager.photoImage),
     ].filter((url) => url !== ""),
     ver: versionAddedMap[oldVillager.versionAdded],
     species: speciesMap[oldVillager.species],
@@ -573,10 +573,10 @@ for (const oldVillager of oldVillagers) {
     wallpaper: newItemNameMap.get(oldVillager.wallpaper)?.id || 0,
     flooring: newItemNameMap.get(oldVillager.flooring)?.id || 0,
     furnitures: oldVillager.furnitureList,
-    diyWorkbench: parseNumbersFromString(String(oldVillager.diyWorkbench)),
-    kitchenware: parseNumbersFromString(String(oldVillager.kitchenEquipment)),
+    diyWorkbench: processFurnitureString(String(oldVillager.diyWorkbench)),
+    kitchenware: processFurnitureString(String(oldVillager.kitchenEquipment)),
     houseImage: oldVillager.houseImage
-      ? processFurnitureString(oldVillager.houseImage)
+      ? processImageUrl(oldVillager.houseImage)
       : undefined,
     bubbleColor: oldVillager.bubbleColor,
     nameColor: oldVillager.nameColor,
@@ -594,8 +594,8 @@ for (const oldNpc of oldNpcs) {
     name: oldNpc.translations?.cNzh || oldNpc.name,
     rawName: oldNpc.name,
     images: [
-      processFurnitureString(oldNpc.iconImage),
-      processFurnitureString(oldNpc.photoImage || ""),
+      processImageUrl(oldNpc.iconImage),
+      processImageUrl(oldNpc.photoImage || ""),
     ].filter((url) => url !== ""),
     ver: oldNpc.versionAdded
       ? versionAddedMap[oldNpc.versionAdded]
@@ -616,7 +616,7 @@ for (const oldReaction of oldReactions) {
     order: oldReaction.num,
     name: oldReaction.translations?.cNzh || oldReaction.name,
     rawName: oldReaction.name,
-    image: processFurnitureString(oldReaction.image),
+    image: processImageUrl(oldReaction.image),
     ver: versionAddedMap[oldReaction.versionAdded],
     source: oldReaction.source,
     sourceNotes: oldReaction.sourceNotes || undefined,
@@ -643,7 +643,7 @@ for (const oldConstruction of oldConstructions) {
     id: id,
     name: oldConstruction.translations?.cNzh || oldConstruction.name || "",
     rawName: oldConstruction.name || "",
-    image: processFurnitureString(oldConstruction.image),
+    image: processImageUrl(oldConstruction.image),
     ver: versionAddedMap[oldConstruction.versionAdded] || Version.The200,
     buy: oldConstruction.buy || undefined,
     type: constructionTypeMap[oldConstruction.category || "Other"],
