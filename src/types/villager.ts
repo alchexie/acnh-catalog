@@ -102,6 +102,7 @@ export interface Villager {
   flooring: number;
   diyWorkbench: number;
   kitchenware: number;
+  houseImage?: string;
 
   nameColor: string;
   bubbleColor: string;

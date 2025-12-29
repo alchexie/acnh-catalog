@@ -13,6 +13,7 @@ import {
 } from "../services/dataService";
 import { joinArray, lightenColor } from "../utils/common";
 import ColorBlock from "./ColorBlock.vue";
+import { processImageUrl } from "../utils/imageUtils";
 
 interface Props {
   data: Villager;
@@ -127,6 +128,13 @@ const toggleFurnitureExpanded = () => {
         <div v-for="furniture in furnitureList" :key="furniture">
           <ItemIcon :itemId="furniture" :size="60" />
         </div>
+        <img
+          v-if="props.data.houseImage"
+          :src="processImageUrl(props.data.houseImage)"
+          :alt="'House Image'"
+          :style="{ width: '60px', height: '60px', borderRadius: '4px' }"
+          :key="'houseImage'"
+        />
       </div>
     </div>
   </BaseCard>

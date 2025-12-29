@@ -28,7 +28,10 @@ import {
 } from "../src/types/villager";
 import type { NPC as NewNPC } from "../src/types/npc";
 import type { Reaction as NewReaction } from "../src/types/reaction";
-import { ConstructionType, type Construction as NewConstruction } from "../src/types/construction";
+import {
+  ConstructionType,
+  type Construction as NewConstruction,
+} from "../src/types/construction";
 import { RecipeType } from "../src/types/recipe";
 import {
   CreatureType,
@@ -526,7 +529,6 @@ for (const oldVillager of oldVillagers) {
     images: [
       processImageUrlForStorage(oldVillager.iconImage),
       processImageUrlForStorage(oldVillager.photoImage),
-      processImageUrlForStorage(oldVillager.houseImage || ""),
     ].filter((url) => url !== ""),
     ver: versionAddedMap[oldVillager.versionAdded],
     species: speciesMap[oldVillager.species],
@@ -552,6 +554,9 @@ for (const oldVillager of oldVillagers) {
       newItemIdMap.get(
         Number(String(oldVillager.kitchenEquipment).split(",")[0])
       )?.id || 0,
+    houseImage: oldVillager.houseImage
+      ? processImageUrlForStorage(oldVillager.houseImage)
+      : undefined,
     bubbleColor: oldVillager.bubbleColor,
     nameColor: oldVillager.nameColor,
   };
@@ -622,11 +627,10 @@ for (const oldConstruction of oldConstructions) {
     buy: oldConstruction.buy || undefined,
     type: constructionTypeMap[oldConstruction.category || "Other"],
     source: oldConstruction.source || [],
-  }
+  };
   newConstructions.push(newConstruction);
 }
 newConstructions.sort((a, b) => a.id - b.id);
-
 
 // 输出到文件
 fs.writeFileSync(
