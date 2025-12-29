@@ -78,7 +78,7 @@ const handleClick = () => {
     @click="handleClick"
   >
     <span class="detail-row detail-center">
-      ID: {{ displayId || "N/A" }}
+      ID: {{ displayId }}
       <ColorBlock
         v-if="displayColors.length > 0"
         :displayColors="displayColors"
@@ -93,33 +93,36 @@ const handleClick = () => {
       <span class="detail-label">标签</span>
       <span class="detail-value">{{ itemModel.tagName }}</span>
     </div> -->
-
+    <div v-if="!itemModel.isClothing" class="detail-row">
+      <span class="detail-label">HHA分数</span>
+      <span class="detail-value">{{ itemModel.hhaPoints || "--" }}</span>
+    </div>
     <div v-if="!itemModel.isClothing" class="detail-row">
       <span class="detail-label">HHA主题</span>
-      <span class="detail-value">{{ itemModel.seriesName }}</span>
+      <span class="detail-value">{{ itemModel.hhaSeriesName }}</span>
     </div>
     <div v-if="!itemModel.isClothing" class="detail-row">
       <span class="detail-label">HHA场景</span>
       <span class="detail-value">
-        {{ joinArray(itemModel.conceptNames) }}
+        {{ joinArray(itemModel.hhaConceptNames) }}
       </span>
     </div>
     <div v-if="!itemModel.isClothing" class="detail-row">
       <span class="detail-label">HHA套组</span>
-      <span class="detail-value">{{ itemModel.setName }}</span>
+      <span class="detail-value">{{ itemModel.hhaSetName }}</span>
     </div>
     <div v-if="!itemModel.isClothing" class="detail-row">
       <span class="detail-label">HHA分类</span>
-      <span class="detail-value">{{ itemModel.categoryName }}</span>
+      <span class="detail-value">{{ itemModel.hhaCategoryName }}</span>
     </div>
 
     <div v-if="itemModel.isClothing" class="detail-row">
       <span class="detail-label">服饰风格</span>
-      <span class="detail-value">{{ joinArray(itemModel.styleNames) }}</span>
+      <span class="detail-value">{{ joinArray(itemModel.clothingStyleNames) }}</span>
     </div>
     <div v-if="itemModel.isClothing" class="detail-row">
       <span class="detail-label">服饰主题</span>
-      <span class="detail-value">{{ joinArray(itemModel.themeNames) }}</span>
+      <span class="detail-value">{{ joinArray(itemModel.closingThemeNames) }}</span>
     </div>
     <div class="detail-row">
       <span class="detail-label">{{ UI_TEXT.LABELS.SOURCE }}</span>

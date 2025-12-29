@@ -8,16 +8,16 @@ const BASE_PATH = import.meta.env.BASE_URL;
  */
 export const CONFIG = {
   DATA_FILES: {
-    ITEMS: `${BASE_PATH}config/acnh-items.small.json`,
     CATALOG: `${BASE_PATH}catalog_items.json`,
-    TRANSLATIONS: `${BASE_PATH}config/translations.json`,
-    VILLAGERS: `${BASE_PATH}config/acnh-villagers.json`,
-    NPCS: `${BASE_PATH}config/acnh-npcs.json`,
+    ITEMS: `${BASE_PATH}config/acnh-items.small.json`,
+    VILLAGERS: `${BASE_PATH}config/acnh-villagers.small.json`,
+    NPCS: `${BASE_PATH}config/acnh-npcs.small.json`,
     CREATURES: `${BASE_PATH}config/acnh-creatures.small.json`,
     REACTIONS: `${BASE_PATH}config/acnh-reactions.json`,
     RECIPES: `${BASE_PATH}config/acnh-recipes.small.json`,
     CONSTRUCTION: `${BASE_PATH}config/acnh-construction.json`,
     MESSAGE_CARDS: `${BASE_PATH}config/acnh-message-cards.json`,
+    TRANSLATIONS: `${BASE_PATH}config/translations.json`,
   },
 
   /**

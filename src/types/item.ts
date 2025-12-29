@@ -52,6 +52,13 @@ export const ClothingTypes: ItemType[] = [
   ItemType.Umbrellas,
   ItemType.ClothingOther,
 ];
+
+export const MuseumTypes: ItemType[] = [
+  ItemType.Creature,
+  ItemType.Fossils,
+  ItemType.Artwork,
+];
+
 export const MiscTypes: ItemType[] = [
   ItemType.ToolsGoods,
   ItemType.Fencing,
@@ -165,10 +172,11 @@ export interface Item {
   colors: Color[]; // 物品颜色列表
   size?: ItemSize; // 物品尺寸
   buy?: number; // 购买价格
-  sell?: number; // 出售价格
+  sell: number; // 出售价格
   source?: string[]; // 获取来源
 
   tag?: string; // 标签（家具）
+  points?: number; // HHA积分
   series?: string; // HHA主题
   concepts?: string[]; // HHA场景
   set?: string; // HHA套组

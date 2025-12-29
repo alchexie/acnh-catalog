@@ -17,8 +17,6 @@ export interface Translations {
   sources: Record<string, string>;
   tags: Record<string, string>;
   series: Record<string, string>;
-  hobbys: Record<string, string>;
-  species: Record<string, string>;
   concepts: Record<string, string>;
   styles: Record<string, string>;
   themes: Record<string, string>;

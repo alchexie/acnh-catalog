@@ -17,10 +17,6 @@ export function useReactionsData(): UseReactionsDataReturn {
   const allReactions = ref<Reaction[]>([]);
   const loading = ref(false);
   const error = ref("");
-
-  /**
-   * 加载表情反应数据
-   */
   const loadData = async (): Promise<void> => {
     try {
       loading.value = true;

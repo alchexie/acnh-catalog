@@ -1,23 +1,18 @@
-import type { Translation } from "./index";
+import type { Gender, Version } from "./index";
 
 /**
  * NPC数据类型
  */
 export interface NPC {
-  sourceSheet: string;
+  id: string;
+  order: number;
   name: string;
-  iconImage: string;
-  photoImage: string;
-  gender: string;
-  genderAsia?: string;
-  versionAdded: string | null;
-  npcId: string;
-  internalId: number;
+  rawName: string;
+  images: string[];
+  ver: Version;
+  gender: Gender;
   birthday: string;
+
   nameColor: string;
   bubbleColor: string;
-  iconFilename: string;
-  photoFilename: string;
-  uniqueEntryId: string;
-  translations?: Translation;
 }

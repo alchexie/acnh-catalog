@@ -11,12 +11,25 @@ import {
   items as oldItems,
   recipes as oldRecipes,
   creatures as oldCreatures,
+  villagers as oldVillagers,
+  npcs as oldNpcs,
 } from "animal-crossing";
 import type { Item as NewItem, Variant } from "../src/types/item";
 import { ItemType, Version, ItemSize, Color } from "../src/types/item";
 import type { Recipe as NewRecipe } from "../src/types/recipe";
+import {
+  Gender,
+  Hobby,
+  Personality,
+  Species,
+  type Villager as NewVillager,
+} from "../src/types/villager";
+import type { NPC as NewNPC } from "../src/types/npc";
 import { RecipeType } from "../src/types/recipe";
-import { CreatureType, type Creature as NewCreature } from "../src/types/creature";
+import {
+  CreatureType,
+  type Creature as NewCreature,
+} from "../src/types/creature";
 
 /**
  * 递归移除对象中的 null 和 undefined 字段
@@ -314,6 +327,7 @@ function convertItem(oldItem: OldItem): NewItem {
     source: oldItem.source,
     size: oldItem.size ? sizeMap[oldItem.size] : undefined,
     tag: oldItem.tag,
+    points: oldItem.hhaBasePoints ?? undefined,
     series: oldItem.series ?? undefined,
     themes:
       oldItem.themes && oldItem.themes.length > 0 ? oldItem.themes : undefined,
@@ -326,7 +340,7 @@ function convertItem(oldItem: OldItem): NewItem {
       ? newRecipeIdMap.get(oldItem.recipe.internalId)?.id
       : undefined,
     buy: oldItem.buy ?? undefined,
-    sell: oldItem.sell ?? undefined,
+    sell: oldItem.sell ?? 0,
     variants: variants.length > 0 ? variants : undefined,
   };
 }
@@ -401,6 +415,7 @@ for (const oldCreature of oldCreatures) {
     colors: newCreature.colors,
     size: newCreature.size,
     sell: newCreature.sell,
+    points: oldCreature.hhaBasePoints,
     category: oldCreature.hhaCategory ?? undefined,
   };
   newItems.push(newItem);
@@ -409,6 +424,136 @@ for (const oldCreature of oldCreatures) {
 }
 newCreatures.sort((a, b) => a.id - b.id);
 newItems.sort((a, b) => a.id - b.id);
+
+const genderMap: Record<string, Gender> = {
+  Male: Gender.Male,
+  Female: Gender.Female,
+};
+
+const personalityMap: Record<string, Personality> = {
+  Cranky: Personality.Cranky,
+  Jock: Personality.Jock,
+  Lazy: Personality.Lazy,
+  Smug: Personality.Smug,
+  Normal: Personality.Normal,
+  Peppy: Personality.Peppy,
+  Snooty: Personality.Snooty,
+  "Big Sister": Personality.BigSister,
+};
+
+const hobbyMap: Record<string, Hobby> = {
+  Education: Hobby.Education,
+  Fashion: Hobby.Fashion,
+  Fitness: Hobby.Fitness,
+  Music: Hobby.Music,
+  Nature: Hobby.Nature,
+  Play: Hobby.Play,
+};
+
+const speciesMap: Record<string, Species> = {
+  Alligator: Species.Alligator,
+  Anteater: Species.Anteater,
+  Bear: Species.Bear,
+  "Bear cub": Species.BearCub,
+  Bird: Species.Bird,
+  Bull: Species.Bull,
+  Cat: Species.Cat,
+  Chicken: Species.Chicken,
+  Cow: Species.Cow,
+  Deer: Species.Deer,
+  Dog: Species.Dog,
+  Duck: Species.Duck,
+  Eagle: Species.Eagle,
+  Elephant: Species.Elephant,
+  Frog: Species.Frog,
+  Goat: Species.Goat,
+  Gorilla: Species.Gorilla,
+  Hamster: Species.Hamster,
+  Hippo: Species.Hippo,
+  Horse: Species.Horse,
+  Kangaroo: Species.Kangaroo,
+  Koala: Species.Koala,
+  Lion: Species.Lion,
+  Monkey: Species.Monkey,
+  Mouse: Species.Mouse,
+  Octopus: Species.Octopus,
+  Ostrich: Species.Ostrich,
+  Penguin: Species.Penguin,
+  Pig: Species.Pig,
+  Rabbit: Species.Rabbit,
+  Rhino: Species.Rhino,
+  Sheep: Species.Sheep,
+  Squirrel: Species.Squirrel,
+  Tiger: Species.Tiger,
+  Wolf: Species.Wolf,
+};
+
+let newVillagers: NewVillager[] = [];
+for (const oldVillager of oldVillagers) {
+  const newVillager: NewVillager = {
+    id: oldVillager.filename,
+    name: oldVillager.translations?.cNzh || oldVillager.name,
+    rawName: oldVillager.name,
+    images: [
+      processImageUrlForStorage(oldVillager.iconImage),
+      processImageUrlForStorage(oldVillager.photoImage),
+      processImageUrlForStorage(oldVillager.houseImage || ""),
+    ].filter((url) => url !== ""),
+    ver: versionAddedMap[oldVillager.versionAdded],
+    species: speciesMap[oldVillager.species],
+    gender: genderMap[oldVillager.gender],
+    personality: personalityMap[oldVillager.personality],
+    subtype: oldVillager.subtype,
+    hobby: hobbyMap[oldVillager.hobby],
+    birthday: oldVillager.birthday,
+    styles: oldVillager.styles,
+    colors: Array.from(new Set(oldVillager.colors.map((c) => colorMap[c]))),
+    catchphrase: oldVillager.catchphrases.cNzh,
+    saying: oldVillager.favoriteSaying,
+
+    song: newItemNameMap.get(oldVillager.favoriteSong)?.id || 0,
+    cloting: newItemNameMap.get(oldVillager.defaultClothing)?.id || 0,
+    umbrella: newItemNameMap.get(oldVillager.defaultUmbrella)?.id || 0,
+    wallpaper: newItemNameMap.get(oldVillager.wallpaper)?.id || 0,
+    flooring: newItemNameMap.get(oldVillager.flooring)?.id || 0,
+    furnitures: oldVillager.furnitureList,
+    diyWorkbench:
+      newItemIdMap.get(Number(oldVillager.diyWorkbench.split(",")[0]))?.id || 0,
+    kitchenware:
+      newItemIdMap.get(
+        Number(String(oldVillager.kitchenEquipment).split(",")[0])
+      )?.id || 0,
+    bubbleColor: oldVillager.bubbleColor,
+    nameColor: oldVillager.nameColor,
+  };
+  newVillagers.push(newVillager);
+}
+newVillagers.sort((a, b) => a.id.localeCompare(b.id));
+
+let newNpcs: NewNPC[] = [];
+for (const oldNpc of oldNpcs) {
+  if (!oldNpc.iconImage) continue; // 跳过无效数据
+  const newNpc: NewNPC = {
+    id: oldNpc.npcId,
+    order: oldNpc.internalId,
+    name: oldNpc.translations?.cNzh || oldNpc.name,
+    rawName: oldNpc.name,
+    images: [
+      processImageUrlForStorage(oldNpc.iconImage),
+      processImageUrlForStorage(oldNpc.photoImage || ""),
+    ].filter((url) => url !== ""),
+    ver: oldNpc.versionAdded
+      ? versionAddedMap[oldNpc.versionAdded]
+      : Version.The100,
+    gender: genderMap[oldNpc.gender],
+    birthday: oldNpc.birthday,
+    nameColor: oldNpc.nameColor!,
+    bubbleColor: oldNpc.bubbleColor!,
+  };
+  newNpcs.push(newNpc);
+}
+newNpcs.sort((a, b) => a.order - b.order);
+
 // 输出到文件
 fs.writeFileSync(
   path.join(outputPath, "acnh-items.small.json"),
@@ -431,5 +576,17 @@ fs.writeFileSync(
 fs.writeFileSync(
   path.join(outputPath, "acnh-creatures.small.json"),
   JSON.stringify(newCreatures.map(removeNullFields), null, 2),
+  "utf-8"
+);
+
+fs.writeFileSync(
+  path.join(outputPath, "acnh-villagers.small.json"),
+  JSON.stringify(newVillagers.map(removeNullFields), null, 2),
+  "utf-8"
+);
+
+fs.writeFileSync(
+  path.join(outputPath, "acnh-npcs.small.json"),
+  JSON.stringify(newNpcs.map(removeNullFields), null, 2),
   "utf-8"
 );

@@ -7,6 +7,10 @@ import {
   type Creature,
   type Reaction,
   CreatureType,
+  Gender,
+  Personality,
+  Hobby,
+  Species,
 } from "../types";
 import { RecipeType, type Recipe } from "../types/recipe";
 
@@ -14,11 +18,10 @@ import type { Construction } from "../types/construction";
 import type { MessageCard } from "../types/messagecard";
 import { CONFIG } from "../config";
 import { ItemType, Version, ItemSize, Color } from "../types/item";
-import { PERSONALITY_MAP } from "../constants";
+import { ENTITY_ICONS } from "../constants";
 
 let translationsCache: Translations | null = null;
 
-// 反向映射：数字到字符串
 export const ItemTypeNameMap: Record<ItemType, string> = {
   [ItemType.Housewares]: "家具/家具",
   [ItemType.Miscellaneous]: "家具/小物件",
@@ -123,45 +126,158 @@ export const CreatureTypeNameMap: Record<CreatureType, string> = {
   [CreatureType.Fish]: "鱼类",
   [CreatureType.SeaCreatures]: "海洋生物",
 };
-/**
- * 加载翻译数据
- * @returns 翻译数据对象
- */
-export async function loadTranslations(): Promise<Translations> {
-  if (translationsCache) {
-    return translationsCache;
-  }
 
-  try {
-    const response = await fetch(CONFIG.DATA_FILES.TRANSLATIONS);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    translationsCache = await response.json();
-    return translationsCache!;
-  } catch (error) {
-    console.error("加载翻译数据失败:", error);
-    // 返回空翻译对象作为降级方案
-    return {
-      sources: {},
-      tags: {},
-      series: {},
-      hobbys: {},
-      species: {},
-      concepts: {},
-      styles: {},
-      themes: {},
-      sets: {},
-      categories: {},
-      seasons: {},
-    };
-  }
+function getTranslation(
+  key: string,
+  translationMap: Record<string, string> | undefined
+): string {
+  return translationMap?.[key] || key;
 }
 
-/**
- * 加载物品数据
- * @returns 原始物品数据数组
- */
+export function getItemTypeName(type: ItemType): string {
+  return ItemTypeNameMap[type];
+}
+
+export function getVersionName(ver: Version): string {
+  return versionNameMap[ver];
+}
+
+export function getSizeName(size: ItemSize): string {
+  return itemSizeNameMap[size];
+}
+
+export function getColorName(color: Color | string): string {
+  if (typeof color === "string") {
+    color = Object.entries(Color).find(([k]) => k === color)?.[1] as Color;
+  }
+  return colorNameMap[color];
+}
+
+export function getSourceName(source: string): string {
+  return getTranslation(source, translationsCache?.sources);
+}
+
+export function getTagName(tag: string): string {
+  return getTranslation(tag, translationsCache?.tags);
+}
+
+export function getHHASeriesName(series: string): string {
+  return getTranslation(series, translationsCache?.series);
+}
+
+export function getHHASetName(set: string): string {
+  return getTranslation(set, translationsCache?.sets);
+}
+
+export function getHHAConceptName(concept: string): string {
+  return getTranslation(concept, translationsCache?.concepts);
+}
+
+export function getHHACategoryName(category: string): string {
+  return getTranslation(category, translationsCache?.categories);
+}
+
+export function getClothingStyleName(style: string): string {
+  return getTranslation(style, translationsCache?.styles);
+}
+
+export function getClothingThemeName(theme: string): string {
+  return getTranslation(theme, translationsCache?.themes);
+}
+
+export function getRecipeTypeName(type: RecipeType): string {
+  return RecipeTypeNameMap[type] || "";
+}
+
+export function getSeasonName(season: string): string {
+  return getTranslation(season, translationsCache?.seasons);
+}
+
+export function getCreatureTypeName(type: CreatureType): string {
+  return CreatureTypeNameMap[type];
+}
+
+export const PersonalityNameMap: Record<Personality, string> = {
+  [Personality.Cranky]: "暴躁",
+  [Personality.Jock]: "运动",
+  [Personality.Lazy]: "悠闲",
+  [Personality.Smug]: "自恋",
+  [Personality.Normal]: "普通",
+  [Personality.Peppy]: "元气",
+  [Personality.Snooty]: "成熟",
+  [Personality.BigSister]: "大姐姐",
+} as const;
+
+export const HobbyNameMap: Record<Hobby, string> = {
+  [Hobby.Education]: "教育",
+  [Hobby.Fashion]: "时尚",
+  [Hobby.Fitness]: "健身",
+  [Hobby.Music]: "音乐",
+  [Hobby.Nature]: "自然",
+  [Hobby.Play]: "游戏",
+};
+
+export const SpeciesNameMap: Record<Species, string> = {
+  [Species.Alligator]: "鳄鱼",
+  [Species.Anteater]: "食蚁兽",
+  [Species.Bear]: "熊",
+  [Species.BearCub]: "熊仔",
+  [Species.Bird]: "鸟",
+  [Species.Bull]: "公牛",
+  [Species.Cat]: "猫",
+  [Species.Chicken]: "鸡",
+  [Species.Cow]: "奶牛",
+  [Species.Deer]: "鹿",
+  [Species.Dog]: "狗",
+  [Species.Duck]: "鸭",
+  [Species.Eagle]: "鹰",
+  [Species.Elephant]: "大象",
+  [Species.Frog]: "青蛙",
+  [Species.Goat]: "山羊",
+  [Species.Gorilla]: "大猩猩",
+  [Species.Hamster]: "仓鼠",
+  [Species.Hippo]: "河马",
+  [Species.Horse]: "马",
+  [Species.Kangaroo]: "袋鼠",
+  [Species.Koala]: "考拉",
+  [Species.Lion]: "狮子",
+  [Species.Monkey]: "猴子",
+  [Species.Mouse]: "老鼠",
+  [Species.Octopus]: "章鱼",
+  [Species.Ostrich]: "鸵鸟",
+  [Species.Penguin]: "企鹅",
+  [Species.Pig]: "猪",
+  [Species.Rabbit]: "兔子",
+  [Species.Rhino]: "犀牛",
+  [Species.Sheep]: "绵羊",
+  [Species.Squirrel]: "松鼠",
+  [Species.Tiger]: "老虎",
+  [Species.Wolf]: "狼",
+} as const;
+
+export function getPersonalityName(personality: Personality): string {
+  return PersonalityNameMap[personality];
+}
+
+export function getHobbyName(hobby: Hobby): string {
+  return HobbyNameMap[hobby];
+}
+
+export function getSpeciesName(species: Species): string {
+  return SpeciesNameMap[species];
+}
+
+export function getGenderName(gender: Gender): string {
+  if (gender === Gender.Male) return "男性";
+  if (gender === Gender.Female) return "女性";
+  return gender;
+}
+
+export function getGenderIcon(gender: Gender): string {
+  return gender === Gender.Male ? ENTITY_ICONS.MALE : ENTITY_ICONS.FEMALE;
+}
+
+
 export async function loadItemsData(): Promise<Item[]> {
   try {
     const response = await fetch(CONFIG.DATA_FILES.ITEMS);
@@ -175,10 +291,6 @@ export async function loadItemsData(): Promise<Item[]> {
   }
 }
 
-/**
- * 加载目录数据（用户拥有的物品）
- * @returns 包含拥有物品名称和ID集合的对象
- */
 export async function loadCatalogData(): Promise<Set<number>> {
   try {
     const response = await fetch(CONFIG.DATA_FILES.CATALOG);
@@ -201,174 +313,6 @@ export async function loadCatalogData(): Promise<Set<number>> {
   }
 }
 
-/**
- * 获取翻译文本的通用函数
- * @param key 翻译键
- * @param translationMap 翻译映射表
- * @returns 翻译后的文本，如果没有找到则返回原键
- */
-function getTranslation(
-  key: string,
-  translationMap: Record<string, string> | undefined
-): string {
-  return translationMap?.[key] || key;
-}
-
-/**
- * 获取类型名称
- * @param type 类型键（数字或字符串）
- * @returns 枚举键名
- */
-export function getItemTypeName(type: ItemType): string {
-  return ItemTypeNameMap[type] || "";
-}
-
-/**
- * 获取版本名称
- * @param ver 版本键（数字）
- * @returns 版本字符串
- */
-export function getVersionName(ver: Version): string {
-  return versionNameMap[ver] || "";
-}
-
-/**
- * 获取尺寸名称
- * @param size 尺寸键（数字）
- * @returns 尺寸字符串
- */
-export function getSizeName(size: ItemSize): string {
-  return itemSizeNameMap[size] || "";
-}
-
-/**
- * 获取颜色名称
- * @param color 颜色键（数字或字符串）
- * @returns 翻译后的颜色名称
- */
-export function getColorName(color: Color | string): string {
-  if (typeof color === "string") {
-    color = Object.entries(Color).find(([k]) => k === color)?.[1] as Color;
-  }
-  return colorNameMap[color] || "";
-}
-
-/**
- * 获取来源名称
- * @param source 来源键
- * @returns 翻译后的来源名称
- */
-export function getSourceName(source: string): string {
-  return getTranslation(source, translationsCache?.sources);
-}
-
-/**
- * 获取标签名称
- * @param tag 标签键
- * @returns 翻译后的标签名称
- */
-export function getTagName(tag: string): string {
-  return getTranslation(tag, translationsCache?.tags);
-}
-
-/**
- * 获取系列名称
- * @param series 系列键
- * @returns 翻译后的系列名称
- */
-export function getSeriesName(series: string): string {
-  return getTranslation(series, translationsCache?.series);
-}
-
-/**
- * 获取爱好名称
- * @param hobby 爱好键
- * @returns 翻译后的爱好名称
- */
-export function getHobbyName(hobby: string): string {
-  return getTranslation(hobby, translationsCache?.hobbys);
-}
-
-/**
- * 获取物种名称
- * @param species 物种键
- * @returns 翻译后的物种名称
- */
-export function getSpeciesName(species: string): string {
-  return getTranslation(species, translationsCache?.species);
-}
-
-/**
- * 获取概念名称
- * @param concept 概念键
- * @returns 翻译后的概念名称
- */
-export function getConceptName(concept: string): string {
-  return getTranslation(concept, translationsCache?.concepts);
-}
-
-/**
- * 获取风格名称
- * @param style 风格键
- * @returns 翻译后的风格名称
- */
-export function getStyleName(style: string): string {
-  return getTranslation(style, translationsCache?.styles);
-}
-
-/**
- * 获取主题名称
- * @param theme 主题键
- * @returns 翻译后的主题名称
- */
-export function getThemeName(theme: string): string {
-  return getTranslation(theme, translationsCache?.themes);
-}
-
-/**
- * 获取套组名称
- * @param set 套组键
- * @returns 翻译后的套组名称
- */
-export function getSetName(set: string): string {
-  return getTranslation(set, translationsCache?.sets);
-}
-
-/**
- * 获取HHA分类名称
- * @param category 分类键
- * @returns 翻译后的分类名称
- */
-export function getCategoryName(category: string): string {
-  return getTranslation(category, translationsCache?.categories);
-}
-
-export function getPersonalityName(personality: string): string {
-  return PERSONALITY_MAP[personality] || personality;
-}
-
-export function getGenderName(gender: string): string {
-  if (gender === "Male") return "男性";
-  if (gender === "Female") return "女性";
-  return gender;
-}
-
-export function getRecipeTypeName(type: RecipeType): string {
-  return RecipeTypeNameMap[type] || "";
-}
-
-export function getSeasonName(season: string): string {
-  return getTranslation(season, translationsCache?.seasons);
-}
-
-export function getCreatureTypeName(type: CreatureType): string {
-  return CreatureTypeNameMap[type] || "";
-}
-
-/**
- * 加载村民数据
- * @returns 村民数据数组
- */
 export async function loadVillagersData(): Promise<Villager[]> {
   try {
     const response = await fetch(CONFIG.DATA_FILES.VILLAGERS);
@@ -382,10 +326,6 @@ export async function loadVillagersData(): Promise<Villager[]> {
   }
 }
 
-/**
- * 加载NPC数据
- * @returns NPC数据数组
- */
 export async function loadNPCsData(): Promise<NPC[]> {
   try {
     const response = await fetch(CONFIG.DATA_FILES.NPCS);
@@ -399,10 +339,6 @@ export async function loadNPCsData(): Promise<NPC[]> {
   }
 }
 
-/**
- * 加载生物数据（昆虫、鱼类等）
- * @returns 生物数据数组
- */
 export async function loadCreaturesData(): Promise<Creature[]> {
   try {
     const response = await fetch(CONFIG.DATA_FILES.CREATURES);
@@ -416,10 +352,6 @@ export async function loadCreaturesData(): Promise<Creature[]> {
   }
 }
 
-/**
- * 加载表情反应数据
- * @returns 表情反应数据数组
- */
 export async function loadReactionsData(): Promise<Reaction[]> {
   try {
     const response = await fetch(CONFIG.DATA_FILES.REACTIONS);
@@ -433,10 +365,6 @@ export async function loadReactionsData(): Promise<Reaction[]> {
   }
 }
 
-/**
- * 加载DIY配方数据
- * @returns DIY配方数据数组
- */
 export async function loadRecipesData(): Promise<Recipe[]> {
   try {
     const response = await fetch(CONFIG.DATA_FILES.RECIPES);
@@ -450,10 +378,6 @@ export async function loadRecipesData(): Promise<Recipe[]> {
   }
 }
 
-/**
- * 加载改建数据
- * @returns 改建数据数组
- */
 export async function loadConstructionData(): Promise<Construction[]> {
   try {
     const response = await fetch(CONFIG.DATA_FILES.CONSTRUCTION);
@@ -467,10 +391,6 @@ export async function loadConstructionData(): Promise<Construction[]> {
   }
 }
 
-/**
- * 加载消息卡片数据
- * @returns 消息卡片数据数组
- */
 export async function loadMessageCardsData(): Promise<MessageCard[]> {
   try {
     const response = await fetch(CONFIG.DATA_FILES.MESSAGE_CARDS);

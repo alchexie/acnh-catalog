@@ -5,17 +5,24 @@ import {
   ItemTypeNameMap,
   versionNameMap,
   itemSizeNameMap,
-  getSeriesName,
+  getHHASeriesName,
   getTagName,
   getSourceName,
   getColorName,
-  getStyleName,
-  getConceptName,
-  getSetName,
-  getThemeName,
-  getCategoryName,
+  getClothingStyleName,
+  getHHAConceptName,
+  getHHASetName,
+  getClothingThemeName,
+  getHHACategoryName,
 } from "../services/dataService";
-import { Color, Version, ItemSize, FurnitureTypes, ClothingTypes, ItemType } from "../types/item";
+import {
+  Color,
+  Version,
+  ItemSize,
+  FurnitureTypes,
+  ClothingTypes,
+  ItemType,
+} from "../types/item";
 import { formatPrice } from "../utils/common";
 import type { Recipe } from "../types/recipe";
 import { useRecipesData } from "../composables/useRecipesData";
@@ -119,15 +126,15 @@ export class ItemModel {
   }
 
   get buyPrice(): number | null {
-    return this._data.buy ?? null;
+    return this._data.buy || null;
   }
 
   get buyPriceStr(): string {
     return formatPrice(this.buyPrice);
   }
 
-  get sellPrice(): number | null {
-    return this._data.sell ?? null;
+  get sellPrice(): number {
+    return this._data.sell;
   }
 
   get sellPriceStr(): string {
@@ -154,52 +161,56 @@ export class ItemModel {
     return this.sources.map((s) => getSourceName(s) || s);
   }
 
-  get series(): string {
+  get hhaPoints(): number | null {
+    return this._data.points || null;
+  }
+
+  get hhaSeries(): string {
     return this._data.series || "";
   }
 
-  get seriesName(): string {
-    return getSeriesName(this.series) || "--";
+  get hhaSeriesName(): string {
+    return getHHASeriesName(this.hhaSeries) || "--";
   }
 
-  get themes(): string[] {
-    return this._data.themes || [];
-  }
-
-  get themeNames(): string[] {
-    return this.themes.map((t) => getThemeName(t) || t);
-  }
-
-  get set(): string {
-    return this._data.set || "";
-  }
-
-  get setName(): string {
-    return getSetName(this.set) || "--";
-  }
-
-  get styles(): string[] {
-    return this._data.styles || [];
-  }
-
-  get styleNames(): string[] {
-    return this.styles.map((style) => getStyleName(style) || style);
-  }
-
-  get concepts(): string[] {
+  get hhaConcepts(): string[] {
     return this._data.concepts || [];
   }
 
-  get conceptNames(): string[] {
-    return this.concepts.map((concept) => getConceptName(concept) || "");
+  get hhaConceptNames(): string[] {
+    return this.hhaConcepts.map((c) => getHHAConceptName(c) || c);
   }
 
-  get category(): string {
+  get hhaSet(): string {
+    return this._data.set || "";
+  }
+
+  get hhaSetName(): string {
+    return getHHASetName(this.hhaSet) || "--";
+  }
+
+  get hhaCategory(): string {
     return this._data.category || "";
   }
 
-  get categoryName(): string {
-    return getCategoryName(this.category) || "--";
+  get hhaCategoryName(): string {
+    return getHHACategoryName(this.hhaCategory) || "--";
+  }
+
+  get closingThemes(): string[] {
+    return this._data.themes || [];
+  }
+
+  get closingThemeNames(): string[] {
+    return this.closingThemes.map((t) => getClothingThemeName(t) || t);
+  }
+
+  get clothingStyles(): string[] {
+    return this._data.styles || [];
+  }
+
+  get clothingStyleNames(): string[] {
+    return this.clothingStyles.map((s) => getClothingStyleName(s) || s);
   }
 
   get recipeId(): number | null {
@@ -392,7 +403,7 @@ export class ItemModel {
 
   matchesSeries(series: string): boolean {
     if (!series) return true;
-    return this.series === series;
+    return this.hhaSeries === series;
   }
 
   matchesSource(source: string): boolean {
@@ -402,26 +413,26 @@ export class ItemModel {
 
   matchesTheme(theme: string): boolean {
     if (!theme) return true;
-    return this.themes.includes(theme);
+    return this.closingThemes.includes(theme);
   }
 
   matchesStyle(style: string): boolean {
     if (!style) return true;
-    return this.styles.includes(style);
+    return this.clothingStyles.includes(style);
   }
 
   matchesConcept(concept: string): boolean {
     if (!concept) return true;
-    return this.concepts.includes(concept);
+    return this.hhaConcepts.includes(concept);
   }
 
   matchesSet(set: string): boolean {
     if (!set) return true;
-    return this.set === set;
+    return this.hhaSet === set;
   }
 
   matchesCategory(category: string): boolean {
     if (!category) return true;
-    return this.category === category;
+    return this.hhaCategory === category;
   }
 }

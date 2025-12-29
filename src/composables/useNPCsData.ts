@@ -17,19 +17,13 @@ export function useNPCsData(): UseNPCsDataReturn {
   const allNPCs = ref<NPC[]>([]);
   const loading = ref(false);
   const error = ref("");
-
-  /**
-   * 加载NPC数据
-   */
   const loadData = async (): Promise<void> => {
     try {
       loading.value = true;
       error.value = "";
 
       const npcs = await loadNPCsData();
-      // 过滤掉 iconImage 为 null 的 NPC，并按 internalId 排序
       allNPCs.value = npcs
-        .filter((npc) => npc.iconImage !== null)
         .sort((a, b) => a.internalId - b.internalId);
 
       loading.value = false;

@@ -4,8 +4,8 @@ import { useRouter } from "vue-router";
 import { useItemsData } from "../composables/useItemsData";
 
 const props = defineProps({
-  itemName: {
-    type: String,
+  itemId: {
+    type: Number,
     required: true,
   },
   size: {
@@ -15,10 +15,10 @@ const props = defineProps({
 });
 
 const router = useRouter();
-const { itemNameMap } = useItemsData();
+const { itemIdMap } = useItemsData();
 
-const item = computed(() => itemNameMap.value[props.itemName]);
-const chineseName = computed(() => item.value?.name || "");
+const itemModel = computed(() => itemIdMap.value[props.itemId]);
+const name = computed(() => itemModel.value?.name || "");
 
 const showPreview = ref(false);
 
@@ -31,7 +31,7 @@ const handleMouseLeave = () => {
 };
 
 const handleClick = () => {
-  if (item.value?.id) router.push(`/item/${item.value.id}`);
+  if (itemModel.value?.id) router.push(`/item/${itemModel.value.id}`);
 };
 </script>
 
@@ -39,15 +39,15 @@ const handleClick = () => {
   <div
     class="item-icon-container"
     :style="{ width: props.size + 'px' }"
-    :class="{ 'item-icon-clickable': item?.id }"
+    :class="{ 'item-icon-clickable': itemModel?.id }"
     @click="handleClick"
     @mouseover="handleMouseOver"
     @mouseleave="handleMouseLeave"
   >
     <img
-      v-if="item?.image"
-      :src="item.image"
-      :alt="props.itemName"
+      v-if="itemModel?.image"
+      :src="itemModel.image"
+      :alt="itemModel?.name"
       :style="{ width: props.size + 'px', height: props.size + 'px' }"
       class="item-icon"
       loading="lazy"
@@ -55,14 +55,14 @@ const handleClick = () => {
     <transition name="preview">
       <div v-if="showPreview" class="preview-overlay">
         <img
-          v-if="item?.image"
-          :src="item.image"
+          v-if="itemModel?.image"
+          :src="itemModel.image"
           alt="preview"
           class="preview-icon"
           loading="lazy"
         />
-        <hr v-if="chineseName" class="preview-separator" />
-        <span v-if="chineseName" class="preview-name">{{ chineseName }}</span>
+        <hr v-if="name" class="preview-separator" />
+        <span v-if="name" class="preview-name">{{ name }}</span>
       </div>
     </transition>
   </div>

@@ -1,16 +1,18 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
 import type { Villager } from "../types/villager";
-import { ENTITY_ICONS } from "../constants";
-import { getChineseText, lightenColor } from "../utils/common";
 import { useItemsData } from "../composables/useItemsData";
 import BaseCard from "./BaseCard.vue";
 import ItemIcon from "./ItemIcon.vue";
 import {
+  getClothingStyleName,
+  getGenderIcon,
   getHobbyName,
   getPersonalityName,
   getSpeciesName,
 } from "../services/dataService";
+import { joinArray, lightenColor } from "../utils/common";
+import ColorBlock from "./ColorBlock.vue";
 
 interface Props {
   data: Villager;
@@ -19,47 +21,32 @@ interface Props {
 const props = defineProps<Props>();
 const { loadData } = useItemsData();
 
-// 组件挂载时确保物品数据已加载
 onMounted(() => {
   loadData();
 });
 
-// 当前图片索引
 const currentImageIndex = ref(0);
-
-// 家具列表是否展开
 const isFurnitureExpanded = ref(false);
-
-// 当前形状
 const currentShape = computed(() =>
   currentImageIndex.value === 0 ? "circle" : "rounded"
 );
 
-// 获取性别emoji
-const getGenderIcon = (gender: string): string => {
-  return gender === "Male" ? ENTITY_ICONS.MALE : ENTITY_ICONS.FEMALE;
-};
-
-// 获取家具列表
 const furnitureList = computed(() => {
   return [
-    ...(props.data.furnitureNameList || []),
+    ...props.data.furnitures,
     props.data.wallpaper,
     props.data.flooring,
+    props.data.diyWorkbench,
+    props.data.kitchenware,
   ];
 });
 
-// 获取默认物品列表（服装、雨伞、歌曲）
 const defaultItems = computed(() => {
-  return [
-    props.data.defaultClothing,
-    props.data.defaultUmbrella,
-    props.data.favoriteSong,
-  ];
+  return [props.data.cloting, props.data.umbrella, props.data.song];
 });
 
 const handleClick = () => {
-  window.open(`https://nookipedia.com/wiki/${props.data.name}`, "_blank");
+  window.open(`https://nookipedia.com/wiki/${props.data.rawName}`, "_blank");
 };
 
 const handleImageIndexChanged = (index: number) => {
@@ -74,29 +61,26 @@ const toggleFurnitureExpanded = () => {
 <template>
   <BaseCard
     colorClass="card--green-dark"
-    :version="props.data.versionAdded"
-    :images="[props.data.iconImage, props.data.photoImage, props.data.houseImage].filter((img): img is string => Boolean(img))"
-    :displayName="getChineseText(props.data)"
+    :version="props.data.ver"
+    :images="props.data.images"
+    :displayName="props.data.name"
     :shape="currentShape"
     :style="{
-      background: props.data.bubbleColor || '#4a9b4f',
-      border:
-        '3px solid ' + lightenColor(props.data.bubbleColor || '#4a9b4f', -0.5),
+      background: props.data.bubbleColor,
+      border: '3px solid ' + lightenColor(props.data.bubbleColor, -0.5),
     }"
     @click="handleClick"
     @image-index-changed="handleImageIndexChanged"
   >
     <template #name>
-      <h3
-        class="card-name"
-        :style="{ color: props.data.nameColor || '#4a9b4f' }"
-      >
-        {{ getChineseText(props.data) }}
+      <h3 class="card-name" :style="{ color: props.data.nameColor }">
+        {{ props.data.name }}
       </h3>
     </template>
     <span class="detail-row detail-center">
       {{ getGenderIcon(props.data.gender) }}
       {{ getSpeciesName(props.data.species) }}
+      <ColorBlock :displayColors="props.data.colors" :size="16" />
     </span>
     <span class="detail-row detail-center">
       {{ getPersonalityName(props.data.personality) }}({{ props.data.subtype }})
@@ -104,14 +88,27 @@ const toggleFurnitureExpanded = () => {
       {{ getHobbyName(props.data.hobby) }}
     </span>
     <span class="detail-row detail-center"> 🎂 {{ props.data.birthday }} </span>
-
+    <span class="detail-row">
+      <span class="detail-label">服饰风格</span>
+      <span class="detail-value">{{
+        joinArray(props.data.styles.map(getClothingStyleName))
+      }}</span>
+    </span>
+    <span class="detail-row">
+      <span class="detail-label">口头禅</span>
+      <span class="detail-value">{{ props.data.catchphrase }}</span>
+    </span>
+    <span class="detail-row">
+      <span class="detail-label">格言</span>
+      <span class="detail-value">{{ props.data.saying }}</span>
+    </span>
     <!-- 默认物品图片 -->
     <div v-if="defaultItems.length > 0" class="default-items-section">
       <div class="default-items-list">
         <ItemIcon
           v-for="item in defaultItems"
           :key="item"
-          :itemName="item"
+          :itemId="item"
           :size="60"
         />
       </div>
@@ -128,7 +125,7 @@ const toggleFurnitureExpanded = () => {
       </span>
       <div v-if="isFurnitureExpanded" class="furniture-list">
         <div v-for="furniture in furnitureList" :key="furniture">
-          <ItemIcon :itemName="furniture" :size="60" />
+          <ItemIcon :itemId="furniture" :size="60" />
         </div>
       </div>
     </div>

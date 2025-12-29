@@ -64,35 +64,3 @@ export const UI_TEXT = {
   },
   CURRENCY: "铃钱",
 } as const;
-
-/**
- * 性格翻译映射
- */
-export const PERSONALITY_MAP: Record<string, string> = {
-  Cranky: "暴躁",
-  Jock: "运动",
-  Lazy: "悠闲",
-  Smug: "自恋",
-  Normal: "普通",
-  Peppy: "元气",
-  Snooty: "大姐姐",
-  "Big Sister": "大姐头",
-} as const;
-
-/**
- * CSS类名前缀
- */
-export const CSS_PREFIX = {
-  GRID: "grid",
-  CARD: "card",
-  TAB: "tab",
-} as const;
-
-/**
- * 默认值
- */
-export const DEFAULTS = {
-  PAGE_SIZE: 100,
-  DEBOUNCE_DELAY: 300,
-  IMAGE_PLACEHOLDER: "/placeholder.png",
-} as const;

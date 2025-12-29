@@ -12,10 +12,10 @@ const { allVillagers, loading, error, loadData } = useVillagersData();
 
 // 多条件筛选
 const filters = ref({
-  species: "",
-  gender: "",
-  personality: "",
-  hobby: "",
+  species: 0,
+  gender: 0,
+  personality: 0,
+  hobby: 0,
 });
 const isFilterExpanded = ref(false);
 
@@ -52,15 +52,18 @@ const handlePageChange = (page: number) => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
-// 组件挂载时加载数据
 onMounted(() => {
   loadData();
 });
 
 // 当筛选条件改变时，重置到第一页
-watch(filters, () => {
-  currentPage.value = 1;
-}, { deep: true });
+watch(
+  filters,
+  () => {
+    currentPage.value = 1;
+  },
+  { deep: true }
+);
 </script>
 
 <template>

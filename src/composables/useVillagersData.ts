@@ -25,9 +25,7 @@ export function useVillagersData(): UseVillagersDataReturn {
     try {
       loading.value = true;
       error.value = "";
-
       allVillagers.value = await loadVillagersData();
-
       loading.value = false;
     } catch (err) {
       console.error("加载村民数据失败:", err);

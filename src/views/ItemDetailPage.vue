@@ -11,7 +11,7 @@ import { joinArray } from "../utils";
 
 const route = useRoute();
 const router = useRouter();
-const { itemIdMap, itemNameMap, loading, error, loadData } = useItemsData();
+const { itemIdMap, loading, error, loadData } = useItemsData();
 
 const itemId = computed(() => Number(route.params.id));
 const itemModel = computed(() => itemIdMap.value[itemId.value]);
@@ -189,17 +189,17 @@ onMounted(() => {
               <span>🏷️ {{ itemModel.tagName }}</span>
             </div>
 
-            <div v-if="itemModel.series" class="info-item">
+            <div v-if="itemModel.hhaSeries" class="info-item">
               <label>系列:</label>
-              <span>📦 {{ itemModel.seriesName }}</span>
+              <span>📦 {{ itemModel.hhaSeriesName }}</span>
             </div>
 
-            <div v-if="itemModel.buyPrice" class="info-item">
+            <div class="info-item">
               <label>购买价格:</label>
               <span class="price">💰 {{ itemModel.buyPriceStr }} 铃钱</span>
             </div>
 
-            <div v-if="itemModel.sellPrice" class="info-item">
+            <div class="info-item">
               <label>出售价格:</label>
               <span class="price">💵 {{ itemModel.sellPriceStr }} 铃钱</span>
             </div>

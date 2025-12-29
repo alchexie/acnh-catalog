@@ -4,16 +4,16 @@ import { Color, ItemType, ItemSize, Version } from "../types/item";
 import {
   getItemTypeName,
   getColorName,
-  getSeriesName,
+  getHHASeriesName,
   getSizeName,
   getSourceName,
   getTagName,
   getVersionName,
-  getStyleName,
-  getThemeName,
-  getConceptName,
-  getSetName,
-  getCategoryName,
+  getClothingStyleName,
+  getClothingThemeName,
+  getHHAConceptName,
+  getHHASetName,
+  getHHACategoryName,
 } from "../services/dataService";
 
 export interface FilterOption<T = string> {
@@ -105,12 +105,12 @@ export function useFilterOptions(): FilterOptionsData {
 
   const populateSeries = (items: ItemModel[]): void => {
     const seriesSet = new Set(
-      items.map((item) => item.series).filter((s): s is string => !!s)
+      items.map((item) => item.hhaSeries).filter((s): s is string => !!s)
     );
     series.value = [...seriesSet]
       .map((ser) => ({
         value: ser,
-        name: getSeriesName(ser),
+        name: getHHASeriesName(ser),
       }))
       .sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
   };
@@ -118,12 +118,12 @@ export function useFilterOptions(): FilterOptionsData {
   const populateThemes = (items: ItemModel[]): void => {
     const themesSet = new Set<string>();
     items.forEach((item) => {
-      item.themes.forEach((theme) => themesSet.add(theme));
+      item.closingThemes.forEach((theme) => themesSet.add(theme));
     });
     themes.value = [...themesSet]
       .map((theme) => ({
         value: theme,
-        name: getThemeName(theme),
+        name: getClothingThemeName(theme),
       }))
       .sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
   };
@@ -131,12 +131,12 @@ export function useFilterOptions(): FilterOptionsData {
   const populateStyles = (items: ItemModel[]): void => {
     const stylesSet = new Set<string>();
     items.forEach((item) => {
-      item.styles.forEach((style) => stylesSet.add(style));
+      item.clothingStyles.forEach((style) => stylesSet.add(style));
     });
     styles.value = [...stylesSet]
       .map((style) => ({
         value: style,
-        name: getStyleName(style),
+        name: getClothingStyleName(style),
       }))
       .sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
   };
@@ -144,36 +144,36 @@ export function useFilterOptions(): FilterOptionsData {
   const populateConcepts = (items: ItemModel[]): void => {
     const conceptsSet = new Set<string>();
     items.forEach((item) => {
-      item.concepts.forEach((concept) => conceptsSet.add(concept));
+      item.hhaConcepts.forEach((concept) => conceptsSet.add(concept));
     });
     concepts.value = [...conceptsSet]
       .map((concept) => ({
         value: concept,
-        name: getConceptName(concept),
+        name: getHHAConceptName(concept),
       }))
       .sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
   };
 
   const populateSets = (items: ItemModel[]): void => {
     const setsSet = new Set(
-      items.map((item) => item.set).filter((s): s is string => !!s)
+      items.map((item) => item.hhaSet).filter((s): s is string => !!s)
     );
     sets.value = [...setsSet]
       .map((set) => ({
         value: set,
-        name: getSetName(set),
+        name: getHHASetName(set),
       }))
       .sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
   };
 
   const populateCategories = (items: ItemModel[]): void => {
     const categoriesSet = new Set(
-      items.map((item) => item.category).filter((c): c is string => !!c)
+      items.map((item) => item.hhaCategory).filter((c): c is string => !!c)
     );
     categories.value = [...categoriesSet]
       .map((category) => ({
         value: category,
-        name: getCategoryName(category),
+        name: getHHACategoryName(category),
       }))
       .sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
   };
