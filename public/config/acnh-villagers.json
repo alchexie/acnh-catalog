@@ -20581,6 +20581,7 @@
       "latest/NpcBromide/NpcNmlRhn00"
     ],
     "ver": 1,
+    "species": 31,
     "gender": 2,
     "personality": 2,
     "subtype": "B",
@@ -20633,6 +20634,7 @@
       "latest/NpcBromide/NpcNmlRhn01"
     ],
     "ver": 1,
+    "species": 31,
     "gender": 1,
     "personality": 5,
     "subtype": "B",
@@ -20689,6 +20691,7 @@
       "latest/NpcBromide/NpcNmlRhn02"
     ],
     "ver": 1,
+    "species": 31,
     "gender": 2,
     "personality": 1,
     "subtype": "A",
@@ -20747,6 +20750,7 @@
       "latest/NpcBromide/NpcNmlRhn04"
     ],
     "ver": 1,
+    "species": 31,
     "gender": 2,
     "personality": 3,
     "subtype": "A",
@@ -20805,6 +20809,7 @@
       "latest/NpcBromide/NpcNmlRhn05"
     ],
     "ver": 13,
+    "species": 31,
     "gender": 1,
     "personality": 7,
     "subtype": "B",
@@ -20858,6 +20863,7 @@
       "latest/NpcBromide/NpcNmlRhn07"
     ],
     "ver": 1,
+    "species": 31,
     "gender": 1,
     "personality": 5,
     "subtype": "A",
@@ -20918,6 +20924,7 @@
       "latest/NpcBromide/NpcNmlRhn08"
     ],
     "ver": 1,
+    "species": 31,
     "gender": 1,
     "personality": 8,
     "subtype": "A",

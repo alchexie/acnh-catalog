@@ -248,7 +248,7 @@ export const SpeciesNameMap: Record<Species, string> = {
   [Species.Penguin]: "企鹅",
   [Species.Pig]: "猪",
   [Species.Rabbit]: "兔子",
-  [Species.Rhino]: "犀牛",
+  [Species.Rhinoceros]: "犀牛",
   [Species.Sheep]: "绵羊",
   [Species.Squirrel]: "松鼠",
   [Species.Tiger]: "老虎",

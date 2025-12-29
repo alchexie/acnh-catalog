@@ -520,7 +520,7 @@ const speciesMap: Record<string, Species> = {
   Penguin: Species.Penguin,
   Pig: Species.Pig,
   Rabbit: Species.Rabbit,
-  Rhino: Species.Rhino,
+  Rhinoceros: Species.Rhinoceros,
   Sheep: Species.Sheep,
   Squirrel: Species.Squirrel,
   Tiger: Species.Tiger,

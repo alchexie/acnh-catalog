@@ -66,7 +66,7 @@ export const Species = {
   Penguin: 28,
   Pig: 29,
   Rabbit: 30,
-  Rhino: 31,
+  Rhinoceros: 31,
   Sheep: 32,
   Squirrel: 33,
   Tiger: 34,
