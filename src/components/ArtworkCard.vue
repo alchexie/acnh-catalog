@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { formatPrice } from "../utils/common";
 import { getItemTypeName, itemSizeNameMap } from "../services/dataService";
 import type { Artwork } from "../types/artwork";
 import BaseCard from "./BaseCard.vue";
@@ -74,6 +73,10 @@ const handleNextImage = () => {
 const handleClick = () => {
   window.open(`https://nookipedia.com/wiki/${props.data.rawName}`, "_blank");
 };
+
+const handleTitleClick = () => {
+  window.open(`https://en.wikipedia.org/wiki/${props.data.title}`, "_blank");
+};
 </script>
 
 <template>
@@ -100,7 +103,7 @@ const handleClick = () => {
       </div>
     </template>
     <div class="detail-row detail-row--full">
-      <span class="detail-value">{{ props.data.title }}</span>
+      <span class="detail-value detail-value--clickable" @click="handleTitleClick">{{ props.data.title }}</span>
     </div>
     <div class="detail-row detail-row--full">
       <span class="detail-label">作者</span>
@@ -212,6 +215,16 @@ const handleClick = () => {
   white-space: normal;
   overflow-wrap: break-word;
   word-break: break-word;
+}
+
+.detail-value--clickable {
+  cursor: pointer;
+  color: #007bff;
+  text-decoration: underline;
+}
+
+.detail-value--clickable:hover {
+  color: #0056b3;
 }
 
 .detail-row--full {
