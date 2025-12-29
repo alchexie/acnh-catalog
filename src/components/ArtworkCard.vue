@@ -222,15 +222,6 @@ const handleTitleClick = () => {
   max-width: 50px;
 }
 
-.detail-value--full {
-  text-align: left;
-  max-width: 100%;
-  word-wrap: break-word;
-  white-space: normal;
-  overflow-wrap: break-word;
-  word-break: break-word;
-}
-
 .detail-value--clickable {
   cursor: pointer;
   color: #007bff;
@@ -239,23 +230,6 @@ const handleTitleClick = () => {
 
 .detail-value--clickable:hover {
   color: #0056b3;
-}
-
-.detail-row--full {
-  display: block;
-}
-
-.detail-row--full .detail-label {
-  display: block;
-  margin-bottom: 4px;
-  font-weight: 600;
-  color: #666;
-  text-align: left;
-}
-
-.detail-row--full .detail-value--full {
-  display: block;
-  padding-left: 0;
 }
 
 .hover-preview {

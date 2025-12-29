@@ -9,6 +9,7 @@ export * from "./creature";
 export * from "./reaction";
 export * from "./messagecard";
 export * from "./artwork";
+export * from "./fossil";
 
 export interface Translation {
   cNzh: string;

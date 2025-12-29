@@ -84,9 +84,17 @@ const handleImageIndexChanged = (index: number) => {
       <span class="detail-label">天气</span>
       <span class="detail-value">{{ getWeather(props.data) }}</span>
     </div>
-    <div class="detail-row">
+    <div class="detail-row  detail-row--full">
       <span class="detail-label">{{ UI_TEXT.LABELS.LOCATION }}</span>
-      <span class="detail-value">{{ getLocation(props.data) }}</span>
+      <span class="detail-value--full">{{ getLocation(props.data) }}</span>
+    </div>
+    <div class="detail-row detail-row--full">
+      <span class="detail-label">获得</span>
+      <span class="detail-value--full">{{ props.data.catchPhrase }}</span>
+    </div>
+    <div class="detail-row detail-row--full">
+      <span class="detail-label">介绍</span>
+      <span class="detail-value--full">{{ props.data.desc }}</span>
     </div>
   </BaseCard>
 </template>

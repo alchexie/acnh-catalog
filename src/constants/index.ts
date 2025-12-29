@@ -16,6 +16,7 @@ export const DATA_LOADING = {
   CONSTRUCTION: "正在加载改建数据...",
   MESSAGE_CARDS: "正在加载消息卡片数据...",
   ARTWORKS: "正在加载艺术品数据...",
+  FOSSILS: "正在加载化石数据...",
   ERROR_GENERIC: "加载数据失败，请确保数据文件存在",
 } as const;
 
@@ -32,6 +33,7 @@ export const ENTITY_ICONS = {
   CONSTRUCTION: "🏗️",
   MESSAGE_CARDS: "💌",
   ARTWORKS: "🎨",
+  FOSSILS: "🦕",
   // 生物类型
   INSECTS: "🦋",
   FISH: "🐟",
@@ -53,6 +55,7 @@ export const UI_TEXT = {
     CREATURES_UNIT: "种生物",
     REACTIONS_UNIT: "个表情",
     ARTWORKS_UNIT: "件艺术品",
+    FOSSILS_UNIT: "件化石",
   },
   TOTAL: "共",
   LABELS: {

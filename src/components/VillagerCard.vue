@@ -93,9 +93,9 @@ const toggleFurnitureExpanded = () => {
       <span class="detail-label">口头禅</span>
       <span class="detail-value">{{ props.data.catchphrase }}</span>
     </span>
-    <span class="detail-row">
+    <span class="detail-row detail-row--full">
       <span class="detail-label">格言</span>
-      <span class="detail-value">{{ props.data.saying }}</span>
+      <span class="detail-value--full">{{ props.data.saying }}</span>
     </span>
     <!-- 默认物品图片 -->
     <div v-if="defaultItems.length > 0" class="default-items-section">

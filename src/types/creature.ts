@@ -37,4 +37,6 @@ export interface Creature {
     north: HemisphereInfo;
     south: HemisphereInfo;
   };
+  catchPhrase: string;
+  desc: string;
 }

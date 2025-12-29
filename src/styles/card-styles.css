@@ -133,6 +133,32 @@
   font-weight: 600;
 }
 
+.detail-row--full {
+  display: block;
+}
+
+.detail-row--full .detail-label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 600;
+  color: #666;
+  text-align: left;
+}
+
+.detail-row--full .detail-value--full {
+  display: block;
+  padding-left: 0;
+}
+
+.detail-value--full {
+  text-align: left;
+  max-width: 100%;
+  word-wrap: break-word;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
 /* 颜色主题变量 */
 .card--brown {
   --card-hover-shadow: rgba(121, 85, 72, 0.2);

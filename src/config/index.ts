@@ -21,6 +21,7 @@ export const CONFIG = {
     CONSTRUCTIONS: `${BASE_PATH}config/acnh-constructions.json`,
     MESSAGE_CARDS: `${BASE_PATH}config/acnh-message-cards.json`,
     ARTWORKS: `${BASE_PATH}config/acnh-artworks.json`,
+    FOSSILS: `${BASE_PATH}config/acnh-fossils.json`,
   },
 
   /**

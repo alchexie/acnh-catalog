@@ -7,6 +7,7 @@ import {
   type Creature,
   type Reaction,
   type Artwork,
+  type Fossil,
   CreatureType,
   Gender,
   Personality,
@@ -427,6 +428,19 @@ export async function loadArtworkData(): Promise<Artwork[]> {
     return await response.json();
   } catch (error) {
     console.error("加载艺术品数据失败:", error);
+    throw error;
+  }
+}
+
+export async function loadFossilsData(): Promise<Fossil[]> {
+  try {
+    const response = await fetch(CONFIG.DATA_FILES.FOSSILS);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("加载化石数据失败:", error);
     throw error;
   }
 }

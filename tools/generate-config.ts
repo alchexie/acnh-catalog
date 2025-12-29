@@ -29,6 +29,7 @@ import {
 import type { NPC as NewNPC } from "../src/types/npc";
 import type { Reaction as NewReaction } from "../src/types/reaction";
 import type { Artwork as NewArtwork } from "../src/types/artwork";
+import type { Fossil as NewFossil } from "../src/types/fossil";
 import {
   ConstructionType,
   type Construction as NewConstruction,
@@ -359,11 +360,9 @@ let newItems: NewItem[] = [];
 let newItemIdMap = new Map<number, NewItem>();
 let newItemNameMap = new Map<string, NewItem>();
 let messageCards: MessageCard[] = [];
-let newArtworks: NewArtwork[] = [];
-
 let fakeArtworks = new Map<string, OldItem>();
 let realArtworks = new Map<string, OldItem>();
-
+let fossilGroups = new Map<string, OldItem[]>();
 for (const oldItem of oldItems) {
   if (oldItem.sourceSheet === OldItemSourceSheet.MessageCards) {
     const messageCard: MessageCard = {
@@ -404,9 +403,19 @@ for (const oldItem of oldItems) {
         fakeArtworks.set(oldItem.name, oldItem);
       }
     }
+
+    if (oldItem.sourceSheet === OldItemSourceSheet.Fossils) {
+      let groupName = oldItem.fossilGroup!;
+      if (!fossilGroups.has(groupName)) {
+        fossilGroups.set(groupName, []);
+      }
+      fossilGroups.get(groupName)!.push(oldItem);
+    }
   }
 }
+messageCards.sort((a, b) => a.id - b.id);
 
+let newArtworks: NewArtwork[] = [];
 for (const [name, realArtwork] of realArtworks) {
   const fakeArtwork = fakeArtworks.get(name);
   const l = realArtwork.artist!.split(",");
@@ -451,8 +460,24 @@ for (const [name, realArtwork] of realArtworks) {
   };
   newArtworks.push(newArtwork);
 }
-messageCards.sort((a, b) => a.id - b.id);
 newArtworks.sort((a, b) => a.id - b.id);
+
+let newFossils: NewFossil[] = [];
+for (const [groupName, parts] of fossilGroups) {
+  //
+  const fossil: NewFossil = {
+    name: groupName,
+    parts: parts
+      .sort((a, b) => a.internalId! - b.internalId!)
+      .map((part) => ({
+        id: part.internalId!,
+        name: part.name,
+        image: processImageUrl(part.image!),
+      })),
+    desc: parts[0].description![0]!,
+  };
+  newFossils.push(fossil);
+}
 
 const interiorStructures = JSON.parse(
   fs.readFileSync(path.join(__dirname, "Interior Structures.json"), "utf-8")
@@ -493,6 +518,8 @@ for (const oldCreature of oldCreatures) {
     whereHow: oldCreature.whereHow ?? undefined,
     weather: oldCreature.weather ?? undefined,
     hemispheres: oldCreature.hemispheres,
+    catchPhrase: oldCreature.catchPhrase![0]!,
+    desc: oldCreature.description![0]!,
   };
   newCreatures.push(newCreature);
 
@@ -721,6 +748,12 @@ fs.writeFileSync(
 fs.writeFileSync(
   path.join(outputPath, "acnh-artworks.json"),
   JSON.stringify(newArtworks.map(removeNullFields), null, 2),
+  "utf-8"
+);
+
+fs.writeFileSync(
+  path.join(outputPath, "acnh-fossils.json"),
+  JSON.stringify(newFossils.map(removeNullFields), null, 2),
   "utf-8"
 );
 
