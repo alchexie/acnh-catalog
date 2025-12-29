@@ -14,9 +14,7 @@ const allMessageCards = ref<MessageCard[]>([]) as Ref<MessageCard[]>;
 const loading = ref(true);
 const error = ref("");
 let isDataLoaded = false;
-/**
- * 组合函数：管理消息卡片数据加载
- */
+
 export function useMessageCardsData(): UseMessageCardsDataReturn {
   const loadData = async (): Promise<void> => {
     if (isDataLoaded) {

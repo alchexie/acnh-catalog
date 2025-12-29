@@ -21,15 +21,11 @@ export function useNPCsData(): UseNPCsDataReturn {
     try {
       loading.value = true;
       error.value = "";
-
-      const npcs = await loadNPCsData();
-      allNPCs.value = npcs
-        .sort((a, b) => a.internalId - b.internalId);
-
-      loading.value = false;
+      allNPCs.value = await loadNPCsData();
     } catch (err) {
-      console.error("加载NPC数据失败:", err);
       error.value = DATA_LOADING.ERROR_GENERIC;
+      console.error("加载NPC数据失败:", err);
+    } finally {
       loading.value = false;
     }
   };

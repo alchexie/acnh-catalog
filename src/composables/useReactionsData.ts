@@ -10,9 +10,6 @@ export interface UseReactionsDataReturn {
   loadData: () => Promise<void>;
 }
 
-/**
- * 组合函数：管理表情反应数据加载
- */
 export function useReactionsData(): UseReactionsDataReturn {
   const allReactions = ref<Reaction[]>([]);
   const loading = ref(false);
@@ -22,10 +19,10 @@ export function useReactionsData(): UseReactionsDataReturn {
       loading.value = true;
       error.value = "";
       allReactions.value = await loadReactionsData();
-      loading.value = false;
     } catch (err) {
-      console.error("加载表情反应数据失败:", err);
       error.value = DATA_LOADING.ERROR_GENERIC;
+      console.error("加载表情反应数据失败:", err);
+    } finally {
       loading.value = false;
     }
   };

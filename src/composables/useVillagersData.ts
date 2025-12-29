@@ -10,26 +10,19 @@ export interface UseVillagersDataReturn {
   loadData: () => Promise<void>;
 }
 
-/**
- * 组合函数：管理村民数据加载
- */
 export function useVillagersData(): UseVillagersDataReturn {
   const allVillagers = ref<Villager[]>([]);
   const loading = ref(false);
   const error = ref("");
-
-  /**
-   * 加载村民数据
-   */
   const loadData = async (): Promise<void> => {
     try {
       loading.value = true;
       error.value = "";
       allVillagers.value = await loadVillagersData();
-      loading.value = false;
     } catch (err) {
-      console.error("加载村民数据失败:", err);
       error.value = DATA_LOADING.ERROR_GENERIC;
+      console.error("加载村民数据失败:", err);
+    } finally {
       loading.value = false;
     }
   };
