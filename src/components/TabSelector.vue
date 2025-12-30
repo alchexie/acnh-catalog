@@ -64,7 +64,7 @@ const selectTab = (tabId: TabType) => {
 <style scoped>
 .tab-selector {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   margin-bottom: var(--spacing-sm);
   justify-content: center;
   flex-wrap: wrap;
@@ -73,7 +73,7 @@ const selectTab = (tabId: TabType) => {
 .tab-button {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-xs);
   padding: var(--spacing-sm) var(--spacing-md);
   border: 2px solid var(--border-color);
   border-radius: var(--border-radius-xl);

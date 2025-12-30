@@ -119,7 +119,7 @@
 /* 分类筛选器样式 */
 .category-filter {
   display: flex;
-  gap: var(--spacing-md);
+  gap: var(--spacing-sm);
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -127,14 +127,14 @@
 .category-btn {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-md) var(--spacing-md);
+  gap: var(--spacing-xm);
+  padding: var(--spacing-sm) var(--spacing-md);
   background: white;
   border: 2px solid var(--border-color);
   border-radius: var(--border-radius-lg);
   cursor: pointer;
   transition: var(--transition-normal);
-  font-size: 1em;
+  font-size: 0.9em;
   box-shadow: var(--shadow-sm);
 }
 
@@ -188,13 +188,13 @@
 }
 
 .toggle-btn {
-  padding: var(--spacing-sm) var(--spacing-md);
+  padding: var(--spacing-xs) var(--spacing-sm);
   background: transparent;
   border: none;
   border-radius: 21px;
   cursor: pointer;
   transition: var(--transition-normal);
-  font-size: 0.95em;
+  font-size: 0.9em;
   font-weight: 600;
   color: var(--secondary-color);
 }
