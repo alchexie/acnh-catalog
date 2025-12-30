@@ -321,10 +321,9 @@ const clearAllFilters = () => {
 .controls {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 6px;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
 }
 
 .search-box {
@@ -333,7 +332,7 @@ const clearAllFilters = () => {
   font-size: 16px;
   border: 2px solid #ddd;
   border-radius: 6px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   box-sizing: border-box;
 }
 

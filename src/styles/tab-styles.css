@@ -168,9 +168,9 @@
 .filter-controls-wrapper {
   background-color: white;
   border-radius: 0 0 var(--border-radius-md) var(--border-radius-md);
-  padding: var(--spacing-lg);
+  padding: var(--spacing-md);
   margin-top: calc(-1 * var(--border-radius-md));
-  padding-top: calc(var(--spacing-lg) + var(--border-radius-md));
+  padding-top: var(--spacing-md);
   box-shadow: var(--shadow-sm);
   position: relative;
   z-index: 1;
@@ -231,12 +231,4 @@
   .stat-item {
     font-size: 1em;
   }
-}
-
-/* 筛选行样式 */
-.filter-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: var(--spacing-xl);
 }

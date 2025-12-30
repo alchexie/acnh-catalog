@@ -56,6 +56,9 @@ export const UI_TEXT = {
     REACTIONS_UNIT: "个表情",
     ARTWORKS_UNIT: "件艺术品",
     FOSSILS_UNIT: "组化石",
+    RECIPES_UNIT: "个配方",
+    CONSTRUCTION_UNIT: "个改建项目",
+    MESSAGE_CARDS_UNIT: "张消息卡片",
   },
   LABELS: {
     PRICE: "售价",
