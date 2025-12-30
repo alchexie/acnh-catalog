@@ -118,7 +118,7 @@ onMounted(() => {
 
     <template v-else>
       <div class="header">
-        <button class="back-btn" @click="goBack">← 返回列表</button>
+        <button class="action-btn primary" @click="goBack">← 返回列表</button>
         <h1>物品详情</h1>
       </div>
 
@@ -431,6 +431,8 @@ onMounted(() => {
 </template>
 
 <style scoped>
+@import "../styles/tab-styles.css";
+
 .detail-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -442,21 +444,6 @@ onMounted(() => {
   display: flex;
   align-items: center;
   gap: 20px;
-}
-
-.back-btn {
-  padding: 10px 20px;
-  background: #4a9b4f;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background 0.3s;
-}
-
-.back-btn:hover {
-  background: #3d8042;
 }
 
 .header h1 {

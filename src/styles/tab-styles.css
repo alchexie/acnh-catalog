@@ -1,8 +1,4 @@
 /* 公共Tab样式 */
-.tab {
-  width: 100%;
-}
-
 .loading,
 .error {
   text-align: center;
@@ -11,22 +7,22 @@
 }
 
 .error {
-  color: #e74c3c;
+  color: var(--danger-color);
 }
 
 /* Stats 基础样式 */
 .stats {
   background-color: white;
-  border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  box-shadow: var(--shadow-sm);
   text-align: center;
 }
 
 /* 筛选器展开时的stats样式 */
 .filter-expanded .stats {
-  border-radius: 10px 10px 0 0;
+  border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
   margin-bottom: 0;
 }
 
@@ -34,13 +30,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 20px;
+  gap: var(--spacing-xl);
   text-align: center;
 }
 
 .stats-content {
   display: flex;
-  gap: 20px;
+  gap: var(--spacing-xl);
   flex-wrap: wrap;
   flex: 1;
   justify-content: center;
@@ -52,40 +48,78 @@
   margin: 0;
 }
 
-/* 按钮基础样式 */
-.btn {
+/* 通用按钮样式 */
+.action-btn {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 20px;
-  background: white;
-  border: 2px solid #e0e0e0;
-  border-radius: 12px;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-sm);
   cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 1em;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  font-weight: 500;
+  transition: var(--transition-normal);
+  box-shadow: var(--shadow-sm);
+  white-space: nowrap;
+}
+
+.action-btn:hover:not(:disabled) {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.action-btn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.action-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.action-btn .icon {
+  font-size: 12px;
+}
+
+/* 按钮变体 */
+.action-btn.primary {
+  background: linear-gradient(135deg, var(--primary-color) 0%, #5dade2 100%);
+}
+
+.action-btn.primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--primary-hover) 0%, #3498db 100%);
+}
+
+.action-btn.success {
+  background: linear-gradient(135deg, var(--success-color) 0%, #5db663 100%);
+}
+
+.action-btn.success:hover:not(:disabled) {
+  background: linear-gradient(135deg, #3d8342 0%, var(--success-color) 100%);
+}
+
+.action-btn.danger {
+  background-color: var(--danger-color);
+  background: linear-gradient(135deg, var(--danger-color) 0%, #e53935 100%);
   font-weight: 600;
 }
 
-.btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  border-color: #4caf50;
+.action-btn.danger:hover:not(:disabled) {
+  background: linear-gradient(135deg, #d32f2f 0%, var(--danger-color) 100%);
 }
 
-.btn.active {
-  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
-  color: white;
-  border-color: #4caf50;
-  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+.action-btn.danger:active:not(:disabled) {
+  background: #b71c1c;
 }
 
 /* 分类筛选器样式 */
 .category-filter {
   display: flex;
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: var(--spacing-md);
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -93,27 +127,27 @@
 .category-btn {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 20px;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-md);
   background: white;
-  border: 2px solid #e0e0e0;
-  border-radius: 12px;
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: var(--transition-normal);
   font-size: 1em;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
 }
 
 .category-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  border-color: #4caf50;
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-color);
 }
 
 .category-btn.active {
-  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+  background: linear-gradient(135deg, var(--primary-color) 0%, #45a049 100%);
   color: white;
-  border-color: #4caf50;
+  border-color: var(--primary-color);
   box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
 }
 
@@ -133,11 +167,11 @@
 /* 筛选器容器样式 */
 .filter-controls-wrapper {
   background-color: white;
-  border-radius: 0 0 10px 10px;
-  padding: 20px;
-  margin-top: -10px;
-  padding-top: 30px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 var(--border-radius-md) var(--border-radius-md);
+  padding: var(--spacing-lg);
+  margin-top: calc(-1 * var(--border-radius-md));
+  padding-top: calc(var(--spacing-lg) + var(--border-radius-md));
+  box-shadow: var(--shadow-sm);
   position: relative;
   z-index: 1;
 }
@@ -147,38 +181,38 @@
   display: inline-flex;
   gap: 0;
   margin-left: auto;
-  background: #e0e0e0;
-  border-radius: 25px;
-  padding: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: var(--border-color);
+  border-radius: var(--border-radius-xl);
+  padding: var(--spacing-xs);
+  box-shadow: var(--shadow-sm);
 }
 
 .toggle-btn {
-  padding: 8px 20px;
+  padding: var(--spacing-sm) var(--spacing-md);
   background: transparent;
   border: none;
   border-radius: 21px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: var(--transition-normal);
   font-size: 0.95em;
   font-weight: 600;
-  color: #666;
+  color: var(--secondary-color);
 }
 
 .toggle-btn:hover {
-  color: #333;
+  color: var(--secondary-color);
 }
 
 .toggle-btn.active {
   background: white;
-  color: #4caf50;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  color: var(--success-color);
+  box-shadow: var(--shadow-sm);
 }
 
 /* 响应式设计 */
 @media (max-width: 768px) {
   .category-filter {
-    gap: 8px;
+    gap: var(--spacing-sm);
   }
 
   .category-btn {
@@ -197,4 +231,12 @@
   .stat-item {
     font-size: 1em;
   }
+}
+
+/* 筛选行样式 */
+.filter-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-xl);
 }

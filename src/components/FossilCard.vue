@@ -26,9 +26,9 @@ const handleClick = () => {
       <h3 class="card-name">{{ props.data.name }}</h3>
     </template>
 
-    <div class="detail-row detail-row--full">
-      <span class="detail-label">介绍</span>
-      <span class="detail-value--full">{{ props.data.desc }}</span>
+    <div class="detail-row full">
+      <span class="detail-label">描述</span>
+      <span class="detail-value">{{ props.data.desc }}</span>
     </div>
 
     <div class="detail-row">

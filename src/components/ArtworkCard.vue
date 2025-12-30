@@ -102,28 +102,28 @@ const handleTitleClick = () => {
         </div>
       </div>
     </template>
-    <div class="detail-row detail-row--full">
+    <div class="detail-row detail-center">
       <span
-        class="detail-value detail-value--clickable"
+        class="clickable"
         @click="handleTitleClick"
         >{{ props.data.title }}</span
       >
     </div>
-    <div class="detail-row detail-row--full">
-      <span class="detail-label">作者</span>
-      <span class="detail-value--full">{{ props.data.artist }}</span>
+    <div class="detail-row full">
+      <span class="detail-label">艺术家</span>
+      <span class="detail-value">{{ props.data.artist }}</span>
     </div>
-    <div class="detail-row detail-row--full">
+    <div class="detail-row full">
       <span class="detail-label">年代</span>
-      <span class="detail-value--full">{{ props.data.age }}</span>
+      <span class="detail-value">{{ props.data.age }}</span>
     </div>
-    <div class="detail-row detail-row--full">
+    <div class="detail-row full">
       <span class="detail-label">技法</span>
-      <span class="detail-value--full">{{ props.data.technique }}</span>
+      <span class="detail-value">{{ props.data.technique }}</span>
     </div>
-    <div class="detail-row detail-row--full">
-      <span class="detail-label">介绍</span>
-      <span class="detail-value--full">{{ props.data.desc }}</span>
+    <div class="detail-row full">
+      <span class="detail-label">描述</span>
+      <span class="detail-value">{{ props.data.desc }}</span>
     </div>
     <div class="detail-row">
       <span class="detail-label">分类</span>
@@ -222,13 +222,13 @@ const handleTitleClick = () => {
   max-width: 50px;
 }
 
-.detail-value--clickable {
+.clickable {
   cursor: pointer;
   color: #007bff;
   text-decoration: underline;
 }
 
-.detail-value--clickable:hover {
+.clickable:hover {
   color: #0056b3;
 }
 

@@ -65,7 +65,7 @@ const selectTab = (tabId: TabType) => {
 .tab-selector {
   display: flex;
   gap: 10px;
-  margin-bottom: 30px;
+  margin-bottom: var(--spacing-sm);
   justify-content: center;
   flex-wrap: wrap;
 }
@@ -73,30 +73,30 @@ const selectTab = (tabId: TabType) => {
 .tab-button {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  border: 2px solid #e0e0e0;
-  border-radius: 25px;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius-xl);
   background-color: white;
   cursor: pointer;
   font-size: 1em;
   font-weight: 500;
-  transition: all 0.3s ease;
-  color: #666;
+  transition: var(--transition-normal);
+  color: var(--secondary-color);
 }
 
 .tab-button:hover {
-  border-color: #4a9b4f;
+  border-color: var(--primary-color);
   background-color: #f0f8f0;
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(74, 155, 79, 0.2);
+  box-shadow: var(--shadow-sm);
 }
 
 .tab-button.active {
-  border-color: #4a9b4f;
-  background-color: #4a9b4f;
+  border-color: var(--primary-color);
+  background-color: var(--primary-color);
   color: white;
-  box-shadow: 0 4px 12px rgba(74, 155, 79, 0.3);
+  box-shadow: var(--shadow-md);
 }
 
 .tab-icon {

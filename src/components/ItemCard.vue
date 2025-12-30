@@ -178,14 +178,8 @@ const handleClick = () => {
 @import "../styles/card-styles.css";
 
 .item-owned {
-  background: #e8f5e9;
-  border: 2px solid #4caf50;
-}
-
-.item-id {
-  font-size: 12px;
-  color: #666;
-  text-align: center;
+  background: var(--gradient-success-light);
+  border: 2px solid var(--success-color);
 }
 
 .buy-price {

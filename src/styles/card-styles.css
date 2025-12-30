@@ -1,10 +1,10 @@
 /* 统一的Card组件样式 */
 .card {
   background: white;
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-normal);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -14,21 +14,21 @@
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-lg);
 }
 
 /* 已拥有物品的视觉指示 */
 .item-owned {
-  border: 3px solid #4CAF50;
+  border: 3px solid var(--success-color);
   background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 100%);
 }
 
 .item-owned::before {
   content: "✓";
   position: absolute;
-  top: 8px;
-  left: 8px;
-  background: #4CAF50;
+  top: var(--spacing-sm);
+  left: var(--spacing-sm);
+  background: var(--success-color);
   color: white;
   border-radius: 50%;
   width: 24px;
@@ -46,14 +46,14 @@
   height: 100px;
   border-radius: 50%;
   overflow: hidden;
-  margin: 0 auto 12px;
-  background: linear-gradient(135deg, #f5f5f5 0%, #eeeeee 100%);
+  margin: 0 auto var(--spacing-sm);
+  background: var(--gradient-light);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: transform var(--transition-normal);
 }
 
 .card-image-wrapper:hover {
@@ -72,7 +72,7 @@
 .card-image-container {
   position: relative;
   display: inline-block;
-  margin: 0 auto 12px;
+  margin: 0 auto var(--spacing-sm);
 }
 
 .card-image {
@@ -104,59 +104,56 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 6px 10px;
+  padding: var(--spacing-xs) 10px;
   background-color: #f8f9fa;
-  border-radius: 6px;
+  border-radius: var(--border-radius-sm);
   font-size: 0.85em;
   line-height: 1.4;
 }
 
-.detail-center {
-  justify-content: center;
-  gap: 8px;
-}
-
-.detail-label {
-  font-weight: 600;
-  color: #666;
-  flex-shrink: 0;
-}
-
-.detail-value {
-  color: #333;
-  text-align: right;
-  word-wrap: break-word;
-  max-width: 60%;
-}
-
-.detail-value.price {
-  font-weight: 600;
-}
-
-.detail-row--full {
+.detail-row.full {
   display: block;
 }
 
-.detail-row--full .detail-label {
+.detail-row.full .detail-label {
   display: block;
-  margin-bottom: 4px;
+  margin-bottom: var(--spacing-xs);
   font-weight: 600;
-  color: #666;
+  color: var(--secondary-color);
   text-align: left;
 }
 
-.detail-row--full .detail-value--full {
+.detail-row.full .detail-value {
   display: block;
   padding-left: 0;
-}
-
-.detail-value--full {
   text-align: left;
   max-width: 100%;
   word-wrap: break-word;
   white-space: normal;
   overflow-wrap: break-word;
   word-break: break-word;
+}
+
+.detail-center {
+  justify-content: center;
+  gap: var(--spacing-sm);
+}
+
+.detail-label {
+  font-weight: 600;
+  color: var(--secondary-color);
+  flex-shrink: 0;
+}
+
+.detail-value {
+  color: var(--secondary-color);
+  text-align: right;
+  word-wrap: break-word;
+  max-width: 80%;
+}
+
+.detail-value.price {
+  font-weight: 600;
 }
 
 /* 颜色主题变量 */
@@ -197,91 +194,61 @@
 }
 
 /* 应用主题变量 */
-.card--brown .card-name {
-  color: var(--card-name-color);
-}
-.card--green .card-name {
-  color: var(--card-name-color);
-}
-.card--orange .card-name {
-  color: var(--card-name-color);
-}
-.card--purple .card-name {
-  color: var(--card-name-color);
-}
-.card--green-dark .card-name {
-  color: var(--card-name-color);
-}
+.card--brown .card-name,
+.card--green .card-name,
+.card--orange .card-name,
+.card--purple .card-name,
+.card--green-dark .card-name,
 .card--orange-dark .card-name {
   color: var(--card-name-color);
 }
 
-.card--brown .detail-value.price {
-  color: var(--card-price-color);
-}
-.card--green .detail-value.price {
-  color: var(--card-price-color);
-}
-.card--orange .detail-value.price {
-  color: var(--card-price-color);
-}
-.card--purple .detail-value.price {
-  color: var(--card-price-color);
-}
-.card--green-dark .detail-value.price {
-  color: var(--card-price-color);
-}
+.card--brown .detail-value.price,
+.card--green .detail-value.price,
+.card--orange .detail-value.price,
+.card--purple .detail-value.price,
+.card--green-dark .detail-value.price,
 .card--orange-dark .detail-value.price {
   color: var(--card-price-color);
 }
 
-.card--brown:hover {
-  box-shadow: 0 6px 20px var(--card-hover-shadow);
-}
-.card--green:hover {
-  box-shadow: 0 6px 20px var(--card-hover-shadow);
-}
-.card--orange:hover {
-  box-shadow: 0 6px 20px var(--card-hover-shadow);
-}
-.card--purple:hover {
-  box-shadow: 0 6px 20px var(--card-hover-shadow);
-}
-.card--green-dark:hover {
-  box-shadow: 0 6px 20px var(--card-hover-shadow);
-}
+.card--brown:hover,
+.card--green:hover,
+.card--orange:hover,
+.card--purple:hover,
+.card--green-dark:hover,
 .card--orange-dark:hover {
   box-shadow: 0 6px 20px var(--card-hover-shadow);
 }
 
 .card--brown .card-image-wrapper {
-  background: linear-gradient(135deg, #f5f5f5 0%, #eeeeee 100%);
+  background: var(--gradient-brown-light);
 }
 
 .card--green .card-image-wrapper {
-  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  background: var(--gradient-green-light);
 }
 
 .card--orange .card-image-wrapper {
-  background: linear-gradient(135deg, #fff9e6 0%, #fff3cc 100%);
+  background: var(--gradient-orange-light);
 }
 
 .card--purple .card-image-wrapper {
-  background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+  background: var(--gradient-purple-light);
 }
 
 .card--green-dark .card-image-wrapper {
-  background: linear-gradient(135deg, #f0f8f0 0%, #e8f5e8 100%);
+  background: var(--gradient-green-dark);
 }
 
 .card--orange-dark .card-image-wrapper {
-  background: linear-gradient(135deg, #fff9e6 0%, #fff3cc 100%);
+  background: var(--gradient-orange-light);
 }
 
 /* 响应式设计 */
 @media (max-width: 768px) {
   .card {
-    padding: 12px;
+    padding: var(--spacing-sm);
   }
 
   .card-image-wrapper {
@@ -295,7 +262,7 @@
 
   .detail-row {
     font-size: 0.8em;
-    padding: 4px 8px;
+    padding: var(--spacing-xs) var(--spacing-sm);
   }
 }
 
@@ -335,35 +302,6 @@
 
 .image-nav-next {
   right: -32px;
-}
-
-/* 形状切换按钮样式 */
-.shape-toggle-btn {
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  background: rgba(255, 255, 255, 0.9);
-  color: #333;
-  border: 1px solid #ddd;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 12px;
-  transition: all 0.2s ease;
-  z-index: 10;
-}
-
-.shape-toggle-btn:hover {
-  background: rgba(255, 255, 255, 1);
-  transform: scale(1.1);
-}
-
-.shape-toggle-btn:active {
-  transform: scale(0.95);
 }
 
 /* 图片指示器样式 */

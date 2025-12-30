@@ -133,18 +133,7 @@ onMounted(() => {
 <style scoped>
 @import "../styles/tab-styles.css";
 
-.filter-row {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-}
-
 .category-filter {
-  display: flex;
-  justify-content: center;
   flex: 1;
 }
 </style>

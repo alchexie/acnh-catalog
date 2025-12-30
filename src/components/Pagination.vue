@@ -22,10 +22,11 @@ const showPagination = computed(() => {
 
 <template>
   <div v-if="showPagination" class="pagination">
-    <button :disabled="currentPage === 1" @click="emit('page-change', 1)">
+    <button class="action-btn primary" :disabled="currentPage === 1" @click="emit('page-change', 1)">
       首页
     </button>
     <button
+      class="action-btn primary"
       :disabled="currentPage === 1"
       @click="emit('page-change', currentPage - 1)"
     >
@@ -35,12 +36,14 @@ const showPagination = computed(() => {
       >第 {{ currentPage }} 页 / 共 {{ totalPages }} 页</span
     >
     <button
+      class="action-btn primary"
       :disabled="currentPage === totalPages"
       @click="emit('page-change', currentPage + 1)"
     >
       下一页
     </button>
     <button
+      class="action-btn primary"
       :disabled="currentPage === totalPages"
       @click="emit('page-change', totalPages)"
     >
@@ -50,6 +53,8 @@ const showPagination = computed(() => {
 </template>
 
 <style scoped>
+@import "../styles/tab-styles.css";
+
 .pagination {
   display: flex;
   justify-content: center;
@@ -59,30 +64,9 @@ const showPagination = computed(() => {
   padding: 20px;
 }
 
-button {
-  padding: 10px 20px;
-  background: #4a9b4f;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
-  transition: background 0.3s;
-}
-
-button:hover:not(:disabled) {
-  background: #3d8142;
-}
-
-button:disabled {
-  background: #ccc;
-  cursor: not-allowed;
-}
-
 .page-info {
   margin: 0 15px;
   font-weight: 600;
-  color: #333;
+  color: var(--secondary-color);
 }
 </style>

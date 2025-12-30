@@ -105,7 +105,7 @@ const handleFileChange = async (event: Event) => {
 </template>
 
 <style scoped>
-@import "../styles/button-styles.css";
+@import "../styles/tab-styles.css";
 
 .catalog-uploader {
   display: flex;
@@ -114,18 +114,18 @@ const handleFileChange = async (event: Event) => {
 }
 
 .upload-status {
-  padding: 6px 12px;
-  border-radius: 4px;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
   font-size: 13px;
-  background-color: #e8f5e9;
+  background-color: var(--gradient-success-light);
   color: #2e7d32;
-  border: 1px solid #4caf50;
+  border: 1px solid var(--success-color);
   white-space: nowrap;
 }
 
 .upload-status.error {
   background-color: #ffebee;
   color: #c62828;
-  border: 1px solid #ef5350;
+  border: 1px solid var(--danger-color);
 }
 </style>

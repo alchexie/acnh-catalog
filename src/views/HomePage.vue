@@ -74,16 +74,16 @@ onUnmounted(() => {
 .container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 20px;
+  padding: var(--spacing-md);
 }
 
 header {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: var(--spacing-md);
 }
 
 h1 {
-  color: #4a9b4f;
+  color: var(--primary-color);
   font-size: 2.5em;
   margin: 0;
 }
@@ -96,24 +96,24 @@ h1 {
 
 .back-to-top {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: var(--spacing-xl);
+  right: var(--spacing-xl);
   width: 50px;
   height: 50px;
-  background-color: #4a9b4f;
+  background-color: var(--primary-color);
   color: white;
   border: none;
   border-radius: 50%;
   font-size: 24px;
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-normal);
   z-index: 1000;
 }
 
 .back-to-top:hover {
-  background-color: #3a7b3f;
+  background-color: var(--primary-hover);
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-lg);
 }
 </style>

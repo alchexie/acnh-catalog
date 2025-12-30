@@ -316,7 +316,7 @@ const clearAllFilters = () => {
 </template>
 
 <style scoped>
-@import "../styles/button-styles.css";
+@import "../styles/tab-styles.css";
 
 .controls {
   display: flex;

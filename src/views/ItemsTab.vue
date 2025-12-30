@@ -125,7 +125,6 @@ const toggleFilter = () => {
 
 <style scoped>
 @import "../styles/tab-styles.css";
-@import "../styles/button-styles.css";
 
 .filter-section {
   margin-bottom: 20px;
