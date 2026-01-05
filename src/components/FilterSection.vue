@@ -84,14 +84,14 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 
-type FilterOptionValue = string | number;
+export type FilterOptionValue = string | number;
 
-interface FilterOption {
+export interface FilterOption {
   value: FilterOptionValue;
   label: string;
 }
 
-interface Filter {
+export interface Filter {
   label: string;
   value: string;
   options: FilterOption[];

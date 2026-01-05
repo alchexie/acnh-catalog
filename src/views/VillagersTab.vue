@@ -2,6 +2,7 @@
 import { onMounted, ref, computed } from "vue";
 import { useVillagersData } from "../composables/useVillagersData";
 import { usePagination } from "../composables/usePagination";
+import { useFilter } from "../composables/useFilter";
 import { DATA_LOADING, UI_TEXT } from "../constants";
 import Grid from "../components/Grid.vue";
 import VillagerCard from "../components/VillagerCard.vue";
@@ -17,10 +18,6 @@ import {
 
 // 使用村民数据加载组合函数
 const { allVillagers, loading, error, loadData } = useVillagersData();
-
-// 筛选状态
-const selectedFilters = ref<Record<string, string | number>>({});
-const searchQuery = ref("");
 
 // 过滤器配置
 const filters = computed(() => [
@@ -58,53 +55,13 @@ const filters = computed(() => [
   },
 ]);
 
-const handleFiltersChanged = (filters: {
-  searchQuery: string;
-  selectedFilters: Record<string, string | number>;
-}) => {
-  searchQuery.value = filters.searchQuery;
-  selectedFilters.value = filters.selectedFilters;
-  currentPage.value = 1; // 筛选变化时重置到第一页
-};
-
-const filteredVillagers = computed(() => {
-  let result = allVillagers.value;
-
-  // 种族筛选
-  const speciesValue = Number(selectedFilters.value.species);
-  if (speciesValue && speciesValue !== 0) {
-    result = result.filter((v) => v.species === speciesValue);
-  }
-  // 性别筛选
-  const genderValue = Number(selectedFilters.value.gender);
-  if (genderValue && genderValue !== 0) {
-    result = result.filter((v) => v.gender === genderValue);
-  }
-  // 性格筛选
-  const personalityValue = Number(selectedFilters.value.personality);
-  if (personalityValue && personalityValue !== 0) {
-    result = result.filter((v) => v.personality === personalityValue);
-  }
-  // 爱好筛选
-  const hobbyValue = Number(selectedFilters.value.hobby);
-  if (hobbyValue && hobbyValue !== 0) {
-    result = result.filter((v) => v.hobby === hobbyValue);
-  }
-
-  // 搜索筛选
-  if (searchQuery.value) {
-    result = result.filter((villager) =>
-      villager.name.toLowerCase().includes(searchQuery.value.toLowerCase())
-    );
-  }
-
-  return result;
-});
+// 使用通用筛选 composable
+const { filteredData, handleFiltersChanged } = useFilter(allVillagers);
 
 // 分页相关
 const perPageCount = ref(100);
 const { currentPage, totalPageCount, displayDatas, handlePageChange } =
-  usePagination(filteredVillagers, perPageCount);
+  usePagination(filteredData, perPageCount);
 
 onMounted(() => {
   loadData();
@@ -121,7 +78,7 @@ onMounted(() => {
         <template #stats>
           <div class="stat-item">
             {{ UI_TEXT.STATS.TOTAL_ITEMS
-            }}{{ filteredVillagers.length.toLocaleString()
+            }}{{ filteredData.length.toLocaleString()
             }}{{ UI_TEXT.STATS.VILLAGERS_UNIT }}
           </div>
         </template>
@@ -132,7 +89,7 @@ onMounted(() => {
         :current-page="currentPage"
         :total-pages="totalPageCount"
         :per-page="perPageCount"
-        :items-count="filteredVillagers.length"
+        :items-count="filteredData.length"
         @page-change="handlePageChange"
       />
     </template>

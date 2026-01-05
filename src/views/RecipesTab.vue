@@ -3,6 +3,7 @@ import { onMounted, ref, computed } from "vue";
 import { useRecipesData } from "../composables/useRecipesData";
 import { useItemsData } from "../composables/useItemsData";
 import { usePagination } from "../composables/usePagination";
+import { useFilter } from "../composables/useFilter";
 import { DATA_LOADING, UI_TEXT } from "../constants";
 import { RecipeType } from "../types/recipe";
 import Grid from "../components/Grid.vue";
@@ -14,15 +15,11 @@ import { getRecipeTypeName } from "../services/dataService";
 const { allRecipes, loading, error, loadData } = useRecipesData();
 const { loadData: loadItemsData } = useItemsData();
 
-// 筛选状态
-const selectedFilters = ref<Record<string, string | number>>({});
-const searchQuery = ref("");
-
 // 过滤器配置
 const filters = computed(() => [
   {
     label: "类型",
-    value: "category",
+    value: "type",
     options: Object.values(RecipeType).map((type) => ({
       value: type,
       label: `${getRecipeTypeName(type)} (${
@@ -32,33 +29,12 @@ const filters = computed(() => [
   },
 ]);
 
-const handleFiltersChanged = (filters: { searchQuery: string; selectedFilters: Record<string, string | number> }) => {
-  searchQuery.value = filters.searchQuery;
-  selectedFilters.value = filters.selectedFilters;
-  currentPage.value = 1; // 筛选变化时重置到第一页
-};
-
-const filteredRecipes = computed(() => {
-  let result = allRecipes.value;
-
-  // 类型筛选
-  if (selectedFilters.value.category && selectedFilters.value.category !== 0) {
-    result = result.filter((r) => r.type === selectedFilters.value.category);
-  }
-
-  // 搜索筛选
-  if (searchQuery.value) {
-    result = result.filter((recipe) =>
-      recipe.name.toLowerCase().includes(searchQuery.value.toLowerCase())
-    );
-  }
-
-  return result;
-});
+// 使用通用筛选 composable
+const { filteredData, handleFiltersChanged } = useFilter(allRecipes);
 
 // 分页相关
 const perPageCount = ref(100);
-const { currentPage, totalPageCount, displayDatas, handlePageChange } = usePagination(filteredRecipes, perPageCount);
+const { currentPage, totalPageCount, displayDatas, handlePageChange } = usePagination(filteredData, perPageCount);
 
 // 组件挂载时加载数据
 onMounted(() => {
@@ -79,7 +55,7 @@ onMounted(() => {
       >
         <template #stats>
           <div class="stat-item">
-            {{ UI_TEXT.STATS.TOTAL_ITEMS }}{{ filteredRecipes.length }}{{ UI_TEXT.STATS.RECIPES_UNIT }}
+            {{ UI_TEXT.STATS.TOTAL_ITEMS }}{{ filteredData.length }}{{ UI_TEXT.STATS.RECIPES_UNIT }}
           </div>
         </template>
       </FilterSection>
@@ -89,7 +65,7 @@ onMounted(() => {
         :current-page="currentPage"
         :total-pages="totalPageCount"
         :per-page="perPageCount"
-        :items-count="filteredRecipes.length"
+        :items-count="filteredData.length"
         @page-change="handlePageChange"
       />
     </template>

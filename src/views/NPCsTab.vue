@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { onMounted, ref, computed } from "vue";
+import { onMounted, computed } from "vue";
 import { useNPCsData } from "../composables/useNPCsData";
+import { useFilter } from "../composables/useFilter";
 import { DATA_LOADING, UI_TEXT } from "../constants";
 import Grid from "../components/Grid.vue";
 import NPCCard from "../components/NPCCard.vue";
@@ -9,27 +10,11 @@ import FilterSection from "../components/FilterSection.vue";
 // 使用NPC数据加载组合函数
 const { allNPCs, loading, error, loadData } = useNPCsData();
 
-// 筛选状态
-const searchQuery = ref("");
+// 过滤器配置（空配置，仅用于搜索）
+const filters = computed(() => []);
 
-// 处理筛选变化
-const handleFiltersChanged = (filters: { searchQuery: string; selectedFilters: Record<string, string | number> }) => {
-  searchQuery.value = filters.searchQuery;
-};
-
-// 根据搜索筛选的NPC
-const filteredNPCs = computed(() => {
-  let result = allNPCs.value;
-
-  // 搜索筛选
-  if (searchQuery.value) {
-    result = result.filter((npc) =>
-      npc.name.toLowerCase().includes(searchQuery.value.toLowerCase())
-    );
-  }
-
-  return result;
-});
+// 使用通用筛选 composable
+const { filteredData, handleFiltersChanged } = useFilter(allNPCs);
 
 // 组件挂载时加载数据
 onMounted(() => {
@@ -44,15 +29,16 @@ onMounted(() => {
 
     <template v-else>
       <FilterSection
+        :filters="filters"
         @filters-changed="handleFiltersChanged"
       >
         <template #stats>
           <div class="stat-item">
-            {{ UI_TEXT.STATS.TOTAL_ITEMS }}{{ filteredNPCs.length }}{{ UI_TEXT.STATS.NPCS_UNIT }}
+            {{ UI_TEXT.STATS.TOTAL_ITEMS }}{{ filteredData.length }}{{ UI_TEXT.STATS.NPCS_UNIT }}
           </div>
         </template>
       </FilterSection>
-      <Grid :datas="filteredNPCs" :card-component="NPCCard" />
+      <Grid :datas="filteredData" :card-component="NPCCard" />
     </template>
   </div>
 </template>
