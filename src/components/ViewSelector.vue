@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ENTITY_ICONS } from "../constants";
 
-export type TabType =
+export type ViewType =
   | "items"
   | "villagers"
   | "npcs"
@@ -13,23 +13,23 @@ export type TabType =
   | "artwork"
   | "fossils";
 
-interface Tab {
-  id: TabType;
+interface ViewItem {
+  id: ViewType;
   label: string;
   icon: string;
 }
 
 interface Props {
-  activeTab: TabType;
+  activeView: ViewType;
 }
 
 defineProps<Props>();
 
 const emit = defineEmits<{
-  "update:activeTab": [tab: TabType];
+  "update:activeView": [view: ViewType];
 }>();
 
-const tabs: Tab[] = [
+const views: ViewItem[] = [
   { id: "items", label: "物品", icon: ENTITY_ICONS.ITEMS },
   { id: "villagers", label: "村民", icon: ENTITY_ICONS.VILLAGERS },
   { id: "npcs", label: "NPC", icon: ENTITY_ICONS.NPCS },
@@ -42,27 +42,27 @@ const tabs: Tab[] = [
   { id: "messagecard", label: "消息卡片", icon: ENTITY_ICONS.MESSAGE_CARDS },
 ];
 
-const selectTab = (tabId: TabType) => {
-  emit("update:activeTab", tabId);
+const selectView = (viewId: ViewType) => {
+  emit("update:activeView", viewId);
 };
 </script>
 
 <template>
-  <div class="tab-selector">
+  <div class="view-selector">
     <button
-      v-for="tab in tabs"
-      :key="tab.id"
-      :class="['tab-button', { active: activeTab === tab.id }]"
-      @click="selectTab(tab.id)"
+      v-for="view in views"
+      :key="view.id"
+      :class="['view-button', { active: activeView === view.id }]"
+      @click="selectView(view.id)"
     >
-      <span class="tab-icon">{{ tab.icon }}</span>
-      <span class="tab-label">{{ tab.label }}</span>
+      <span class="view-icon">{{ view.icon }}</span>
+      <span class="view-label">{{ view.label }}</span>
     </button>
   </div>
 </template>
 
 <style scoped>
-.tab-selector {
+.view-selector {
   display: flex;
   gap: 8px;
   margin-bottom: var(--spacing-sm);
@@ -70,7 +70,7 @@ const selectTab = (tabId: TabType) => {
   flex-wrap: wrap;
 }
 
-.tab-button {
+.view-button {
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
@@ -85,39 +85,39 @@ const selectTab = (tabId: TabType) => {
   color: var(--secondary-color);
 }
 
-.tab-button:hover {
+.view-button:hover {
   border-color: var(--primary-color);
   background-color: #f0f8f0;
   transform: translateY(-2px);
   box-shadow: var(--shadow-sm);
 }
 
-.tab-button.active {
+.view-button.active {
   border-color: var(--primary-color);
   background-color: var(--primary-color);
   color: white;
   box-shadow: var(--shadow-md);
 }
 
-.tab-icon {
+.view-icon {
   font-size: 1.3em;
 }
 
-.tab-label {
+.view-label {
   font-weight: 600;
 }
 
 @media (max-width: 600px) {
-  .tab-selector {
+  .view-selector {
     gap: 6px;
   }
 
-  .tab-button {
+  .view-button {
     padding: 6px 12px;
     font-size: 0.9em;
   }
 
-  .tab-icon {
+  .view-icon {
     font-size: 1.1em;
   }
 }

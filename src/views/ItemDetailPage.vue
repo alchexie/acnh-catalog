@@ -431,7 +431,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
-@import "../styles/tab-styles.css";
+@import "../styles/view-styles.css";
 
 .detail-container {
   max-width: 1200px;

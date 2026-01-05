@@ -1,20 +1,20 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
-import type { TabType } from "../components/TabSelector.vue";
-import TabSelector from "../components/TabSelector.vue";
-import ItemsTab from "./ItemsTab.vue";
-import VillagersTab from "./VillagersTab.vue";
-import NPCsTab from "./NPCsTab.vue";
-import CreaturesTab from "./CreaturesTab.vue";
-import ReactionsTab from "./ReactionsTab.vue";
-import RecipesTab from "./RecipesTab.vue";
-import ConstructionTab from "./ConstructionTab.vue";
-import MessageCardTab from "./MessageCardTab.vue";
-import ArtworkTab from "./ArtworkTab.vue";
-import FossilsTab from "./FossilsTab.vue";
+import type { ViewType } from "../components/ViewSelector.vue";
+import ViewSelector from "../components/ViewSelector.vue";
+import ItemsView from "./ItemsView.vue";
+import VillagersView from "./VillagersView.vue";
+import NPCsView from "./NPCsView.vue";
+import CreaturesView from "./CreaturesView.vue";
+import ReactionsView from "./ReactionsView.vue";
+import RecipesView from "./RecipesView.vue";
+import ConstructionView from "./ConstructionView.vue";
+import MessageCardView from "./MessageCardView.vue";
+import ArtworkView from "./ArtworkView.vue";
+import FossilsView from "./FossilsView.vue";
 
-// 当前选中的标签
-const activeTab = ref<TabType>("items");
+// 当前选中的视图
+const activeView = ref<ViewType>("items");
 
 // 回到顶部按钮显示状态
 const showBackToTop = ref(false);
@@ -44,19 +44,19 @@ onUnmounted(() => {
       <h1>动物森友会目录</h1>
     </header>
 
-    <TabSelector v-model:active-tab="activeTab" />
+    <ViewSelector v-model:active-view="activeView" />
 
-    <!-- 根据选中的标签显示对应内容 -->
-    <ItemsTab v-if="activeTab === 'items'" />
-    <VillagersTab v-else-if="activeTab === 'villagers'" />
-    <NPCsTab v-else-if="activeTab === 'npcs'" />
-    <CreaturesTab v-else-if="activeTab === 'creatures'" />
-    <ArtworkTab v-else-if="activeTab === 'artwork'" />
-    <FossilsTab v-else-if="activeTab === 'fossils'" />
-    <ReactionsTab v-else-if="activeTab === 'reactions'" />
-    <RecipesTab v-else-if="activeTab === 'recipes'" />
-    <ConstructionTab v-else-if="activeTab === 'construction'" />
-    <MessageCardTab v-else-if="activeTab === 'messagecard'" />
+    <!-- 根据选中的视图显示对应内容 -->
+    <ItemsView v-if="activeView === 'items'" />
+    <VillagersView v-else-if="activeView === 'villagers'" />
+    <NPCsView v-else-if="activeView === 'npcs'" />
+    <CreaturesView v-else-if="activeView === 'creatures'" />
+    <ArtworkView v-else-if="activeView === 'artwork'" />
+    <FossilsView v-else-if="activeView === 'fossils'" />
+    <ReactionsView v-else-if="activeView === 'reactions'" />
+    <RecipesView v-else-if="activeView === 'recipes'" />
+    <ConstructionView v-else-if="activeView === 'construction'" />
+    <MessageCardView v-else-if="activeView === 'messagecard'" />
 
     <!-- 回到顶部按钮 -->
     <button

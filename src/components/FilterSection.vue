@@ -218,7 +218,7 @@ const handleClearFilters = () => {
 </script>
 
 <style scoped>
-@import "../styles/tab-styles.css";
+@import "../styles/view-styles.css";
 
 .filter-section {
   margin-bottom: 20px;

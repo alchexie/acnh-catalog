@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import { onMounted, ref, computed } from "vue";
+import { ref, computed } from "vue";
 import { useCreaturesData } from "../composables/useCreaturesData";
-import { usePagination } from "../composables/usePagination";
 import { useFilter } from "../composables/useFilter";
-import { DATA_LOADING, UI_TEXT } from "../constants";
-import Grid from "../components/Grid.vue";
+import { UI_TEXT } from "../constants";
+import DataView from "../components/DataView.vue";
 import CreatureCard from "../components/CreatureCard.vue";
 import ToggleGroup from "../components/ToggleGroup.vue";
-import Pagination from "../components/Pagination.vue";
 import FilterSection from "../components/FilterSection.vue";
 import { CreatureType } from "../types";
 import { getCreatureTypeName } from "../services/dataService";
@@ -35,8 +33,6 @@ const filters = computed(() => [
 ]);
 const { filteredData, handleFiltersChanged } = useFilter(allCreatures);
 const sortedFilteredData = computed(() => {
-  // 监听分类变化，切换时回到第一页
-  currentPage.value = 1;
   return filteredData.value.sort((a, b) => {
     const diff = a.type - b.type;
     if (diff !== 0) return diff;
@@ -44,24 +40,21 @@ const sortedFilteredData = computed(() => {
   });
 });
 
-const perPageCount = ref(100);
-const { currentPage, totalPageCount, displayDatas, handlePageChange } =
-  usePagination(sortedFilteredData, perPageCount);
-
-onMounted(() => {
-  loadData();
-});
 </script>
 
 <template>
-  <div class="tab">
-    <div v-if="loading" class="loading">{{ DATA_LOADING.CREATURES }}</div>
-    <div v-else-if="error" class="error">{{ error }}</div>
-
-    <template v-else>
+  <DataView
+    :loading="loading"
+    :error="error"
+    :on-load="loadData"
+    :datas="sortedFilteredData"
+    :card-component="CreatureCard"
+    :card-props="{ hemisphere: selectedHemisphere }"
+  >
+    <template #filters>
       <FilterSection :filters="filters" @filters-changed="handleFiltersChanged">
         <template #stats>
-          <div class="stat-item">
+          <div>
             {{ UI_TEXT.STATS.TOTAL_ITEMS }}{{ sortedFilteredData.length
             }}{{ UI_TEXT.STATS.CREATURES_UNIT }}
           </div>
@@ -73,23 +66,6 @@ onMounted(() => {
           />
         </template>
       </FilterSection>
-      <Grid
-        :datas="displayDatas"
-        :card-component="CreatureCard"
-        :card-props="{ hemisphere: selectedHemisphere }"
-      />
-      <Pagination
-        v-if="totalPageCount > 1"
-        :current-page="currentPage"
-        :total-pages="totalPageCount"
-        :per-page="perPageCount"
-        :items-count="sortedFilteredData.length"
-        @page-change="handlePageChange"
-      />
     </template>
-  </div>
+  </DataView>
 </template>
-
-<style scoped>
-@import "../styles/tab-styles.css";
-</style>

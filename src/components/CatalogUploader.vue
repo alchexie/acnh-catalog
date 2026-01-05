@@ -105,7 +105,7 @@ const handleFileChange = async (event: Event) => {
 </template>
 
 <style scoped>
-@import "../styles/tab-styles.css";
+@import "../styles/view-styles.css";
 
 .catalog-uploader {
   display: flex;

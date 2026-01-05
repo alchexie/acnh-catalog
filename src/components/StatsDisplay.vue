@@ -8,13 +8,13 @@ defineProps<{
 
 <template>
   <div class="stats">
-    <div class="stat-item">
+    <div>
       总物品数: <strong>{{ totalItems.toLocaleString() }}</strong>
     </div>
-    <div class="stat-item">
+    <div>
       当前显示: <strong>{{ displayedItems.toLocaleString() }}</strong>
     </div>
-    <div class="stat-item">
+    <div>
       已拥有: <strong>{{ ownedItems.toLocaleString() }}</strong>
     </div>
   </div>

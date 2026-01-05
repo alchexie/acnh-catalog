@@ -37,5 +37,5 @@ const handleSelect = (value: string | number) => {
 </template>
 
 <style scoped>
-@import "../styles/tab-styles.css";
+@import "../styles/view-styles.css";
 </style>

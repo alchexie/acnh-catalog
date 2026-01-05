@@ -5,7 +5,7 @@ const props = defineProps<{
   currentPage: number;
   totalPages: number;
   perPage: number | "all";
-  itemsCount: number;
+  datasCount: number;
 }>();
 
 const emit = defineEmits<{
@@ -15,7 +15,7 @@ const emit = defineEmits<{
 const showPagination = computed(() => {
   return (
     props.perPage !== "all" &&
-    props.itemsCount > (typeof props.perPage === "number" ? props.perPage : 0)
+    props.datasCount > (typeof props.perPage === "number" ? props.perPage : 0)
   );
 });
 </script>
@@ -53,7 +53,7 @@ const showPagination = computed(() => {
 </template>
 
 <style scoped>
-@import "../styles/tab-styles.css";
+@import "../styles/view-styles.css";
 
 .pagination {
   display: flex;

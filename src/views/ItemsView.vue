@@ -1,13 +1,10 @@
 <script setup lang="ts">
-import { onMounted, computed, ref } from "vue";
+import { computed } from "vue";
 import { useItemsData } from "../composables/useItemsData";
 import { useFilter } from "../composables/useFilter";
-import { usePagination } from "../composables/usePagination";
-import { DATA_LOADING } from "../constants";
+import DataView from "../components/DataView.vue";
 import FilterSection, { type Filter } from "../components/FilterSection.vue";
-import Grid from "../components/Grid.vue";
 import ItemCard from "../components/ItemCard.vue";
-import Pagination from "../components/Pagination.vue";
 import CatalogUploader from "../components/CatalogUploader.vue";
 import {
   getItemTypeName,
@@ -246,10 +243,6 @@ const { filteredData, handleFiltersChanged } = useFilter(
   "replace" // 使用 replace 模式完全替换默认筛选
 );
 
-const perPageCount = ref(60);
-const { currentPage, displayDatas, totalPageCount, handlePageChange } =
-  usePagination(filteredData, perPageCount);
-
 // 计算拥有的物品数量
 const ownedItemsCount = computed(
   () => allItems.value.filter((item) => item.owned).length
@@ -261,50 +254,27 @@ const handleCatalogUpload = (data: {
 }) => {
   updateCatalogData(data);
 };
-
-onMounted(() => {
-  loadData();
-});
 </script>
 
 <template>
-  <div class="tab">
-    <div v-if="loading" class="loading">{{ DATA_LOADING.ITEMS }}</div>
-    <div v-else-if="error" class="error">{{ error }}</div>
-
-    <template v-else>
+  <DataView :loading="loading" :error="error" :on-load="loadData" :datas="filteredData" :per-page="100" :card-component="ItemCard">
+    <template #filters>
       <FilterSection :filters="filters" @filters-changed="handleFiltersChanged">
         <template #stats>
           <div>
-            总物品数: <strong>{{ allItems.length.toLocaleString() }}</strong>
+            总物品数: {{ allItems.length.toLocaleString() }}
           </div>
           <div>
-            当前显示:
-            <strong>{{ filteredData.length.toLocaleString() }}</strong>
+            当前显示: {{ filteredData.length.toLocaleString() }}
           </div>
           <div>
-            已拥有: <strong>{{ ownedItemsCount.toLocaleString() }}</strong>
+            已拥有: {{ ownedItemsCount.toLocaleString() }}
           </div>
         </template>
         <template #action-buttons>
           <CatalogUploader @catalog-uploaded="handleCatalogUpload" />
         </template>
       </FilterSection>
-
-      <Grid :datas="displayDatas" :card-component="ItemCard" />
-
-      <Pagination
-        v-if="totalPageCount > 1"
-        :current-page="currentPage"
-        :total-pages="totalPageCount"
-        :per-page="perPageCount"
-        :items-count="filteredData.length"
-        @page-change="handlePageChange"
-      />
     </template>
-  </div>
+  </DataView>
 </template>
-
-<style scoped>
-@import "../styles/tab-styles.css";
-</style>
