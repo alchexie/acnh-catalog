@@ -41,15 +41,6 @@ export const CONFIG = {
     ID_ASC: "id-asc",
     ID_DESC: "id-desc",
   } as const,
-
-  /**
-   * 筛选选项
-   */
-  FILTER_OPTIONS: {
-    ALL: "all",
-    OWNED: "owned",
-    NOT_OWNED: "not-owned",
-  } as const,
 } as const;
 
 export const COLOR_MAP: Record<Color, string> = {

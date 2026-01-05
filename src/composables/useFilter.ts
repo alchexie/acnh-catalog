@@ -75,8 +75,8 @@ export function useFilter<T>(
     // 清理 selectedFilters，只保留有效的筛选值
     const cleanedFilters: Record<string, FilterOptionValue> = {};
     Object.entries(filters.selectedFilters).forEach(([key, value]) => {
-      // 只保留非空、非"all"、非0的有效筛选值
-      if (value && value !== "" && value !== "all" && value !== 0) {
+      // 只保留非空、非0的有效筛选值
+      if (value && value !== "" && value !== 0) {
         cleanedFilters[key] = value;
       }
     });

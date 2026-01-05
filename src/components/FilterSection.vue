@@ -33,19 +33,19 @@
           清除筛选
         </button>
       </div>
-      <div v-if="props.filters" class="filters-wrapper">
+      <div v-if="filters.length > 0" class="filters-wrapper">
         <div
-          v-for="filter in props.filters"
+          v-for="filter in filters"
           :key="filter.value"
           class="filter-group"
         >
-          <label v-if="props.filters.length > 1" class="filter-title">{{
+          <label v-if="filters.length > 1" class="filter-title">{{
             filter.label
           }}</label>
           <!-- 单个筛选维度时显示按钮 -->
-          <div v-if="props.filters.length === 1" class="category-filter">
+          <div v-if="filters.length === 1" class="category-filter">
             <button
-              v-for="option in getFilterOptions(filter)"
+              v-for="option in filter.options"
               :key="option.value"
               class="category-btn"
               :class="{
@@ -77,7 +77,7 @@
             "
           >
             <option
-              v-for="option in getFilterOptions(filter)"
+              v-for="option in filter.options"
               :key="option.value"
               :value="option.value"
             >
@@ -122,6 +122,7 @@ const isExpanded = ref(false);
 
 const searchQuery = ref("");
 const selectedFilters = ref<Record<string, FilterOptionValue>>({});
+const filters = ref<Filter[]>([]);
 
 // 使用全局共享的视图模式
 const { viewMode } = useViewMode();
@@ -138,22 +139,32 @@ const props = defineProps<{
   currentCount?: number;
   extraStats?: Array<{ label: string; value: number }>;
 }>();
-
-// 默认选中全部选项
+// 并为每个筛选维度添加"全部"选项
 const initializeDefaultFilters = () => {
   if (props.filters) {
     const newFilters: Record<string, FilterOptionValue> = {};
+    const newFiltersWithAll: Filter[] = [];
+    
     props.filters.forEach((filter) => {
       // 根据filter的第一个选项的类型决定"全部"选项的值
       const firstOption = filter.options[0];
       let allValue: FilterOptionValue = 0; // 默认数字0
       if (firstOption && typeof firstOption.value === "string") {
-        allValue = "all"; // 如果第一个选项是字符串，使用'all'
+        allValue = ""; // 如果第一个选项是字符串，使用''
       }
 
       newFilters[filter.value] = allValue;
+      
+      // 为每个筛选维度添加"全部"选项
+      newFiltersWithAll.push({
+        ...filter,
+        options: [{ value: allValue, label: "全部" }, ...filter.options]
+      });
     });
+    
     selectedFilters.value = newFilters;
+    filters.value = newFiltersWithAll;
+    
     emit("filtersChanged", {
       searchQuery: searchQuery.value,
       selectedFilters: selectedFilters.value,
@@ -163,19 +174,6 @@ const initializeDefaultFilters = () => {
 
 // 监听filters变化，初始化默认选择
 watch(() => props.filters, initializeDefaultFilters, { immediate: true });
-
-// 为每个筛选维度生成包含"全部"选项的完整选项列表
-const getFilterOptions = (filter: Filter) => {
-  // 根据filter的第一个选项的类型决定"全部"选项的值
-  const firstOption = filter.options[0];
-  let allValue: FilterOptionValue = 0; // 默认数字0
-
-  if (firstOption && typeof firstOption.value === "string") {
-    allValue = "all"; // 如果第一个选项是字符串，使用'all'
-  }
-
-  return [{ value: allValue, label: "全部" }, ...filter.options];
-};
 
 const getSelectedValue = (dimension: string): FilterOptionValue => {
   return selectedFilters.value[dimension]!;
@@ -218,17 +216,10 @@ const handleFilterChange = (event: {
 const handleClearFilters = () => {
   searchQuery.value = "";
   // 将所有筛选重置为"全部"
-  if (props.filters) {
+  if (filters.value.length > 0) {
     const clearedFilters: Record<string, FilterOptionValue> = {};
-    props.filters.forEach((filter) => {
-      // 根据filter的第一个选项的类型决定"全部"选项的值
-      const firstOption = filter.options[0];
-      let allValue: FilterOptionValue = 0; // 默认数字0
-      if (firstOption && typeof firstOption.value === "string") {
-        allValue = "all"; // 如果第一个选项是字符串，使用'all'
-      }
-
-      clearedFilters[filter.value] = allValue;
+    filters.value.forEach((filter) => {
+      clearedFilters[filter.value] = filter.options[0]?.value ?? "";
     });
     selectedFilters.value = clearedFilters;
   } else {
