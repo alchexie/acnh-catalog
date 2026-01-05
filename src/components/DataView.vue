@@ -68,7 +68,6 @@ onMounted(() => {
 
       <!-- Grid内容 -->
       <div v-if="!hasDatas" class="no-results">
-        <div class="no-results-icon">😢</div>
         <h2 class="no-results-title">没有找到匹配的数据</h2>
       </div>
       <div v-else class="generic-grid">

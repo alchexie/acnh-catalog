@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { useCreaturesData } from "../composables/useCreaturesData";
 import { useFilter } from "../composables/useFilter";
 import DataView from "../components/DataView.vue";
@@ -12,12 +12,17 @@ import { getCreatureTypeName } from "../services/dataService";
 const { allCreatures, loading, error, loadData } = useCreaturesData();
 
 // 当前选择的半球（默认北半球）
-const selectedHemisphere = ref<"north" | "south">("north");
+const selectedHemisphere = ref<"north" | "south">(
+  (localStorage.getItem("hemisphere") as "north" | "south") || "north"
+);
 const hemisphereOptions = [
   { value: "north", label: "北", icon: "🌍" },
   { value: "south", label: "南", icon: "🌏" },
 ];
 
+watch(selectedHemisphere, (newHemisphere) => {
+  localStorage.setItem("hemisphere", newHemisphere);
+});
 const filters = computed(() => [
   {
     label: "类别",
@@ -50,9 +55,9 @@ const sortedFilteredData = computed(() => {
     :card-props="{ hemisphere: selectedHemisphere }"
   >
     <template #filters>
-      <FilterSection 
-        :filters="filters" 
-        :total-count="allCreatures.length" 
+      <FilterSection
+        :filters="filters"
+        :total-count="allCreatures.length"
         :current-count="sortedFilteredData.length"
         @filters-changed="handleFiltersChanged"
       >

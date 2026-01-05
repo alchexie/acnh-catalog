@@ -1,63 +1,44 @@
 <script setup lang="ts">
+import { useRoute } from "vue-router";
 import { ENTITY_ICONS } from "../constants";
 
-export type ViewType =
-  | "items"
-  | "villagers"
-  | "npcs"
-  | "creatures"
-  | "reactions"
-  | "recipes"
-  | "construction"
-  | "messagecard"
-  | "artwork"
-  | "fossils";
-
 interface ViewItem {
-  id: ViewType;
+  path: string;
   label: string;
   icon: string;
 }
 
-interface Props {
-  activeView: ViewType;
-}
-
-defineProps<Props>();
-
-const emit = defineEmits<{
-  "update:activeView": [view: ViewType];
-}>();
+const route = useRoute();
 
 const views: ViewItem[] = [
-  { id: "items", label: "物品", icon: ENTITY_ICONS.ITEMS },
-  { id: "villagers", label: "村民", icon: ENTITY_ICONS.VILLAGERS },
-  { id: "npcs", label: "NPC", icon: ENTITY_ICONS.NPCS },
-  { id: "creatures", label: "生物", icon: ENTITY_ICONS.CREATURES },
-  { id: "fossils", label: "化石", icon: ENTITY_ICONS.FOSSILS },
-  { id: "artwork", label: "艺术品", icon: ENTITY_ICONS.ARTWORKS },
-  { id: "reactions", label: "表情", icon: ENTITY_ICONS.REACTIONS },
-  { id: "recipes", label: "DIY配方", icon: ENTITY_ICONS.RECIPES },
-  { id: "construction", label: "改建", icon: ENTITY_ICONS.CONSTRUCTION },
-  { id: "messagecard", label: "消息卡片", icon: ENTITY_ICONS.MESSAGE_CARDS },
+  { path: "/items", label: "物品", icon: ENTITY_ICONS.ITEMS },
+  { path: "/villagers", label: "村民", icon: ENTITY_ICONS.VILLAGERS },
+  { path: "/npcs", label: "NPC", icon: ENTITY_ICONS.NPCS },
+  { path: "/creatures", label: "生物", icon: ENTITY_ICONS.CREATURES },
+  { path: "/fossils", label: "化石", icon: ENTITY_ICONS.FOSSILS },
+  { path: "/artworks", label: "艺术品", icon: ENTITY_ICONS.ARTWORKS },
+  { path: "/reactions", label: "表情", icon: ENTITY_ICONS.REACTIONS },
+  { path: "/recipes", label: "DIY配方", icon: ENTITY_ICONS.RECIPES },
+  { path: "/constructions", label: "改建", icon: ENTITY_ICONS.CONSTRUCTION },
+  { path: "/message-cards", label: "消息卡片", icon: ENTITY_ICONS.MESSAGE_CARDS },
 ];
 
-const selectView = (viewId: ViewType) => {
-  emit("update:activeView", viewId);
+const isActive = (path: string) => {
+  return route.path === path;
 };
 </script>
 
 <template>
   <div class="view-selector">
-    <button
+    <RouterLink
       v-for="view in views"
-      :key="view.id"
-      :class="['view-button', { active: activeView === view.id }]"
-      @click="selectView(view.id)"
+      :key="view.path"
+      :to="view.path"
+      :class="['view-button', { active: isActive(view.path) }]"
     >
       <span class="view-icon">{{ view.icon }}</span>
       <span class="view-label">{{ view.label }}</span>
-    </button>
+    </RouterLink>
   </div>
 </template>
 
@@ -83,6 +64,7 @@ const selectView = (viewId: ViewType) => {
   font-weight: 500;
   transition: var(--transition-normal);
   color: var(--secondary-color);
+  text-decoration: none;
 }
 
 .view-button:hover {

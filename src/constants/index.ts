@@ -17,7 +17,7 @@ export const DATA_LOADING = {
   MESSAGE_CARDS: "正在加载消息卡片数据...",
   ARTWORKS: "正在加载艺术品数据...",
   FOSSILS: "正在加载化石数据...",
-  ERROR_GENERIC: "加载数据失败，请确保数据文件存在",
+  ERROR_GENERIC: "加载数据失败",
 } as const;
 
 /**

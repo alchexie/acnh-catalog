@@ -227,12 +227,6 @@
   text-align: center;
 }
 
-.no-results-icon {
-  font-size: 60px;
-  margin-bottom: var(--spacing-lg, 20px);
-  opacity: 0.8;
-}
-
 .no-results-title {
   color: var(--text-light, #999);
   font-weight: 400;
@@ -272,10 +266,6 @@
 
   .no-results {
     padding: 40px var(--spacing-md, 15px);
-  }
-
-  .no-results-icon {
-    font-size: 48px;
   }
 
   .no-results-title {

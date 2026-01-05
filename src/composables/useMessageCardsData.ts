@@ -26,10 +26,10 @@ export function useMessageCardsData(): UseMessageCardsDataReturn {
       error.value = ""
       allMessageCards.value = await loadMessageCardsData();
       isDataLoaded = true;
-      loading.value = false;
     } catch (err) {
-      console.error("加载消息卡片数据失败:", err);
       error.value = DATA_LOADING.ERROR_GENERIC;
+      console.error("加载消息卡片数据失败:", err);
+    } finally {
       loading.value = false;
     }
   };

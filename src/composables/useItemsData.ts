@@ -41,8 +41,8 @@ export function useItemsData() {
       });
       isDataLoaded = true;
     } catch (err) {
-      console.error("加载数据失败:", err);
       error.value = DATA_LOADING.ERROR_GENERIC;
+      console.error("加载数据失败:", err);
     } finally {
       loading.value = false;
     }
