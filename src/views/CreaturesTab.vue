@@ -34,8 +34,8 @@ const filters = computed(() => [
   },
 ]);
 const { filteredData, handleFiltersChanged } = useFilter(allCreatures);
-// 监听分类变化，切换时回到第一页
 const sortedFilteredData = computed(() => {
+  // 监听分类变化，切换时回到第一页
   currentPage.value = 1;
   return filteredData.value.sort((a, b) => {
     const diff = a.type - b.type;
