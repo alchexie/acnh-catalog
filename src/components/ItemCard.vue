@@ -160,14 +160,14 @@ const handleClick = () => {
       </span>
     </div>
     <div v-if="itemModel.hasVariations" class="variants-section variant-row">
-      <span class="variants-label">款式</span>
+      <span class="variants-label">{{ itemModel.vTitle }}</span>
       <div class="variants-list">
         <span
           v-for="(vg, vIdx) in itemModel.variantGroups"
           :key="vIdx"
           class="variation-dot variant-dot"
           :class="{ active: vIdx === variantIndex }"
-          :title="vg.name || `款式 ${vIdx + 1}`"
+          :title="vg.name || `${itemModel.vTitle} ${vIdx + 1}`"
           @click="variantIndex = vIdx"
         >
           {{ vIdx + 1 }}
@@ -175,14 +175,14 @@ const handleClick = () => {
       </div>
     </div>
     <div v-if="itemModel.hasPatterns" class="variants-section pattern-row">
-      <span class="variants-label">图案</span>
+      <span class="variants-label">{{ itemModel.pTitle }}</span>
       <div class="variants-list">
         <span
           v-for="(p, pIdx) in currentVariant!.patterns"
           :key="pIdx"
           class="variation-dot pattern-dot"
           :class="{ active: pIdx === patternIndex }"
-          :title="p.name || `图案 ${pIdx + 1}`"
+          :title="p.name || `${itemModel.pTitle} ${pIdx + 1}`"
           @click="patternIndex = pIdx"
         >
           {{ pIdx + 1 }}

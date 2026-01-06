@@ -199,6 +199,8 @@ export interface Item {
   styles?: string[]; // 服饰风格（村民喜好）
 
   variants?: Variant[]; // 变体组列表
+  vTitle?: string; // 变体标题
+  pTitle?: string; // 图案标题
   recipe?: number; // 配方数据
 }
 

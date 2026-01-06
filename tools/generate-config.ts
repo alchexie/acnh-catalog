@@ -370,6 +370,8 @@ function convertItem(oldItem: OldItem): NewItem {
       ? [oldItem.exchangePrice, currencyMap[oldItem.exchangeCurrency!]]
       : undefined,
     variants: variants.length > 0 ? variants : undefined,
+    vTitle: oldItem.bodyTitle || undefined,
+    pTitle: oldItem.variations?.[0].patternTitle || undefined,
   };
 }
 
@@ -811,3 +813,9 @@ fs.writeFileSync(
   JSON.stringify(newConstructions.map(removeNullFields), null, 2),
   "utf-8"
 );
+
+// for (const oldItem of oldItems) {
+//   if (oldItem.exchangeCurrency) {
+//     console.log(oldItem.translations?.cNzh || oldItem.name, oldItem.exchangeCurrency);
+//   }
+// }

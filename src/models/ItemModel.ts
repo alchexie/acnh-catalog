@@ -264,6 +264,12 @@ export class ItemModel {
   }
 
   // ============ 变体相关 ============
+  get vTitle(): string {
+    return this._data.vTitle || "样式";
+  }
+  get pTitle(): string {
+    return this._data.pTitle || "图案";
+  }
   get hasVariations(): boolean {
     const groups = this.variantGroups;
     return (
