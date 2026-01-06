@@ -18,7 +18,9 @@ const props = defineProps<Props>();
 const currentImageIndex = ref(0);
 
 // 当前形状
-const currentShape = computed(() => (currentImageIndex.value === 0 ? "circle" : "rounded"));
+const currentShape = computed(() =>
+  currentImageIndex.value === 0 ? "circle" : "rounded"
+);
 
 // 获取月份信息
 const getMonths = (creature: Creature): string => {
@@ -64,13 +66,9 @@ const handleImageIndexChanged = (index: number) => {
   >
     <div class="detail-row">
       <span class="detail-label">分类</span>
-      <span class="detail-value">{{ getCreatureTypeName(props.data.type) }}</span>
-    </div>
-    <div class="detail-row">
-      <span class="detail-label">{{ UI_TEXT.LABELS.PRICE }}</span>
-      <span class="detail-value price"
-        >{{ formatPrice(props.data.sell) }} {{ UI_TEXT.CURRENCY }}</span
-      >
+      <span class="detail-value">{{
+        getCreatureTypeName(props.data.type)
+      }}</span>
     </div>
     <div class="detail-row">
       <span class="detail-label">月份</span>
@@ -95,6 +93,12 @@ const handleImageIndexChanged = (index: number) => {
     <div class="detail-row full">
       <span class="detail-label">描述</span>
       <span class="detail-value">{{ props.data.desc }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">{{ UI_TEXT.LABELS.PRICE }}</span>
+      <span class="detail-value price">
+        {{ formatPrice(props.data.sell) }} {{ UI_TEXT.CURRENCY }}
+      </span>
     </div>
   </BaseCard>
 </template>

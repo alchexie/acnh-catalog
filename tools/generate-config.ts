@@ -17,7 +17,13 @@ import {
   construction as oldConstructions,
 } from "animal-crossing";
 import type { Item as NewItem, Variant } from "../src/types/item";
-import { ItemType, Version, ItemSize, Color } from "../src/types/item";
+import {
+  ItemType,
+  Version,
+  ItemSize,
+  Color,
+  Currency,
+} from "../src/types/item";
 import type { Recipe as NewRecipe } from "../src/types/recipe";
 import {
   Gender,
@@ -181,6 +187,14 @@ const colorMap: Record<string, Color> = {
   Red: Color.Red,
   White: Color.White,
   Yellow: Color.Yellow,
+};
+
+const currencyMap: Record<string, Currency> = {
+  Bells: Currency.Bells,
+  "Heart Crystals": Currency.HeartCrystals,
+  "Nook Miles": Currency.NookMiles,
+  "Nook Points": Currency.NookPoints,
+  Poki: Currency.Poki,
 };
 
 let newRecipes: NewRecipe[] = [];
@@ -352,6 +366,9 @@ function convertItem(oldItem: OldItem): NewItem {
       : undefined,
     buy: oldItem.buy ?? undefined,
     sell: oldItem.sell ?? 0,
+    exch: oldItem.exchangePrice
+      ? [oldItem.exchangePrice, currencyMap[oldItem.exchangeCurrency!]]
+      : undefined,
     variants: variants.length > 0 ? variants : undefined,
   };
 }
@@ -473,6 +490,7 @@ for (const [groupName, parts] of fossilGroups) {
         id: part.internalId!,
         name: part.name,
         image: processImageUrl(part.image!),
+        sell: part.sell!,
       })),
     desc: parts[0].description![0]!,
   };

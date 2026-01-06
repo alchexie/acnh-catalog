@@ -1,4 +1,4 @@
-import type { Item, Variant, Pattern } from "../types";
+import type { Item, Variant, Pattern, Currency } from "../types";
 import { reactive } from "vue";
 import { processImageUrl } from "../utils/imageUtils";
 import {
@@ -15,6 +15,7 @@ import {
   getClothingThemeName,
   getHHACategoryName,
   getSeasonEventName,
+  getCurrencyName,
 } from "../services/dataService";
 import {
   Color,
@@ -140,6 +141,22 @@ export class ItemModel {
 
   get sellPriceStr(): string {
     return formatPrice(this.sellPrice);
+  }
+
+  get exchPrice(): number | null {
+    return this._data.exch?.[0] || null;
+  }
+
+  get exchPriceStr(): string {
+    return formatPrice(this.exchPrice);
+  }
+
+  get exchCurrency(): Currency | null {
+    return (this._data.exch?.[1] as Currency) || null;
+  }
+
+  get exchCurrencyStr(): string {
+    return this.exchCurrency ? getCurrencyName(this.exchCurrency) : "";
   }
 
   get tag(): string {

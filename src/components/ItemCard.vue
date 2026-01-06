@@ -119,13 +119,17 @@ const handleClick = () => {
 
     <div v-if="itemModel.isClothing" class="detail-row">
       <span class="detail-label">服饰风格</span>
-      <span class="detail-value">{{ joinArray(itemModel.clothingStyleNames) }}</span>
+      <span class="detail-value">{{
+        joinArray(itemModel.clothingStyleNames)
+      }}</span>
     </div>
     <div v-if="itemModel.isClothing" class="detail-row">
       <span class="detail-label">服饰主题</span>
-      <span class="detail-value">{{ joinArray(itemModel.closingThemeNames) }}</span>
+      <span class="detail-value">{{
+        joinArray(itemModel.closingThemeNames)
+      }}</span>
     </div>
-        <div class="detail-row">
+    <div class="detail-row">
       <span class="detail-label">季节/活动</span>
       <span class="detail-value">{{ itemModel.seasonEventName }}</span>
     </div>
@@ -138,11 +142,17 @@ const handleClick = () => {
       />
     </div>
     <div class="detail-row">
+      <span class="detail-label">兑换</span>
+      <span class="detail-value">
+        {{ itemModel.exchPriceStr }} {{ itemModel.exchCurrencyStr }}
+      </span>
+    </div>
+    <div class="detail-row">
       <span class="buy-price" title="购买价格">
-        💰 {{ itemModel.buyPriceStr }}
+        {{ itemModel.buyPriceStr }} {{ UI_TEXT.CURRENCY }}
       </span>
       <span class="sell-price" title="出售价格">
-        💵 {{ itemModel.sellPriceStr }}
+        {{ itemModel.sellPriceStr }} {{ UI_TEXT.CURRENCY }}
       </span>
     </div>
 

@@ -19,7 +19,7 @@ import { RecipeType, type Recipe } from "../types/recipe";
 import { ConstructionType, type Construction } from "../types/construction";
 import type { MessageCard } from "../types/messagecard";
 import { CONFIG } from "../config";
-import { ItemType, Version, ItemSize, Color } from "../types/item";
+import { ItemType, Version, ItemSize, Color, Currency } from "../types/item";
 import { ENTITY_ICONS } from "../constants";
 
 let translationsCache: Translations | null = null;
@@ -129,6 +129,14 @@ export const CreatureTypeNameMap: Record<CreatureType, string> = {
   [CreatureType.SeaCreatures]: "海洋生物",
 };
 
+export const CurrencyNameMap: Record<Currency, string> = {
+  [Currency.Bells]: "铃钱",
+  [Currency.HeartCrystals]: "心形水晶",
+  [Currency.NookMiles]: "Nook里程",
+  [Currency.NookPoints]: "Nook点数",
+  [Currency.Poki]: "Poki币",
+};
+
 function getTranslation(
   key: string,
   translationMap: Record<string, string> | undefined
@@ -153,6 +161,10 @@ export function getColorName(color: Color | string): string {
     color = Object.entries(Color).find(([k]) => k === color)?.[1] as Color;
   }
   return colorNameMap[color];
+}
+
+export function getCurrencyName(currency: Currency): string {
+  return CurrencyNameMap[currency];
 }
 
 export function getSourceName(source: string): string {

@@ -137,6 +137,15 @@ export const Color = {
 
 export type Color = (typeof Color)[keyof typeof Color];
 
+export const Currency = {
+  Bells: 1,
+  HeartCrystals: 2,
+  NookMiles: 3,
+  NookPoints: 4,
+  Poki: 5,
+} as const;
+
+export type Currency = (typeof Currency)[keyof typeof Currency];
 /**
  * 图案接口
  * 表示物品的一个具体图案（如家具的不同花纹）
@@ -173,6 +182,8 @@ export interface Item {
   size?: ItemSize; // 物品尺寸
   buy?: number; // 购买价格
   sell: number; // 出售价格
+  exch?: [number, Currency]; // 兑换价格[数量, 货币类型]
+
   source?: string[]; // 获取来源
   sourceNotes?: string[];
   seasonEvent?: string;

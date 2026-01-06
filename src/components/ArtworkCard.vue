@@ -5,6 +5,8 @@ import BaseCard from "./BaseCard.vue";
 import { computed, ref } from "vue";
 import { processImageUrl } from "../utils/imageUtils";
 import { Teleport } from "vue";
+import { formatPrice } from "../utils/common";
+import { UI_TEXT } from "../constants";
 
 interface Props {
   data: Artwork;
@@ -129,6 +131,12 @@ const handleTitleClick = () => {
     <div class="detail-row">
       <span class="detail-label">尺寸</span>
       <span class="detail-value">{{ itemSizeNameMap[props.data.size] }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">{{ UI_TEXT.LABELS.PRICE }}</span>
+      <span class="detail-value price">
+        {{ formatPrice(props.data.sell) }} {{ UI_TEXT.CURRENCY }}
+      </span>
     </div>
 
     <!-- 预览窗口 -->

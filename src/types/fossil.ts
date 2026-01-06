@@ -4,6 +4,7 @@ export interface Fossil {
         id: number;
         name: string;
         image: string;
+        sell: number;
     }[];
     desc: string;
 }

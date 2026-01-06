@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import { ref, computed } from "vue";
+import { UI_TEXT } from "../constants";
 import type { Fossil } from "../types/fossil";
+import { formatPrice } from "../utils/common";
 import BaseCard from "./BaseCard.vue";
 
 interface Props {
@@ -7,6 +10,16 @@ interface Props {
 }
 
 const props = defineProps<Props>();
+
+const currentPartIndex = ref(0);
+
+const currentPrice = computed(() => {
+  return props.data.parts[currentPartIndex.value]?.sell || 0;
+});
+
+const handleImageIndexChanged = (index: number) => {
+  currentPartIndex.value = index;
+};
 
 const handleClick = () => {
   window.open(`https://nookipedia.com/wiki/Fossils`, "_blank");
@@ -17,9 +30,10 @@ const handleClick = () => {
   <BaseCard
     colorClass="card--orange"
     :version="1"
-    :images="props.data.parts.map(part => part.image)"
+    :images="props.data.parts.map((part) => part.image)"
     :displayName="props.data.name"
     :shape="'rounded'"
+    @image-index-changed="handleImageIndexChanged"
     @click="handleClick"
   >
     <template #name>
@@ -30,10 +44,15 @@ const handleClick = () => {
       <span class="detail-label">描述</span>
       <span class="detail-value">{{ props.data.desc }}</span>
     </div>
-
     <div class="detail-row">
       <span class="detail-label">部件数量</span>
       <span class="detail-value">{{ props.data.parts.length }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">{{ UI_TEXT.LABELS.PRICE }}</span>
+      <span class="detail-value price">
+        {{ formatPrice(currentPrice) }}
+      </span>
     </div>
   </BaseCard>
 </template>

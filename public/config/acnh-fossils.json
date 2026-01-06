@@ -5,7 +5,8 @@
       {
         "id": 4664,
         "name": "acanthostega",
-        "image": "latest/FtrIcon/FtrFossilFirstFourLegs"
+        "image": "latest/FtrIcon/FtrFossilFirstFourLegs",
+        "sell": 2000
       }
     ],
     "desc": "The acanthostega! Said to be one of the earliest amphibians, it existed well before dinosaurs. Because they lived as fish not long before, they still had gills and very webbed \"hands.\" To toss away the life they knew and venture onto unknown lands... they must have been very brave! Hmm... Does it still count as bravery if you have no understanding of what you're doing?"
@@ -16,7 +17,8 @@
       {
         "id": 294,
         "name": "amber",
-        "image": "latest/FtrIcon/FtrFossilAmber"
+        "image": "latest/FtrIcon/FtrFossilAmber",
+        "sell": 1200
       }
     ],
     "desc": "Amber is formed from the sap of ancient trees that hardened over time. Because of its beauty, it has often been traded and used as jewelry throughout history. However, individual specimens may contain ancient plants or insects trapped inside them! These are valuable resources for learning about ancient eras, such as when the dinosaurs roamed... And this is why they are sometimes displayed in certain...ahem... exceptional museums! Like mine."
@@ -27,7 +29,8 @@
       {
         "id": 295,
         "name": "ammonite",
-        "image": "latest/FtrIcon/FtrFossilAmmonoidea"
+        "image": "latest/FtrIcon/FtrFossilAmmonoidea",
+        "sell": 1100
       }
     ],
     "desc": "Ammonites were creatures that lived before and all the way through the age of dinosaurs! Because different species lived at different times, their shells are sometimes used as \"index fossils.\" In other words, these creatures act as markers in time, helping to identify the age of other formations! Who knows what other secrets lie hidden in those spiral shells?"
@@ -38,7 +41,8 @@
       {
         "id": 4651,
         "name": "anomalocaris",
-        "image": "latest/FtrIcon/FtrFossilAnomalocaris"
+        "image": "latest/FtrIcon/FtrFossilAnomalocaris",
+        "sell": 2000
       }
     ],
     "desc": "Anomalocaris lived in the water long before the dinosaurs and are known for their, er, \"distinctive\" look. Flat bodies over three feet in length, bulging eyes like a...dragonfly, antennae like shrimp tails... They looked so peculiar that people originally thought they were multiple fossils stacked on top of each other! As a delightful side note, \"anomalocaris\" means \"abnormal shrimp.\" Obviously this animal has a certain reputation in the scientific community!"
@@ -49,7 +53,8 @@
       {
         "id": 298,
         "name": "archaeopteryx",
-        "image": "latest/FtrIcon/FtrFossilArchaeopteryx"
+        "image": "latest/FtrIcon/FtrFossilArchaeopteryx",
+        "sell": 1300
       }
     ],
     "desc": "Archaeopteryx's feathers led many people to believe it was the progenitor of the birds, eh wot... Sadly, further evidence indicates it's likely not a direct ancestor—more an evolutionary \"uncle,\" if you will. Every time a specimen is found, new theories pop up. And new relatives come to roost in the family tree!"
@@ -60,7 +65,8 @@
       {
         "id": 301,
         "name": "australopith",
-        "image": "latest/FtrIcon/FtrFossilAustralopithecus"
+        "image": "latest/FtrIcon/FtrFossilAustralopithecus",
+        "sell": 1100
       }
     ],
     "desc": "The australopith, thought to be one of the links between humans and apes, emerged 4,000,000 years ago. They lived long ago, even before the ancestors of the modern humans, so there are profound differences... Even so, it seems to me that you can see the beginnings of greatness here!"
@@ -71,7 +77,8 @@
       {
         "id": 296,
         "name": "coprolite",
-        "image": "latest/FtrIcon/FtrFossilCoprolite"
+        "image": "latest/FtrIcon/FtrFossilCoprolite",
+        "sell": 1100
       }
     ],
     "desc": "Coprolites are, in fact...ehm...bits of fossilized...feces. Hoo! Eww! It's true! It must be said they are also astonishing treasure troves of ancient information, eh wot! For example, the coprolite from certain plant-eating dinosaurs has been found to contain small pebbles. This tells us that these dinosaurs, like many modern birds, ate rocks to help grind the greens in their bellies. Indeed! Fossilized feces reveal not only what food the dinos ate, but how they digested it too. Hoo knew?!"
@@ -82,7 +89,8 @@
       {
         "id": 300,
         "name": "dinosaur track",
-        "image": "latest/FtrIcon/FtrFossilIchnology"
+        "image": "latest/FtrIcon/FtrFossilIchnology",
+        "sell": 1000
       }
     ],
     "desc": "Dinosaur tracks are fossilized footprints left on the bottom of the sea or on soft earth. From these fossils, we can deduce the creature's territory range as well as its relationship with its herd... It has even become possible to work out the creature's size, distinctive gait, and, shockingly, walking speed! These trace fossils are like social-media feeds, enabling us to follow the daily lives of the dinosaurs!"
@@ -93,7 +101,8 @@
       {
         "id": 4660,
         "name": "dunkleosteus",
-        "image": "latest/FtrIcon/FtrFossilDunkleosteus"
+        "image": "latest/FtrIcon/FtrFossilDunkleosteus",
+        "sell": 3500
       }
     ],
     "desc": "The dunkleosteus flourished long before the dinosaurs and was a sort of armored fish. Curiously, only fossils for the head and shoulders have been found. We must simply imagine the rest! While its face was rather frightening, I like to picture a cute little tail and perhaps some fluffy paws on its fins. Such speculation is not scientific, of course, and essentially amounts to paleontological fan fiction. I own that."
@@ -104,7 +113,8 @@
       {
         "id": 4663,
         "name": "eusthenopteron",
-        "image": "latest/FtrIcon/FtrFossilFirstAmphibian"
+        "image": "latest/FtrIcon/FtrFossilFirstAmphibian",
+        "sell": 2000
       }
     ],
     "desc": "The eusthenopteron is famous for being the link between fish and land animals long before dinosaurs. It seems to have had strong fins capable of pulling it around areas where the water was shallow. When most creatures lived in the sea...they dreamed of land. If not for them, we mightn't be here today! Imagine if we'd not left the oceans... How might fashion and music be different in an aquatic world? How would we resolve differences? Perhaps some sort of ink-squirting contest of champions?"
@@ -115,7 +125,8 @@
       {
         "id": 4665,
         "name": "juramaia",
-        "image": "latest/FtrIcon/FtrFossilFirstMammal"
+        "image": "latest/FtrIcon/FtrFossilFirstMammal",
+        "sell": 1500
       }
     ],
     "desc": "Ah, yes, the juramaia: one of the first mammals, and one of the few to live alongside the dinosaurs! In order to hide from much larger dinosaurs, it was less than four inches long and quite unobtrusive. Some even theorize that these mammals were nocturnal until the dinosaurs went extinct. They needed every advantage to live among those behemoths. They were nocturnal before it was cool!"
@@ -126,7 +137,8 @@
       {
         "id": 4662,
         "name": "myllokunmingia",
-        "image": "latest/FtrIcon/FtrFossilFirstFish"
+        "image": "latest/FtrIcon/FtrFossilFirstFish",
+        "sell": 1500
       }
     ],
     "desc": "The myllokunmingia! Said to be one of the oldest fish-like animals, it lived well before the dinosaurs. It was about an inch long and seems to have had no lower jaw. It is awe-inspiring imagining such ancient life! There is much we still don't know. We may yet discover even older organisms with even fewer jaws!"
@@ -137,7 +149,8 @@
       {
         "id": 302,
         "name": "shark-tooth pattern",
-        "image": "latest/FtrIcon/FtrFossilShark"
+        "image": "latest/FtrIcon/FtrFossilShark",
+        "sell": 1000
       }
     ],
     "desc": "This shark-tooth pattern comes from the lower jaw of an ancient shark of the genus Helicoprion. Its teeth seem to have grown in a distinctive arrangement rather disturbingly termed a \"tooth-whorl.\" I say \"seem\" because shark skeletons are made not of bone, but cartilage, except for their teeth. Consequently, their bodies are never preserved as fossils, and questions about their jaws remain unanswered. The size and placement in the stone of the shark's teeth are actually the only things we have to work with. Sometimes in research we must maintain a stiff upper lip, even in the absence of a stiff lower jaw!"
@@ -148,7 +161,8 @@
       {
         "id": 303,
         "name": "trilobite",
-        "image": "latest/FtrIcon/FtrFossilTrilobite"
+        "image": "latest/FtrIcon/FtrFossilTrilobite",
+        "sell": 1300
       }
     ],
     "desc": "Trilobites were ancient and extinct before the dinosaurs ever appeared! It boggles the mind! Hoo! They were also one of the most successful classes of animal ever, existing for over 300 million years. Some 50,000 species have been identified in sizes ranging from three millimeters to over two feet! Alas, that is the very limit of my enthusiasm for them, though— they look rather too much like bugs."
@@ -159,12 +173,14 @@
       {
         "id": 177,
         "name": "archelon skull",
-        "image": "latest/FtrIcon/FtrFossilArchelonA"
+        "image": "latest/FtrIcon/FtrFossilArchelonA",
+        "sell": 4000
       },
       {
         "id": 178,
         "name": "archelon tail",
-        "image": "latest/FtrIcon/FtrFossilArchelonB"
+        "image": "latest/FtrIcon/FtrFossilArchelonB",
+        "sell": 3500
       }
     ],
     "desc": "Ah, yes. Archelon. It was a sort of huge sea turtle. The largest thus far found, if you want to know. They were very sizable—some 13 feet long, with a shell the size of a small car... If you're into that sort of thing. They likely ate seaweed, shrimp, octopus, and possibly ammonites, given the era involved. It seems CERTAIN giant turtles had to be prima donnas and eat some of the oldest life forms on earth!"
@@ -175,12 +191,14 @@
       {
         "id": 210,
         "name": "deinony torso",
-        "image": "latest/FtrIcon/FtrFossilDeinonychusA"
+        "image": "latest/FtrIcon/FtrFossilDeinonychusA",
+        "sell": 3000
       },
       {
         "id": 211,
         "name": "deinony tail",
-        "image": "latest/FtrIcon/FtrFossilDeinonychusB"
+        "image": "latest/FtrIcon/FtrFossilDeinonychusB",
+        "sell": 2500
       }
     ],
     "desc": "Ahem... Yes, you may not have heard of Deinonychus, but you may have heard of its cousin, the Velociraptor. Both were predators distinguished by their frighteningly huge toe claws. They also likely had feathers. The main difference between them? Size. Deinonychus was about seven feet tall and weighed 160 pounds. Little Velociraptor, on the other wing, was a compact two feet tall and weighed only about 33 pounds! I've heard that people meeting celebrities are often surprised at how short they are in person!"
@@ -191,12 +209,14 @@
       {
         "id": 184,
         "name": "dimetrodon skull",
-        "image": "latest/FtrIcon/FtrFossilDimetrodonA"
+        "image": "latest/FtrIcon/FtrFossilDimetrodonA",
+        "sell": 5500
       },
       {
         "id": 185,
         "name": "dimetrodon torso",
-        "image": "latest/FtrIcon/FtrFossilDimetrodonB"
+        "image": "latest/FtrIcon/FtrFossilDimetrodonB",
+        "sell": 5000
       }
     ],
     "desc": "Ah, yes. Dimetrodon. Not actually a dinosaur, despite what...some people may tell you. This REPTILE—not dinosaur—is most famous for the large sail-like organ on its back. Said organ was likely useful in regulating its—non-dinosaur—body temperature. Reptiles are known to be cold-blooded, but there is some debate as to whether dinosaurs were too. Dimetrodon assuredly was."
@@ -207,12 +227,14 @@
       {
         "id": 4658,
         "name": "right megalo side",
-        "image": "latest/FtrIcon/FtrFossilMegalocerosA"
+        "image": "latest/FtrIcon/FtrFossilMegalocerosA",
+        "sell": 5500
       },
       {
         "id": 4659,
         "name": "left megalo side",
-        "image": "latest/FtrIcon/FtrFossilMegalocerosB"
+        "image": "latest/FtrIcon/FtrFossilMegalocerosB",
+        "sell": 4000
       }
     ],
     "desc": "The Megaloceros was a relative of the deer that lived during the Ice Age, long after the dinosaurs. It was also known as \"megaloceros giganteus\"...which just means \"deer with large horns.\" True to their name, they were deer with antlers spanning roughly 10 feet across! Imagine the majesty! While smaller than many dinosaurs, they were nonetheless a very charismatic example of megafauna."
@@ -223,12 +245,14 @@
       {
         "id": 195,
         "name": "mammoth skull",
-        "image": "latest/FtrIcon/FtrFossilMammothA"
+        "image": "latest/FtrIcon/FtrFossilMammothA",
+        "sell": 3000
       },
       {
         "id": 196,
         "name": "mammoth torso",
-        "image": "latest/FtrIcon/FtrFossilMammothB"
+        "image": "latest/FtrIcon/FtrFossilMammothB",
+        "sell": 2500
       }
     ],
     "desc": "Ah, Mammoths, the bad boys—and girls!—of the ancient-mammal world. So woolly! So unkempt! They are, of course, most famous for their size, which could be up to 13 tons for the largest males. But they were subject to no one's rules, and some species were SMALLER than modern elephants! Scientists have pondered for years: were mammoths the COOLEST of all extinct species? Perhaps so!"
@@ -239,12 +263,14 @@
       {
         "id": 192,
         "name": "ophthalmo skull",
-        "image": "latest/FtrIcon/FtrFossilOphthalmosaurusA"
+        "image": "latest/FtrIcon/FtrFossilOphthalmosaurusA",
+        "sell": 2500
       },
       {
         "id": 193,
         "name": "ophthalmo torso",
-        "image": "latest/FtrIcon/FtrFossilOphthalmosaurusB"
+        "image": "latest/FtrIcon/FtrFossilOphthalmosaurusB",
+        "sell": 2000
       }
     ],
     "desc": "The adorable Ophthalmosaurus— cutest of all the Ichthyosaurs! What makes a large, sea-dwelling reptile cute, you may ask? I shall tell you... The eyes! Ophthalmosaurus's name means \"eye lizard,\" and its face was quite dominated by those great orbs! Beside their cutifying effect, these eyes gave the creature great vision, making it a very successful hunter. And no doubt because its big, doe eyes lulled prey into a false sense of security..."
@@ -255,12 +281,14 @@
       {
         "id": 198,
         "name": "pachy skull",
-        "image": "latest/FtrIcon/FtrFossilPachycephalosaurusA"
+        "image": "latest/FtrIcon/FtrFossilPachycephalosaurusA",
+        "sell": 4000
       },
       {
         "id": 199,
         "name": "pachy tail",
-        "image": "latest/FtrIcon/FtrFossilPachycephalosaurusB"
+        "image": "latest/FtrIcon/FtrFossilPachycephalosaurusB",
+        "sell": 3500
       }
     ],
     "desc": "Pachycephalosaurus was, to be blunt, not the brightest star in the dinosaur firmament. What I mean is, with its incredibly thick skull—some 10 inches thick in spots—it didn't have much room for... well, for brains. Its brain was likely quite small, but at least it was extremely safe...in its...bony...prison."
@@ -271,12 +299,14 @@
       {
         "id": 213,
         "name": "sabertooth skull",
-        "image": "latest/FtrIcon/FtrFossilSmilodonA"
+        "image": "latest/FtrIcon/FtrFossilSmilodonA",
+        "sell": 2500
       },
       {
         "id": 214,
         "name": "sabertooth tail",
-        "image": "latest/FtrIcon/FtrFossilSmilodonB"
+        "image": "latest/FtrIcon/FtrFossilSmilodonB",
+        "sell": 2000
       }
     ],
     "desc": "Chief actor in my most terrifying nightmares, the Sabertooth Tiger was a mighty predator of long ago. Its most famous feature, obviously, is its razor-sharp, eight-inch-long, t-t-te-tee-te-tee...FANGS! I'm sorry—this is so unprofessional of me. Come on, Blathers! Stiff upper beak, eh wot! While no one has seen a living specimen for some 10,000 years, we must remain ever vigilant!"
@@ -287,17 +317,20 @@
       {
         "id": 238,
         "name": "T. rex skull",
-        "image": "latest/FtrIcon/FtrFossilTRexA"
+        "image": "latest/FtrIcon/FtrFossilTRexA",
+        "sell": 6000
       },
       {
         "id": 239,
         "name": "T. rex torso",
-        "image": "latest/FtrIcon/FtrFossilTRexB"
+        "image": "latest/FtrIcon/FtrFossilTRexB",
+        "sell": 5500
       },
       {
         "id": 240,
         "name": "T. rex tail",
-        "image": "latest/FtrIcon/FtrFossilTRexC"
+        "image": "latest/FtrIcon/FtrFossilTRexC",
+        "sell": 5000
       }
     ],
     "desc": "I'd say that T. Rex is the 800-pound gorilla of the dinosaur world, but it likely weighed well over nine tons. This fearsome chap is practically synonymous with the word \"dinosaur,\" and for good reason! At up to 42 feet long with banana-sized teeth, it was one of the largest carnivores ever to walk the earth. It's unclear how fast T. Rex was since estimates vary wildly... I am just relieved I will never have to escape one. Hoo."
@@ -308,17 +341,20 @@
       {
         "id": 169,
         "name": "ankylo skull",
-        "image": "latest/FtrIcon/FtrFossilAnkylosaurusA"
+        "image": "latest/FtrIcon/FtrFossilAnkylosaurusA",
+        "sell": 3500
       },
       {
         "id": 170,
         "name": "ankylo torso",
-        "image": "latest/FtrIcon/FtrFossilAnkylosaurusB"
+        "image": "latest/FtrIcon/FtrFossilAnkylosaurusB",
+        "sell": 3000
       },
       {
         "id": 171,
         "name": "ankylo tail",
-        "image": "latest/FtrIcon/FtrFossilAnkylosaurusC"
+        "image": "latest/FtrIcon/FtrFossilAnkylosaurusC",
+        "sell": 2500
       }
     ],
     "desc": "Oho! Ankylosaurus was the herbivore hero, the grazing gladiator, the vegetarian barbarian of antiquity! Between its club-like tail, heavy armor, and honest-to-goodness SPIKES, it was a formidable beast! Can you keep a secret? I have even heard recent theories that it actively ATTACKED predators. Can you imagine such behavior in an herbivore? It simply beggars the imagination!"
@@ -329,17 +365,20 @@
       {
         "id": 188,
         "name": "iguanodon skull",
-        "image": "latest/FtrIcon/FtrFossilIguanodonA"
+        "image": "latest/FtrIcon/FtrFossilIguanodonA",
+        "sell": 4000
       },
       {
         "id": 189,
         "name": "iguanodon torso",
-        "image": "latest/FtrIcon/FtrFossilIguanodonB"
+        "image": "latest/FtrIcon/FtrFossilIguanodonB",
+        "sell": 3500
       },
       {
         "id": 190,
         "name": "iguanodon tail",
-        "image": "latest/FtrIcon/FtrFossilIguanodonC"
+        "image": "latest/FtrIcon/FtrFossilIguanodonC",
+        "sell": 3000
       }
     ],
     "desc": "Ah, that graceful ballerina of the Cretaceous, the Iguanodon! When I say it was graceful, I mean by the...ahem...rather low bar set by other large herbivores. Apparently it would nimbly dodge the attacks of predators and fight back with its thumb claws! It could even walk on two legs when it wanted to! Er...truly it was the most elegant and lithe of dinosaurs."
@@ -350,17 +389,20 @@
       {
         "id": 206,
         "name": "ptera body",
-        "image": "latest/FtrIcon/FtrFossilPteranodonA"
+        "image": "latest/FtrIcon/FtrFossilPteranodonA",
+        "sell": 4000
       },
       {
         "id": 207,
         "name": "right ptera wing",
-        "image": "latest/FtrIcon/FtrFossilPteranodonB"
+        "image": "latest/FtrIcon/FtrFossilPteranodonB",
+        "sell": 4500
       },
       {
         "id": 208,
         "name": "left ptera wing",
-        "image": "latest/FtrIcon/FtrFossilPteranodonC"
+        "image": "latest/FtrIcon/FtrFossilPteranodonC",
+        "sell": 4500
       }
     ],
     "desc": "The mighty Pteranodon! Among the very largest animals ever to fly, they were role models to us all. With a wingspan of over 23 feet in some cases, I find it simply stunning that they ever did more than glide! But fly they did, soaring dynamically and dramatically over land and sea! I wish I could have seen it..."
@@ -371,17 +413,20 @@
       {
         "id": 4697,
         "name": "quetzal torso",
-        "image": "latest/FtrIcon/FtrFossilQuetzalcoatlusA"
+        "image": "latest/FtrIcon/FtrFossilQuetzalcoatlusA",
+        "sell": 4500
       },
       {
         "id": 4698,
         "name": "right quetzal wing",
-        "image": "latest/FtrIcon/FtrFossilQuetzalcoatlusB"
+        "image": "latest/FtrIcon/FtrFossilQuetzalcoatlusB",
+        "sell": 5000
       },
       {
         "id": 4699,
         "name": "left quetzal wing",
-        "image": "latest/FtrIcon/FtrFossilQuetzalcoatlusC"
+        "image": "latest/FtrIcon/FtrFossilQuetzalcoatlusC",
+        "sell": 5000
       }
     ],
     "desc": "The Quetzalcoatlus! The undisputed ruler of the skies...at least during the late Cretaceous period. It had a magnificent wingspan of roughly 36 feet, making it one of the largest flying animals ever! While it no doubt soared magnificently, we now know that it also crawled on all fours. It's a bit disappointing, really... This illustrious sky god scrabbling on the ground like a common beetle... They say you should never meet your heroes..."
@@ -392,17 +437,20 @@
       {
         "id": 180,
         "name": "megacero skull",
-        "image": "latest/FtrIcon/FtrFossilBrontotheriumA"
+        "image": "latest/FtrIcon/FtrFossilBrontotheriumA",
+        "sell": 4500
       },
       {
         "id": 181,
         "name": "megacero torso",
-        "image": "latest/FtrIcon/FtrFossilBrontotheriumB"
+        "image": "latest/FtrIcon/FtrFossilBrontotheriumB",
+        "sell": 3500
       },
       {
         "id": 182,
         "name": "megacero tail",
-        "image": "latest/FtrIcon/FtrFossilBrontotheriumC"
+        "image": "latest/FtrIcon/FtrFossilBrontotheriumC",
+        "sell": 3000
       }
     ],
     "desc": "Hoo! I had been hoping someone would bring me a Megacerops! This large fellow was a bit like our modern rhinoceros, but with two horns on its nose! Sadly, their small teeth restricted them to a diet of rather soft plants, and eventually they died out. I feel there is a valuable lesson to be had there about learning to enjoy a variety of foods..."
@@ -413,17 +461,20 @@
       {
         "id": 202,
         "name": "parasaur skull",
-        "image": "latest/FtrIcon/FtrFossilParasaurolophusA"
+        "image": "latest/FtrIcon/FtrFossilParasaurolophusA",
+        "sell": 3500
       },
       {
         "id": 203,
         "name": "parasaur torso",
-        "image": "latest/FtrIcon/FtrFossilParasaurolophusB"
+        "image": "latest/FtrIcon/FtrFossilParasaurolophusB",
+        "sell": 3000
       },
       {
         "id": 204,
         "name": "parasaur tail",
-        "image": "latest/FtrIcon/FtrFossilParasaurolophusC"
+        "image": "latest/FtrIcon/FtrFossilParasaurolophusC",
+        "sell": 2500
       }
     ],
     "desc": "Hootie-hoo, Parasaurolophus! I like to think of it as the beast with the golden tones. You see, the three-foot structure of hollow bone atop its head MAY have been an elaborate noisemaker! As a dyed-in-the-feathers optimist AND music fan, I like to think it serenaded the late Cretaceous!"
@@ -434,17 +485,20 @@
       {
         "id": 234,
         "name": "plesio skull",
-        "image": "latest/FtrIcon/FtrFossilElasmosaurusA"
+        "image": "latest/FtrIcon/FtrFossilElasmosaurusA",
+        "sell": 4000
       },
       {
         "id": 235,
         "name": "plesio torso",
-        "image": "latest/FtrIcon/FtrFossilElasmosaurusB"
+        "image": "latest/FtrIcon/FtrFossilElasmosaurusB",
+        "sell": 4500
       },
       {
         "id": 236,
         "name": "plesio tail",
-        "image": "latest/FtrIcon/FtrFossilElasmosaurusC"
+        "image": "latest/FtrIcon/FtrFossilElasmosaurusC",
+        "sell": 4500
       }
     ],
     "desc": "Ah yes! The Plesiosaurus is a classic of the ancient-reptile world! That long, graceful neck, the wee little head, and the plump, turtle-like body make for a striking silhouette. Incidentally, despite the \"saurus\" name, it wasn't actually a dinosaur. Common error, eh wot. But they were surely a majestic sight, swimming in those ancient seas... like a long-necked rubber ducky..."
@@ -455,17 +509,20 @@
       {
         "id": 222,
         "name": "spino skull",
-        "image": "latest/FtrIcon/FtrFossilSpinosaurusA"
+        "image": "latest/FtrIcon/FtrFossilSpinosaurusA",
+        "sell": 4000
       },
       {
         "id": 223,
         "name": "spino torso",
-        "image": "latest/FtrIcon/FtrFossilSpinosaurusB"
+        "image": "latest/FtrIcon/FtrFossilSpinosaurusB",
+        "sell": 3000
       },
       {
         "id": 224,
         "name": "spino tail",
-        "image": "latest/FtrIcon/FtrFossilSpinosaurusC"
+        "image": "latest/FtrIcon/FtrFossilSpinosaurusC",
+        "sell": 2500
       }
     ],
     "desc": "Ahem. Yes. The Spinosaurus was a very large, carnivorous dinosaur, roughly the size of a T. Rex. Unlike its more famous cousin, however, Spinosaurus seems to have spent a great deal of time in water. Similar to modern crocodiles, this creature lived on a diet of fish AND land-dwelling animals. Personally, I am simply relieved that it did not seek FLYING prey."
@@ -476,17 +533,20 @@
       {
         "id": 226,
         "name": "stego skull",
-        "image": "latest/FtrIcon/FtrFossilStegosaurusA"
+        "image": "latest/FtrIcon/FtrFossilStegosaurusA",
+        "sell": 5000
       },
       {
         "id": 227,
         "name": "stego torso",
-        "image": "latest/FtrIcon/FtrFossilStegosaurusB"
+        "image": "latest/FtrIcon/FtrFossilStegosaurusB",
+        "sell": 4500
       },
       {
         "id": 228,
         "name": "stego tail",
-        "image": "latest/FtrIcon/FtrFossilStegosaurusC"
+        "image": "latest/FtrIcon/FtrFossilStegosaurusC",
+        "sell": 4000
       }
     ],
     "desc": "You can't talk about Stegosaurus without talking about the distinctive diamond-shaped plates on its back. These plates, while made of bone, were not actually connected to the animal's skeleton! They simply grew out from the skin, remarkably enough, and were up to two feet tall and similarly wide. It's not clear exactly how the plates were arranged or what they were for. Yet more mysteries of the ancients!"
@@ -497,17 +557,20 @@
       {
         "id": 242,
         "name": "tricera skull",
-        "image": "latest/FtrIcon/FtrFossilTriceratopsA"
+        "image": "latest/FtrIcon/FtrFossilTriceratopsA",
+        "sell": 5500
       },
       {
         "id": 243,
         "name": "tricera torso",
-        "image": "latest/FtrIcon/FtrFossilTriceratopsB"
+        "image": "latest/FtrIcon/FtrFossilTriceratopsB",
+        "sell": 5000
       },
       {
         "id": 244,
         "name": "tricera tail",
-        "image": "latest/FtrIcon/FtrFossilTriceratopsC"
+        "image": "latest/FtrIcon/FtrFossilTriceratopsC",
+        "sell": 4500
       }
     ],
     "desc": "As herbivores go, Triceratops was unusually well equipped for combat, wot! Its three horns and impressive, bony frill probably helped it fight off predators like T. Rex! The frill may also have been involved in temperature regulation, or else in attracting mates. Does it seem to you like virtually all distinctive dinosaur features were for body heat or attracting mates?"
@@ -518,22 +581,26 @@
       {
         "id": 4688,
         "name": "brachio skull",
-        "image": "latest/FtrIcon/FtrFossilBrachiosaurusA"
+        "image": "latest/FtrIcon/FtrFossilBrachiosaurusA",
+        "sell": 6000
       },
       {
         "id": 4689,
         "name": "brachio chest",
-        "image": "latest/FtrIcon/FtrFossilBrachiosaurusB"
+        "image": "latest/FtrIcon/FtrFossilBrachiosaurusB",
+        "sell": 5500
       },
       {
         "id": 4690,
         "name": "brachio pelvis",
-        "image": "latest/FtrIcon/FtrFossilBrachiosaurusC"
+        "image": "latest/FtrIcon/FtrFossilBrachiosaurusC",
+        "sell": 5000
       },
       {
         "id": 4691,
         "name": "brachio tail",
-        "image": "latest/FtrIcon/FtrFossilBrachiosaurusD"
+        "image": "latest/FtrIcon/FtrFossilBrachiosaurusD",
+        "sell": 5500
       }
     ],
     "desc": "Brachiosaurus, whose name means \"arm lizard\"—eh, wot—was one of the largest herbivorous dinosaurs. Due to its long front legs and elongated neck, it seems to have specialized in eating plants up high. Alas, in order to support its large size, it likely needed to eat more or less every waking hour. What a ferocious forager it must have been indeed!"
@@ -544,32 +611,38 @@
       {
         "id": 216,
         "name": "diplo skull",
-        "image": "latest/FtrIcon/FtrFossilDiplodocusA"
+        "image": "latest/FtrIcon/FtrFossilDiplodocusA",
+        "sell": 5000
       },
       {
         "id": 217,
         "name": "diplo neck",
-        "image": "latest/FtrIcon/FtrFossilDiplodocusB"
+        "image": "latest/FtrIcon/FtrFossilDiplodocusB",
+        "sell": 4500
       },
       {
         "id": 218,
         "name": "diplo chest",
-        "image": "latest/FtrIcon/FtrFossilDiplodocusC"
+        "image": "latest/FtrIcon/FtrFossilDiplodocusC",
+        "sell": 4000
       },
       {
         "id": 219,
         "name": "diplo pelvis",
-        "image": "latest/FtrIcon/FtrFossilDiplodocusD"
+        "image": "latest/FtrIcon/FtrFossilDiplodocusD",
+        "sell": 4500
       },
       {
         "id": 220,
         "name": "diplo tail",
-        "image": "latest/FtrIcon/FtrFossilDiplodocusE"
+        "image": "latest/FtrIcon/FtrFossilDiplodocusE",
+        "sell": 5000
       },
       {
         "id": 7251,
         "name": "diplo tail tip",
-        "image": "latest/FtrIcon/FtrFossilDiplodocusF"
+        "image": "latest/FtrIcon/FtrFossilDiplodocusF",
+        "sell": 4000
       }
     ],
     "desc": "Good old Diplodocus—what would we do without you? This stout fellow embodied all the best in dinosaurs. Those sturdy legs, that magnificent tail, and, above all, that extraordinary neck! Did you know that its center of gravity was such that sitting up on its hind legs was probably easy? What's more, paired with its long neck, this ability greatly increased its reach for eating plants! Best of all, Diplodocus probably grew its entire life, having no \"adult size.\" Would that we were all so gifted!"
