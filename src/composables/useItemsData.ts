@@ -33,8 +33,7 @@ export function useItemsData() {
           const model = new ItemModel(item);
           model.owned = ownedIds.has(item.id);
           return model;
-        })
-        .sort((a, b) => a.id - b.id);
+        });
       allItems.value.forEach((item) => {
         itemIdMap.value[item.id] = item;
         itemNameMap.value[item.rawName] = item;

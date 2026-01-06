@@ -1,245 +1,5 @@
 [
   {
-    "id": 328,
-    "order": 3,
-    "type": 2,
-    "name": "鲫鱼",
-    "rawName": "crucian carp",
-    "images": [
-      "latest/MenuIcon/Fish2",
-      "latest/BookFishIcon/FishFunaCropped",
-      "latest/FtrIcon/FtrFishFuna"
-    ],
-    "ver": 1,
-    "colors": [
-      12,
-      10
-    ],
-    "size": 3,
-    "sell": 160,
-    "whereHow": "River",
-    "hemispheres": {
-      "north": {
-        "time": [
-          "All day"
-        ],
-        "timeArray": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23
-        ],
-        "months": [
-          "Jan - Dec"
-        ],
-        "monthsArray": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12
-        ]
-      },
-      "south": {
-        "time": [
-          "All day"
-        ],
-        "timeArray": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23
-        ],
-        "months": [
-          "Jan - Dec"
-        ],
-        "monthsArray": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12
-        ]
-      }
-    },
-    "catchPhrase": "I caught a crucian carp! My skills are sharp!",
-    "desc": "I wonder... Do you know how to tell the difference between a crucian carp and a standard-issue carp? It's quite easy to tell the two apart... One must simply locate the barbels. Or, rather, the lack of them! And just what is a barbel, you ask? Well, a barbel looks a little something like a mustache. A run-of-the-mill carp will sport this unsightly \"facial hair,\" while a crucian carp is considerably better groomed! I tried to grow a mustache when I was younger. It never did fill in quite right... All for the best in the end, as mustaches go so much better with noses than with beaks!"
-  },
-  {
-    "id": 329,
-    "order": 7,
-    "type": 2,
-    "name": "金鱼",
-    "rawName": "goldfish",
-    "images": [
-      "latest/MenuIcon/Fish7",
-      "latest/BookFishIcon/FishKingyoCropped",
-      "latest/FtrIcon/FtrFishKingyo"
-    ],
-    "ver": 1,
-    "colors": [
-      1,
-      6
-    ],
-    "size": 3,
-    "sell": 1300,
-    "whereHow": "Pond",
-    "hemispheres": {
-      "north": {
-        "time": [
-          "All day"
-        ],
-        "timeArray": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23
-        ],
-        "months": [
-          "Jan - Dec"
-        ],
-        "monthsArray": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12
-        ]
-      },
-      "south": {
-        "time": [
-          "All day"
-        ],
-        "timeArray": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23
-        ],
-        "months": [
-          "Jan - Dec"
-        ],
-        "monthsArray": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12
-        ]
-      }
-    },
-    "catchPhrase": "I caught a goldfish! It's worth its weight in fish!",
-    "desc": "Goldfish are so cute and delicate... but do you know how big they can get? Why, they can grow up to... a foot in length! Well, sometimes. The size of the tank they're kept in tends to restrict their growth. And just how big will this goldfish get in our large museum tank? I look forward to finding out!"
-  },
-  {
     "id": 582,
     "order": 26,
     "type": 1,
@@ -6499,6 +6259,1278 @@
     },
     "catchPhrase": "I caught a horned elephant! I think it's too small to ride...",
     "desc": "The horned elephant beetle certainly lives up to its namesake. Not only does the horn on its head resemble the trunk of an elephant... It is also one of the heaviest beetles in the world! Size aside, allow me to reveal the real reason I find horned elephant beetles so repugnant... Their backs are covered in a fine coat of hair! Hirsute beetles! Hoot! The horror!"
+  },
+  {
+    "id": 3477,
+    "order": 5,
+    "type": 1,
+    "name": "青带凤蝶",
+    "rawName": "common bluebottle",
+    "images": [
+      "latest/MenuIcon/Ins72",
+      "latest/BookInsectIcon/InsectAosujiagehaCropped",
+      "latest/FtrIcon/FtrInsectAosujiagehaCropped"
+    ],
+    "ver": 1,
+    "colors": [
+      10,
+      4
+    ],
+    "size": 3,
+    "sell": 300,
+    "whereHow": "Flying",
+    "weather": "Any except rain",
+    "hemispheres": {
+      "north": {
+        "time": [
+          "4 AM – 7 PM"
+        ],
+        "timeArray": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "months": [
+          "Apr - Aug"
+        ],
+        "monthsArray": [
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      "south": {
+        "time": [
+          "4 AM – 7 PM"
+        ],
+        "timeArray": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "months": [
+          "Jan - Feb",
+          "Oct - Dec"
+        ],
+        "monthsArray": [
+          1,
+          2,
+          10,
+          11,
+          12
+        ]
+      }
+    },
+    "catchPhrase": "I caught a common bluebottle! I'll put it in a rare green jar!",
+    "desc": "The common bluebottle is a type of swallowtail butterfly with a bright blue line running down its wings. They fly quite nimbly, it seems, and are thus quite difficult to catch. But seeing how they've been known to slurp nutrients from MUD puddles... I simply CAN'T imagine wanting to catch one myself. What awful breath!"
+  },
+  {
+    "id": 3478,
+    "order": 6,
+    "type": 1,
+    "name": "大白斑蝶",
+    "rawName": "paper kite butterfly",
+    "images": [
+      "latest/MenuIcon/Ins73",
+      "latest/BookInsectIcon/InsectOhgomamadaraCropped",
+      "latest/FtrIcon/FtrInsectOhgomamadaraCropped"
+    ],
+    "ver": 1,
+    "colors": [
+      9,
+      3
+    ],
+    "size": 3,
+    "sell": 1000,
+    "whereHow": "Flying near flowers",
+    "weather": "Any except rain",
+    "hemispheres": {
+      "north": {
+        "time": [
+          "8 AM – 7 PM"
+        ],
+        "timeArray": [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "months": [
+          "Jan - Dec"
+        ],
+        "monthsArray": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ]
+      },
+      "south": {
+        "time": [
+          "8 AM – 7 PM"
+        ],
+        "timeArray": [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "months": [
+          "Jan - Dec"
+        ],
+        "monthsArray": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ]
+      }
+    },
+    "catchPhrase": "I caught a paper kite butterfly! Do I read it, fly it, or spreadit on toast?",
+    "desc": "With its black-and-white-striped wing pattern, the paper kite butterfly is both elegant and pretty... PRETTY POISONOUS I MEAN! Hoo dear! Where was I? Oh yes... Even this butterfly's black-and-white-striped larva and little golden pupae are toxic to predators. Indeed, the paper kite butterfly's foul flavor is famous, and thus birds, in particular, steer clear of the fiends. THIS bird most of all!"
+  },
+  {
+    "id": 3479,
+    "order": 7,
+    "type": 1,
+    "name": "大紫蛱蝶",
+    "rawName": "great purple emperor",
+    "images": [
+      "latest/MenuIcon/Ins74",
+      "latest/BookInsectIcon/InsectOhmurasakiCropped",
+      "latest/FtrIcon/FtrInsectOhmurasakiCropped"
+    ],
+    "ver": 1,
+    "colors": [
+      7,
+      2
+    ],
+    "size": 3,
+    "sell": 3000,
+    "whereHow": "Flying near flowers",
+    "weather": "Any except rain",
+    "hemispheres": {
+      "north": {
+        "time": [
+          "4 AM – 7 PM"
+        ],
+        "timeArray": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "months": [
+          "May - Aug"
+        ],
+        "monthsArray": [
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      "south": {
+        "time": [
+          "4 AM – 7 PM"
+        ],
+        "timeArray": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "months": [
+          "Jan - Feb",
+          "Nov - Dec"
+        ],
+        "monthsArray": [
+          1,
+          2,
+          11,
+          12
+        ]
+      }
+    },
+    "catchPhrase": "I caught a great purple emperor! Its purple reign is over now!",
+    "desc": "The great purple emperor lives high in the treetops and is renowned for its pretty purple-hued wings. Its impressive bird-like wingspan and elusive nature have made it a favorite among butterfly aficionados. But truth be told, the so-called great purple emperor has some not-so-great personal peculiarities. For one...it has two horrid HORNS upon its head when it is in its caterpillar form. For two...it has been known to dine on feces and animal carcasses! Hoo! That's why I call it the Emperor of EWWW!"
+  },
+  {
+    "id": 3480,
+    "order": 53,
+    "type": 1,
+    "name": "日铜锣花金龟",
+    "rawName": "drone beetle",
+    "images": [
+      "latest/MenuIcon/Ins75",
+      "latest/BookInsectIcon/InsectKanabunCropped",
+      "latest/FtrIcon/FtrInsectKanabunCropped"
+    ],
+    "ver": 1,
+    "colors": [
+      4,
+      5
+    ],
+    "size": 3,
+    "sell": 200,
+    "whereHow": "On trees (any kind)",
+    "weather": "Any weather",
+    "hemispheres": {
+      "north": {
+        "time": [
+          "All day"
+        ],
+        "timeArray": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "months": [
+          "Jun - Aug"
+        ],
+        "monthsArray": [
+          6,
+          7,
+          8
+        ]
+      },
+      "south": {
+        "time": [
+          "All day"
+        ],
+        "timeArray": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "months": [
+          "Jan - Feb",
+          "Dec"
+        ],
+        "monthsArray": [
+          1,
+          2,
+          12
+        ]
+      }
+    },
+    "catchPhrase": "I caught a drone beetle! Shouldn't you have more propellers?",
+    "desc": "I must say, the drone beetle is like that boorish acquaintance who is much too loud for polite company. That is, it is a large bug with a square head and is so named for the droning noise it makes when it flies. Furthermore, it has hooks on its feet that help it to cling tightly to trees. HOOK FEET... How gauche!"
+  },
+  {
+    "id": 3482,
+    "order": 61,
+    "type": 1,
+    "name": "长颈鹿锯锹形虫",
+    "rawName": "giraffe stag",
+    "images": [
+      "latest/MenuIcon/Ins77",
+      "latest/BookInsectIcon/InsectGirafanokogirikuwagataCropped",
+      "latest/FtrIcon/FtrInsectGirafanokogirikuwagataCropped"
+    ],
+    "ver": 1,
+    "colors": [
+      10
+    ],
+    "size": 3,
+    "sell": 12000,
+    "whereHow": "On palm trees",
+    "weather": "Any weather",
+    "hemispheres": {
+      "north": {
+        "time": [
+          "5 PM – 8 AM"
+        ],
+        "timeArray": [
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "months": [
+          "Jul - Aug"
+        ],
+        "monthsArray": [
+          7,
+          8
+        ]
+      },
+      "south": {
+        "time": [
+          "5 PM – 8 AM"
+        ],
+        "timeArray": [
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "months": [
+          "Jan - Feb"
+        ],
+        "monthsArray": [
+          1,
+          2
+        ]
+      }
+    },
+    "catchPhrase": "I caught a giraffe stag! Does that make it a longhorn?",
+    "desc": "The giraffe stag beetle is a bug of preposterous proportions. Not only is its body rather large, it has two long, jagged jaws that can put it over five inches in size! The giraffe stag beetle's long jaws have been compared to the long neck of the giraffe...hence the name. But I say such comparisons are a stretch. Giraffe necks are NOT lined with spikes! If I were a giraffe, I would protest."
+  },
+  {
+    "id": 3483,
+    "order": 42,
+    "type": 1,
+    "name": "人面椿象",
+    "rawName": "man-faced stink bug",
+    "images": [
+      "latest/MenuIcon/Ins78",
+      "latest/BookInsectIcon/InsectJinmenkamemushiCropped",
+      "latest/FtrIcon/FtrInsectJinmenkamemushiCropped"
+    ],
+    "ver": 1,
+    "colors": [
+      10,
+      2
+    ],
+    "size": 3,
+    "sell": 1000,
+    "whereHow": "On flowers",
+    "weather": "Any except rain",
+    "hemispheres": {
+      "north": {
+        "time": [
+          "7 PM – 8 AM"
+        ],
+        "timeArray": [
+          19,
+          20,
+          21,
+          22,
+          23,
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "months": [
+          "Mar - Oct"
+        ],
+        "monthsArray": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "south": {
+        "time": [
+          "7 PM – 8 AM"
+        ],
+        "timeArray": [
+          19,
+          20,
+          21,
+          22,
+          23,
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "months": [
+          "Jan - Apr",
+          "Sep - Dec"
+        ],
+        "monthsArray": [
+          1,
+          2,
+          3,
+          4,
+          9,
+          10,
+          11,
+          12
+        ]
+      }
+    },
+    "catchPhrase": "I caught a man-faced stink bug! Reminds me of my uncle!",
+    "desc": "Never mind this stink bug's smell. What you have here is a bug...with a FACE...on its BACK!! Wot-wot! Simply put, the man-faced stink bug has markings on its shell that resemble a human face. Once you notice this face, you cannot UN-notice it. Indeed, this face might haunt you forever. At least the face will distract you from the stink."
+  },
+  {
+    "id": 3484,
+    "order": 15,
+    "type": 1,
+    "name": "日落蛾",
+    "rawName": "Madagascan sunset moth",
+    "images": [
+      "latest/MenuIcon/Ins79",
+      "latest/BookInsectIcon/InsectNishikiohtsubamegaCropped",
+      "latest/FtrIcon/FtrInsectNishikiohtsubamegaCropped"
+    ],
+    "ver": 1,
+    "colors": [
+      4,
+      8
+    ],
+    "size": 3,
+    "sell": 2500,
+    "whereHow": "Flying near flowers",
+    "weather": "Any except rain",
+    "hemispheres": {
+      "north": {
+        "time": [
+          "8 AM – 4 PM"
+        ],
+        "timeArray": [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "months": [
+          "Apr - Sep"
+        ],
+        "monthsArray": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "south": {
+        "time": [
+          "8 AM – 4 PM"
+        ],
+        "timeArray": [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "months": [
+          "Jan - Mar",
+          "Oct - Dec"
+        ],
+        "monthsArray": [
+          1,
+          2,
+          3,
+          10,
+          11,
+          12
+        ]
+      }
+    },
+    "catchPhrase": "I caught a Madagascan sunset moth! Wow, you're not from around here!",
+    "desc": "The Madagascan sunset moth is said to be the most beautiful moth in the world...a sentiment even I can't deny. While most moths are nocturnal, this one flutters about during the day, making good use of the light. That is, when the daylight reflects off its wings, a kaleidoscope of colors are revealed! Oh! Eh...too bad it has such startling red feet as a caterpillar. I might have found it almost tolerable otherwise. Almost, but not quite."
+  },
+  {
+    "id": 3485,
+    "order": 49,
+    "type": 1,
+    "name": "宝石象鼻虫",
+    "rawName": "blue weevil beetle",
+    "images": [
+      "latest/MenuIcon/Ins80",
+      "latest/BookInsectIcon/InsectHousekizoumushiCropped",
+      "latest/FtrIcon/FtrInsectHousekizoumushiCropped"
+    ],
+    "ver": 1,
+    "colors": [
+      4,
+      8
+    ],
+    "size": 3,
+    "sell": 800,
+    "whereHow": "On palm trees",
+    "weather": "Any weather",
+    "hemispheres": {
+      "north": {
+        "time": [
+          "All day"
+        ],
+        "timeArray": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "months": [
+          "Jul - Aug"
+        ],
+        "monthsArray": [
+          7,
+          8
+        ]
+      },
+      "south": {
+        "time": [
+          "All day"
+        ],
+        "timeArray": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "months": [
+          "Jan - Feb"
+        ],
+        "monthsArray": [
+          1,
+          2
+        ]
+      }
+    },
+    "catchPhrase": "I caught a blue weevil beetle! It's the lesser of blue weevils!",
+    "desc": "Yes, yes. The blue weevil beetle does come in beautiful shades of blue and green. The colors are so bright, some say it looks like a living jewel. But I say it looks like a weevil...and weevil rhymes with EVIL. Draw your own conclusions from there. Hoot! I certainly have!"
+  },
+  {
+    "id": 3487,
+    "order": 48,
+    "type": 1,
+    "name": "琉璃星天牛",
+    "rawName": "rosalia batesi beetle",
+    "images": [
+      "latest/MenuIcon/Ins82",
+      "latest/BookInsectIcon/InsectRuriboshikamikiriCropped",
+      "latest/FtrIcon/FtrInsectRuriboshikamikiriCropped"
+    ],
+    "ver": 1,
+    "colors": [
+      5,
+      10
+    ],
+    "size": 3,
+    "sell": 3000,
+    "whereHow": "On tree stumps",
+    "weather": "Any except rain",
+    "hemispheres": {
+      "north": {
+        "time": [
+          "All day"
+        ],
+        "timeArray": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "months": [
+          "May - Sep"
+        ],
+        "monthsArray": [
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "south": {
+        "time": [
+          "All day"
+        ],
+        "timeArray": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "months": [
+          "Jan - Mar",
+          "Nov - Dec"
+        ],
+        "monthsArray": [
+          1,
+          2,
+          3,
+          11,
+          12
+        ]
+      }
+    },
+    "catchPhrase": "I caught a rosalia batesi beetle! That's easier to do than say!",
+    "desc": "The rosalia batesi beetle is a type of longhorn beetle, so named for the long antennae upon its head. But did you know that longhorn beetles often grow antennae longer than their very own bodies, wot wot? As if this weren't odious enough, look closely and you will find these antennae...are covered in tufts of hair! Best not look closely, I say."
+  },
+  {
+    "id": 5157,
+    "order": 40,
+    "type": 1,
+    "name": "田鳖",
+    "rawName": "giant water bug",
+    "images": [
+      "latest/MenuIcon/Ins76",
+      "latest/BookInsectIcon/InsectTagameCropped",
+      "latest/FtrIcon/FtrInsectTagameCropped"
+    ],
+    "ver": 1,
+    "colors": [
+      12,
+      5
+    ],
+    "size": 3,
+    "sell": 2000,
+    "whereHow": "On rivers/ponds",
+    "weather": "Any weather",
+    "hemispheres": {
+      "north": {
+        "time": [
+          "7 PM – 8 AM"
+        ],
+        "timeArray": [
+          19,
+          20,
+          21,
+          22,
+          23,
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "months": [
+          "Apr - Sep"
+        ],
+        "monthsArray": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "south": {
+        "time": [
+          "7 PM – 8 AM"
+        ],
+        "timeArray": [
+          19,
+          20,
+          21,
+          22,
+          23,
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "months": [
+          "Jan - Mar",
+          "Oct - Dec"
+        ],
+        "monthsArray": [
+          1,
+          2,
+          3,
+          10,
+          11,
+          12
+        ]
+      }
+    },
+    "catchPhrase": "I caught a giant water bug! It should've stayed in the water!",
+    "desc": "How to put this gently? Ah yes... BEWARE the giant water bug! I tell you, this vicious predator has been known to attack fish, frogs, and even snakes! SNAKES! Truth be told, no one is safe! Its nickname is \"the toe-biter,\" for goodness sakes! Now, one final fact before I faint... The gruesome bug uses its nose...to inject its prey...with digestive juices. Hoo... Must stop thinking about...the unthinkable."
+  },
+  {
+    "id": 5339,
+    "order": 35,
+    "type": 1,
+    "name": "豆娘",
+    "rawName": "damselfly",
+    "images": [
+      "latest/MenuIcon/Ins81",
+      "latest/BookInsectIcon/InsectItotonboCropped",
+      "latest/FtrIcon/FtrInsectItotonboCropped"
+    ],
+    "ver": 1,
+    "colors": [
+      4,
+      5
+    ],
+    "size": 3,
+    "sell": 500,
+    "whereHow": "Flying near water",
+    "weather": "Any except rain",
+    "hemispheres": {
+      "north": {
+        "time": [
+          "All day"
+        ],
+        "timeArray": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "months": [
+          "Jan - Feb",
+          "Nov - Dec"
+        ],
+        "monthsArray": [
+          1,
+          2,
+          11,
+          12
+        ]
+      },
+      "south": {
+        "time": [
+          "All day"
+        ],
+        "timeArray": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "months": [
+          "May - Aug"
+        ],
+        "monthsArray": [
+          5,
+          6,
+          7,
+          8
+        ]
+      }
+    },
+    "catchPhrase": "I caught a damselfly! Now it's a damselfly in distress!",
+    "desc": "The colorful damselfly is similar to its cousin, the dragonfly, though it tends to be smaller and thinner. But don't let the delicate looks fool you! Much like the dragonfly, the damselfly is a ruthless predator. It loves to catch flies midair and eat them, and has been known to snack on spiders it plucks from the web! In short, it is not a dinner guest I would recommend... And it is not a menu I could keep down."
+  },
+  {
+    "id": 328,
+    "order": 3,
+    "type": 2,
+    "name": "鲫鱼",
+    "rawName": "crucian carp",
+    "images": [
+      "latest/MenuIcon/Fish2",
+      "latest/BookFishIcon/FishFunaCropped",
+      "latest/FtrIcon/FtrFishFuna"
+    ],
+    "ver": 1,
+    "colors": [
+      12,
+      10
+    ],
+    "size": 3,
+    "sell": 160,
+    "whereHow": "River",
+    "hemispheres": {
+      "north": {
+        "time": [
+          "All day"
+        ],
+        "timeArray": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "months": [
+          "Jan - Dec"
+        ],
+        "monthsArray": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ]
+      },
+      "south": {
+        "time": [
+          "All day"
+        ],
+        "timeArray": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "months": [
+          "Jan - Dec"
+        ],
+        "monthsArray": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ]
+      }
+    },
+    "catchPhrase": "I caught a crucian carp! My skills are sharp!",
+    "desc": "I wonder... Do you know how to tell the difference between a crucian carp and a standard-issue carp? It's quite easy to tell the two apart... One must simply locate the barbels. Or, rather, the lack of them! And just what is a barbel, you ask? Well, a barbel looks a little something like a mustache. A run-of-the-mill carp will sport this unsightly \"facial hair,\" while a crucian carp is considerably better groomed! I tried to grow a mustache when I was younger. It never did fill in quite right... All for the best in the end, as mustaches go so much better with noses than with beaks!"
+  },
+  {
+    "id": 329,
+    "order": 7,
+    "type": 2,
+    "name": "金鱼",
+    "rawName": "goldfish",
+    "images": [
+      "latest/MenuIcon/Fish7",
+      "latest/BookFishIcon/FishKingyoCropped",
+      "latest/FtrIcon/FtrFishKingyo"
+    ],
+    "ver": 1,
+    "colors": [
+      1,
+      6
+    ],
+    "size": 3,
+    "sell": 1300,
+    "whereHow": "Pond",
+    "hemispheres": {
+      "north": {
+        "time": [
+          "All day"
+        ],
+        "timeArray": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "months": [
+          "Jan - Dec"
+        ],
+        "monthsArray": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ]
+      },
+      "south": {
+        "time": [
+          "All day"
+        ],
+        "timeArray": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "months": [
+          "Jan - Dec"
+        ],
+        "monthsArray": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ]
+      }
+    },
+    "catchPhrase": "I caught a goldfish! It's worth its weight in fish!",
+    "desc": "Goldfish are so cute and delicate... but do you know how big they can get? Why, they can grow up to... a foot in length! Well, sometimes. The size of the tank they're kept in tends to restrict their growth. And just how big will this goldfish get in our large museum tank? I look forward to finding out!"
   },
   {
     "id": 2215,
@@ -13216,6 +14248,1035 @@
     "desc": "The coelacanth is a deep-sea fish that has been around since the age of the dinosaurs. They were long thought extinct, so when living specimens were discovered, it was quite a shock! Now I'll just have to figure out where in the museum to display it— fish or fossils!"
   },
   {
+    "id": 4189,
+    "order": 46,
+    "type": 2,
+    "name": "鲟鱼",
+    "rawName": "sturgeon",
+    "images": [
+      "latest/MenuIcon/Fish75",
+      "latest/BookFishIcon/FishTyouzameCropped",
+      "latest/FtrIcon/FtrFishTyouzame"
+    ],
+    "ver": 1,
+    "colors": [
+      10
+    ],
+    "size": 8,
+    "sell": 10000,
+    "whereHow": "River (mouth)",
+    "hemispheres": {
+      "north": {
+        "time": [
+          "All day"
+        ],
+        "timeArray": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "months": [
+          "Jan - Mar",
+          "Sep - Dec"
+        ],
+        "monthsArray": [
+          1,
+          2,
+          3,
+          9,
+          10,
+          11,
+          12
+        ]
+      },
+      "south": {
+        "time": [
+          "All day"
+        ],
+        "timeArray": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "months": [
+          "Mar - Sep"
+        ],
+        "monthsArray": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      }
+    },
+    "catchPhrase": "I caught a sturgeon! Wonder if it can perform sturgery...",
+    "desc": "The sturgeon is a large and long-lived fish which has changed little in the last 300 million years. One curious behavior of theirs is leaping high out of the water and falling back in on their sides. The smacking sounds of their re-entry can be heard for up to half a mile away, likely more underwater! No one knows why they do it, but I like to think it's their impression of bread popping out of a toaster!"
+  },
+  {
+    "id": 4190,
+    "order": 23,
+    "type": 2,
+    "name": "吴郭鱼",
+    "rawName": "tilapia",
+    "images": [
+      "latest/MenuIcon/Fish76",
+      "latest/BookFishIcon/FishThirapiaCropped",
+      "latest/FtrIcon/FtrFishThirapia"
+    ],
+    "ver": 1,
+    "colors": [
+      10
+    ],
+    "size": 3,
+    "sell": 800,
+    "whereHow": "River",
+    "hemispheres": {
+      "north": {
+        "time": [
+          "All day"
+        ],
+        "timeArray": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "months": [
+          "Jun - Oct"
+        ],
+        "monthsArray": [
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "south": {
+        "time": [
+          "All day"
+        ],
+        "timeArray": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "months": [
+          "Jan - Apr",
+          "Dec"
+        ],
+        "monthsArray": [
+          1,
+          2,
+          3,
+          4,
+          12
+        ]
+      }
+    },
+    "catchPhrase": "I caught a tilapia! It makes me happy-a!",
+    "desc": "Wherever the waters are warm, the tilapia can be found. It is a highly adaptable river fish. They mainly feed on algae, but they will also eat larvae and dead fish— or whatever fits in their mouths. I will confess that, as a growing owlet, I similarly defined food as 'anything that fits in my beak.'"
+  },
+  {
+    "id": 4191,
+    "order": 37,
+    "type": 2,
+    "name": "斗鱼",
+    "rawName": "betta",
+    "images": [
+      "latest/MenuIcon/Fish77",
+      "latest/BookFishIcon/FishBetaCropped",
+      "latest/FtrIcon/FtrFishBeta"
+    ],
+    "ver": 1,
+    "colors": [
+      6,
+      10
+    ],
+    "size": 3,
+    "sell": 2500,
+    "whereHow": "River",
+    "hemispheres": {
+      "north": {
+        "time": [
+          "9 AM – 4 PM"
+        ],
+        "timeArray": [
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "months": [
+          "May - Oct"
+        ],
+        "monthsArray": [
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "south": {
+        "time": [
+          "9 AM – 4 PM"
+        ],
+        "timeArray": [
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "months": [
+          "Jan - Apr",
+          "Nov - Dec"
+        ],
+        "monthsArray": [
+          1,
+          2,
+          3,
+          4,
+          11,
+          12
+        ]
+      }
+    },
+    "catchPhrase": "I caught a betta! I betta not drop it!",
+    "desc": "The betta has long fins and beautiful coloring. It is a tropical fish popular in decorative aquariums. They're very territorial and will fight to complete exhaustion, so aquarists must keep them carefully. Rarely do such beauty and violence commingle outside the rowdiest of sunset-viewing parties."
+  },
+  {
+    "id": 4192,
+    "order": 13,
+    "type": 2,
+    "name": "拟鳄龟",
+    "rawName": "snapping turtle",
+    "images": [
+      "latest/MenuIcon/Fish78",
+      "latest/BookFishIcon/FishKamitsukigameCropped",
+      "latest/FtrIcon/FtrFishKamitukigame"
+    ],
+    "ver": 1,
+    "colors": [
+      12,
+      10
+    ],
+    "size": 3,
+    "sell": 5000,
+    "whereHow": "River",
+    "hemispheres": {
+      "north": {
+        "time": [
+          "9 PM – 4 AM"
+        ],
+        "timeArray": [
+          21,
+          22,
+          23,
+          0,
+          1,
+          2,
+          3
+        ],
+        "months": [
+          "Apr - Oct"
+        ],
+        "monthsArray": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "south": {
+        "time": [
+          "9 PM – 4 AM"
+        ],
+        "timeArray": [
+          21,
+          22,
+          23,
+          0,
+          1,
+          2,
+          3
+        ],
+        "months": [
+          "Jan - Apr",
+          "Oct - Dec"
+        ],
+        "monthsArray": [
+          1,
+          2,
+          3,
+          4,
+          10,
+          11,
+          12
+        ]
+      }
+    },
+    "catchPhrase": "I caught a snapping turtle! How can it snap without fingers?",
+    "desc": "The snapping turtle is a large turtle known for its crocodile-like body and long claws. No, wait—it is better known for its ferocious bite, which it can deliver with shocking speed for a turtle. NO, WAIT—it is BEST known for that time one chased me across a parking lot and I had to climb on top of a car."
+  },
+  {
+    "id": 4193,
+    "order": 29,
+    "type": 2,
+    "name": "金鳟",
+    "rawName": "golden trout",
+    "images": [
+      "latest/MenuIcon/Fish79",
+      "latest/BookFishIcon/FishGoldenTorautoCropped",
+      "latest/FtrIcon/FtrFishGoldenTorauto"
+    ],
+    "ver": 1,
+    "colors": [
+      12,
+      10
+    ],
+    "size": 3,
+    "sell": 15000,
+    "whereHow": "River (clifftop)",
+    "hemispheres": {
+      "north": {
+        "time": [
+          "4 PM – 9 AM"
+        ],
+        "timeArray": [
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "months": [
+          "Mar - May",
+          "Sep - Nov"
+        ],
+        "monthsArray": [
+          3,
+          4,
+          5,
+          9,
+          10,
+          11
+        ]
+      },
+      "south": {
+        "time": [
+          "4 PM – 9 AM"
+        ],
+        "timeArray": [
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "months": [
+          "Mar - May",
+          "Sep - Nov"
+        ],
+        "monthsArray": [
+          3,
+          4,
+          5,
+          9,
+          10,
+          11
+        ]
+      }
+    },
+    "catchPhrase": "I caught a golden trout! But the real treasure? Friendship.",
+    "desc": "The golden trout is a beautifully colored fish that can only live in very clean waters. They are difficult to come across since they are found only in high mountain streams. As a side note, I find it much easier to appreciate fish that aren't such prima donnas about everything."
+  },
+  {
+    "id": 4194,
+    "order": 39,
+    "type": 2,
+    "name": "彩虹鱼",
+    "rawName": "rainbowfish",
+    "images": [
+      "latest/MenuIcon/Fish80",
+      "latest/BookFishIcon/FishRainbowfishCropped",
+      "latest/FtrIcon/FtrFishRainbowfish"
+    ],
+    "ver": 1,
+    "colors": [
+      2,
+      10
+    ],
+    "size": 3,
+    "sell": 800,
+    "whereHow": "River",
+    "hemispheres": {
+      "north": {
+        "time": [
+          "9 AM – 4 PM"
+        ],
+        "timeArray": [
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "months": [
+          "May - Oct"
+        ],
+        "monthsArray": [
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "south": {
+        "time": [
+          "9 AM – 4 PM"
+        ],
+        "timeArray": [
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "months": [
+          "Jan - Apr",
+          "Nov - Dec"
+        ],
+        "monthsArray": [
+          1,
+          2,
+          3,
+          4,
+          11,
+          12
+        ]
+      }
+    },
+    "catchPhrase": "I caught a rainbowfish! Where's my pot of goldfish?",
+    "desc": "The rainbowfish is a tropical fish known for its metallic colors and beautiful fins. There are over 50 different species, each unique and pleasing color. I must say, it does make me wish for feathers of a more exciting hue than \"underbaked brownie.\""
+  },
+  {
+    "id": 4201,
+    "order": 56,
+    "type": 2,
+    "name": "凤尾鱼",
+    "rawName": "anchovy",
+    "images": [
+      "latest/MenuIcon/Fish81",
+      "latest/BookFishIcon/FishAntyobiCropped",
+      "latest/FtrIcon/FtrFishAntyobi"
+    ],
+    "ver": 1,
+    "colors": [
+      5,
+      1
+    ],
+    "size": 3,
+    "sell": 200,
+    "whereHow": "Sea",
+    "hemispheres": {
+      "north": {
+        "time": [
+          "4 AM – 9 PM"
+        ],
+        "timeArray": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ],
+        "months": [
+          "Jan - Dec"
+        ],
+        "monthsArray": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ]
+      },
+      "south": {
+        "time": [
+          "4 AM – 9 PM"
+        ],
+        "timeArray": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ],
+        "months": [
+          "Jan - Dec"
+        ],
+        "monthsArray": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ]
+      }
+    },
+    "catchPhrase": "I caught an anchovy! Stay away from my pizza!",
+    "desc": "There are more than 140 species of anchovy, but they do all have some things in common. They are small and feed by simply swimming with their mouths open to filter food particles from the sea. (In my sleepier moments, I sometimes wish I could do that...)"
+  },
+  {
+    "id": 4202,
+    "order": 69,
+    "type": 2,
+    "name": "鬼头刀",
+    "rawName": "mahi-mahi",
+    "images": [
+      "latest/MenuIcon/Fish82",
+      "latest/BookFishIcon/FishShiiraCropped",
+      "latest/FtrIcon/FtrFishShiira"
+    ],
+    "ver": 1,
+    "colors": [
+      3,
+      10
+    ],
+    "size": 8,
+    "sell": 6000,
+    "whereHow": "Pier",
+    "hemispheres": {
+      "north": {
+        "time": [
+          "All day"
+        ],
+        "timeArray": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "months": [
+          "May - Oct"
+        ],
+        "monthsArray": [
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "south": {
+        "time": [
+          "All day"
+        ],
+        "timeArray": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "months": [
+          "Jan - Apr",
+          "Nov - Dec"
+        ],
+        "monthsArray": [
+          1,
+          2,
+          3,
+          4,
+          11,
+          12
+        ]
+      }
+    },
+    "catchPhrase": "I caught a mahi-mahi! It's all mahine-mahine.",
+    "desc": "The mahi-mahi is an ocean fish known for its wide, somewhat-cute face. It can reach over six feet long. It is known by different names including \"dolphinfish,\" even though it has no relation to dolphins. They live in only in warm, tropical waters...which perhaps explains the relaxed, happy look on their faces."
+  },
+  {
+    "id": 4203,
+    "order": 76,
+    "type": 2,
+    "name": "吸盘鱼",
+    "rawName": "suckerfish",
+    "images": [
+      "latest/MenuIcon/Fish83",
+      "latest/BookFishIcon/FishKobanzameCropped",
+      "latest/FtrIcon/FtrFishKobanzame"
+    ],
+    "ver": 1,
+    "colors": [
+      10
+    ],
+    "size": 3,
+    "sell": 1500,
+    "whereHow": "Sea",
+    "hemispheres": {
+      "north": {
+        "time": [
+          "All day"
+        ],
+        "timeArray": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "months": [
+          "Jun - Sep"
+        ],
+        "monthsArray": [
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "south": {
+        "time": [
+          "All day"
+        ],
+        "timeArray": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "months": [
+          "Jan - Mar",
+          "Dec"
+        ],
+        "monthsArray": [
+          1,
+          2,
+          3,
+          12
+        ]
+      }
+    },
+    "catchPhrase": "I caught a suckerfish! I thought it was a shark! Oh, wait - now I get it. \"Sucker\"...",
+    "desc": "The suckerfish is a curious fish that likes to attach itself with its sucker mouth to larger marine animals. The benefit to the suckerfish is that it gets to eat smaller parasites and dead skin off the host's body. Amusingly, some people have used suckerfish on cords to catch large turtles with the fish's own suction! I imagine this practice is the cause of some awkward conversations between fish and turtle, eh wot"
+  },
+  {
+    "id": 4204,
+    "order": 79,
+    "type": 2,
+    "name": "太平洋桶眼鱼",
+    "rawName": "barreleye",
+    "images": [
+      "latest/MenuIcon/Fish84",
+      "latest/BookFishIcon/FishDemenigisuCropped",
+      "latest/FtrIcon/FtrFishDemenigisu"
+    ],
+    "ver": 1,
+    "colors": [
+      10
+    ],
+    "size": 3,
+    "sell": 15000,
+    "whereHow": "Sea",
+    "hemispheres": {
+      "north": {
+        "time": [
+          "9 PM – 4 AM"
+        ],
+        "timeArray": [
+          21,
+          22,
+          23,
+          0,
+          1,
+          2,
+          3
+        ],
+        "months": [
+          "Jan - Dec"
+        ],
+        "monthsArray": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ]
+      },
+      "south": {
+        "time": [
+          "9 PM – 4 AM"
+        ],
+        "timeArray": [
+          21,
+          22,
+          23,
+          0,
+          1,
+          2,
+          3
+        ],
+        "months": [
+          "Jan - Dec"
+        ],
+        "monthsArray": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ]
+      }
+    },
+    "catchPhrase": "I caught a barreleye! Like eyeing fish in a barrel!",
+    "desc": "The barreleye is a deep-sea fish with protuberant eyes and a clear head, so some of its organs are... visible. At first blush, a transparent head seems absurd, but there is a reason: so it can see things directly above! But I must confess - the more I learn about deep-sea fish, the happier I am to live on dry land, wot."
+  },
+  {
+    "id": 5254,
+    "order": 9,
+    "type": 2,
+    "name": "兰寿金鱼",
+    "rawName": "ranchu goldfish",
+    "images": [
+      "latest/MenuIcon/Fish85",
+      "latest/BookFishIcon/FishRanchuCropped",
+      "latest/FtrIcon/FtrFishRanchu"
+    ],
+    "ver": 1,
+    "colors": [
+      1,
+      10
+    ],
+    "size": 3,
+    "sell": 4500,
+    "whereHow": "Pond",
+    "hemispheres": {
+      "north": {
+        "time": [
+          "9 AM – 4 PM"
+        ],
+        "timeArray": [
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "months": [
+          "Jan - Dec"
+        ],
+        "monthsArray": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ]
+      },
+      "south": {
+        "time": [
+          "9 AM – 4 PM"
+        ],
+        "timeArray": [
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "months": [
+          "Jan - Dec"
+        ],
+        "monthsArray": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ]
+      }
+    },
+    "catchPhrase": "I caught a ranchu goldfish! But I prefer balsamicu goldfish!",
+    "desc": "The ranchu goldfish is a charming relative of the goldfish with a bumpy head and stout, round body. They have ordinary heads when born, but develop impressive rectangular heads after about three years. Supposedly their head shape changes depending on factors like the size of their tank... So ranchu goldfish enthusiasts aim to raise perfectly shaped specimens and work hard to achieve this. Of course, no one asks the ranchu goldfish themselves what shape they want their heads to be..."
+  },
+  {
     "id": 2620,
     "order": 1,
     "type": 3,
@@ -15932,2067 +17993,6 @@
     },
     "catchPhrase": "GAAAAH! I got a giant isopod! It's the crustodian of the sea.",
     "desc": "Growing up to nearly 20 inches, the sea-dwelling giant isopod is the world's largest cousin of the pill bug. Twenty inches?! Twenty times as revolting, I say! Making matters worse for those of us who find the pill bug repulsive rather than \"cute\"... The giant isopod can swim shockingly fast and is known for its voracious appetite. In fact, it's most happy when dining on the carcasses of animals that have sunk to the bottom of the sea! This behavior has earned it a nickname... 'the vacuum cleaner of the deep.' Why must nature play such awful pranks on me?"
-  },
-  {
-    "id": 3477,
-    "order": 5,
-    "type": 1,
-    "name": "青带凤蝶",
-    "rawName": "common bluebottle",
-    "images": [
-      "latest/MenuIcon/Ins72",
-      "latest/BookInsectIcon/InsectAosujiagehaCropped",
-      "latest/FtrIcon/FtrInsectAosujiagehaCropped"
-    ],
-    "ver": 1,
-    "colors": [
-      10,
-      4
-    ],
-    "size": 3,
-    "sell": 300,
-    "whereHow": "Flying",
-    "weather": "Any except rain",
-    "hemispheres": {
-      "north": {
-        "time": [
-          "4 AM – 7 PM"
-        ],
-        "timeArray": [
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18
-        ],
-        "months": [
-          "Apr - Aug"
-        ],
-        "monthsArray": [
-          4,
-          5,
-          6,
-          7,
-          8
-        ]
-      },
-      "south": {
-        "time": [
-          "4 AM – 7 PM"
-        ],
-        "timeArray": [
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18
-        ],
-        "months": [
-          "Jan - Feb",
-          "Oct - Dec"
-        ],
-        "monthsArray": [
-          1,
-          2,
-          10,
-          11,
-          12
-        ]
-      }
-    },
-    "catchPhrase": "I caught a common bluebottle! I'll put it in a rare green jar!",
-    "desc": "The common bluebottle is a type of swallowtail butterfly with a bright blue line running down its wings. They fly quite nimbly, it seems, and are thus quite difficult to catch. But seeing how they've been known to slurp nutrients from MUD puddles... I simply CAN'T imagine wanting to catch one myself. What awful breath!"
-  },
-  {
-    "id": 3478,
-    "order": 6,
-    "type": 1,
-    "name": "大白斑蝶",
-    "rawName": "paper kite butterfly",
-    "images": [
-      "latest/MenuIcon/Ins73",
-      "latest/BookInsectIcon/InsectOhgomamadaraCropped",
-      "latest/FtrIcon/FtrInsectOhgomamadaraCropped"
-    ],
-    "ver": 1,
-    "colors": [
-      9,
-      3
-    ],
-    "size": 3,
-    "sell": 1000,
-    "whereHow": "Flying near flowers",
-    "weather": "Any except rain",
-    "hemispheres": {
-      "north": {
-        "time": [
-          "8 AM – 7 PM"
-        ],
-        "timeArray": [
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18
-        ],
-        "months": [
-          "Jan - Dec"
-        ],
-        "monthsArray": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12
-        ]
-      },
-      "south": {
-        "time": [
-          "8 AM – 7 PM"
-        ],
-        "timeArray": [
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18
-        ],
-        "months": [
-          "Jan - Dec"
-        ],
-        "monthsArray": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12
-        ]
-      }
-    },
-    "catchPhrase": "I caught a paper kite butterfly! Do I read it, fly it, or spreadit on toast?",
-    "desc": "With its black-and-white-striped wing pattern, the paper kite butterfly is both elegant and pretty... PRETTY POISONOUS I MEAN! Hoo dear! Where was I? Oh yes... Even this butterfly's black-and-white-striped larva and little golden pupae are toxic to predators. Indeed, the paper kite butterfly's foul flavor is famous, and thus birds, in particular, steer clear of the fiends. THIS bird most of all!"
-  },
-  {
-    "id": 3479,
-    "order": 7,
-    "type": 1,
-    "name": "大紫蛱蝶",
-    "rawName": "great purple emperor",
-    "images": [
-      "latest/MenuIcon/Ins74",
-      "latest/BookInsectIcon/InsectOhmurasakiCropped",
-      "latest/FtrIcon/FtrInsectOhmurasakiCropped"
-    ],
-    "ver": 1,
-    "colors": [
-      7,
-      2
-    ],
-    "size": 3,
-    "sell": 3000,
-    "whereHow": "Flying near flowers",
-    "weather": "Any except rain",
-    "hemispheres": {
-      "north": {
-        "time": [
-          "4 AM – 7 PM"
-        ],
-        "timeArray": [
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18
-        ],
-        "months": [
-          "May - Aug"
-        ],
-        "monthsArray": [
-          5,
-          6,
-          7,
-          8
-        ]
-      },
-      "south": {
-        "time": [
-          "4 AM – 7 PM"
-        ],
-        "timeArray": [
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18
-        ],
-        "months": [
-          "Jan - Feb",
-          "Nov - Dec"
-        ],
-        "monthsArray": [
-          1,
-          2,
-          11,
-          12
-        ]
-      }
-    },
-    "catchPhrase": "I caught a great purple emperor! Its purple reign is over now!",
-    "desc": "The great purple emperor lives high in the treetops and is renowned for its pretty purple-hued wings. Its impressive bird-like wingspan and elusive nature have made it a favorite among butterfly aficionados. But truth be told, the so-called great purple emperor has some not-so-great personal peculiarities. For one...it has two horrid HORNS upon its head when it is in its caterpillar form. For two...it has been known to dine on feces and animal carcasses! Hoo! That's why I call it the Emperor of EWWW!"
-  },
-  {
-    "id": 3480,
-    "order": 53,
-    "type": 1,
-    "name": "日铜锣花金龟",
-    "rawName": "drone beetle",
-    "images": [
-      "latest/MenuIcon/Ins75",
-      "latest/BookInsectIcon/InsectKanabunCropped",
-      "latest/FtrIcon/FtrInsectKanabunCropped"
-    ],
-    "ver": 1,
-    "colors": [
-      4,
-      5
-    ],
-    "size": 3,
-    "sell": 200,
-    "whereHow": "On trees (any kind)",
-    "weather": "Any weather",
-    "hemispheres": {
-      "north": {
-        "time": [
-          "All day"
-        ],
-        "timeArray": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23
-        ],
-        "months": [
-          "Jun - Aug"
-        ],
-        "monthsArray": [
-          6,
-          7,
-          8
-        ]
-      },
-      "south": {
-        "time": [
-          "All day"
-        ],
-        "timeArray": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23
-        ],
-        "months": [
-          "Jan - Feb",
-          "Dec"
-        ],
-        "monthsArray": [
-          1,
-          2,
-          12
-        ]
-      }
-    },
-    "catchPhrase": "I caught a drone beetle! Shouldn't you have more propellers?",
-    "desc": "I must say, the drone beetle is like that boorish acquaintance who is much too loud for polite company. That is, it is a large bug with a square head and is so named for the droning noise it makes when it flies. Furthermore, it has hooks on its feet that help it to cling tightly to trees. HOOK FEET... How gauche!"
-  },
-  {
-    "id": 3482,
-    "order": 61,
-    "type": 1,
-    "name": "长颈鹿锯锹形虫",
-    "rawName": "giraffe stag",
-    "images": [
-      "latest/MenuIcon/Ins77",
-      "latest/BookInsectIcon/InsectGirafanokogirikuwagataCropped",
-      "latest/FtrIcon/FtrInsectGirafanokogirikuwagataCropped"
-    ],
-    "ver": 1,
-    "colors": [
-      10
-    ],
-    "size": 3,
-    "sell": 12000,
-    "whereHow": "On palm trees",
-    "weather": "Any weather",
-    "hemispheres": {
-      "north": {
-        "time": [
-          "5 PM – 8 AM"
-        ],
-        "timeArray": [
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23,
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7
-        ],
-        "months": [
-          "Jul - Aug"
-        ],
-        "monthsArray": [
-          7,
-          8
-        ]
-      },
-      "south": {
-        "time": [
-          "5 PM – 8 AM"
-        ],
-        "timeArray": [
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23,
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7
-        ],
-        "months": [
-          "Jan - Feb"
-        ],
-        "monthsArray": [
-          1,
-          2
-        ]
-      }
-    },
-    "catchPhrase": "I caught a giraffe stag! Does that make it a longhorn?",
-    "desc": "The giraffe stag beetle is a bug of preposterous proportions. Not only is its body rather large, it has two long, jagged jaws that can put it over five inches in size! The giraffe stag beetle's long jaws have been compared to the long neck of the giraffe...hence the name. But I say such comparisons are a stretch. Giraffe necks are NOT lined with spikes! If I were a giraffe, I would protest."
-  },
-  {
-    "id": 3483,
-    "order": 42,
-    "type": 1,
-    "name": "人面椿象",
-    "rawName": "man-faced stink bug",
-    "images": [
-      "latest/MenuIcon/Ins78",
-      "latest/BookInsectIcon/InsectJinmenkamemushiCropped",
-      "latest/FtrIcon/FtrInsectJinmenkamemushiCropped"
-    ],
-    "ver": 1,
-    "colors": [
-      10,
-      2
-    ],
-    "size": 3,
-    "sell": 1000,
-    "whereHow": "On flowers",
-    "weather": "Any except rain",
-    "hemispheres": {
-      "north": {
-        "time": [
-          "7 PM – 8 AM"
-        ],
-        "timeArray": [
-          19,
-          20,
-          21,
-          22,
-          23,
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7
-        ],
-        "months": [
-          "Mar - Oct"
-        ],
-        "monthsArray": [
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10
-        ]
-      },
-      "south": {
-        "time": [
-          "7 PM – 8 AM"
-        ],
-        "timeArray": [
-          19,
-          20,
-          21,
-          22,
-          23,
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7
-        ],
-        "months": [
-          "Jan - Apr",
-          "Sep - Dec"
-        ],
-        "monthsArray": [
-          1,
-          2,
-          3,
-          4,
-          9,
-          10,
-          11,
-          12
-        ]
-      }
-    },
-    "catchPhrase": "I caught a man-faced stink bug! Reminds me of my uncle!",
-    "desc": "Never mind this stink bug's smell. What you have here is a bug...with a FACE...on its BACK!! Wot-wot! Simply put, the man-faced stink bug has markings on its shell that resemble a human face. Once you notice this face, you cannot UN-notice it. Indeed, this face might haunt you forever. At least the face will distract you from the stink."
-  },
-  {
-    "id": 3484,
-    "order": 15,
-    "type": 1,
-    "name": "日落蛾",
-    "rawName": "Madagascan sunset moth",
-    "images": [
-      "latest/MenuIcon/Ins79",
-      "latest/BookInsectIcon/InsectNishikiohtsubamegaCropped",
-      "latest/FtrIcon/FtrInsectNishikiohtsubamegaCropped"
-    ],
-    "ver": 1,
-    "colors": [
-      4,
-      8
-    ],
-    "size": 3,
-    "sell": 2500,
-    "whereHow": "Flying near flowers",
-    "weather": "Any except rain",
-    "hemispheres": {
-      "north": {
-        "time": [
-          "8 AM – 4 PM"
-        ],
-        "timeArray": [
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ],
-        "months": [
-          "Apr - Sep"
-        ],
-        "monthsArray": [
-          4,
-          5,
-          6,
-          7,
-          8,
-          9
-        ]
-      },
-      "south": {
-        "time": [
-          "8 AM – 4 PM"
-        ],
-        "timeArray": [
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ],
-        "months": [
-          "Jan - Mar",
-          "Oct - Dec"
-        ],
-        "monthsArray": [
-          1,
-          2,
-          3,
-          10,
-          11,
-          12
-        ]
-      }
-    },
-    "catchPhrase": "I caught a Madagascan sunset moth! Wow, you're not from around here!",
-    "desc": "The Madagascan sunset moth is said to be the most beautiful moth in the world...a sentiment even I can't deny. While most moths are nocturnal, this one flutters about during the day, making good use of the light. That is, when the daylight reflects off its wings, a kaleidoscope of colors are revealed! Oh! Eh...too bad it has such startling red feet as a caterpillar. I might have found it almost tolerable otherwise. Almost, but not quite."
-  },
-  {
-    "id": 3485,
-    "order": 49,
-    "type": 1,
-    "name": "宝石象鼻虫",
-    "rawName": "blue weevil beetle",
-    "images": [
-      "latest/MenuIcon/Ins80",
-      "latest/BookInsectIcon/InsectHousekizoumushiCropped",
-      "latest/FtrIcon/FtrInsectHousekizoumushiCropped"
-    ],
-    "ver": 1,
-    "colors": [
-      4,
-      8
-    ],
-    "size": 3,
-    "sell": 800,
-    "whereHow": "On palm trees",
-    "weather": "Any weather",
-    "hemispheres": {
-      "north": {
-        "time": [
-          "All day"
-        ],
-        "timeArray": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23
-        ],
-        "months": [
-          "Jul - Aug"
-        ],
-        "monthsArray": [
-          7,
-          8
-        ]
-      },
-      "south": {
-        "time": [
-          "All day"
-        ],
-        "timeArray": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23
-        ],
-        "months": [
-          "Jan - Feb"
-        ],
-        "monthsArray": [
-          1,
-          2
-        ]
-      }
-    },
-    "catchPhrase": "I caught a blue weevil beetle! It's the lesser of blue weevils!",
-    "desc": "Yes, yes. The blue weevil beetle does come in beautiful shades of blue and green. The colors are so bright, some say it looks like a living jewel. But I say it looks like a weevil...and weevil rhymes with EVIL. Draw your own conclusions from there. Hoot! I certainly have!"
-  },
-  {
-    "id": 3487,
-    "order": 48,
-    "type": 1,
-    "name": "琉璃星天牛",
-    "rawName": "rosalia batesi beetle",
-    "images": [
-      "latest/MenuIcon/Ins82",
-      "latest/BookInsectIcon/InsectRuriboshikamikiriCropped",
-      "latest/FtrIcon/FtrInsectRuriboshikamikiriCropped"
-    ],
-    "ver": 1,
-    "colors": [
-      5,
-      10
-    ],
-    "size": 3,
-    "sell": 3000,
-    "whereHow": "On tree stumps",
-    "weather": "Any except rain",
-    "hemispheres": {
-      "north": {
-        "time": [
-          "All day"
-        ],
-        "timeArray": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23
-        ],
-        "months": [
-          "May - Sep"
-        ],
-        "monthsArray": [
-          5,
-          6,
-          7,
-          8,
-          9
-        ]
-      },
-      "south": {
-        "time": [
-          "All day"
-        ],
-        "timeArray": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23
-        ],
-        "months": [
-          "Jan - Mar",
-          "Nov - Dec"
-        ],
-        "monthsArray": [
-          1,
-          2,
-          3,
-          11,
-          12
-        ]
-      }
-    },
-    "catchPhrase": "I caught a rosalia batesi beetle! That's easier to do than say!",
-    "desc": "The rosalia batesi beetle is a type of longhorn beetle, so named for the long antennae upon its head. But did you know that longhorn beetles often grow antennae longer than their very own bodies, wot wot? As if this weren't odious enough, look closely and you will find these antennae...are covered in tufts of hair! Best not look closely, I say."
-  },
-  {
-    "id": 4189,
-    "order": 46,
-    "type": 2,
-    "name": "鲟鱼",
-    "rawName": "sturgeon",
-    "images": [
-      "latest/MenuIcon/Fish75",
-      "latest/BookFishIcon/FishTyouzameCropped",
-      "latest/FtrIcon/FtrFishTyouzame"
-    ],
-    "ver": 1,
-    "colors": [
-      10
-    ],
-    "size": 8,
-    "sell": 10000,
-    "whereHow": "River (mouth)",
-    "hemispheres": {
-      "north": {
-        "time": [
-          "All day"
-        ],
-        "timeArray": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23
-        ],
-        "months": [
-          "Jan - Mar",
-          "Sep - Dec"
-        ],
-        "monthsArray": [
-          1,
-          2,
-          3,
-          9,
-          10,
-          11,
-          12
-        ]
-      },
-      "south": {
-        "time": [
-          "All day"
-        ],
-        "timeArray": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23
-        ],
-        "months": [
-          "Mar - Sep"
-        ],
-        "monthsArray": [
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9
-        ]
-      }
-    },
-    "catchPhrase": "I caught a sturgeon! Wonder if it can perform sturgery...",
-    "desc": "The sturgeon is a large and long-lived fish which has changed little in the last 300 million years. One curious behavior of theirs is leaping high out of the water and falling back in on their sides. The smacking sounds of their re-entry can be heard for up to half a mile away, likely more underwater! No one knows why they do it, but I like to think it's their impression of bread popping out of a toaster!"
-  },
-  {
-    "id": 4190,
-    "order": 23,
-    "type": 2,
-    "name": "吴郭鱼",
-    "rawName": "tilapia",
-    "images": [
-      "latest/MenuIcon/Fish76",
-      "latest/BookFishIcon/FishThirapiaCropped",
-      "latest/FtrIcon/FtrFishThirapia"
-    ],
-    "ver": 1,
-    "colors": [
-      10
-    ],
-    "size": 3,
-    "sell": 800,
-    "whereHow": "River",
-    "hemispheres": {
-      "north": {
-        "time": [
-          "All day"
-        ],
-        "timeArray": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23
-        ],
-        "months": [
-          "Jun - Oct"
-        ],
-        "monthsArray": [
-          6,
-          7,
-          8,
-          9,
-          10
-        ]
-      },
-      "south": {
-        "time": [
-          "All day"
-        ],
-        "timeArray": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23
-        ],
-        "months": [
-          "Jan - Apr",
-          "Dec"
-        ],
-        "monthsArray": [
-          1,
-          2,
-          3,
-          4,
-          12
-        ]
-      }
-    },
-    "catchPhrase": "I caught a tilapia! It makes me happy-a!",
-    "desc": "Wherever the waters are warm, the tilapia can be found. It is a highly adaptable river fish. They mainly feed on algae, but they will also eat larvae and dead fish— or whatever fits in their mouths. I will confess that, as a growing owlet, I similarly defined food as 'anything that fits in my beak.'"
-  },
-  {
-    "id": 4191,
-    "order": 37,
-    "type": 2,
-    "name": "斗鱼",
-    "rawName": "betta",
-    "images": [
-      "latest/MenuIcon/Fish77",
-      "latest/BookFishIcon/FishBetaCropped",
-      "latest/FtrIcon/FtrFishBeta"
-    ],
-    "ver": 1,
-    "colors": [
-      6,
-      10
-    ],
-    "size": 3,
-    "sell": 2500,
-    "whereHow": "River",
-    "hemispheres": {
-      "north": {
-        "time": [
-          "9 AM – 4 PM"
-        ],
-        "timeArray": [
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ],
-        "months": [
-          "May - Oct"
-        ],
-        "monthsArray": [
-          5,
-          6,
-          7,
-          8,
-          9,
-          10
-        ]
-      },
-      "south": {
-        "time": [
-          "9 AM – 4 PM"
-        ],
-        "timeArray": [
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ],
-        "months": [
-          "Jan - Apr",
-          "Nov - Dec"
-        ],
-        "monthsArray": [
-          1,
-          2,
-          3,
-          4,
-          11,
-          12
-        ]
-      }
-    },
-    "catchPhrase": "I caught a betta! I betta not drop it!",
-    "desc": "The betta has long fins and beautiful coloring. It is a tropical fish popular in decorative aquariums. They're very territorial and will fight to complete exhaustion, so aquarists must keep them carefully. Rarely do such beauty and violence commingle outside the rowdiest of sunset-viewing parties."
-  },
-  {
-    "id": 4192,
-    "order": 13,
-    "type": 2,
-    "name": "拟鳄龟",
-    "rawName": "snapping turtle",
-    "images": [
-      "latest/MenuIcon/Fish78",
-      "latest/BookFishIcon/FishKamitsukigameCropped",
-      "latest/FtrIcon/FtrFishKamitukigame"
-    ],
-    "ver": 1,
-    "colors": [
-      12,
-      10
-    ],
-    "size": 3,
-    "sell": 5000,
-    "whereHow": "River",
-    "hemispheres": {
-      "north": {
-        "time": [
-          "9 PM – 4 AM"
-        ],
-        "timeArray": [
-          21,
-          22,
-          23,
-          0,
-          1,
-          2,
-          3
-        ],
-        "months": [
-          "Apr - Oct"
-        ],
-        "monthsArray": [
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10
-        ]
-      },
-      "south": {
-        "time": [
-          "9 PM – 4 AM"
-        ],
-        "timeArray": [
-          21,
-          22,
-          23,
-          0,
-          1,
-          2,
-          3
-        ],
-        "months": [
-          "Jan - Apr",
-          "Oct - Dec"
-        ],
-        "monthsArray": [
-          1,
-          2,
-          3,
-          4,
-          10,
-          11,
-          12
-        ]
-      }
-    },
-    "catchPhrase": "I caught a snapping turtle! How can it snap without fingers?",
-    "desc": "The snapping turtle is a large turtle known for its crocodile-like body and long claws. No, wait—it is better known for its ferocious bite, which it can deliver with shocking speed for a turtle. NO, WAIT—it is BEST known for that time one chased me across a parking lot and I had to climb on top of a car."
-  },
-  {
-    "id": 4193,
-    "order": 29,
-    "type": 2,
-    "name": "金鳟",
-    "rawName": "golden trout",
-    "images": [
-      "latest/MenuIcon/Fish79",
-      "latest/BookFishIcon/FishGoldenTorautoCropped",
-      "latest/FtrIcon/FtrFishGoldenTorauto"
-    ],
-    "ver": 1,
-    "colors": [
-      12,
-      10
-    ],
-    "size": 3,
-    "sell": 15000,
-    "whereHow": "River (clifftop)",
-    "hemispheres": {
-      "north": {
-        "time": [
-          "4 PM – 9 AM"
-        ],
-        "timeArray": [
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23,
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8
-        ],
-        "months": [
-          "Mar - May",
-          "Sep - Nov"
-        ],
-        "monthsArray": [
-          3,
-          4,
-          5,
-          9,
-          10,
-          11
-        ]
-      },
-      "south": {
-        "time": [
-          "4 PM – 9 AM"
-        ],
-        "timeArray": [
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23,
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8
-        ],
-        "months": [
-          "Mar - May",
-          "Sep - Nov"
-        ],
-        "monthsArray": [
-          3,
-          4,
-          5,
-          9,
-          10,
-          11
-        ]
-      }
-    },
-    "catchPhrase": "I caught a golden trout! But the real treasure? Friendship.",
-    "desc": "The golden trout is a beautifully colored fish that can only live in very clean waters. They are difficult to come across since they are found only in high mountain streams. As a side note, I find it much easier to appreciate fish that aren't such prima donnas about everything."
-  },
-  {
-    "id": 4194,
-    "order": 39,
-    "type": 2,
-    "name": "彩虹鱼",
-    "rawName": "rainbowfish",
-    "images": [
-      "latest/MenuIcon/Fish80",
-      "latest/BookFishIcon/FishRainbowfishCropped",
-      "latest/FtrIcon/FtrFishRainbowfish"
-    ],
-    "ver": 1,
-    "colors": [
-      2,
-      10
-    ],
-    "size": 3,
-    "sell": 800,
-    "whereHow": "River",
-    "hemispheres": {
-      "north": {
-        "time": [
-          "9 AM – 4 PM"
-        ],
-        "timeArray": [
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ],
-        "months": [
-          "May - Oct"
-        ],
-        "monthsArray": [
-          5,
-          6,
-          7,
-          8,
-          9,
-          10
-        ]
-      },
-      "south": {
-        "time": [
-          "9 AM – 4 PM"
-        ],
-        "timeArray": [
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ],
-        "months": [
-          "Jan - Apr",
-          "Nov - Dec"
-        ],
-        "monthsArray": [
-          1,
-          2,
-          3,
-          4,
-          11,
-          12
-        ]
-      }
-    },
-    "catchPhrase": "I caught a rainbowfish! Where's my pot of goldfish?",
-    "desc": "The rainbowfish is a tropical fish known for its metallic colors and beautiful fins. There are over 50 different species, each unique and pleasing color. I must say, it does make me wish for feathers of a more exciting hue than \"underbaked brownie.\""
-  },
-  {
-    "id": 4201,
-    "order": 56,
-    "type": 2,
-    "name": "凤尾鱼",
-    "rawName": "anchovy",
-    "images": [
-      "latest/MenuIcon/Fish81",
-      "latest/BookFishIcon/FishAntyobiCropped",
-      "latest/FtrIcon/FtrFishAntyobi"
-    ],
-    "ver": 1,
-    "colors": [
-      5,
-      1
-    ],
-    "size": 3,
-    "sell": 200,
-    "whereHow": "Sea",
-    "hemispheres": {
-      "north": {
-        "time": [
-          "4 AM – 9 PM"
-        ],
-        "timeArray": [
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20
-        ],
-        "months": [
-          "Jan - Dec"
-        ],
-        "monthsArray": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12
-        ]
-      },
-      "south": {
-        "time": [
-          "4 AM – 9 PM"
-        ],
-        "timeArray": [
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20
-        ],
-        "months": [
-          "Jan - Dec"
-        ],
-        "monthsArray": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12
-        ]
-      }
-    },
-    "catchPhrase": "I caught an anchovy! Stay away from my pizza!",
-    "desc": "There are more than 140 species of anchovy, but they do all have some things in common. They are small and feed by simply swimming with their mouths open to filter food particles from the sea. (In my sleepier moments, I sometimes wish I could do that...)"
-  },
-  {
-    "id": 4202,
-    "order": 69,
-    "type": 2,
-    "name": "鬼头刀",
-    "rawName": "mahi-mahi",
-    "images": [
-      "latest/MenuIcon/Fish82",
-      "latest/BookFishIcon/FishShiiraCropped",
-      "latest/FtrIcon/FtrFishShiira"
-    ],
-    "ver": 1,
-    "colors": [
-      3,
-      10
-    ],
-    "size": 8,
-    "sell": 6000,
-    "whereHow": "Pier",
-    "hemispheres": {
-      "north": {
-        "time": [
-          "All day"
-        ],
-        "timeArray": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23
-        ],
-        "months": [
-          "May - Oct"
-        ],
-        "monthsArray": [
-          5,
-          6,
-          7,
-          8,
-          9,
-          10
-        ]
-      },
-      "south": {
-        "time": [
-          "All day"
-        ],
-        "timeArray": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23
-        ],
-        "months": [
-          "Jan - Apr",
-          "Nov - Dec"
-        ],
-        "monthsArray": [
-          1,
-          2,
-          3,
-          4,
-          11,
-          12
-        ]
-      }
-    },
-    "catchPhrase": "I caught a mahi-mahi! It's all mahine-mahine.",
-    "desc": "The mahi-mahi is an ocean fish known for its wide, somewhat-cute face. It can reach over six feet long. It is known by different names including \"dolphinfish,\" even though it has no relation to dolphins. They live in only in warm, tropical waters...which perhaps explains the relaxed, happy look on their faces."
-  },
-  {
-    "id": 4203,
-    "order": 76,
-    "type": 2,
-    "name": "吸盘鱼",
-    "rawName": "suckerfish",
-    "images": [
-      "latest/MenuIcon/Fish83",
-      "latest/BookFishIcon/FishKobanzameCropped",
-      "latest/FtrIcon/FtrFishKobanzame"
-    ],
-    "ver": 1,
-    "colors": [
-      10
-    ],
-    "size": 3,
-    "sell": 1500,
-    "whereHow": "Sea",
-    "hemispheres": {
-      "north": {
-        "time": [
-          "All day"
-        ],
-        "timeArray": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23
-        ],
-        "months": [
-          "Jun - Sep"
-        ],
-        "monthsArray": [
-          6,
-          7,
-          8,
-          9
-        ]
-      },
-      "south": {
-        "time": [
-          "All day"
-        ],
-        "timeArray": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23
-        ],
-        "months": [
-          "Jan - Mar",
-          "Dec"
-        ],
-        "monthsArray": [
-          1,
-          2,
-          3,
-          12
-        ]
-      }
-    },
-    "catchPhrase": "I caught a suckerfish! I thought it was a shark! Oh, wait - now I get it. \"Sucker\"...",
-    "desc": "The suckerfish is a curious fish that likes to attach itself with its sucker mouth to larger marine animals. The benefit to the suckerfish is that it gets to eat smaller parasites and dead skin off the host's body. Amusingly, some people have used suckerfish on cords to catch large turtles with the fish's own suction! I imagine this practice is the cause of some awkward conversations between fish and turtle, eh wot"
-  },
-  {
-    "id": 4204,
-    "order": 79,
-    "type": 2,
-    "name": "太平洋桶眼鱼",
-    "rawName": "barreleye",
-    "images": [
-      "latest/MenuIcon/Fish84",
-      "latest/BookFishIcon/FishDemenigisuCropped",
-      "latest/FtrIcon/FtrFishDemenigisu"
-    ],
-    "ver": 1,
-    "colors": [
-      10
-    ],
-    "size": 3,
-    "sell": 15000,
-    "whereHow": "Sea",
-    "hemispheres": {
-      "north": {
-        "time": [
-          "9 PM – 4 AM"
-        ],
-        "timeArray": [
-          21,
-          22,
-          23,
-          0,
-          1,
-          2,
-          3
-        ],
-        "months": [
-          "Jan - Dec"
-        ],
-        "monthsArray": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12
-        ]
-      },
-      "south": {
-        "time": [
-          "9 PM – 4 AM"
-        ],
-        "timeArray": [
-          21,
-          22,
-          23,
-          0,
-          1,
-          2,
-          3
-        ],
-        "months": [
-          "Jan - Dec"
-        ],
-        "monthsArray": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12
-        ]
-      }
-    },
-    "catchPhrase": "I caught a barreleye! Like eyeing fish in a barrel!",
-    "desc": "The barreleye is a deep-sea fish with protuberant eyes and a clear head, so some of its organs are... visible. At first blush, a transparent head seems absurd, but there is a reason: so it can see things directly above! But I must confess - the more I learn about deep-sea fish, the happier I am to live on dry land, wot."
-  },
-  {
-    "id": 5157,
-    "order": 40,
-    "type": 1,
-    "name": "田鳖",
-    "rawName": "giant water bug",
-    "images": [
-      "latest/MenuIcon/Ins76",
-      "latest/BookInsectIcon/InsectTagameCropped",
-      "latest/FtrIcon/FtrInsectTagameCropped"
-    ],
-    "ver": 1,
-    "colors": [
-      12,
-      5
-    ],
-    "size": 3,
-    "sell": 2000,
-    "whereHow": "On rivers/ponds",
-    "weather": "Any weather",
-    "hemispheres": {
-      "north": {
-        "time": [
-          "7 PM – 8 AM"
-        ],
-        "timeArray": [
-          19,
-          20,
-          21,
-          22,
-          23,
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7
-        ],
-        "months": [
-          "Apr - Sep"
-        ],
-        "monthsArray": [
-          4,
-          5,
-          6,
-          7,
-          8,
-          9
-        ]
-      },
-      "south": {
-        "time": [
-          "7 PM – 8 AM"
-        ],
-        "timeArray": [
-          19,
-          20,
-          21,
-          22,
-          23,
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7
-        ],
-        "months": [
-          "Jan - Mar",
-          "Oct - Dec"
-        ],
-        "monthsArray": [
-          1,
-          2,
-          3,
-          10,
-          11,
-          12
-        ]
-      }
-    },
-    "catchPhrase": "I caught a giant water bug! It should've stayed in the water!",
-    "desc": "How to put this gently? Ah yes... BEWARE the giant water bug! I tell you, this vicious predator has been known to attack fish, frogs, and even snakes! SNAKES! Truth be told, no one is safe! Its nickname is \"the toe-biter,\" for goodness sakes! Now, one final fact before I faint... The gruesome bug uses its nose...to inject its prey...with digestive juices. Hoo... Must stop thinking about...the unthinkable."
-  },
-  {
-    "id": 5254,
-    "order": 9,
-    "type": 2,
-    "name": "兰寿金鱼",
-    "rawName": "ranchu goldfish",
-    "images": [
-      "latest/MenuIcon/Fish85",
-      "latest/BookFishIcon/FishRanchuCropped",
-      "latest/FtrIcon/FtrFishRanchu"
-    ],
-    "ver": 1,
-    "colors": [
-      1,
-      10
-    ],
-    "size": 3,
-    "sell": 4500,
-    "whereHow": "Pond",
-    "hemispheres": {
-      "north": {
-        "time": [
-          "9 AM – 4 PM"
-        ],
-        "timeArray": [
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ],
-        "months": [
-          "Jan - Dec"
-        ],
-        "monthsArray": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12
-        ]
-      },
-      "south": {
-        "time": [
-          "9 AM – 4 PM"
-        ],
-        "timeArray": [
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ],
-        "months": [
-          "Jan - Dec"
-        ],
-        "monthsArray": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12
-        ]
-      }
-    },
-    "catchPhrase": "I caught a ranchu goldfish! But I prefer balsamicu goldfish!",
-    "desc": "The ranchu goldfish is a charming relative of the goldfish with a bumpy head and stout, round body. They have ordinary heads when born, but develop impressive rectangular heads after about three years. Supposedly their head shape changes depending on factors like the size of their tank... So ranchu goldfish enthusiasts aim to raise perfectly shaped specimens and work hard to achieve this. Of course, no one asks the ranchu goldfish themselves what shape they want their heads to be..."
-  },
-  {
-    "id": 5339,
-    "order": 35,
-    "type": 1,
-    "name": "豆娘",
-    "rawName": "damselfly",
-    "images": [
-      "latest/MenuIcon/Ins81",
-      "latest/BookInsectIcon/InsectItotonboCropped",
-      "latest/FtrIcon/FtrInsectItotonboCropped"
-    ],
-    "ver": 1,
-    "colors": [
-      4,
-      5
-    ],
-    "size": 3,
-    "sell": 500,
-    "whereHow": "Flying near water",
-    "weather": "Any except rain",
-    "hemispheres": {
-      "north": {
-        "time": [
-          "All day"
-        ],
-        "timeArray": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23
-        ],
-        "months": [
-          "Jan - Feb",
-          "Nov - Dec"
-        ],
-        "monthsArray": [
-          1,
-          2,
-          11,
-          12
-        ]
-      },
-      "south": {
-        "time": [
-          "All day"
-        ],
-        "timeArray": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23
-        ],
-        "months": [
-          "May - Aug"
-        ],
-        "monthsArray": [
-          5,
-          6,
-          7,
-          8
-        ]
-      }
-    },
-    "catchPhrase": "I caught a damselfly! Now it's a damselfly in distress!",
-    "desc": "The colorful damselfly is similar to its cousin, the dragonfly, though it tends to be smaller and thinner. But don't let the delicate looks fool you! Much like the dragonfly, the damselfly is a ruthless predator. It loves to catch flies midair and eat them, and has been known to snack on spiders it plucks from the web! In short, it is not a dinner guest I would recommend... And it is not a menu I could keep down."
   },
   {
     "id": 6920,

@@ -561,8 +561,18 @@ for (const oldCreature of oldCreatures) {
   newItemIdMap.set(newItem.id, newItem);
   newItemNameMap.set(newItem.rawName, newItem);
 }
-newCreatures.sort((a, b) => a.id - b.id);
-newItems.sort((a, b) => a.id - b.id);
+newCreatures.sort((a, b) => {
+  if (a.type !== b.type) {
+    return a.type - b.type;
+  }
+  return a.order - b.order;
+});
+newItems.sort((a, b) => {
+  if (a.type !== b.type) {
+    return a.type - b.type;
+  }
+  return a.id - b.id;
+});
 
 const genderMap: Record<string, Gender> = {
   Male: Gender.Male,

@@ -36,13 +36,6 @@ const filters = computed(() => [
   },
 ]);
 const { filteredData, handleFiltersChanged } = useFilter(allCreatures);
-const sortedFilteredData = computed(() => {
-  return filteredData.value.sort((a, b) => {
-    const diff = a.type - b.type;
-    if (diff !== 0) return diff;
-    return a.order - b.order;
-  });
-});
 </script>
 
 <template>
@@ -50,7 +43,7 @@ const sortedFilteredData = computed(() => {
     :loading="loading"
     :error="error"
     :on-load="loadData"
-    :datas="sortedFilteredData"
+    :datas="filteredData"
     :card-component="CreatureCard"
     :card-props="{ hemisphere: selectedHemisphere }"
   >
@@ -58,7 +51,7 @@ const sortedFilteredData = computed(() => {
       <FilterSection
         :filters="filters"
         :total-count="allCreatures.length"
-        :current-count="sortedFilteredData.length"
+        :current-count="filteredData.length"
         @filters-changed="handleFiltersChanged"
       >
         <template #action-buttons>
