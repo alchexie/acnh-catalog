@@ -166,6 +166,13 @@ export class ItemModel {
     return this._data.sourceNotes || [];
   }
 
+  get sourceWithNotes(): Array<{ name: string; note?: string }> {
+    return this.sources.map((source, index) => ({
+      name: getSourceName(source) || source,
+      note: this.sourceNotes[index] || undefined,
+    }));
+  }
+
   get seasonEvent(): string | null {
     return this._data.seasonEvent || null;
   }

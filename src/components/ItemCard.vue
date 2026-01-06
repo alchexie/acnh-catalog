@@ -5,6 +5,7 @@ import { joinArray } from "../utils/common";
 import { ItemModel } from "../models";
 import BaseCard from "./BaseCard.vue";
 import ColorBlock from "./ColorBlock.vue";
+import SourceList from "./SourceList.vue";
 import { UI_TEXT } from "../constants";
 import { Color } from "../types/item";
 
@@ -128,9 +129,13 @@ const handleClick = () => {
       <span class="detail-label">季节/活动</span>
       <span class="detail-value">{{ itemModel.seasonEventName }}</span>
     </div>
-    <div class="detail-row">
+    <div class="detail-row source-row">
       <span class="detail-label">{{ UI_TEXT.LABELS.SOURCE }}</span>
-      <span class="detail-value">{{ joinArray(itemModel.sourceNames) }}</span>
+      <SourceList
+        class="detail-value"
+        :sources="itemModel.sources"
+        :sourceNotes="itemModel.sourceNotes"
+      />
     </div>
     <div class="detail-row">
       <span class="buy-price" title="购买价格">

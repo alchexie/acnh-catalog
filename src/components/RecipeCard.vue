@@ -1,15 +1,12 @@
 <script setup lang="ts">
 import type { Recipe } from "../types/recipe";
 import { UI_TEXT } from "../constants";
-import { formatPrice, joinArray } from "../utils/common";
+import { formatPrice } from "../utils/common";
 import BaseCard from "./BaseCard.vue";
 import MaterialItem from "./MaterialItem.vue";
+import SourceList from "./SourceList.vue";
 import { processImageUrl } from "../utils/imageUtils";
-import {
-  getRecipeTypeName,
-  getSeasonEventName,
-  getSourceName,
-} from "../services/dataService";
+import { getRecipeTypeName, getSeasonEventName } from "../services/dataService";
 import { useRouter } from "vue-router";
 
 interface Props {
@@ -50,9 +47,11 @@ const handleClick = () => {
     </div>
     <div class="detail-row">
       <span class="detail-label">{{ UI_TEXT.LABELS.SOURCE }}</span>
-      <span class="detail-value">{{
-        joinArray(props.data.source.map(getSourceName))
-      }}</span>
+      <SourceList
+        class="detail-value"
+        :sources="props.data.source"
+        :sourceNotes="props.data.sourceNotes"
+      />
     </div>
     <div
       v-if="Object.keys(props.data.materials).length > 0"

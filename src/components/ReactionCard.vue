@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { Reaction } from "../types/reaction";
 import { UI_TEXT } from "../constants";
-import { joinArray } from "../utils/common";
 import BaseCard from "./BaseCard.vue";
-import { getSeasonEventName, getSourceName } from "../services/dataService";
+import SourceList from "./SourceList.vue";
+import { getSeasonEventName } from "../services/dataService";
 
 interface Props {
   data: Reaction;
@@ -32,9 +32,11 @@ const handleClick = () => {
     </div>
     <div class="detail-row">
       <span class="detail-label">{{ UI_TEXT.LABELS.SOURCE }}</span>
-      <span class="detail-value">{{
-        joinArray(props.data.source.map(getSourceName))
-      }}</span>
+      <SourceList
+        class="detail-value"
+        :sources="props.data.source"
+        :sourceNotes="props.data.sourceNotes"
+      />
     </div>
   </BaseCard>
 </template>
