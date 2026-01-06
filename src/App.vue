@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, watch } from "vue";
 import ItemDetailModal from "./components/ItemDetailModal.vue";
+import Tooltip from "./components/Tooltip.vue";
 import { useItemDetailModal } from "./composables/useItemDetailModal";
 
 // 回到顶部按钮显示状态
@@ -53,6 +54,9 @@ onUnmounted(() => {
       :itemId="currentItemId"
       @close="closeModal"
     />
+
+    <!-- 全局 Tooltip -->
+    <Tooltip />
 
     <!-- 回到顶部按钮 -->
     <button
