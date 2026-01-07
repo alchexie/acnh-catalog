@@ -5,11 +5,9 @@ import BaseCard from "./BaseCard.vue";
 import SourceList from "./SourceList.vue";
 import { getActivityName } from "../services/dataService";
 
-interface Props {
+const props = defineProps<{
   data: Reaction;
-}
-
-const props = defineProps<Props>();
+}>();
 
 const handleClick = () => {
   window.open(`https://nookipedia.com/wiki/${props.data.rawName}`, "_blank");

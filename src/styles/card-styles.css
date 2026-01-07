@@ -39,12 +39,12 @@
 /* Light 变体 */
 .card--variant-light {
   background: #ffffff;
-  border: 3px solid #ffffff;
+  border: 5px solid #ffffff;
 }
 
 .card--variant-dark {
   background: var(--base-color);
-  border: 3px solid var(--main-color);
+  border: 5px solid var(--main-color);
 }
 
 .card--variant-light .card-image-wrapper {
@@ -84,7 +84,7 @@
 }
 
 .card-image-wrapper.rounded {
-  border-radius: 8px;
+  border-radius: var(--border-radius-xl);
 }
 
 .card-image-wrapper.square {
@@ -186,7 +186,7 @@
   align-items: flex-start;
   padding: var(--spacing-xs) 10px;
   background-color: #f8f9fa;
-  border-radius: var(--border-radius-sm);
+  border-radius: var(--border-radius-lg);
   font-size: 0.85em;
   line-height: 1.4;
 }
@@ -215,6 +215,7 @@
 }
 
 .detail-row.detail-center {
+  align-items: center;
   justify-content: center;
   gap: var(--spacing-sm);
 }

@@ -21,11 +21,11 @@ const { visible, position, content, maxWidth } = useTooltip();
 .tooltip-fixed {
   position: fixed;
   transform: translate(-50%, -100%);
-  padding: 6px 10px;
+  padding: 12px;
   background: rgba(0, 0, 0, 0.9);
   color: #fff;
   font-size: 12px;
-  border-radius: 4px;
+  border-radius: var(--border-radius-xl);
   white-space: pre-wrap;
   word-wrap: break-word;
   pointer-events: none;

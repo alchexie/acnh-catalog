@@ -2,6 +2,7 @@
 import { computed, ref } from "vue";
 import { useItemsData } from "../composables/useItemsData";
 import { useItemDetailModal } from "../composables/useItemDetailModal";
+import { processImageUrl } from "../utils/imageUtils";
 
 const props = defineProps({
   itemId: {
@@ -12,6 +13,14 @@ const props = defineProps({
     type: Number,
     default: 100,
   },
+  vIndex: {
+    type: Number,
+    default: 0,
+  },
+  pIndex: {
+    type: Number,
+    default: 0,
+  }
 });
 
 const { openModal } = useItemDetailModal();
@@ -19,6 +28,11 @@ const { itemIdMap } = useItemsData();
 
 const itemModel = computed(() => itemIdMap.value[props.itemId]);
 const name = computed(() => itemModel.value?.name || "");
+const image = computed(() => {
+  if (!itemModel.value) return "";
+  const pattern = itemModel.value.getPattern(props.vIndex, props.pIndex);
+  return pattern ? processImageUrl(pattern.image) : itemModel.value.image;
+});
 
 const showPreview = ref(false);
 
@@ -45,9 +59,9 @@ const handleClick = () => {
     @mouseleave="handleMouseLeave"
   >
     <img
-      v-if="itemModel?.image"
-      :src="itemModel.image"
-      :alt="itemModel?.name"
+      v-if="image"
+      :src="image"
+      :alt="name"
       :style="{ width: props.size + 'px', height: props.size + 'px' }"
       class="item-icon"
       loading="lazy"
@@ -55,8 +69,8 @@ const handleClick = () => {
     <transition name="preview">
       <div v-if="showPreview" class="preview-overlay">
         <img
-          v-if="itemModel?.image"
-          :src="itemModel.image"
+          v-if="image"
+          :src="image"
           alt="preview"
           class="preview-icon"
           loading="lazy"
@@ -70,9 +84,7 @@ const handleClick = () => {
 
 <style scoped>
 .item-icon {
-  object-fit: contain;
-  border-radius: 4px;
-  transition: all 0.2s ease;
+  padding: 5px;
 }
 
 .item-icon-container {
@@ -82,8 +94,7 @@ const handleClick = () => {
   align-items: center;
   gap: 4px;
   background: white;
-  border-radius: 4px;
-  border: 1px solid #e0e0e0;
+  border-radius: var(--border-radius-lg);
   transition: all 0.2s ease;
 }
 
@@ -96,11 +107,8 @@ const handleClick = () => {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100px;
-  height: auto;
   background: white;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
+  border-radius: var(--border-radius-lg);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -110,10 +118,8 @@ const handleClick = () => {
 }
 
 .preview-icon {
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
-  border-radius: 4px;
+  width: 130px;
+  height: 130px;
 }
 
 .preview-separator {
@@ -132,7 +138,6 @@ const handleClick = () => {
   word-wrap: break-word;
   color: #333;
   padding: 0 4px;
-  max-width: 92px;
 }
 
 .preview-enter-active,

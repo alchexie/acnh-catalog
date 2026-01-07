@@ -71,10 +71,10 @@ const iconSize = computed(() => 24);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 12px;
+  padding: 8px;
   background: white;
-  border-radius: 6px;
-  border: 1px solid #ffcc80;
+  border-radius: var(--border-radius-xl);
+  border: 2px solid #ffcc80;
   transition: all 0.2s;
 }
 
@@ -107,7 +107,7 @@ const iconSize = computed(() => 24);
   background: #ff9800;
   color: white;
   padding: 3px 10px;
-  border-radius: 10px;
+  border-radius: var(--border-radius-xl);
   font-weight: 700;
   font-size: 0.8em;
 }

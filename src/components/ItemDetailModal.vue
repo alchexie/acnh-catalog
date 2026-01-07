@@ -209,15 +209,13 @@ const handleOverlayClick = (e: MouseEvent) => {
                   <div class="info-item">
                     <label>购买价格:</label>
                     <span class="price">
-                      💰 {{ itemModel.buyPriceStrs.join(",") || "不可购买"}}
+                      💰 {{ itemModel.buyPriceStrs.join(",") || "不可购买" }}
                     </span>
                   </div>
 
                   <div class="info-item">
                     <label>出售价格:</label>
-                    <span class="price">
-                      💵 {{ itemModel.sellPriceStr }}
-                    </span>
+                    <span class="price"> 💵 {{ itemModel.sellPriceStr }} </span>
                   </div>
                 </div>
 
@@ -505,7 +503,7 @@ const handleOverlayClick = (e: MouseEvent) => {
 .modal-container {
   position: relative;
   background: #f5f5f5;
-  border-radius: 16px;
+  border-radius: var(--border-radius-xl);
   max-width: 1000px;
   width: 100%;
   max-height: 80vh;

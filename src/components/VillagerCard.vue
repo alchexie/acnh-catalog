@@ -68,16 +68,23 @@ const toggleFurnitureExpanded = () => {
       </h3>
     </template>
     <span class="detail-row detail-center">
-      {{ getGenderIcon(props.data.gender) }}
-      {{ getSpeciesName(props.data.species) }}
+      <span class="detail-label">
+        {{ getGenderIcon(props.data.gender) }}
+        {{ getSpeciesName(props.data.species) }}
+      </span>
       <ColorBlock :colors="props.data.colors" :size="16" />
     </span>
     <span class="detail-row detail-center">
-      {{ getPersonalityName(props.data.personality) }}({{ props.data.subtype }})
-      /
-      {{ getHobbyName(props.data.hobby) }}
+      <span class="detail-label">
+        {{ getPersonalityName(props.data.personality) }}({{
+          props.data.subtype
+        }}) /
+        {{ getHobbyName(props.data.hobby) }}
+      </span>
     </span>
-    <span class="detail-row detail-center"> 🎂 {{ props.data.birthday }} </span>
+    <span class="detail-row detail-center">
+      <span class="detail-label"> 🎂 {{ props.data.birthday }} </span>
+    </span>
     <span class="detail-row">
       <span class="detail-label">服饰风格</span>
       <span class="detail-value">{{
@@ -106,10 +113,7 @@ const toggleFurnitureExpanded = () => {
 
     <!-- 家具列表 -->
     <div v-if="furnitureList.length > 0" class="furniture-section">
-      <span
-        class="furniture-label furniture-toggle"
-        @click="toggleFurnitureExpanded"
-      >
+      <span class="furniture-label" @click="toggleFurnitureExpanded">
         家具 ({{ furnitureList.length }})
         <span class="toggle-icon">{{ isFurnitureExpanded ? "▼" : "▶" }}</span>
       </span>
@@ -155,10 +159,9 @@ const toggleFurnitureExpanded = () => {
 
 .furniture-section {
   background: #f0f9f0;
-  border-radius: 8px;
-  padding: 12px;
-  border: 1px solid #c8e6c8;
-  margin-top: 8px;
+  border-radius: var(--border-radius-xl);
+  padding: 8px;
+  border: 2px solid #c8e6c8;
 }
 
 .furniture-label {
@@ -166,21 +169,17 @@ const toggleFurnitureExpanded = () => {
   color: #4a9b4f;
   font-size: 0.85em;
   display: block;
-  margin-bottom: 8px;
-}
-
-.furniture-toggle {
   cursor: pointer;
   user-select: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 4px 8px;
-  border-radius: 4px;
+  border-radius: var(--border-radius-xl);
   transition: background-color 0.2s ease;
 }
 
-.furniture-toggle:hover {
+.furniture-label:hover {
   background-color: #e8f5e9;
 }
 

@@ -210,9 +210,14 @@ const handleTitleClick = () => {
   width: 40px;
   height: 40px;
   object-fit: cover;
-  border-radius: 4px;
-  border: 1px solid #ddd;
+  border-radius: var(--border-radius-md);
+  border: 2px solid #ddd;
+  padding: 3px;
 }
+
+.thumbnail:hover {
+  background-color: #ddd;
+} 
 
 .image-title {
   font-size: 12px;
@@ -261,8 +266,8 @@ const handleTitleClick = () => {
 
 .preview-content {
   background: white;
-  border-radius: 8px;
-  padding: 16px;
+  border-radius: var(--border-radius-xl);
+  padding: 25px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   max-width: 90vw;
   max-height: 90vh;

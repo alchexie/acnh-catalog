@@ -418,6 +418,15 @@ export class ItemModel {
     return false;
   }
 
+  getPattern(vIndex: number, pIndex: number): Pattern | null {
+    const variants = this.variantGroups;
+    if (vIndex < 0 || vIndex >= variants.length) return null;
+    const variant = variants[vIndex];
+    if (!variant) return null;
+    if (pIndex < 0 || pIndex >= variant.patterns.length) return null;
+    return variant.patterns[pIndex] || null;
+  }
+
   // ============ 匹配筛选方法 ============
   matchesColor(color?: Color): boolean {
     if (color === undefined) return true;

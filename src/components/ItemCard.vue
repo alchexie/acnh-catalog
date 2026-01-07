@@ -69,7 +69,7 @@ const handleClick = () => {
     @click="handleClick"
   >
     <span class="detail-row detail-center">
-      ID: {{ displayId }}
+      <span class="detail-label"> ID: {{ displayId }} </span>
       <ColorBlock
         v-if="displayColors.length > 0"
         :colors="displayColors"
@@ -184,16 +184,11 @@ const handleClick = () => {
 <style scoped>
 @import "../styles/card-styles.css";
 
-.detail-center {
-  justify-content: center !important;
-  align-items: center;
-}
-
 .variants-section {
   background: #f0f9f0;
-  border-radius: 8px;
-  padding: 12px;
-  border: 1px solid #c8e6c8;
+  border-radius: var(--border-radius-xl);
+  padding: 8px;
+  border: 2px solid #c8e6c8;
   margin-top: 8px;
 }
 
@@ -209,6 +204,7 @@ const handleClick = () => {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  padding: 4px;
 }
 
 .variation-dot {

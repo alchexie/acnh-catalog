@@ -6,12 +6,10 @@ import { ref, computed } from "vue";
 import { processImageUrl } from "../utils/imageUtils";
 import { getPriceStr, getCreatureTypeName } from "../services/dataService";
 
-interface Props {
+const props = defineProps<{
   data: Creature;
   hemisphere: "north" | "south";
-}
-
-const props = defineProps<Props>();
+}>();
 
 // 当前图片索引
 const currentImageIndex = ref(0);

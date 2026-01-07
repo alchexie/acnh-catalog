@@ -5,11 +5,9 @@ import type { Fossil } from "../types/fossil";
 import BaseCard from "./BaseCard.vue";
 import { getPriceStr } from "../services/dataService";
 
-interface Props {
+const props = defineProps<{
   data: Fossil;
-}
-
-const props = defineProps<Props>();
+}>();
 
 const currentPartIndex = ref(0);
 

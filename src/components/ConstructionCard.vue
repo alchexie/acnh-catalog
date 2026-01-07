@@ -5,11 +5,9 @@ import type { Construction } from "../types/construction";
 import BaseCard from "./BaseCard.vue";
 import SourceList from "./SourceList.vue";
 
-interface Props {
+const props = defineProps<{
   data: Construction;
-}
-
-const props = defineProps<Props>();
+}>();
 
 const handleClick = () => {
   window.open(`https://nookipedia.com/wiki/${props.data.rawName}`, "_blank");

@@ -327,7 +327,7 @@ export async function loadItemsData(): Promise<Item[]> {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return await response.json();
+    return await response.json() as Item[];
   } catch (error) {
     console.error("加载物品数据失败:", error);
     throw error;
@@ -342,7 +342,7 @@ export async function loadCatalogData(): Promise<Set<number>> {
       return new Set();
     }
 
-    const data: { items: CatalogItem[] } = await response.json();
+    const data: { items: CatalogItem[] } = await response.json() as { items: CatalogItem[] };
     const ownedIds = new Set<number>();
 
     data.items.forEach((item) => {
@@ -362,7 +362,7 @@ export async function loadVillagersData(): Promise<Villager[]> {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return await response.json();
+    return await response.json() as Villager[];
   } catch (error) {
     console.error("加载村民数据失败:", error);
     throw error;
@@ -375,7 +375,7 @@ export async function loadNPCsData(): Promise<NPC[]> {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return await response.json();
+    return await response.json() as NPC[];
   } catch (error) {
     console.error("加载NPC数据失败:", error);
     throw error;
@@ -388,7 +388,7 @@ export async function loadCreaturesData(): Promise<Creature[]> {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return await response.json();
+    return await response.json() as Creature[];
   } catch (error) {
     console.error("加载生物数据失败:", error);
     throw error;
@@ -401,7 +401,7 @@ export async function loadReactionsData(): Promise<Reaction[]> {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return await response.json();
+    return await response.json() as Reaction[];
   } catch (error) {
     console.error("加载表情反应数据失败:", error);
     throw error;
@@ -414,7 +414,7 @@ export async function loadRecipesData(): Promise<Recipe[]> {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return await response.json();
+    return await response.json() as Recipe[];
   } catch (error) {
     console.error("加载DIY配方数据失败:", error);
     throw error;
@@ -427,7 +427,7 @@ export async function loadConstructionsData(): Promise<Construction[]> {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return await response.json();
+    return await response.json() as Construction[];
   } catch (error) {
     console.error("加载改建数据失败:", error);
     throw error;
@@ -440,7 +440,7 @@ export async function loadMessageCardsData(): Promise<MessageCard[]> {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return await response.json();
+    return await response.json() as MessageCard[];
   } catch (error) {
     console.error("加载贺卡数据失败:", error);
     throw error;
@@ -453,7 +453,7 @@ export async function loadArtworkData(): Promise<Artwork[]> {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return await response.json();
+    return await response.json() as Artwork[];
   } catch (error) {
     console.error("加载艺术品数据失败:", error);
     throw error;
@@ -466,7 +466,7 @@ export async function loadFossilsData(): Promise<Fossil[]> {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return await response.json();
+    return await response.json() as Fossil[];
   } catch (error) {
     console.error("加载化石数据失败:", error);
     throw error;
@@ -479,7 +479,7 @@ export async function loadTranslations(): Promise<Translations> {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    const data: Translations = await response.json();
+    const data: Translations = await response.json() as Translations;
     translationsCache = data;
     return data;
   } catch (error) {

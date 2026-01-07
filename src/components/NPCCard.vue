@@ -8,7 +8,9 @@ const props = defineProps<{
   data: NPC;
 }>();
 const currentImageIndex = ref(0);
-const currentShape = computed(() => currentImageIndex.value === 0 ? 'circle' : 'rounded');
+const currentShape = computed(() =>
+  currentImageIndex.value === 0 ? "circle" : "rounded"
+);
 
 const handleClick = () => {
   window.open(`https://nookipedia.com/wiki/${props.data.rawName}`, "_blank");
@@ -39,8 +41,12 @@ const handleImageIndexChanged = (index: number) => {
       </h3>
     </template>
     <span class="detail-row detail-center">
-      {{ getGenderIcon(props.data.gender) }} {{ props.data.id }}
+      <span class="detail-label">
+        {{ getGenderIcon(props.data.gender) }} {{ props.data.id }}
+      </span>
     </span>
-    <span class="detail-row detail-center"> 🎂 {{ props.data.birthday }} </span>
+    <span class="detail-row detail-center">
+      <span class="detail-label"> 🎂 {{ props.data.birthday }} </span>
+    </span>
   </BaseCard>
 </template>

@@ -111,9 +111,9 @@ const isShiny = computed(() => {
 /* RecipeCard特殊样式 */
 .materials-section {
   background: #fff9f0;
-  border-radius: 8px;
-  padding: 12px;
-  border: 1px solid #ffe0b2;
+  border-radius: var(--border-radius-xl);
+  padding: 8px;
+  border: 2px solid #ffe0b2;
   margin-top: 8px;
 }
 
