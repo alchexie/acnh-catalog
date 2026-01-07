@@ -506,9 +506,9 @@ const handleOverlayClick = (e: MouseEvent) => {
   position: relative;
   background: #f5f5f5;
   border-radius: 16px;
-  max-width: 1400px;
+  max-width: 800px;
   width: 100%;
-  max-height: 98vh;
+  max-height: 80vh;
   overflow: hidden;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
   display: flex;
