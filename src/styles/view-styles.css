@@ -41,7 +41,7 @@
   padding: var(--spacing-sm) var(--spacing-md);
   color: white;
   border: none;
-  border-radius: var(--border-radius-sm);
+  border-radius: var(--border-radius-xl);
   cursor: pointer;
   font-size: 14px;
   font-weight: 500;

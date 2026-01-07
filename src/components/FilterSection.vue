@@ -244,7 +244,7 @@ const handleClearFilters = () => {
 /* 筛选器容器 */
 .filter-container {
   background-color: white;
-  border-radius: var(--border-radius-md, 8px);
+  border-radius: var(--border-radius-xl);
   padding: var(--spacing-md, 16px);
   margin-bottom: 20px;
   box-shadow: var(--shadow-sm, 0 2px 4px rgba(0, 0, 0, 0.1));
@@ -277,7 +277,7 @@ const handleClearFilters = () => {
   padding: 12px;
   font-size: 16px;
   border: 2px solid var(--border-color, #ddd);
-  border-radius: var(--border-radius-sm, 6px);
+  border-radius: var(--border-radius-xl);
   box-sizing: border-box;
   transition: border-color 0.2s;
 }
@@ -317,7 +317,7 @@ const handleClearFilters = () => {
 .filter-select {
   padding: 8px 12px;
   border: 1px solid var(--border-color, #ddd);
-  border-radius: var(--border-radius-sm, 4px);
+  border-radius: var(--border-radius-xl);
   background: white;
   cursor: pointer;
   font-size: 14px;
