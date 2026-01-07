@@ -1,3 +1,4 @@
+import type { Price } from "../services/dataService";
 import { Color, type ItemSize, type Version } from "./index";
 
 export const CreatureType = {
@@ -30,7 +31,7 @@ export interface Creature {
   ver: Version;
   size: ItemSize;
   colors: Color[];
-  sell: number;
+  sell: Price;
   whereHow?: string;
   weather?: string;
   hemispheres: {

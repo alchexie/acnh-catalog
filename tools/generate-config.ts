@@ -365,7 +365,7 @@ function convertItem(oldItem: OldItem): NewItem {
       ? newRecipeIdMap.get(oldItem.recipe.internalId)?.id
       : undefined,
     buy: oldItem.buy ?? undefined,
-    sell: oldItem.sell ?? 0,
+    sell: oldItem.sell ?? undefined,
     exch: oldItem.exchangePrice
       ? [oldItem.exchangePrice, currencyMap[oldItem.exchangeCurrency!]]
       : undefined,

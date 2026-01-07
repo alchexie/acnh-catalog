@@ -2,8 +2,8 @@
 import { ref, computed } from "vue";
 import { UI_TEXT } from "../constants";
 import type { Fossil } from "../types/fossil";
-import { formatPrice } from "../utils/common";
 import BaseCard from "./BaseCard.vue";
+import { getPriceStr } from "../services/dataService";
 
 interface Props {
   data: Fossil;
@@ -51,7 +51,7 @@ const handleClick = () => {
     <div class="detail-row">
       <span class="detail-label">{{ UI_TEXT.LABELS.PRICE }}</span>
       <span class="detail-value price">
-        {{ formatPrice(currentPrice) }}
+        {{ getPriceStr(currentPrice) }}
       </span>
     </div>
   </BaseCard>

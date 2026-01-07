@@ -28,15 +28,6 @@ export function lightenColor(hex: string, percent = 0.7): string {
   b = Math.round(b + (255 - b) * percent);
   return `rgb(${r},${g},${b})`;
 }
-/**
- * 格式化数字为带千位分隔符的字符串
- * @param num 数字
- * @returns 格式化后的字符串，如 "1,234"
- */
-export function formatPrice(price: number | null | undefined): string {
-  if (price == null || price === -1) return "--";
-  return price.toLocaleString();
-}
 
 /**
  * 连接数组元素为字符串

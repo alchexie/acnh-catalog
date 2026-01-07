@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { UI_TEXT } from "../constants";
-import { getConstrunctionTypeName } from "../services/dataService";
+import { getPriceStr, getConstructionTypeName } from "../services/dataService";
 import type { Construction } from "../types/construction";
-import { formatPrice } from "../utils/common";
 import BaseCard from "./BaseCard.vue";
 import SourceList from "./SourceList.vue";
 
@@ -29,7 +28,7 @@ const handleClick = () => {
     <div class="detail-row">
       <span class="detail-label">分类</span>
       <span class="detail-value">
-        {{ getConstrunctionTypeName(props.data.type) }}
+        {{ getConstructionTypeName(props.data.type) }}
       </span>
     </div>
     <div class="detail-row">
@@ -39,7 +38,7 @@ const handleClick = () => {
     <div class="detail-row">
       <span class="detail-label">{{ UI_TEXT.LABELS.PRICE }}</span>
       <span class="detail-value price">
-        {{ formatPrice(props.data.buy) }} {{ UI_TEXT.CURRENCY }}
+        {{ getPriceStr(props.data.buy) }}
       </span>
     </div>
   </BaseCard>

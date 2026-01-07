@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted } from "vue";
 import { useItemsData } from "../composables/useItemsData";
-import { getSourceName } from "../services/dataService";
+import { getPriceStr, getSourceName } from "../services/dataService";
 import { processImageUrl } from "../utils/imageUtils";
 import MaterialItem from "./MaterialItem.vue";
 import ColorBlock from "./ColorBlock.vue";
@@ -86,10 +86,6 @@ const allVariants = computed(() => {
 
 // 拥有状态
 const isOwned = computed(() => itemModel.value?.owned || false);
-
-const formatPrice = (price: number): string => {
-  return price.toLocaleString("zh-CN");
-};
 
 // 返回首页
 const closeModal = () => {
@@ -212,16 +208,16 @@ const handleOverlayClick = (e: MouseEvent) => {
 
                   <div class="info-item">
                     <label>购买价格:</label>
-                    <span class="price"
-                      >💰 {{ itemModel.buyPriceStr }} 铃钱</span
-                    >
+                    <span class="price">
+                      💰 {{ itemModel.buyPriceStrs.join(",") || "不可购买"}}
+                    </span>
                   </div>
 
                   <div class="info-item">
                     <label>出售价格:</label>
-                    <span class="price"
-                      >💵 {{ itemModel.sellPriceStr }} 铃钱</span
-                    >
+                    <span class="price">
+                      💵 {{ itemModel.sellPriceStr }}
+                    </span>
                   </div>
                 </div>
 
@@ -267,8 +263,8 @@ const handleOverlayClick = (e: MouseEvent) => {
                     <div v-if="cyrusPrice" class="info-item">
                       <label>Cyrus定制价格:</label>
                       <span class="price"
-                        >💰 {{ formatPrice(cyrusPrice) }} 铃钱</span
-                      >
+                        >💰 {{ getPriceStr(cyrusPrice) }}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -393,7 +389,7 @@ const handleOverlayClick = (e: MouseEvent) => {
                       <div v-if="recipe.sell" class="recipe-info-item">
                         <label>出售价格:</label>
                         <span class="price"
-                          >💵 {{ formatPrice(recipe.sell) }} 铃钱</span
+                          >💵 {{ getPriceStr(recipe.sell) }}</span
                         >
                       </div>
                       <div v-if="recipe.ver" class="recipe-info-item">

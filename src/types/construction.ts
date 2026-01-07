@@ -1,3 +1,4 @@
+import type { Price } from "../services/dataService";
 import type { Version } from "./index";
 
 export const ConstructionType = {
@@ -21,6 +22,6 @@ export interface Construction {
   image: string;
   ver: Version;
   type: ConstructionType;
-  buy?: number;
+  buy?: Price;
   source: string[];
 }

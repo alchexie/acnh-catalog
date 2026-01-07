@@ -1,3 +1,5 @@
+import type { Price } from "../services/dataService";
+
 /**
  * 物品分类枚举（数字枚举）
  */
@@ -180,9 +182,9 @@ export interface Item {
   ver: Version; // 添加版本
   colors: Color[]; // 物品颜色列表
   size?: ItemSize; // 物品尺寸
-  buy?: number; // 购买价格
-  sell: number; // 出售价格
-  exch?: [number, Currency]; // 兑换价格[数量, 货币类型]
+  buy?: Price; // 购买价格
+  sell?: Price; // 出售价格
+  exch?: Price; // 兑换价格
 
   source?: string[]; // 获取来源
   sourceNotes?: string[];

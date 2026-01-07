@@ -1,3 +1,4 @@
+import type { Price } from "../services/dataService";
 import type { Version } from "./item";
 
 /**
@@ -31,9 +32,9 @@ export interface Recipe {
   rawName: string;
   images: string[];
   ver: Version;
-  buy?: number;
-  sell?: number;
-  color?: string
+  buy?: Price;
+  sell?: Price;
+  color?: string;
   itemId: number;
   seasonEvent?: string;
   source: string[];

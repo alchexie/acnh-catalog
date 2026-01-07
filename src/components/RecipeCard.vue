@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import type { Recipe } from "../types/recipe";
 import { UI_TEXT } from "../constants";
-import { formatPrice } from "../utils/common";
 import BaseCard from "./BaseCard.vue";
 import MaterialItem from "./MaterialItem.vue";
 import SourceList from "./SourceList.vue";
 import { processImageUrl } from "../utils/imageUtils";
-import { getRecipeTypeName, getSeasonEventName } from "../services/dataService";
+import { getPriceStr, getRecipeTypeName, getSeasonEventName } from "../services/dataService";
 import { useItemDetailModal } from "../composables/useItemDetailModal";
 
 interface Props {
@@ -50,7 +49,7 @@ const handleClick = () => {
     <div class="detail-row">
       <span class="detail-label">{{ UI_TEXT.LABELS.PRICE }}</span>
       <span class="detail-value price">
-        {{ formatPrice(props.data.sell) }} {{ UI_TEXT.CURRENCY }}
+        {{ getPriceStr(props.data.sell) }}
       </span>
     </div>
     <div

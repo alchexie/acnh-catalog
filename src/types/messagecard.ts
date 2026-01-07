@@ -2,6 +2,7 @@
  * 消息卡片类型定义
  */
 
+import type { Price } from "../services/dataService";
 import type { Version } from "./item";
 
 export interface MessageCard {
@@ -10,7 +11,7 @@ export interface MessageCard {
   rawName: string;
   image: string;
   ver: Version;
-  buy?: number;
+  buy?: Price;
   backColor?: string;
   bodyColor: string;
   headColor: string;

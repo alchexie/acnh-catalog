@@ -22,6 +22,7 @@ import { CONFIG } from "../config";
 import { ItemType, Version, ItemSize, Color, Currency } from "../types/item";
 import { ENTITY_ICONS } from "../constants";
 
+export type Price = [number, Currency] | number;
 let translationsCache: Translations | null = null;
 
 export const ItemTypeNameMap: Record<ItemType, string> = {
@@ -131,10 +132,10 @@ export const CreatureTypeNameMap: Record<CreatureType, string> = {
 
 export const CurrencyNameMap: Record<Currency, string> = {
   [Currency.Bells]: "铃钱",
-  [Currency.HeartCrystals]: "心形水晶",
+  [Currency.HeartCrystals]: "爱的结晶",
   [Currency.NookMiles]: "Nook里程",
   [Currency.NookPoints]: "Nook点数",
-  [Currency.Poki]: "Poki币",
+  [Currency.Poki]: "波奇",
 };
 
 function getTranslation(
@@ -142,6 +143,17 @@ function getTranslation(
   translationMap: Record<string, string> | undefined
 ): string {
   return translationMap?.[key] || key;
+}
+
+export function getPriceStr(price: Price | null | undefined): string {
+  if (!price) return "";
+  if (price && !Array.isArray(price)) {
+    price = [price, Currency.Bells];
+  }
+  let [amount, currency] = price as [number, Currency];
+  if (amount < 0) return "";
+
+  return `${amount.toLocaleString()} ${getCurrencyName(currency)}`;
 }
 
 export function getItemTypeName(type: ItemType): string {
@@ -301,7 +313,7 @@ export const ConstructionTypeNameMap: Record<ConstructionType, string> = {
   [ConstructionType.Other]: "建筑",
 };
 
-export function getConstrunctionTypeName(type: ConstructionType): string {
+export function getConstructionTypeName(type: ConstructionType): string {
   return ConstructionTypeNameMap[type];
 }
 

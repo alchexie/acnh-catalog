@@ -1,3 +1,4 @@
+import type { Price } from "../services/dataService";
 import type { Color, ItemSize, ItemType, Version } from "./item";
 
 export interface Artwork {
@@ -17,8 +18,8 @@ export interface Artwork {
   desc: string;
   itemType: ItemType;
   source: string[];
-  buy: number;
-  sell: number;
+  buy: Price;
+  sell: Price;
   fake?: {
     id: number;
     image: string;

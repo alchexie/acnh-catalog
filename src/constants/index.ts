@@ -58,5 +58,4 @@ export const UI_TEXT = {
     BIRTHDAY: "生日",
     ID: "ID",
   },
-  CURRENCY: "铃钱",
 } as const;

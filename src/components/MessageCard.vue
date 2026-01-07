@@ -2,8 +2,8 @@
 import { ref } from "vue";
 import type { MessageCard } from "../types/messagecard";
 import BaseCard from "./BaseCard.vue";
-import { UI_TEXT } from "../constants";
-import { formatPrice, lightenColor } from "../utils/common";
+import { lightenColor } from "../utils/common";
+import { getPriceStr } from "../services/dataService";
 
 const props = defineProps<{
   data: MessageCard;
@@ -44,7 +44,7 @@ const handleClick = () => {
     <div class="detail-row">
       <span class="detail-label">价格</span>
       <span class="detail-value price">
-        {{ formatPrice(props.data.buy) }} {{ UI_TEXT.CURRENCY }}
+        {{ getPriceStr(props.data.buy) }}
       </span>
     </div>
   </BaseCard>

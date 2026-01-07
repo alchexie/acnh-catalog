@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { getItemTypeName, itemSizeNameMap } from "../services/dataService";
+import { getPriceStr, getItemTypeName, itemSizeNameMap } from "../services/dataService";
 import type { Artwork } from "../types/artwork";
 import BaseCard from "./BaseCard.vue";
 import { computed, ref } from "vue";
 import { processImageUrl } from "../utils/imageUtils";
 import { Teleport } from "vue";
-import { formatPrice } from "../utils/common";
 import { UI_TEXT } from "../constants";
 
 interface Props {
@@ -135,7 +134,7 @@ const handleTitleClick = () => {
     <div class="detail-row">
       <span class="detail-label">{{ UI_TEXT.LABELS.PRICE }}</span>
       <span class="detail-value price">
-        {{ formatPrice(props.data.sell) }} {{ UI_TEXT.CURRENCY }}
+        {{ getPriceStr(props.data.sell) }}
       </span>
     </div>
 

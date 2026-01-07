@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import type { Creature } from "../types/creature";
 import { UI_TEXT } from "../constants";
-import { formatPrice } from "../utils/common";
 import BaseCard from "./BaseCard.vue";
 import { ref, computed } from "vue";
 import { processImageUrl } from "../utils/imageUtils";
-import { getCreatureTypeName } from "../services/dataService";
+import { getPriceStr, getCreatureTypeName } from "../services/dataService";
 
 interface Props {
   data: Creature;
@@ -97,7 +96,7 @@ const handleImageIndexChanged = (index: number) => {
     <div class="detail-row">
       <span class="detail-label">{{ UI_TEXT.LABELS.PRICE }}</span>
       <span class="detail-value price">
-        {{ formatPrice(props.data.sell) }} {{ UI_TEXT.CURRENCY }}
+        {{ getPriceStr(props.data.sell) }}
       </span>
     </div>
   </BaseCard>

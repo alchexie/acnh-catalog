@@ -1,4 +1,4 @@
-import type { Item, Variant, Pattern, Currency } from "../types";
+import { type Item, type Variant, type Pattern } from "../types";
 import { reactive } from "vue";
 import { processImageUrl } from "../utils/imageUtils";
 import {
@@ -15,7 +15,8 @@ import {
   getClothingThemeName,
   getHHACategoryName,
   getSeasonEventName,
-  getCurrencyName,
+  type Price,
+  getPriceStr,
 } from "../services/dataService";
 import {
   Color,
@@ -25,7 +26,6 @@ import {
   ClothingTypes,
   ItemType,
 } from "../types/item";
-import { formatPrice } from "../utils/common";
 import type { Recipe } from "../types/recipe";
 import { useRecipesData } from "../composables/useRecipesData";
 
@@ -127,36 +127,29 @@ export class ItemModel {
     return this.colors.map((color) => getColorName(color) || "");
   }
 
-  get buyPrice(): number | null {
-    return this._data.buy || null;
+  get buyPrices(): Price[] {
+    let prices: Price[] = [];
+    if (this._data.buy !== undefined && (this._data.buy as number) >= 0) {
+      prices.push(this._data.buy);
+    }
+    if (this._data.exch !== undefined) {
+      prices.push(this._data.exch);
+    }
+    return prices;
   }
 
-  get buyPriceStr(): string {
-    return formatPrice(this.buyPrice);
+  get buyPriceStrs(): string[] {
+    return this.buyPrices
+      .map((price) => getPriceStr(price))
+      .filter((str) => str !== "");
   }
 
-  get sellPrice(): number {
-    return this._data.sell;
+  get sellPrice(): Price | null {
+    return this._data.sell || null;
   }
 
   get sellPriceStr(): string {
-    return formatPrice(this.sellPrice);
-  }
-
-  get exchPrice(): number | null {
-    return this._data.exch?.[0] || null;
-  }
-
-  get exchPriceStr(): string {
-    return formatPrice(this.exchPrice);
-  }
-
-  get exchCurrency(): Currency | null {
-    return (this._data.exch?.[1] as Currency) || null;
-  }
-
-  get exchCurrencyStr(): string {
-    return this.exchCurrency ? getCurrencyName(this.exchCurrency) : "";
+    return getPriceStr(this.sellPrice) || "不可出售";
   }
 
   get tag(): string {

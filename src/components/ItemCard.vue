@@ -142,21 +142,23 @@ const handleClick = () => {
       />
     </div>
     <div class="detail-row">
-      <span class="detail-label">兑换</span>
-      <span class="detail-value">
-        {{ itemModel.exchPriceStr }} {{ itemModel.exchCurrencyStr }}
-      </span>
-    </div>
-    <div class="detail-row">
       <span class="detail-label">购买</span>
       <span class="detail-value price">
-        {{ itemModel.buyPriceStr }} {{ UI_TEXT.CURRENCY }}
+        <template v-if="itemModel.buyPrices.length > 0">
+          <div
+            v-for="(priceStr, index) in itemModel.buyPriceStrs"
+            :key="index"
+          >
+            {{ priceStr }}
+          </div>
+        </template>
+        <div v-else>不可购买</div>
       </span>
     </div>
     <div class="detail-row">
       <span class="detail-label">{{ UI_TEXT.LABELS.PRICE }}</span>
       <span class="detail-value price">
-        {{ itemModel.sellPriceStr }} {{ UI_TEXT.CURRENCY }}
+        {{ itemModel.sellPriceStr }}
       </span>
     </div>
     <div v-if="itemModel.hasVariations" class="variants-section variant-row">
@@ -198,14 +200,6 @@ const handleClick = () => {
 .item-owned {
   background: var(--gradient-success-light);
   border: 2px solid var(--success-color);
-}
-
-.buy-price {
-  color: #ff6b6b;
-}
-
-.sell-price {
-  color: #51cf66;
 }
 
 .detail-center {
