@@ -16,10 +16,7 @@ const props = defineProps<{
 
 const { openModal } = useItemDetailModal();
 
-// 使用传入的 ItemModel 实例
 const itemModel = props.data;
-
-// 使用简单的 ref 管理响应式状态 - 直接访问 ItemModel 内部的 ref
 const variantIndex = computed({
   get: () => itemModel.variantIndex,
   set: (val: number) => (itemModel.variantIndex = val),
@@ -30,14 +27,12 @@ const patternIndex = computed({
   set: (val: number) => (itemModel.patternIndex = val),
 });
 
-// 计算属性 - 基于 ItemModel 方法，这些会自动响应内部 ref 的变化
 const currentVariant = computed(() => itemModel.currentVariant);
 const displayId = computed(() => itemModel.getDisplayId());
 const displayColors = computed(() => itemModel.getDisplayColors());
 const displayName = computed(() => itemModel.getDisplayName());
 const displayImages = computed(() => itemModel.getDisplayImages());
 
-// 应用颜色筛选
 const applyColorFilter = () => {
   if (props.colorFilter !== undefined && itemModel.hasVariations) {
     const match = itemModel.findVariantByColor(props.colorFilter);
@@ -47,22 +42,16 @@ const applyColorFilter = () => {
     }
   }
 };
-
-// 重置并应用颜色筛选
 const resetAndApplyColorFilter = () => {
   variantIndex.value = 0;
   patternIndex.value = 0;
   applyColorFilter();
 };
-
-// 初始化时应用颜色筛选
 onMounted(() => {
   applyColorFilter();
 });
 
-// 监听颜色筛选器变化
 watch(() => props.colorFilter, resetAndApplyColorFilter);
-
 const handleClick = () => {
   openModal(itemModel.id);
 };
@@ -145,10 +134,7 @@ const handleClick = () => {
       <span class="detail-label">购买</span>
       <span class="detail-value price">
         <template v-if="itemModel.buyPrices.length > 0">
-          <div
-            v-for="(priceStr, index) in itemModel.buyPriceStrs"
-            :key="index"
-          >
+          <div v-for="(priceStr, index) in itemModel.buyPriceStrs" :key="index">
             {{ priceStr }}
           </div>
         </template>
@@ -162,14 +148,14 @@ const handleClick = () => {
       </span>
     </div>
     <div v-if="itemModel.hasVariations" class="variants-section variant-row">
-      <span class="variants-label">{{ itemModel.vTitle }}</span>
+      <span class="variants-label">{{ itemModel.vTitleName }}</span>
       <div class="variants-list">
         <span
           v-for="(vg, vIdx) in itemModel.variantGroups"
           :key="vIdx"
           class="variation-dot variant-dot"
           :class="{ active: vIdx === variantIndex }"
-          :title="vg.name || `${itemModel.vTitle} ${vIdx + 1}`"
+          :title="vg.name || `${itemModel.vTitleName} ${vIdx + 1}`"
           @click="variantIndex = vIdx"
         >
           {{ vIdx + 1 }}
@@ -177,14 +163,14 @@ const handleClick = () => {
       </div>
     </div>
     <div v-if="itemModel.hasPatterns" class="variants-section pattern-row">
-      <span class="variants-label">{{ itemModel.pTitle }}</span>
+      <span class="variants-label">{{ itemModel.pTitleName }}</span>
       <div class="variants-list">
         <span
           v-for="(p, pIdx) in currentVariant!.patterns"
           :key="pIdx"
           class="variation-dot pattern-dot"
           :class="{ active: pIdx === patternIndex }"
-          :title="p.name || `${itemModel.pTitle} ${pIdx + 1}`"
+          :title="p.name || `${itemModel.pTitleName} ${pIdx + 1}`"
           @click="patternIndex = pIdx"
         >
           {{ pIdx + 1 }}

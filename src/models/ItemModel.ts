@@ -17,6 +17,7 @@ import {
   getSeasonEventName,
   type Price,
   getPriceStr,
+  getItemVariantTitle,
 } from "../services/dataService";
 import {
   Color,
@@ -258,10 +259,16 @@ export class ItemModel {
 
   // ============ 变体相关 ============
   get vTitle(): string {
-    return this._data.vTitle || "样式";
+    return this._data.vTitle || "";
+  }
+  get vTitleName(): string {
+    return getItemVariantTitle(this.vTitle) || "样式";
   }
   get pTitle(): string {
-    return this._data.pTitle || "图案";
+    return this._data.pTitle || "";
+  }
+  get pTitleName(): string {
+    return getItemVariantTitle(this.pTitle) || "图案";
   }
   get hasVariations(): boolean {
     const groups = this.variantGroups;

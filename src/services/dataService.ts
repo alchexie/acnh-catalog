@@ -219,6 +219,10 @@ export function getSeasonEventName(seasonEvent: string): string {
   return getTranslation(seasonEvent, translationsCache?.seasonEvents);
 }
 
+export function getItemVariantTitle(title: string): string {
+  return getTranslation(title, translationsCache?.itemVariantTitles);
+}
+
 export function getCreatureTypeName(type: CreatureType): string {
   return CreatureTypeNameMap[type];
 }
