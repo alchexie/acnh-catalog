@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { processImageUrl } from "../utils/imageUtils";
 import { adjustBrightness } from "../utils/common";
 import VersionBadge from "./VersionBadge.vue";
@@ -72,15 +72,31 @@ const variantClass = computed(() => {
     : "card--variant-dark";
 });
 
-// 基于 colorTheme 计算样式
-const themeStyles = computed(() => {
-  if (!props.colorTheme) return {};
-  const baseColor = props.colorTheme;
-  const mainColor = adjustBrightness(baseColor, -0.3);
-  return {
-    "--base-color": baseColor,
-    "--main-color": mainColor,
-  };
+// 随机倾斜角度
+const randomRotation = ref(0);
+
+// 组件挂载时生成随机倾斜角度（-1.5 到 1.5 度之间）
+onMounted(() => {
+  randomRotation.value = (Math.random() - 0.5) * 3; // -1.5 到 1.5 度
+});
+
+// 卡片样式（包含主题和随机倾斜）
+const cardStyles = computed(() => {
+  const styles: Record<string, string> = {};
+  
+  // 只在简略状态下（非详细状态）应用倾斜
+  if (!props.detailed) {
+    styles.transform = `rotate(${randomRotation.value}deg)`;
+  }
+  
+  if (props.colorTheme) {
+    const baseColor = props.colorTheme;
+    const mainColor = adjustBrightness(baseColor, -0.3);
+    styles["--base-color"] = baseColor;
+    styles["--main-color"] = mainColor;
+  }
+  
+  return styles;
 });
 </script>
 
@@ -96,7 +112,7 @@ const themeStyles = computed(() => {
         'card--shiny': shiny,
       },
     ]"
-    :style="themeStyles"
+    :style="cardStyles"
   >
     <VersionBadge :version="version" />
     <div class="card-image-container">

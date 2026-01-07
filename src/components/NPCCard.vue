@@ -4,11 +4,9 @@ import type { NPC } from "../types/npc";
 import BaseCard from "./BaseCard.vue";
 import { getGenderIcon } from "../services/dataService";
 
-interface Props {
+const props = defineProps<{
   data: NPC;
-}
-
-const props = defineProps<Props>();
+}>();
 const currentImageIndex = ref(0);
 const currentShape = computed(() => currentImageIndex.value === 0 ? 'circle' : 'rounded');
 

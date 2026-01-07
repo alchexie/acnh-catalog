@@ -15,11 +15,9 @@ import { joinArray } from "../utils/common";
 import ColorBlock from "./ColorBlock.vue";
 import { processImageUrl } from "../utils/imageUtils";
 
-interface Props {
+const props = defineProps<{
   data: Villager;
-}
-
-const props = defineProps<Props>();
+}>();
 const { loadData } = useItemsData();
 
 onMounted(() => {

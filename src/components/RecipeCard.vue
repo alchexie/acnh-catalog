@@ -13,11 +13,9 @@ import {
 } from "../services/dataService";
 import { useItemDetailModal } from "../composables/useItemDetailModal";
 
-interface Props {
+const props = defineProps<{
   data: Recipe;
-}
-
-const props = defineProps<Props>();
+}>();
 const { openModal } = useItemDetailModal();
 
 const handleClick = () => {
