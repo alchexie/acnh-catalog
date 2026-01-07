@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import type { Recipe } from "../types/recipe";
 import { UI_TEXT } from "../constants";
 import BaseCard from "./BaseCard.vue";
 import MaterialItem from "./MaterialItem.vue";
 import SourceList from "./SourceList.vue";
 import { processImageUrl } from "../utils/imageUtils";
+import { lightenColor } from "../utils/common";
 import {
   getPriceStr,
   getRecipeTypeName,
@@ -22,6 +24,45 @@ const { openModal } = useItemDetailModal();
 const handleClick = () => {
   openModal(props.data.itemId);
 };
+
+// 颜色映射表
+const colorMap: Record<string, { bg: string; name: string }> = {
+  red: { bg: "#ffcdd2", name: "#c62828" },
+  orange: { bg: "#ffe0b2", name: "#e65100" },
+  yellow: { bg: "#fff9c4", name: "#f57f17" },
+  green: { bg: "#c8e6c9", name: "#2e7d32" },
+  blue: { bg: "#bbdefb", name: "#1565c0" },
+  purple: { bg: "#e1bee7", name: "#6a1b9a" },
+  pink: { bg: "#f8bbd0", name: "#c2185b" },
+  brown: { bg: "#d7ccc8", name: "#4e342e" },
+  beige: { bg: "#efebe9", name: "#5d4037" },
+  white: { bg: "#fafafa", name: "#616161" },
+  cream: { bg: "#fff8e1", name: "#f57f17" },
+  gray: { bg: "#e0e0e0", name: "#424242" },
+  "light gray": { bg: "#f5f5f5", name: "#757575" },
+  "dark gray": { bg: "#bdbdbd", name: "#212121" },
+  gold: { bg: "#fff9c4", name: "#f57f17" },
+  silver: { bg: "#e0e0e0", name: "#616161" },
+  brick: { bg: "#ffccbc", name: "#bf360c" },
+};
+
+// 计算背景和边框颜色
+const cardStyle = computed(() => {
+  const color = props.data.cardColor;
+  const colors = (color && color in colorMap ? colorMap[color] : colorMap["orange"])!;
+  
+  return {
+    background: colors.bg,
+    border: `3px solid ${lightenColor(colors.bg, -0.3)}`,
+  };
+});
+
+// 计算卡片名称颜色
+const nameColor = computed(() => {
+  const color = props.data.cardColor;
+  const colors = (color && color in colorMap ? colorMap[color] : colorMap["orange"])!;
+  return colors.name;
+});
 </script>
 
 <template>
@@ -30,8 +71,14 @@ const handleClick = () => {
     :version="props.data.ver"
     :images="props.data.images.map(processImageUrl)"
     :displayName="props.data.name"
+    :style="cardStyle"
     @click="handleClick"
   >
+    <template #name>
+      <h3 class="card-name" :style="{ color: nameColor }">
+        {{ props.data.name }}
+      </h3>
+    </template>
     <div class="detail-row">
       <span class="detail-label">分类</span>
       <span class="detail-value">{{ getRecipeTypeName(props.data.type) }}</span>

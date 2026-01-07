@@ -52,8 +52,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100px;
-  height: 100px;
+  width: 140px;
+  height: 140px;
   margin: 0 auto var(--spacing-sm);
   background: var(--gradient-light);
   border-radius: 50%;
@@ -75,8 +75,8 @@
 }
 
 .card-image {
-  width: 80%;
-  height: 80%;
+  width: 85%;
+  height: 85%;
   object-fit: contain;
 }
 
