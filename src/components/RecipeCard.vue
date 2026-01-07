@@ -56,7 +56,6 @@ const isShiny = computed(() => {
   const color = props.data.cardColor;
   return color === "gold" || color === "silver";
 });
-
 </script>
 
 <template>

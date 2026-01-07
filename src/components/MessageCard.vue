@@ -20,7 +20,6 @@ const nameColor = computed(() => {
 
 <template>
   <BaseCard
-    colorClass="card--brown"
     :version="props.data.ver"
     :images="[props.data.image]"
     :displayName="props.data.name"
@@ -32,10 +31,7 @@ const nameColor = computed(() => {
     @click="handleClick"
   >
     <template #name>
-      <h3
-        class="card-name"
-        :style="{ color: nameColor }"
-      >
+      <h3 class="card-name" :style="{ color: nameColor }">
         {{ props.data.name }}
       </h3>
     </template>

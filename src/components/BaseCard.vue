@@ -36,8 +36,8 @@ const currentShape = computed(() => props.shape);
 const currentImageIndex = ref(0);
 
 // 当前显示的图片
-const currentImage = computed(
-  () => processImageUrl(props.images[currentImageIndex.value] || "")
+const currentImage = computed(() =>
+  processImageUrl(props.images[currentImageIndex.value] || "")
 );
 
 // 是否有多个图片
@@ -67,43 +67,35 @@ const nextImage = () => {
 
 // 计算卡片变体类名
 const variantClass = computed(() => {
-  return props.variant === "light" ? "card--variant-light" : "card--variant-dark";
+  return props.variant === "light"
+    ? "card--variant-light"
+    : "card--variant-dark";
 });
 
 // 基于 colorTheme 计算样式
 const themeStyles = computed(() => {
   if (!props.colorTheme) return {};
-  
   const baseColor = props.colorTheme;
-  const mainColor = adjustBrightness(baseColor, -0.5);
-  let bgColor, borderColor, textColor, imageWrapperBg;
-  if (props.variant === "dark") {
-    // dark 变体：使用原色作为背景，边框和文本更深
-    bgColor = baseColor;
-    borderColor = mainColor;
-    textColor = mainColor;
-    imageWrapperBg = adjustBrightness(baseColor, 0.8);
-  } else {
-    // light 变体：
-    bgColor = "#ffffff";
-    borderColor = "#ffffff";
-    textColor = mainColor;
-    imageWrapperBg = adjustBrightness(baseColor, 0.8);
-  }
-  
+  const mainColor = adjustBrightness(baseColor, -0.3);
   return {
-    '--card-bg': bgColor,
-    '--card-border': borderColor,
-    '--card-color': textColor,
-    '--card-image-bg': imageWrapperBg,
+    "--base-color": baseColor,
+    "--main-color": mainColor,
   };
 });
 </script>
 
 <template>
-  <div 
-    class="card" 
-    :class="[colorClass, variantClass, { 'card--with-checkmark': showCheckmark, 'card--custom-theme': colorTheme, 'card--shiny': shiny }]"
+  <div
+    class="card"
+    :class="[
+      colorClass,
+      variantClass,
+      {
+        'card--with-checkmark': showCheckmark,
+        'card--custom-theme': colorTheme,
+        'card--shiny': shiny,
+      },
+    ]"
     :style="themeStyles"
   >
     <VersionBadge :version="version" />
