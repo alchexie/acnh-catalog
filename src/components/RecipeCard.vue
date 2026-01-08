@@ -41,6 +41,31 @@ const colorMap: Record<string, string> = {
   gold: "#fff9c4",
   silver: "#e0e0e0",
   brick: "#ffccbc",
+  // 动森特殊颜色编号
+  color_51: "#ffe0b2", // 浅橙色
+  color_52: "#fff9c4", // 浅黄色
+  color_53: "#c8e6c9", // 浅绿色
+  color_54: "#bbdefb", // 浅蓝色
+  color_55: "#e1bee7", // 浅紫色
+  color_56: "#f8bbd0", // 浅粉色
+  color_60: "#d7ccc8", // 棕色系
+  color_61: "#ffccbc", // 砖红色系
+  color_62: "#ffcdd2", // 浅红色
+  color_63: "#dcedc8", // 青绿色
+  color_64: "#b2dfdb", // 青色
+  color_65: "#b2ebf2", // 天蓝色
+  color_66: "#d1c4e9", // 淡紫色
+  color_67: "#f0e4d7", // 奶油色系
+  color_68: "#fce4ec", // 樱花粉
+  color_69: "#e8eaf6", // 薰衣草色
+  color_70: "#fff3e0", // 浅杏色
+  color_71: "#e0f2f1", // 薄荷绿
+  color_72: "#fce4ec", // 淡玫瑰色
+  color_73: "#ede7f6", // 淡紫罗兰
+  color_74: "#f1f8e9", // 浅黄绿
+  color_75: "#e8f5e9", // 极浅绿
+  color_76: "#fef5e7", // 象牙白
+  color_77: "#eceff1", // 浅灰蓝
 };
 
 // 计算主题颜色
