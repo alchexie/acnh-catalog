@@ -419,12 +419,12 @@ export function getConstellationName(constellation: Constellation): string {
 }
 
 export const ConstructionTypeNameMap: Record<ConstructionType, string> = {
-  [ConstructionType.Bridge]: "桥梁",
-  [ConstructionType.Door]: "门",
-  [ConstructionType.Incline]: "斜坡",
-  [ConstructionType.Mailbox]: "信箱",
   [ConstructionType.Roofing]: "屋顶",
-  [ConstructionType.Siding]: "外墙",
+  [ConstructionType.Siding]: "墙壁",
+  [ConstructionType.Door]: "门",
+  [ConstructionType.Mailbox]: "信箱",
+  [ConstructionType.Bridge]: "桥梁",
+  [ConstructionType.Incline]: "斜坡",
   [ConstructionType.Other]: "建筑",
 };
 
