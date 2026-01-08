@@ -12,7 +12,6 @@ import {
   getSpeciesName,
   getConstellation,
   getConstellationIcon,
-  getConstellationIconStyle,
   getConstellationName,
 } from "../services/dataService";
 import { joinArray } from "../utils/common";
@@ -92,7 +91,6 @@ const toggleFurnitureExpanded = () => {
         <img 
           class="inline-icon" 
           :src="getConstellationIcon(getConstellation(props.data.birthday))"
-          :style="getConstellationIconStyle(getConstellation(props.data.birthday))"
           :alt="getConstellationName(getConstellation(props.data.birthday))"
           :title="getConstellationName(getConstellation(props.data.birthday))"
         />

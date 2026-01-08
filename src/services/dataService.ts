@@ -376,20 +376,6 @@ export const ConstellationNameMap: Record<Constellation, string> = {
   [Constellation.Aquarius]: "水瓶座",
   [Constellation.Pisces]: "双鱼座",
 };
-export const ConstellationColorMap: Record<Constellation, string> = {
-  [Constellation.Aries]: "#ff6b6b", // 红色 - 火象
-  [Constellation.Taurus]: "#8bc34a", // 绿色 - 土象
-  [Constellation.Gemini]: "#ffd93d", // 黄色 - 风象
-  [Constellation.Cancer]: "#81c7d4", // 青色 - 水象
-  [Constellation.Leo]: "#ff8c42", // 橙色 - 火象
-  [Constellation.Virgo]: "#a1887f", // 棕色 - 土象
-  [Constellation.Libra]: "#b8e994", // 浅绿 - 风象
-  [Constellation.Scorpio]: "#596275", // 深蓝 - 水象
-  [Constellation.Sagittarius]: "#ee5a6f", // 粉红 - 火象
-  [Constellation.Capricorn]: "#795548", // 深棕 - 土象
-  [Constellation.Aquarius]: "#82ccdd", // 浅蓝 - 风象
-  [Constellation.Pisces]: "#9b59b6", // 紫色 - 水象
-};
 // 根据生日计算星座
 export function getConstellation(birthday: string): Constellation {
   // birthday 格式如 "1/15" 或 "12/25"
@@ -424,30 +410,12 @@ export function getConstellation(birthday: string): Constellation {
   return Constellation.Pisces; // 2/19 - 3/20
 }
 
-// 获取星座图标的背景位置（4x3雪碧图）
 export function getConstellationIcon(constellation: Constellation): string {
   return `/acnh-catalog/img/icon/constellation_${constellation}.png`;
 }
 
-export function getConstellationIconStyle(constellation: Constellation): {
-  backgroundColor: string;
-  boxShadow: string;
-  borderRadius: string;
-} {
-  const color = getConstellationColor(constellation);
-  return {
-    backgroundColor: color,
-    boxShadow: `0 0 4px ${color}`,
-    borderRadius: "50%",
-  };
-}
-
 export function getConstellationName(constellation: Constellation): string {
   return ConstellationNameMap[constellation];
-}
-
-export function getConstellationColor(constellation: Constellation): string {
-  return ConstellationColorMap[constellation];
 }
 
 export const ConstructionTypeNameMap: Record<ConstructionType, string> = {

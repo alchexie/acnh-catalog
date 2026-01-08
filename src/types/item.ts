@@ -148,6 +148,13 @@ export const Currency = {
 } as const;
 
 export type Currency = (typeof Currency)[keyof typeof Currency];
+
+export const KitType = {
+  Normal: 1,
+  Pumpkin: 2,
+  RainbowFeather: 3,
+} as const;
+export type KitType = (typeof KitType)[keyof typeof KitType];
 /**
  * 图案接口
  * 表示物品的一个具体图案（如家具的不同花纹）
