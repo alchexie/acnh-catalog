@@ -133,7 +133,7 @@ const handleClick = () => {
     </div>
     <div class="detail-row">
       <span class="detail-label">购买</span>
-      <span class="detail-value price">
+      <span class="detail-value highlight">
         <template v-if="itemModel.buyPrices.length > 0">
           <div v-for="(priceStr, index) in itemModel.buyPriceStrs" :key="index">
             {{ priceStr }}
@@ -144,7 +144,7 @@ const handleClick = () => {
     </div>
     <div class="detail-row">
       <span class="detail-label">{{ UI_TEXT.LABELS.PRICE }}</span>
-      <span class="detail-value price">
+      <span class="detail-value highlight">
         {{ itemModel.sellPriceStr }}
       </span>
     </div>

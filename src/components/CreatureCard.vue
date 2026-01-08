@@ -63,11 +63,36 @@ const colorClass = computed(() => {
       return "card--green";
   }
 });
+
+// 当前月份
+const currentMonth = new Date().getMonth() + 1;
+
+// 当前小时（0-23）
+const currentHour = new Date().getHours();
+
+// 检查当前月份是否可捕捉
+const isCurrentMonthAvailable = computed(() => {
+  const hemisphere = props.data.hemispheres[props.hemisphere];
+  return hemisphere.monthsArray.includes(currentMonth);
+});
+
+// 检查当前时间是否可用（仅当月份可用时）
+const isCurrentTimeAvailable = computed(() => {
+  if (!isCurrentMonthAvailable.value) return false;
+  const hemisphere = props.data.hemispheres[props.hemisphere];
+  return hemisphere.timeArray.includes(currentHour);
+});
+
+// 检查当前月份是否可捕捉
+const variant = computed(() => {
+  return isCurrentTimeAvailable.value ? "dark" : "light";
+});
 </script>
 
 <template>
   <BaseCard
     :colorClass="colorClass"
+    :variant="variant"
     :version="props.data.ver"
     :images="props.data.images.map(processImageUrl)"
     :displayName="props.data.name"
@@ -81,13 +106,21 @@ const colorClass = computed(() => {
         getCreatureTypeName(props.data.type)
       }}</span>
     </div>
-    <div class="detail-row">
+    <div class="detail-row" :class="{ highlight: isCurrentMonthAvailable }">
       <span class="detail-label">月份</span>
-      <span class="detail-value">{{ getMonths(props.data) }}</span>
+      <span
+        class="detail-value"
+        :class="{ highlight: isCurrentMonthAvailable }"
+        >{{ getMonths(props.data) }}</span
+      >
     </div>
-    <div class="detail-row">
+    <div class="detail-row" :class="{ highlight: isCurrentTimeAvailable }">
       <span class="detail-label">时间</span>
-      <span class="detail-value">{{ getTime(props.data) }}</span>
+      <span
+        class="detail-value"
+        :class="{ highlight: isCurrentTimeAvailable }"
+        >{{ getTime(props.data) }}</span
+      >
     </div>
     <div class="detail-row">
       <span class="detail-label">天气</span>
@@ -107,7 +140,7 @@ const colorClass = computed(() => {
     </div>
     <div class="detail-row">
       <span class="detail-label">{{ UI_TEXT.LABELS.PRICE }}</span>
-      <span class="detail-value price">
+      <span class="detail-value highlight">
         {{ getPriceStr(props.data.sell) }}
       </span>
     </div>

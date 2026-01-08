@@ -48,7 +48,7 @@ const handleClick = () => {
     </div>
     <div class="detail-row">
       <span class="detail-label">{{ UI_TEXT.LABELS.PRICE }}</span>
-      <span class="detail-value price">
+      <span class="detail-value highlight">
         {{ getPriceStr(currentPrice) }}
       </span>
     </div>

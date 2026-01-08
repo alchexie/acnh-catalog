@@ -37,7 +37,7 @@ const nameColor = computed(() => {
     </template>
     <div class="detail-row">
       <span class="detail-label">价格</span>
-      <span class="detail-value price">
+      <span class="detail-value highlight">
         {{ getPriceStr(props.data.buy) || "不可购买" }}
       </span>
     </div>
