@@ -164,7 +164,9 @@ export function getPriceWithIcon(price: Price | null | undefined): string {
   if (amount < 0) return "";
 
   const icon = getCurrencyIcon(currency);
-  return `${amount.toLocaleString()} <img src="${icon}" alt="${getCurrencyName(currency)}" class="inline-icon" />`;
+  return `${amount.toLocaleString()} <img src="${icon}" alt="${getCurrencyName(
+    currency
+  )}" class="inline-icon" />`;
 }
 
 export function getItemTypeName(type: ItemType): string {
@@ -344,18 +346,18 @@ export function getGenderIcon(gender: Gender): string {
 
 // 星座枚举
 export const Constellation = {
-  Aries: 1,        // 白羊座
-  Taurus: 2,       // 金牛座
-  Gemini: 3,       // 双子座
-  Cancer: 4,       // 巨蟹座
-  Leo: 5,          // 狮子座
-  Virgo: 6,        // 处女座
-  Libra: 7,        // 天秤座
-  Scorpio: 8,      // 天蝎座
-  Sagittarius: 9,  // 射手座
-  Capricorn: 10,   // 魔羯座
-  Aquarius: 11,    // 水瓶座
-  Pisces: 12,      // 双鱼座
+  Aries: 1, // 白羊座
+  Taurus: 2, // 金牛座
+  Gemini: 3, // 双子座
+  Cancer: 4, // 巨蟹座
+  Leo: 5, // 狮子座
+  Virgo: 6, // 处女座
+  Libra: 7, // 天秤座
+  Scorpio: 8, // 天蝎座
+  Sagittarius: 9, // 射手座
+  Capricorn: 10, // 魔羯座
+  Aquarius: 11, // 水瓶座
+  Pisces: 12, // 双鱼座
 } as const;
 
 export type Constellation = (typeof Constellation)[keyof typeof Constellation];
@@ -375,18 +377,18 @@ export const ConstellationNameMap: Record<Constellation, string> = {
   [Constellation.Pisces]: "双鱼座",
 };
 export const ConstellationColorMap: Record<Constellation, string> = {
-  [Constellation.Aries]: "#ff6b6b",        // 红色 - 火象
-  [Constellation.Taurus]: "#8bc34a",       // 绿色 - 土象
-  [Constellation.Gemini]: "#ffd93d",       // 黄色 - 风象
-  [Constellation.Cancer]: "#81c7d4",       // 青色 - 水象
-  [Constellation.Leo]: "#ff8c42",          // 橙色 - 火象
-  [Constellation.Virgo]: "#a1887f",        // 棕色 - 土象
-  [Constellation.Libra]: "#b8e994",        // 浅绿 - 风象
-  [Constellation.Scorpio]: "#596275",      // 深蓝 - 水象
-  [Constellation.Sagittarius]: "#ee5a6f",  // 粉红 - 火象
-  [Constellation.Capricorn]: "#795548",    // 深棕 - 土象
-  [Constellation.Aquarius]: "#82ccdd",     // 浅蓝 - 风象
-  [Constellation.Pisces]: "#9b59b6",       // 紫色 - 水象
+  [Constellation.Aries]: "#ff6b6b", // 红色 - 火象
+  [Constellation.Taurus]: "#8bc34a", // 绿色 - 土象
+  [Constellation.Gemini]: "#ffd93d", // 黄色 - 风象
+  [Constellation.Cancer]: "#81c7d4", // 青色 - 水象
+  [Constellation.Leo]: "#ff8c42", // 橙色 - 火象
+  [Constellation.Virgo]: "#a1887f", // 棕色 - 土象
+  [Constellation.Libra]: "#b8e994", // 浅绿 - 风象
+  [Constellation.Scorpio]: "#596275", // 深蓝 - 水象
+  [Constellation.Sagittarius]: "#ee5a6f", // 粉红 - 火象
+  [Constellation.Capricorn]: "#795548", // 深棕 - 土象
+  [Constellation.Aquarius]: "#82ccdd", // 浅蓝 - 风象
+  [Constellation.Pisces]: "#9b59b6", // 紫色 - 水象
 };
 // 根据生日计算星座
 export function getConstellation(birthday: string): Constellation {
@@ -394,36 +396,49 @@ export function getConstellation(birthday: string): Constellation {
   const [monthStr, dayStr] = birthday.split("/");
   const month = Number(monthStr);
   const day = Number(dayStr);
-  
+
   if (!month || !day) return Constellation.Aries; // 默认返回白羊座
-  
-  if ((month === 3 && day >= 21) || (month === 4 && day <= 19)) return Constellation.Aries;
-  if ((month === 4 && day >= 20) || (month === 5 && day <= 20)) return Constellation.Taurus;
-  if ((month === 5 && day >= 21) || (month === 6 && day <= 20)) return Constellation.Gemini;
-  if ((month === 6 && day >= 21) || (month === 7 && day <= 22)) return Constellation.Cancer;
-  if ((month === 7 && day >= 23) || (month === 8 && day <= 22)) return Constellation.Leo;
-  if ((month === 8 && day >= 23) || (month === 9 && day <= 22)) return Constellation.Virgo;
-  if ((month === 9 && day >= 23) || (month === 10 && day <= 22)) return Constellation.Libra;
-  if ((month === 10 && day >= 23) || (month === 11 && day <= 21)) return Constellation.Scorpio;
-  if ((month === 11 && day >= 22) || (month === 12 && day <= 21)) return Constellation.Sagittarius;
-  if ((month === 12 && day >= 22) || (month === 1 && day <= 19)) return Constellation.Capricorn;
-  if ((month === 1 && day >= 20) || (month === 2 && day <= 18)) return Constellation.Aquarius;
+
+  if ((month === 3 && day >= 21) || (month === 4 && day <= 19))
+    return Constellation.Aries;
+  if ((month === 4 && day >= 20) || (month === 5 && day <= 20))
+    return Constellation.Taurus;
+  if ((month === 5 && day >= 21) || (month === 6 && day <= 20))
+    return Constellation.Gemini;
+  if ((month === 6 && day >= 21) || (month === 7 && day <= 22))
+    return Constellation.Cancer;
+  if ((month === 7 && day >= 23) || (month === 8 && day <= 22))
+    return Constellation.Leo;
+  if ((month === 8 && day >= 23) || (month === 9 && day <= 22))
+    return Constellation.Virgo;
+  if ((month === 9 && day >= 23) || (month === 10 && day <= 22))
+    return Constellation.Libra;
+  if ((month === 10 && day >= 23) || (month === 11 && day <= 21))
+    return Constellation.Scorpio;
+  if ((month === 11 && day >= 22) || (month === 12 && day <= 21))
+    return Constellation.Sagittarius;
+  if ((month === 12 && day >= 22) || (month === 1 && day <= 19))
+    return Constellation.Capricorn;
+  if ((month === 1 && day >= 20) || (month === 2 && day <= 18))
+    return Constellation.Aquarius;
   return Constellation.Pisces; // 2/19 - 3/20
 }
 
 // 获取星座图标的背景位置（4x3雪碧图）
-export function getConstellationIconStyle(constellation: Constellation): { backgroundPosition: string; backgroundColor: string; boxShadow: string } {
-  // 图标按 4x3 排列，每个占 33.33% 宽度和 50% 高度
-  const index = constellation - 1; // 0-11
-  const col = index % 4;
-  const row = Math.floor(index / 4);
-  const x = col * 33.33;
-  const y = row * 50;
+export function getConstellationIcon(constellation: Constellation): string {
+  return `/acnh-catalog/img/icon/constellation_${constellation}.png`;
+}
+
+export function getConstellationIconStyle(constellation: Constellation): {
+  backgroundColor: string;
+  boxShadow: string;
+  borderRadius: string;
+} {
   const color = getConstellationColor(constellation);
   return {
-    backgroundPosition: `${x}% ${y}%`,
     backgroundColor: color,
     boxShadow: `0 0 4px ${color}`,
+    borderRadius: "50%",
   };
 }
 
@@ -455,7 +470,7 @@ export async function loadItemsData(): Promise<Item[]> {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return await response.json() as Item[];
+    return (await response.json()) as Item[];
   } catch (error) {
     console.error("加载物品数据失败:", error);
     throw error;
@@ -470,7 +485,9 @@ export async function loadCatalogData(): Promise<Set<number>> {
       return new Set();
     }
 
-    const data: { items: CatalogItem[] } = await response.json() as { items: CatalogItem[] };
+    const data: { items: CatalogItem[] } = (await response.json()) as {
+      items: CatalogItem[];
+    };
     const ownedIds = new Set<number>();
 
     data.items.forEach((item) => {
@@ -490,7 +507,7 @@ export async function loadVillagersData(): Promise<Villager[]> {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return await response.json() as Villager[];
+    return (await response.json()) as Villager[];
   } catch (error) {
     console.error("加载村民数据失败:", error);
     throw error;
@@ -503,7 +520,7 @@ export async function loadNPCsData(): Promise<NPC[]> {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return await response.json() as NPC[];
+    return (await response.json()) as NPC[];
   } catch (error) {
     console.error("加载NPC数据失败:", error);
     throw error;
@@ -516,7 +533,7 @@ export async function loadCreaturesData(): Promise<Creature[]> {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return await response.json() as Creature[];
+    return (await response.json()) as Creature[];
   } catch (error) {
     console.error("加载生物数据失败:", error);
     throw error;
@@ -529,7 +546,7 @@ export async function loadReactionsData(): Promise<Reaction[]> {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return await response.json() as Reaction[];
+    return (await response.json()) as Reaction[];
   } catch (error) {
     console.error("加载表情反应数据失败:", error);
     throw error;
@@ -542,7 +559,7 @@ export async function loadRecipesData(): Promise<Recipe[]> {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return await response.json() as Recipe[];
+    return (await response.json()) as Recipe[];
   } catch (error) {
     console.error("加载DIY配方数据失败:", error);
     throw error;
@@ -555,7 +572,7 @@ export async function loadConstructionsData(): Promise<Construction[]> {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return await response.json() as Construction[];
+    return (await response.json()) as Construction[];
   } catch (error) {
     console.error("加载改建数据失败:", error);
     throw error;
@@ -568,7 +585,7 @@ export async function loadMessageCardsData(): Promise<MessageCard[]> {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return await response.json() as MessageCard[];
+    return (await response.json()) as MessageCard[];
   } catch (error) {
     console.error("加载贺卡数据失败:", error);
     throw error;
@@ -581,7 +598,7 @@ export async function loadArtworkData(): Promise<Artwork[]> {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return await response.json() as Artwork[];
+    return (await response.json()) as Artwork[];
   } catch (error) {
     console.error("加载艺术品数据失败:", error);
     throw error;
@@ -594,7 +611,7 @@ export async function loadFossilsData(): Promise<Fossil[]> {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return await response.json() as Fossil[];
+    return (await response.json()) as Fossil[];
   } catch (error) {
     console.error("加载化石数据失败:", error);
     throw error;
@@ -607,7 +624,7 @@ export async function loadTranslations(): Promise<Translations> {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    const data: Translations = await response.json() as Translations;
+    const data: Translations = (await response.json()) as Translations;
     translationsCache = data;
     return data;
   } catch (error) {

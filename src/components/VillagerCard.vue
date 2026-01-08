@@ -11,6 +11,7 @@ import {
   getPersonalityName,
   getSpeciesName,
   getConstellation,
+  getConstellationIcon,
   getConstellationIconStyle,
   getConstellationName,
 } from "../services/dataService";
@@ -88,11 +89,13 @@ const toggleFurnitureExpanded = () => {
     <span class="detail-row detail-center">
       <span class="detail-label">
         {{ props.data.birthday }}
-        <span 
-          class="constellation-icon" 
+        <img 
+          class="inline-icon" 
+          :src="getConstellationIcon(getConstellation(props.data.birthday))"
           :style="getConstellationIconStyle(getConstellation(props.data.birthday))"
+          :alt="getConstellationName(getConstellation(props.data.birthday))"
           :title="getConstellationName(getConstellation(props.data.birthday))"
-        ></span>
+        />
       </span>
     </span>
     <span class="detail-row">
