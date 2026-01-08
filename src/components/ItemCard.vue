@@ -60,6 +60,7 @@ const handleClick = () => {
 <template>
   <BaseCard
     colorClass="card--green"
+    :class="{ 'recipe-bg': itemModel.canDIY }"
     :variant="itemModel.owned ? 'dark' : 'light'"
     :showCheckmark="itemModel.owned"
     :version="itemModel.version"

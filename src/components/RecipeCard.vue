@@ -89,6 +89,7 @@ const isShiny = computed(() => {
     :displayName="props.data.name"
     :shiny="isShiny"
     variant="dark"
+    class="recipe-bg"
     @click="handleClick"
   >
     <div class="detail-row">

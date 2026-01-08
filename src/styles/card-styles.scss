@@ -133,6 +133,14 @@
   }
 }
 
+/* ==================== DIY背景样式 ==================== */
+.recipe-bg {
+  background-image: url("/img/diy_bg.png");
+  background-size: 100%;
+  background-position: top;
+  background-repeat: repeat;
+}
+
 /* ==================== 图片容器 ==================== */
 .card-image-container {
   position: relative;
