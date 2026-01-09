@@ -13,129 +13,141 @@ import {
   Personality,
   Hobby,
   Species,
-} from "../types";
-import { RecipeType, type Recipe } from "../types/recipe";
+} from '../types';
+import { RecipeType, type Recipe } from '../types/recipe';
 
-import { ConstructionType, type Construction } from "../types/construction";
-import type { MessageCard } from "../types/messagecard";
-import { CONFIG } from "../config";
-import { ItemType, Version, ItemSize, Color, Currency, KitType } from "../types/item";
+import { ConstructionType, type Construction } from '../types/construction';
+import type { MessageCard } from '../types/messagecard';
+import { BASE_PATH, CONFIG } from '../config';
+import { ItemType, Version, ItemSize, Color, Currency, KitType } from '../types/item';
 
 export type Price = [number, Currency] | number;
 export type CusCost = [number, KitType];
 let translationsCache: Translations | null = null;
 
 export const ItemTypeNameMap: Record<ItemType, string> = {
-  [ItemType.Housewares]: "家具/家具",
-  [ItemType.Miscellaneous]: "家具/小物件",
-  [ItemType.WallMounted]: "家具/壁挂物",
-  [ItemType.CeilingDecor]: "家具/天花板",
-  [ItemType.InteriorStructures]: "家具/其他",
-  [ItemType.Tops]: "服饰/上装",
-  [ItemType.Bottoms]: "服饰/下装",
-  [ItemType.DressUp]: "服饰/套装",
-  [ItemType.Headwear]: "服饰/头戴物",
-  [ItemType.Accessories]: "服饰/饰品",
-  [ItemType.Socks]: "服饰/袜子",
-  [ItemType.Shoes]: "服饰/鞋子",
-  [ItemType.Bags]: "服饰/包包",
-  [ItemType.Umbrellas]: "服饰/雨伞",
-  [ItemType.ClothingOther]: "服饰/其他",
-  [ItemType.ToolsGoods]: "工具",
-  [ItemType.Fencing]: "栅栏",
-  [ItemType.Wallpaper]: "壁纸",
-  [ItemType.Floors]: "地板",
-  [ItemType.Rugs]: "地垫",
-  [ItemType.Creature]: "博物馆/生物",
-  [ItemType.Fossils]: "博物馆/化石",
-  [ItemType.Artwork]: "博物馆/艺术品",
-  [ItemType.Gyroids]: "陶俑",
-  [ItemType.Music]: "音乐",
-  [ItemType.Photos]: "照片",
-  [ItemType.Posters]: "海报",
-  [ItemType.Other]: "其他",
+  [ItemType.Housewares]: '家具/家具',
+  [ItemType.Miscellaneous]: '家具/小物件',
+  [ItemType.WallMounted]: '家具/壁挂物',
+  [ItemType.CeilingDecor]: '家具/天花板',
+  [ItemType.InteriorStructures]: '家具/其他',
+  [ItemType.Tops]: '服饰/上装',
+  [ItemType.Bottoms]: '服饰/下装',
+  [ItemType.DressUp]: '服饰/套装',
+  [ItemType.Headwear]: '服饰/头戴物',
+  [ItemType.Accessories]: '服饰/饰品',
+  [ItemType.Socks]: '服饰/袜子',
+  [ItemType.Shoes]: '服饰/鞋子',
+  [ItemType.Bags]: '服饰/包包',
+  [ItemType.Umbrellas]: '服饰/雨伞',
+  [ItemType.ClothingOther]: '服饰/其他',
+  [ItemType.ToolsGoods]: '工具',
+  [ItemType.Fencing]: '栅栏',
+  [ItemType.Wallpaper]: '壁纸',
+  [ItemType.Floors]: '地板',
+  [ItemType.Rugs]: '地垫',
+  [ItemType.Creature]: '博物馆/生物',
+  [ItemType.Fossils]: '博物馆/化石',
+  [ItemType.Artwork]: '博物馆/艺术品',
+  [ItemType.Gyroids]: '陶俑',
+  [ItemType.Music]: '音乐',
+  [ItemType.Photos]: '照片',
+  [ItemType.Posters]: '海报',
+  [ItemType.Other]: '其他',
 };
 
 export const versionNameMap: Record<Version, string> = {
-  [Version.The100]: "1.0.0",
-  [Version.The110]: "1.1.0",
-  [Version.The120]: "1.2.0",
-  [Version.The130]: "1.3.0",
-  [Version.The140]: "1.4.0",
-  [Version.The150]: "1.5.0",
-  [Version.The160]: "1.6.0",
-  [Version.The170]: "1.7.0",
-  [Version.The180]: "1.8.0",
-  [Version.The190]: "1.9.0",
-  [Version.The1100]: "1.10.0",
-  [Version.The1110]: "1.11.0",
-  [Version.The200]: "2.0.0",
-  [Version.The204]: "2.0.4",
+  [Version.The100]: '1.0.0',
+  [Version.The110]: '1.1.0',
+  [Version.The120]: '1.2.0',
+  [Version.The130]: '1.3.0',
+  [Version.The140]: '1.4.0',
+  [Version.The150]: '1.5.0',
+  [Version.The160]: '1.6.0',
+  [Version.The170]: '1.7.0',
+  [Version.The180]: '1.8.0',
+  [Version.The190]: '1.9.0',
+  [Version.The1100]: '1.10.0',
+  [Version.The1110]: '1.11.0',
+  [Version.The200]: '2.0.0',
+  [Version.The204]: '2.0.4',
 };
 
 export const itemSizeNameMap: Record<ItemSize, string> = {
-  [ItemSize.The05X1]: "0.5x1",
-  [ItemSize.The1X05]: "1x0.5",
-  [ItemSize.The1X1]: "1x1",
-  [ItemSize.The1X15]: "1x1.5",
-  [ItemSize.The15X15]: "1.5x1.5",
-  [ItemSize.The1X2]: "1x2",
-  [ItemSize.The2X05]: "2x0.5",
-  [ItemSize.The2X1]: "2x1",
-  [ItemSize.The2X15]: "2x1.5",
-  [ItemSize.The2X2]: "2x2",
-  [ItemSize.The3X1]: "3x1",
-  [ItemSize.The3X2]: "3x2",
-  [ItemSize.The3X3]: "3x3",
-  [ItemSize.The4X3]: "4x3",
-  [ItemSize.The4X4]: "4x4",
-  [ItemSize.The5X5]: "5x5",
+  [ItemSize.The05X1]: '0.5x1',
+  [ItemSize.The1X05]: '1x0.5',
+  [ItemSize.The1X1]: '1x1',
+  [ItemSize.The1X15]: '1x1.5',
+  [ItemSize.The15X15]: '1.5x1.5',
+  [ItemSize.The1X2]: '1x2',
+  [ItemSize.The2X05]: '2x0.5',
+  [ItemSize.The2X1]: '2x1',
+  [ItemSize.The2X15]: '2x1.5',
+  [ItemSize.The2X2]: '2x2',
+  [ItemSize.The3X1]: '3x1',
+  [ItemSize.The3X2]: '3x2',
+  [ItemSize.The3X3]: '3x3',
+  [ItemSize.The4X3]: '4x3',
+  [ItemSize.The4X4]: '4x4',
+  [ItemSize.The5X5]: '5x5',
 };
 
 export const colorNameMap: Record<Color, string> = {
-  [Color.Red]: "红色",
-  [Color.Orange]: "橙色",
-  [Color.Yellow]: "黄色",
-  [Color.Green]: "绿色",
-  [Color.Blue]: "蓝色",
-  [Color.Aqua]: "青色",
-  [Color.Purple]: "紫色",
-  [Color.Pink]: "粉色",
-  [Color.White]: "白色",
-  [Color.Black]: "黑色",
-  [Color.Gray]: "灰色",
-  [Color.Brown]: "棕色",
-  [Color.Beige]: "米色",
-  [Color.Colorful]: "彩色",
+  [Color.Red]: '红色',
+  [Color.Orange]: '橙色',
+  [Color.Yellow]: '黄色',
+  [Color.Green]: '绿色',
+  [Color.Blue]: '蓝色',
+  [Color.Aqua]: '青色',
+  [Color.Purple]: '紫色',
+  [Color.Pink]: '粉色',
+  [Color.White]: '白色',
+  [Color.Black]: '黑色',
+  [Color.Gray]: '灰色',
+  [Color.Brown]: '棕色',
+  [Color.Beige]: '米色',
+  [Color.Colorful]: '彩色',
 };
 
 export const RecipeTypeNameMap: Record<RecipeType, string> = {
-  [RecipeType.Tools]: "工具",
-  [RecipeType.Housewares]: "家具",
-  [RecipeType.Miscellaneous]: "小物件",
-  [RecipeType.WallMounted]: "壁挂物",
-  [RecipeType.CeilingDecor]: "天花板",
-  [RecipeType.Wallpaper]: "墙壁",
-  [RecipeType.Floors]: "地板",
-  [RecipeType.Rugs]: "地垫",
-  [RecipeType.Equipment]: "装备",
-  [RecipeType.Other]: "其他",
-  [RecipeType.Savory]: "食物",
-  [RecipeType.Sweet]: "点心",
+  [RecipeType.Tools]: '工具',
+  [RecipeType.Housewares]: '家具',
+  [RecipeType.Miscellaneous]: '小物件',
+  [RecipeType.WallMounted]: '壁挂物',
+  [RecipeType.CeilingDecor]: '天花板',
+  [RecipeType.Wallpaper]: '墙壁',
+  [RecipeType.Floors]: '地板',
+  [RecipeType.Rugs]: '地垫',
+  [RecipeType.Equipment]: '装备',
+  [RecipeType.Other]: '其他',
+  [RecipeType.Savory]: '食物',
+  [RecipeType.Sweet]: '点心',
 };
 
 export const CreatureTypeNameMap: Record<CreatureType, string> = {
-  [CreatureType.Insects]: "昆虫",
-  [CreatureType.Fish]: "鱼类",
-  [CreatureType.SeaCreatures]: "海洋生物",
+  [CreatureType.Insects]: '昆虫',
+  [CreatureType.Fish]: '鱼类',
+  [CreatureType.SeaCreatures]: '海洋生物',
 };
 
 export const CurrencyNameMap: Record<Currency, string> = {
-  [Currency.Bells]: "铃钱",
-  [Currency.HeartCrystals]: "爱的结晶",
-  [Currency.NookMiles]: "Nook里程",
-  [Currency.NookPoints]: "Nook点数",
-  [Currency.Poki]: "波金",
+  [Currency.Bells]: '铃钱',
+  [Currency.HeartCrystals]: '爱的结晶',
+  [Currency.NookMiles]: 'Nook里程',
+  [Currency.NookPoints]: 'Nook点数',
+  [Currency.Poki]: '波金',
+};
+
+export const getImgUrl = (path: string) => {
+  // const isDev = !/.js$/.test(import.meta.url);
+  // if (isDev) {
+  // return `${location.origin}${BASE_PATH}${path}`;
+  // } else {
+  //   const url = new URL(path, import.meta.url);
+  //   console.log(path, 111, import.meta, 222, url);
+  //   return url.href;
+  // }
+   return `${location.origin}${BASE_PATH}${path}`;
 };
 
 function getTranslation(
@@ -146,23 +158,23 @@ function getTranslation(
 }
 
 export function getPriceStr(price: Price | null | undefined): string {
-  if (!price) return "";
+  if (!price) return '';
   if (price && !Array.isArray(price)) {
     price = [price, Currency.Bells];
   }
   let [amount, currency] = price as [number, Currency];
-  if (amount < 0) return "";
+  if (amount < 0) return '';
 
   return `${amount.toLocaleString()} ${getCurrencyName(currency)}`;
 }
 
 export function getPriceWithIcon(price: Price | null | undefined): string {
-  if (!price) return "";
+  if (!price) return '';
   if (price && !Array.isArray(price)) {
     price = [price, Currency.Bells];
   }
   let [amount, currency] = price as [number, Currency];
-  if (amount < 0) return "";
+  if (amount < 0) return '';
 
   const icon = getCurrencyIcon(currency);
   return `${amount.toLocaleString()} <img src="${icon}" alt="${getCurrencyName(
@@ -172,17 +184,17 @@ export function getPriceWithIcon(price: Price | null | undefined): string {
 
 export function getKitTypeIcon(kitType: KitType): string {
   const iconMap: Record<KitType, string> = {
-    [KitType.Normal]: "/acnh-catalog/img/icon/kit_type_1.png",
-    [KitType.Pumpkin]: "/acnh-catalog/img/icon/kit_type_2.png",
-    [KitType.RainbowFeather]: "/acnh-catalog/img/icon/kit_type_3.png",
+    [KitType.Normal]: getImgUrl('img/icon/kit_type_1.png'),
+    [KitType.Pumpkin]: getImgUrl('img/icon/kit_type_2.png'),
+    [KitType.RainbowFeather]: getImgUrl('img/icon/kit_type_3.png'),
   };
   return iconMap[kitType];
 }
 
 export function getCusCost(cusCost: CusCost | null | undefined): string {
-  if (!cusCost) return "";
+  if (!cusCost) return '';
   let [kitCost, kitType] = cusCost;
-  if (kitCost <= 0) return "";
+  if (kitCost <= 0) return '';
   const icon = getKitTypeIcon(kitType);
   return `${kitCost.toLocaleString()} <img src="${icon}" class="inline-icon" />`;
 }
@@ -200,7 +212,7 @@ export function getSizeName(size: ItemSize): string {
 }
 
 export function getColorName(color: Color | string): string {
-  if (typeof color === "string") {
+  if (typeof color === 'string') {
     color = Object.entries(Color).find(([k]) => k === color)?.[1] as Color;
   }
   return colorNameMap[color];
@@ -212,20 +224,20 @@ export function getCurrencyName(currency: Currency): string {
 
 export function getCurrencyIcon(currency: Currency): string {
   const iconMap: Record<Currency, string> = {
-    [Currency.Bells]: "/acnh-catalog/img/icon/currency_1.png",
-    [Currency.HeartCrystals]: "/acnh-catalog/img/icon/currency_2.png",
-    [Currency.NookMiles]: "/acnh-catalog/img/icon/currency_3.png",
-    [Currency.NookPoints]: "/acnh-catalog/img/icon/currency_4.png",
-    [Currency.Poki]: "/acnh-catalog/img/icon/currency_5.png",
+    [Currency.Bells]: getImgUrl('img/icon/currency_1.png'),
+    [Currency.HeartCrystals]: getImgUrl('img/icon/currency_2.png'),
+    [Currency.NookMiles]: getImgUrl('img/icon/currency_3.png'),
+    [Currency.NookPoints]: getImgUrl('img/icon/currency_4.png'),
+    [Currency.Poki]: getImgUrl('img/icon/currency_5.png'),
   };
   return iconMap[currency];
 }
 
 export function getCreatureTypeIcon(type: CreatureType): string {
   const iconMap: Record<CreatureType, string> = {
-    [CreatureType.Insects]: "/acnh-catalog/img/icon/creature_type_1.png",
-    [CreatureType.Fish]: "/acnh-catalog/img/icon/creature_type_2.png",
-    [CreatureType.SeaCreatures]: "/acnh-catalog/img/icon/creature_type_3.png",
+    [CreatureType.Insects]: getImgUrl('img/icon/creature_type_1.png'),
+    [CreatureType.Fish]: getImgUrl('img/icon/creature_type_2.png'),
+    [CreatureType.SeaCreatures]: getImgUrl('img/icon/creature_type_3.png'),
   };
   return iconMap[type];
 }
@@ -263,11 +275,11 @@ export function getClothingThemeName(theme: string): string {
 }
 
 export function getRecipeTypeName(type: RecipeType): string {
-  return RecipeTypeNameMap[type] || "";
+  return RecipeTypeNameMap[type] || '';
 }
 
 export function getRecipeTypeIcon(type: RecipeType): string {
-  return `/acnh-catalog/img/icon/recipe_type/recipe_type_${type}.png`;
+  return getImgUrl(`img/icon/recipe_type/recipe_type_${type}.png`);
 }
 
 export function getActivityName(activity: string): string {
@@ -283,61 +295,61 @@ export function getCreatureTypeName(type: CreatureType): string {
 }
 
 export const PersonalityNameMap: Record<Personality, string> = {
-  [Personality.Cranky]: "暴躁",
-  [Personality.Jock]: "运动",
-  [Personality.Lazy]: "悠闲",
-  [Personality.Smug]: "自恋",
-  [Personality.Normal]: "普通",
-  [Personality.Peppy]: "元气",
-  [Personality.Snooty]: "成熟",
-  [Personality.BigSister]: "大姐姐",
+  [Personality.Cranky]: '暴躁',
+  [Personality.Jock]: '运动',
+  [Personality.Lazy]: '悠闲',
+  [Personality.Smug]: '自恋',
+  [Personality.Normal]: '普通',
+  [Personality.Peppy]: '元气',
+  [Personality.Snooty]: '成熟',
+  [Personality.BigSister]: '大姐姐',
 } as const;
 
 export const HobbyNameMap: Record<Hobby, string> = {
-  [Hobby.Education]: "教育",
-  [Hobby.Fashion]: "时尚",
-  [Hobby.Fitness]: "健身",
-  [Hobby.Music]: "音乐",
-  [Hobby.Nature]: "自然",
-  [Hobby.Play]: "游戏",
+  [Hobby.Education]: '教育',
+  [Hobby.Fashion]: '时尚',
+  [Hobby.Fitness]: '健身',
+  [Hobby.Music]: '音乐',
+  [Hobby.Nature]: '自然',
+  [Hobby.Play]: '游戏',
 };
 
 export const SpeciesNameMap: Record<Species, string> = {
-  [Species.Alligator]: "鳄鱼",
-  [Species.Anteater]: "食蚁兽",
-  [Species.Bear]: "熊",
-  [Species.BearCub]: "熊仔",
-  [Species.Bird]: "鸟",
-  [Species.Bull]: "公牛",
-  [Species.Cat]: "猫",
-  [Species.Chicken]: "鸡",
-  [Species.Cow]: "奶牛",
-  [Species.Deer]: "鹿",
-  [Species.Dog]: "狗",
-  [Species.Duck]: "鸭",
-  [Species.Eagle]: "鹰",
-  [Species.Elephant]: "大象",
-  [Species.Frog]: "青蛙",
-  [Species.Goat]: "山羊",
-  [Species.Gorilla]: "大猩猩",
-  [Species.Hamster]: "仓鼠",
-  [Species.Hippo]: "河马",
-  [Species.Horse]: "马",
-  [Species.Kangaroo]: "袋鼠",
-  [Species.Koala]: "考拉",
-  [Species.Lion]: "狮子",
-  [Species.Monkey]: "猴子",
-  [Species.Mouse]: "老鼠",
-  [Species.Octopus]: "章鱼",
-  [Species.Ostrich]: "鸵鸟",
-  [Species.Penguin]: "企鹅",
-  [Species.Pig]: "猪",
-  [Species.Rabbit]: "兔子",
-  [Species.Rhinoceros]: "犀牛",
-  [Species.Sheep]: "绵羊",
-  [Species.Squirrel]: "松鼠",
-  [Species.Tiger]: "老虎",
-  [Species.Wolf]: "狼",
+  [Species.Alligator]: '鳄鱼',
+  [Species.Anteater]: '食蚁兽',
+  [Species.Bear]: '熊',
+  [Species.BearCub]: '熊仔',
+  [Species.Bird]: '鸟',
+  [Species.Bull]: '公牛',
+  [Species.Cat]: '猫',
+  [Species.Chicken]: '鸡',
+  [Species.Cow]: '奶牛',
+  [Species.Deer]: '鹿',
+  [Species.Dog]: '狗',
+  [Species.Duck]: '鸭',
+  [Species.Eagle]: '鹰',
+  [Species.Elephant]: '大象',
+  [Species.Frog]: '青蛙',
+  [Species.Goat]: '山羊',
+  [Species.Gorilla]: '大猩猩',
+  [Species.Hamster]: '仓鼠',
+  [Species.Hippo]: '河马',
+  [Species.Horse]: '马',
+  [Species.Kangaroo]: '袋鼠',
+  [Species.Koala]: '考拉',
+  [Species.Lion]: '狮子',
+  [Species.Monkey]: '猴子',
+  [Species.Mouse]: '老鼠',
+  [Species.Octopus]: '章鱼',
+  [Species.Ostrich]: '鸵鸟',
+  [Species.Penguin]: '企鹅',
+  [Species.Pig]: '猪',
+  [Species.Rabbit]: '兔子',
+  [Species.Rhinoceros]: '犀牛',
+  [Species.Sheep]: '绵羊',
+  [Species.Squirrel]: '松鼠',
+  [Species.Tiger]: '老虎',
+  [Species.Wolf]: '狼',
 } as const;
 
 export function getPersonalityName(personality: Personality): string {
@@ -353,19 +365,19 @@ export function getSpeciesName(species: Species): string {
 }
 
 export function getSpeciesIcon(species: Species): string {
-  return `/acnh-catalog/img/icon/species/species_${species}.png`;
+  return getImgUrl(`img/icon/species/species_${species}.png`);
 }
 
 export function getGenderName(gender: Gender): string {
-  if (gender === Gender.Male) return "男性";
-  if (gender === Gender.Female) return "女性";
+  if (gender === Gender.Male) return '男性';
+  if (gender === Gender.Female) return '女性';
   return gender;
 }
 
 export function getGenderIcon(gender: Gender): string {
   const iconMap: Record<Gender, string> = {
-    [Gender.Male]: "/acnh-catalog/img/icon/gender_2.png",
-    [Gender.Female]: "/acnh-catalog/img/icon/gender_1.png",
+    [Gender.Male]: getImgUrl('img/icon/gender_2.png'),
+    [Gender.Female]: getImgUrl('img/icon/gender_1.png'),
   };
   return iconMap[gender];
 }
@@ -389,23 +401,23 @@ export const Constellation = {
 export type Constellation = (typeof Constellation)[keyof typeof Constellation];
 
 export const ConstellationNameMap: Record<Constellation, string> = {
-  [Constellation.Aries]: "白羊座",
-  [Constellation.Taurus]: "金牛座",
-  [Constellation.Gemini]: "双子座",
-  [Constellation.Cancer]: "巨蟹座",
-  [Constellation.Leo]: "狮子座",
-  [Constellation.Virgo]: "处女座",
-  [Constellation.Libra]: "天秤座",
-  [Constellation.Scorpio]: "天蝎座",
-  [Constellation.Sagittarius]: "射手座",
-  [Constellation.Capricorn]: "魔羯座",
-  [Constellation.Aquarius]: "水瓶座",
-  [Constellation.Pisces]: "双鱼座",
+  [Constellation.Aries]: '白羊座',
+  [Constellation.Taurus]: '金牛座',
+  [Constellation.Gemini]: '双子座',
+  [Constellation.Cancer]: '巨蟹座',
+  [Constellation.Leo]: '狮子座',
+  [Constellation.Virgo]: '处女座',
+  [Constellation.Libra]: '天秤座',
+  [Constellation.Scorpio]: '天蝎座',
+  [Constellation.Sagittarius]: '射手座',
+  [Constellation.Capricorn]: '魔羯座',
+  [Constellation.Aquarius]: '水瓶座',
+  [Constellation.Pisces]: '双鱼座',
 };
 // 根据生日计算星座
 export function getConstellation(birthday: string): Constellation {
   // birthday 格式如 "1/15" 或 "12/25"
-  const [monthStr, dayStr] = birthday.split("/");
+  const [monthStr, dayStr] = birthday.split('/');
   const month = Number(monthStr);
   const day = Number(dayStr);
 
@@ -419,8 +431,7 @@ export function getConstellation(birthday: string): Constellation {
     return Constellation.Gemini;
   if ((month === 6 && day >= 21) || (month === 7 && day <= 22))
     return Constellation.Cancer;
-  if ((month === 7 && day >= 23) || (month === 8 && day <= 22))
-    return Constellation.Leo;
+  if ((month === 7 && day >= 23) || (month === 8 && day <= 22)) return Constellation.Leo;
   if ((month === 8 && day >= 23) || (month === 9 && day <= 22))
     return Constellation.Virgo;
   if ((month === 9 && day >= 23) || (month === 10 && day <= 22))
@@ -437,7 +448,7 @@ export function getConstellation(birthday: string): Constellation {
 }
 
 export function getConstellationIcon(constellation: Constellation): string {
-  return `/acnh-catalog/img/icon/constellation/constellation_${constellation}.png`;
+  return getImgUrl(`img/icon/constellation/constellation_${constellation}.png`);
 }
 
 export function getConstellationName(constellation: Constellation): string {
@@ -445,13 +456,13 @@ export function getConstellationName(constellation: Constellation): string {
 }
 
 export const ConstructionTypeNameMap: Record<ConstructionType, string> = {
-  [ConstructionType.Roofing]: "屋顶",
-  [ConstructionType.Siding]: "墙壁",
-  [ConstructionType.Door]: "门",
-  [ConstructionType.Mailbox]: "信箱",
-  [ConstructionType.Bridge]: "桥梁",
-  [ConstructionType.Incline]: "斜坡",
-  [ConstructionType.Other]: "建筑",
+  [ConstructionType.Roofing]: '屋顶',
+  [ConstructionType.Siding]: '墙壁',
+  [ConstructionType.Door]: '门',
+  [ConstructionType.Mailbox]: '信箱',
+  [ConstructionType.Bridge]: '桥梁',
+  [ConstructionType.Incline]: '斜坡',
+  [ConstructionType.Other]: '建筑',
 };
 
 export function getConstructionTypeName(type: ConstructionType): string {
@@ -459,11 +470,11 @@ export function getConstructionTypeName(type: ConstructionType): string {
 }
 
 export function getConstructionTypeIcon(type: ConstructionType): string {
-  return `/acnh-catalog/img/icon/construction_type/construction_type_${type}.png`;
+  return getImgUrl(`img/icon/construction_type/construction_type_${type}.png`);
 }
 
 export function getItemTypeIcon(type: ItemType): string {
-  return `/acnh-catalog/img/icon/item_type/item_type_${type}.png`;
+  return getImgUrl(`img/icon/item_type/item_type_${type}.png`);
 }
 
 export async function loadItemsData(): Promise<Item[]> {
@@ -474,7 +485,7 @@ export async function loadItemsData(): Promise<Item[]> {
     }
     return (await response.json()) as Item[];
   } catch (error) {
-    console.error("加载物品数据失败:", error);
+    console.error('加载物品数据失败:', error);
     throw error;
   }
 }
@@ -483,7 +494,7 @@ export async function loadCatalogData(): Promise<Set<number>> {
   try {
     const response = await fetch(CONFIG.DATA_FILES.CATALOG);
     if (!response.ok) {
-      console.log("无法加载 catalog_items.json，将不显示拥有状态");
+      console.log('无法加载 catalog_items.json，将不显示拥有状态');
       return new Set();
     }
 
@@ -498,7 +509,7 @@ export async function loadCatalogData(): Promise<Set<number>> {
     console.log(`已加载 ${ownedIds.size} 个拥有的物品`);
     return ownedIds;
   } catch (error) {
-    console.log("无法加载 catalog_items.json，将不显示拥有状态");
+    console.log('无法加载 catalog_items.json，将不显示拥有状态');
     return new Set();
   }
 }
@@ -511,7 +522,7 @@ export async function loadVillagersData(): Promise<Villager[]> {
     }
     return (await response.json()) as Villager[];
   } catch (error) {
-    console.error("加载村民数据失败:", error);
+    console.error('加载村民数据失败:', error);
     throw error;
   }
 }
@@ -524,7 +535,7 @@ export async function loadNPCsData(): Promise<NPC[]> {
     }
     return (await response.json()) as NPC[];
   } catch (error) {
-    console.error("加载NPC数据失败:", error);
+    console.error('加载NPC数据失败:', error);
     throw error;
   }
 }
@@ -537,7 +548,7 @@ export async function loadCreaturesData(): Promise<Creature[]> {
     }
     return (await response.json()) as Creature[];
   } catch (error) {
-    console.error("加载生物数据失败:", error);
+    console.error('加载生物数据失败:', error);
     throw error;
   }
 }
@@ -550,7 +561,7 @@ export async function loadReactionsData(): Promise<Reaction[]> {
     }
     return (await response.json()) as Reaction[];
   } catch (error) {
-    console.error("加载表情反应数据失败:", error);
+    console.error('加载表情反应数据失败:', error);
     throw error;
   }
 }
@@ -563,7 +574,7 @@ export async function loadRecipesData(): Promise<Recipe[]> {
     }
     return (await response.json()) as Recipe[];
   } catch (error) {
-    console.error("加载DIY配方数据失败:", error);
+    console.error('加载DIY配方数据失败:', error);
     throw error;
   }
 }
@@ -576,7 +587,7 @@ export async function loadConstructionsData(): Promise<Construction[]> {
     }
     return (await response.json()) as Construction[];
   } catch (error) {
-    console.error("加载改建数据失败:", error);
+    console.error('加载改建数据失败:', error);
     throw error;
   }
 }
@@ -589,7 +600,7 @@ export async function loadMessageCardsData(): Promise<MessageCard[]> {
     }
     return (await response.json()) as MessageCard[];
   } catch (error) {
-    console.error("加载贺卡数据失败:", error);
+    console.error('加载贺卡数据失败:', error);
     throw error;
   }
 }
@@ -602,7 +613,7 @@ export async function loadArtworkData(): Promise<Artwork[]> {
     }
     return (await response.json()) as Artwork[];
   } catch (error) {
-    console.error("加载艺术品数据失败:", error);
+    console.error('加载艺术品数据失败:', error);
     throw error;
   }
 }
@@ -615,7 +626,7 @@ export async function loadFossilsData(): Promise<Fossil[]> {
     }
     return (await response.json()) as Fossil[];
   } catch (error) {
-    console.error("加载化石数据失败:", error);
+    console.error('加载化石数据失败:', error);
     throw error;
   }
 }
@@ -630,7 +641,7 @@ export async function loadTranslations(): Promise<Translations> {
     translationsCache = data;
     return data;
   } catch (error) {
-    console.error("加载翻译数据失败:", error);
+    console.error('加载翻译数据失败:', error);
     throw error;
   }
 }

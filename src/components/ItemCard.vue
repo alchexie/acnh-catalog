@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { computed, onMounted, watch } from "vue";
-import { joinArray } from "../utils/common";
-import { getItemTypeIcon } from "../services/dataService";
-import { ItemModel } from "../models";
-import BaseCard from "./BaseCard.vue";
-import ColorBlock from "./ColorBlock.vue";
-import SourceList from "./SourceList.vue";
-import { UI_TEXT } from "../constants";
-import { Color } from "../types/item";
-import { useItemDetailModal } from "../composables/useItemDetailModal";
+import { computed, onMounted, watch } from 'vue';
+import { joinArray } from '../utils/common';
+import { getImgUrl, getItemTypeIcon } from '../services/dataService';
+import { ItemModel } from '../models';
+import BaseCard from './BaseCard.vue';
+import ColorBlock from './ColorBlock.vue';
+import SourceList from './SourceList.vue';
+import { UI_TEXT } from '../constants';
+import { Color } from '../types/item';
+import { useItemDetailModal } from '../composables/useItemDetailModal';
 
 const props = defineProps<{
   data: ItemModel;
@@ -82,11 +82,7 @@ const handleClick = () => {
         />
         ID: {{ displayId }}
       </span>
-      <ColorBlock
-        v-if="displayColors.length > 0"
-        :colors="displayColors"
-        :size="16"
-      />
+      <ColorBlock v-if="displayColors.length > 0" :colors="displayColors" :size="16" />
     </span>
     <div class="detail-row">
       <span class="detail-label">尺寸</span>
@@ -98,7 +94,7 @@ const handleClick = () => {
     </div> -->
     <div v-if="!itemModel.isClothing" class="detail-row">
       <span class="detail-label">HHA分数</span>
-      <span class="detail-value">{{ itemModel.hhaPoints || "--" }}</span>
+      <span class="detail-value">{{ itemModel.hhaPoints || '--' }}</span>
     </div>
     <div v-if="!itemModel.isClothing" class="detail-row">
       <span class="detail-label">HHA主题</span>
@@ -121,15 +117,11 @@ const handleClick = () => {
 
     <div v-if="itemModel.isClothing" class="detail-row">
       <span class="detail-label">服饰风格</span>
-      <span class="detail-value">{{
-        joinArray(itemModel.clothingStyleNames)
-      }}</span>
+      <span class="detail-value">{{ joinArray(itemModel.clothingStyleNames) }}</span>
     </div>
     <div v-if="itemModel.isClothing" class="detail-row">
       <span class="detail-label">服饰主题</span>
-      <span class="detail-value">{{
-        joinArray(itemModel.closingThemeNames)
-      }}</span>
+      <span class="detail-value">{{ joinArray(itemModel.closingThemeNames) }}</span>
     </div>
     <div class="detail-row">
       <span class="detail-label">季节/庆典</span>
@@ -158,21 +150,17 @@ const handleClick = () => {
     </div>
     <div class="detail-row">
       <span class="detail-label">{{ UI_TEXT.LABELS.PRICE }}</span>
-      <span class="detail-value highlight" v-html="itemModel.sellPriceStr">
-      </span>
+      <span class="detail-value highlight" v-html="itemModel.sellPriceStr"> </span>
     </div>
 
     <div
       v-if="itemModel.hasVariations"
-      :class="[
-        'variants-section',
-        { 'variants-section--pink': !itemModel.canCustomize },
-      ]"
+      :class="['variants-section', { 'variants-section--pink': !itemModel.canCustomize }]"
     >
       <span class="variants-label">
         <img
           v-if="itemModel.canCustomize"
-          src="/acnh-catalog/img/icon/icon_cus_v.png"
+          :src="getImgUrl('img/icon/icon_cus_v.png')"
           :alt="itemModel.typeName"
           :title="itemModel.typeName"
           class="inline-icon"
@@ -198,7 +186,7 @@ const handleClick = () => {
       <span v-if="itemModel.hasPatterns" class="variants-label">
         <img
           v-if="itemModel.canCustomize"
-          src="/acnh-catalog/img/icon/icon_cus_p.png"
+          :src="getImgUrl('img/icon/icon_cus_p.png')"
           :alt="itemModel.typeName"
           :title="itemModel.typeName"
           class="inline-icon"
@@ -223,11 +211,7 @@ const handleClick = () => {
       <div v-if="itemModel.canCustomize" class="detail-row">
         <span class="detail-label">花费</span>
         <span class="detail-value">
-          <div
-            v-for="(str, index) in displayCusCostStrs"
-            :key="index"
-            v-html="str"
-          ></div>
+          <div v-for="(str, index) in displayCusCostStrs" :key="index" v-html="str"></div>
         </span>
       </div>
     </div>
@@ -235,7 +219,7 @@ const handleClick = () => {
 </template>
 
 <style scoped lang="scss">
-@use "../styles/card-styles";
+@use '../styles/card-styles';
 .variants-section {
   background: #fff9e6;
   border-radius: var(--border-radius-xl);
