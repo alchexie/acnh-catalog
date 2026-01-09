@@ -1,9 +1,11 @@
+/// <reference types="vite/client" />
+
 import { Color } from '../types';
 
 /**
  * 应用配置常量
  */
-export const BASE_PATH = '/acnh-catalog/'; // = import.meta.env.BASE_URL;
+export const BASE_PATH = import.meta.env.BASE_URL;
 
 /**
  * 数据文件路径配置

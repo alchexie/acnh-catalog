@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { BASE_PATH } from '../config';
 
-const baseUrl = import.meta.env.BASE_URL;
+const baseUrl = BASE_PATH;
 const expandedSections = ref({
   patterns: true,
   polishings: true,
