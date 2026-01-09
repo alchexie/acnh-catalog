@@ -212,7 +212,6 @@ const handleClick = () => {
           class="variation-dot"
           :class="{
             active: pIdx === patternIndex,
-            blue: itemModel.isPatternCusOnlyByCyrus(pIdx),
           }"
           :title="p.name || `${itemModel.pTitleName} ${pIdx + 1}`"
           @click="patternIndex = pIdx"

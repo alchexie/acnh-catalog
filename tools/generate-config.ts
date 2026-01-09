@@ -220,7 +220,6 @@ function processVariations(oldItem: OldItem): Variant[] {
   }
 
   let cusKitCost = oldItem.kitCost || 0;
-  let cusKitType: KitType = KitType.Normal;
   const variantMap = new Map<string, Variant>();
 
   oldItem.variations.forEach((v) => {
@@ -237,12 +236,9 @@ function processVariations(oldItem: OldItem): Variant[] {
 
     const variant = variantMap.get(variantName)!;
     const patternColors = v.colors || oldItem.colors || [];
-
-    if (v.kitType && v.variation !== "Damaged") {
-      cusKitType = kitTypeMap[v.kitType];
-    } else {
+    let cusKitType = v.kitType ? kitTypeMap[v.kitType] : KitType.Normal;
+    if (v.variation === "Damaged") {
       cusKitCost = 0;
-      cusKitType = KitType.Normal;
     }
     const cusPrice = v.cyrusCustomizePrice || 0;
     const cus = [cusPrice, [cusKitCost, cusKitType]] as [number, CusCost];
@@ -369,7 +365,11 @@ function convertItem(oldItem: OldItem): NewItem {
     variants: variants.length > 0 ? variants : undefined,
     vt: oldItem.bodyTitle || undefined,
     pt: oldItem.variations?.[0].patternTitle || undefined,
-    iv: oldItem.bodyCustomize || isContainsDamaged || undefined,
+    iv:
+      oldItem.bodyCustomize ||
+      oldItem.customize ||
+      isContainsDamaged ||
+      undefined,
     ip: oldItem.patternCustomize || undefined,
   };
 }

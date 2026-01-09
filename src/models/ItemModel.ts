@@ -303,24 +303,8 @@ export class ItemModel {
 
   isVariantCusOnlyByCyrus(vIndex?: number): boolean {
     if (!this.canCustomize) return false;
-    if (!this._data.iv) return true; // 图案可定制则不是纯定制
-    let vIdx = vIndex === undefined ? this.variantIndex : vIndex;
-    const variant = this.variantGroups[vIdx];
-    if (!variant) return false;
-    const pattern = variant.patterns[0];
-    if (!pattern) return false;
-    if (!pattern.cus) return false;
-    if (pattern.cus[1][0]) return false;
-    return true;
-  }
-
-  isPatternCusOnlyByCyrus(pIndex?: number): boolean {
-    if (!this.canCustomize) return false;
-    if (!this._data.ip) return true; // 变体可定制则不是纯定制
-    let pIdx = pIndex === undefined ? this.patternIndex : pIndex;
-    const variant = this.variantGroups[0];
-    if (!variant) return false;
-    const pattern = variant.patterns[pIdx];
+    if (!this._data.iv) return true;
+    const pattern = this.getPattern(vIndex, 0);
     if (!pattern) return false;
     if (!pattern.cus) return false;
     if (pattern.cus[1][0]) return false;
