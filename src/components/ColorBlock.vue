@@ -6,7 +6,7 @@
 import { computed } from 'vue';
 import { COLOR_MAP } from '../config';
 import { Color } from '../types';
-import { getColorName } from '../services/dataService';
+import { getColorName } from '../services/nameService';
 
 // 彩虹颜色常量
 const RAINBOW_COLORS = [

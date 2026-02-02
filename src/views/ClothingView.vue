@@ -15,7 +15,7 @@ import {
   getClothingThemeName,
   getClothingStyleName,
   getCatalogName,
-} from '../services/dataService';
+} from '../services/nameService';
 import { ItemType, Version, Color, ClothingTypes, Catalog } from '../types/item';
 import { useActivitysData } from '../composables/useActivitysData';
 

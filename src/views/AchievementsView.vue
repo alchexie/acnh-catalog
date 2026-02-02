@@ -5,7 +5,7 @@ import { useFilter } from '../composables/useFilter';
 import DataView from '../components/DataView.vue';
 import FilterSection, { type Filter } from '../components/FilterSection.vue';
 import AchievementCard from '../components/AchievementCard.vue';
-import { getVersionName } from '../services/dataService';
+import { getVersionName } from '../services/nameService';
 import { Version } from '../types/item';
 
 const { data: allAchievements, status, error, loadData } = useAchievementsData();

@@ -5,14 +5,13 @@ import BaseCard from './BaseCard.vue';
 import DetailRow from './common/DetailRow.vue';
 import InlineIcon from './common/InlineIcon.vue';
 import ItemIcon from './ItemIcon.vue';
+import { getGenderIcon, getConstellationIcon } from '../services/iconService';
 import {
-  getGenderIcon,
   getGenderName,
-  getConstellation,
-  getConstellationIcon,
   getConstellationName,
   getHobbyName,
-} from '../services/dataService';
+} from '../services/nameService';
+import { getConstellation } from '../utils/dateUtils';
 
 const props = defineProps<{
   data: NPC;

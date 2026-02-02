@@ -13,7 +13,7 @@ import {
   getPersonalityName,
   getSpeciesName,
   getVersionName,
-} from '../services/dataService';
+} from '../services/nameService';
 import { useItemsData } from '../composables';
 
 const { loadData: loadItems } = useItemsData();

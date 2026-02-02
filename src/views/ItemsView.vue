@@ -22,7 +22,7 @@ import {
   getHHASetsOrder,
   getHHASeriesOrder,
   getHHAConceptsOrder,
-} from '../services/dataService';
+} from '../services/nameService';
 import {
   ItemType,
   Version,

@@ -2,12 +2,12 @@
 import { computed, onMounted, watch, ref } from 'vue';
 import { joinArray } from '../utils/common';
 import {
-  getImgUrl,
   getItemTypeIcon,
   getItemSubtypeIcon,
   getSizeIcon,
   getCatalogIcon,
-} from '../services/dataService';
+} from '../services/iconService';
+import { getImgUrl } from '../utils/imageUtils';
 import { ItemModel } from '../models';
 import BaseCard from './BaseCard.vue';
 import DetailRow from './common/DetailRow.vue';

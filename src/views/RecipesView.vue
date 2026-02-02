@@ -7,7 +7,7 @@ import { RecipeType, type Recipe } from '../types/recipe';
 import DataView from '../components/DataView.vue';
 import RecipeCard from '../components/RecipeCard.vue';
 import FilterSection from '../components/FilterSection.vue';
-import { getRecipeTypeName } from '../services/dataService';
+import { getRecipeTypeName } from '../services/nameService';
 
 const { data: allRecipes, status, error, loadData } = useRecipesData();
 const loading = computed(() => status.value === 'loading');

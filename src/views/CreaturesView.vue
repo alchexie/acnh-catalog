@@ -7,7 +7,7 @@ import CreatureCard from '../components/CreatureCard.vue';
 import FilterSection from '../components/FilterSection.vue';
 import ToggleGroup from '../components/ToggleGroup.vue';
 import { CreatureType, type Creature } from '../types';
-import { getCreatureTypeName } from '../services/dataService';
+import { getCreatureTypeName } from '../services/nameService';
 
 const { data: allCreatures, status, error, loadData } = useCreaturesData();
 const loading = computed(() => status.value === 'loading');

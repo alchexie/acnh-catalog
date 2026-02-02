@@ -6,7 +6,7 @@ import DataView from '../components/DataView.vue';
 import ConstructionCard from '../components/ConstructionCard.vue';
 import FilterSection from '../components/FilterSection.vue';
 import { ConstructionType } from '../types/construction';
-import { getConstructionTypeName } from '../services/dataService';
+import { getConstructionTypeName } from '../services/nameService';
 
 const { data: allConstruction, status, error, loadData } = useConstructionData();
 const loading = computed(() => status.value === 'loading');

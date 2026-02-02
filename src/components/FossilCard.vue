@@ -4,7 +4,7 @@ import { UI_TEXT } from '../constants';
 import type { Fossil } from '../types/fossil';
 import BaseCard from './BaseCard.vue';
 import DetailRow from './common/DetailRow.vue';
-import { getPriceWithIcon, getSizeWithIcon } from '../services/dataService';
+import { getPriceWithIcon, getSizeWithIcon } from '../utils/formatters';
 import { getFossilTypeName, ItemSize } from '../types';
 
 const props = defineProps<{

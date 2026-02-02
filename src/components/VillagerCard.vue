@@ -5,18 +5,16 @@ import BaseCard from './BaseCard.vue';
 import DetailRow from './common/DetailRow.vue';
 import InlineIcon from './common/InlineIcon.vue';
 import ItemIcon from './ItemIcon.vue';
+import { getSpeciesIcon, getGenderIcon, getConstellationIcon } from '../services/iconService';
 import {
   getClothingStyleName,
-  getGenderIcon,
+  getGenderName,
   getHobbyName,
   getPersonalityName,
   getSpeciesName,
-  getSpeciesIcon,
-  getConstellation,
-  getConstellationIcon,
   getConstellationName,
-  getGenderName,
-} from '../services/dataService';
+} from '../services/nameService';
+import { getConstellation } from '../utils/dateUtils';
 import { joinArray } from '../utils/common';
 import ColorBlock from './ColorBlock.vue';
 import { processImageUrl } from '../utils/imageUtils';

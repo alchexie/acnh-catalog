@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
 import { useItemsData } from '../composables/useItemsData';
-import { getPriceWithIcon, getSourceName } from '../services/dataService';
+import { getPriceWithIcon } from '../utils/formatters';
+import { getSourceName } from '../services/nameService';
 import { processImageUrl } from '../utils/imageUtils';
 import MaterialItem from './MaterialItem.vue';
 import ColorBlock from './ColorBlock.vue';

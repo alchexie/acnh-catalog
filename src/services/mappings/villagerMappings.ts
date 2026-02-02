@@ -2,6 +2,7 @@
  * 村民相关映射表
  */
 import { Personality, Hobby, Species } from '../../types';
+import { Constellation } from '../../utils/dateUtils';
 
 export const PersonalityNameMap: Record<Personality, string> = {
   [Personality.Cranky]: '暴躁',
@@ -60,24 +61,6 @@ export const SpeciesNameMap: Record<Species, string> = {
   [Species.Tiger]: '老虎',
   [Species.Wolf]: '狼',
 } as const;
-
-// 星座枚举
-export const Constellation = {
-  Aries: 1,
-  Taurus: 2,
-  Gemini: 3,
-  Cancer: 4,
-  Leo: 5,
-  Virgo: 6,
-  Libra: 7,
-  Scorpio: 8,
-  Sagittarius: 9,
-  Capricorn: 10,
-  Aquarius: 11,
-  Pisces: 12,
-} as const;
-
-export type Constellation = (typeof Constellation)[keyof typeof Constellation];
 
 export const ConstellationNameMap: Record<Constellation, string> = {
   [Constellation.Aries]: '白羊座',

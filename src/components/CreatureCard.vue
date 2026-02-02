@@ -6,12 +6,9 @@ import DetailRow from './common/DetailRow.vue';
 import InlineIcon from './common/InlineIcon.vue';
 import { computed } from 'vue';
 import { processImageUrl } from '../utils/imageUtils';
-import {
-  getPriceWithIcon,
-  getCreatureTypeName,
-  getCreatureTypeIcon,
-  getSizeWithIcon,
-} from '../services/dataService';
+import { getCreatureTypeIcon } from '../services/iconService';
+import { getCreatureTypeName } from '../services/nameService';
+import { getPriceWithIcon, getSizeWithIcon } from '../utils/formatters';
 
 const props = defineProps<{
   data: Creature;

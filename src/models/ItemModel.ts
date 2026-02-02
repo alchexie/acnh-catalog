@@ -1,6 +1,6 @@
 import { type Item, type Variant, type Pattern, type Price } from '../types';
 import { reactive } from 'vue';
-import { processImageUrl } from '../utils/imageUtils';
+import { processImageUrl, getImgUrl } from '../utils/imageUtils';
 import {
   getHHASeriesName,
   getTagName,
@@ -12,11 +12,9 @@ import {
   getClothingThemeName,
   getHHACategoryName,
   getItemVariantTitle,
-  getPriceWithIcon,
-  getCusCost,
   getCatalogName,
-  getImgUrl,
-} from '../services/dataService';
+} from '../services/nameService';
+import { getPriceWithIcon, getCusCost } from '../utils/formatters';
 import {
   ItemTypeNameMap,
   VersionNameMap,

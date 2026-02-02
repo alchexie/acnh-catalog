@@ -9,11 +9,9 @@ import MaterialItem from './MaterialItem.vue';
 import ActivityList from './ActivityList.vue';
 import SourceList from './SourceList.vue';
 import { processImageUrl } from '../utils/imageUtils';
-import {
-  getPriceWithIcon,
-  getRecipeTypeName,
-  getRecipeTypeIcon,
-} from '../services/dataService';
+import { getRecipeTypeIcon } from '../services/iconService';
+import { getRecipeTypeName } from '../services/nameService';
+import { getPriceWithIcon } from '../utils/formatters';
 import { useItemDetailModal } from '../composables/useItemDetailModal';
 import type { Price } from '../types';
 

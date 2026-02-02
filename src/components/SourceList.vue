@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { getSourceName } from '../services/dataService';
+import { getSourceName } from '../services/nameService';
 import TooltipWrapper from './TooltipWrapper.vue';
 
 const props = defineProps<{

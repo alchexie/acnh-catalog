@@ -3,10 +3,10 @@ import { computed, onMounted, watch } from 'vue';
 import { joinArray } from '../utils/common';
 import {
   getCatalogIcon,
-  getImgUrl,
   getItemTypeIcon,
   getSizeIcon,
-} from '../services/dataService';
+} from '../services/iconService';
+import { getImgUrl } from '../utils/imageUtils';
 import { ItemModel } from '../models';
 import BaseCard from './BaseCard.vue';
 import DetailRow from './common/DetailRow.vue';

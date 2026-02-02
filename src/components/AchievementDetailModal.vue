@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed, onMounted } from 'vue';
 import { useAchievementsData } from '../composables/useAchievementsData';
-import { getImgUrl, getPriceWithIcon } from '../services/dataService';
+import { getImgUrl } from '../utils/imageUtils';
+import { getPriceWithIcon } from '../utils/formatters';
 import { Currency } from '../types';
 
 const props = defineProps<{

@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import {
-  getPriceWithIcon,
-  getItemTypeName,
-  getSizeWithIcon,
-} from '../services/dataService';
+import { getItemTypeName } from '../services/nameService';
+import { getPriceWithIcon, getSizeWithIcon } from '../utils/formatters';
 import type { Artwork } from '../types/artwork';
 import BaseCard from './BaseCard.vue';
 import DetailRow from './common/DetailRow.vue';

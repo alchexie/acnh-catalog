@@ -4,11 +4,9 @@ import DetailRow from './common/DetailRow.vue';
 import InlineIcon from './common/InlineIcon.vue';
 import type { Plant } from '../types/plant';
 import { UI_TEXT } from '../constants';
-import {
-  getPlantTypeName,
-  getPlantTypeIcon,
-  getPriceWithIcon,
-} from '../services/dataService';
+import { getPlantTypeIcon } from '../services/iconService';
+import { getPlantTypeName } from '../services/nameService';
+import { getPriceWithIcon } from '../utils/formatters';
 import ItemIcon from './ItemIcon.vue';
 import { computed, onMounted } from 'vue';
 import { useItemsData } from '../composables/useItemsData';

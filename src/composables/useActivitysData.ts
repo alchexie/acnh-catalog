@@ -1,5 +1,6 @@
 import { ref } from 'vue';
-import { loadTranslations, translationsCache, getImgUrl } from '../services/dataService';
+import { loadTranslations, translationsCache } from '../services/translationService';
+import { getImgUrl } from '../utils/imageUtils';
 import { CONFIG } from '../config';
 import type { Activity } from '../types/activity';
 

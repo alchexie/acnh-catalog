@@ -6,7 +6,7 @@ import FilterSection from '../components/FilterSection.vue';
 import { usePlantsData } from '../composables/usePlantsData';
 import { useFilter } from '../composables/useFilter';
 import { PlantType, type Plant } from '../types/plant';
-import { getPlantTypeName } from '../services/dataService';
+import { getPlantTypeName } from '../services/nameService';
 
 const { data: allPlants, status, error, loadData } = usePlantsData();
 const loading = computed(() => status.value === 'loading');

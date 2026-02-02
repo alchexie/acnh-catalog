@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import { loadTranslations } from '../services/dataService';
+import { loadTranslations } from '../services/translationService';
 import { useActivitysData } from './useActivitysData';
 
 const isInitialized = ref(false);

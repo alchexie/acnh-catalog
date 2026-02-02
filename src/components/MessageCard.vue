@@ -3,7 +3,7 @@ import type { MessageCard } from '../types/messagecard';
 import BaseCard from './BaseCard.vue';
 import DetailRow from './common/DetailRow.vue';
 import { selectHighestContrastColor } from '../utils/common';
-import { getPriceWithIcon } from '../services/dataService';
+import { getPriceWithIcon } from '../utils/formatters';
 import { computed } from 'vue';
 
 const props = defineProps<{

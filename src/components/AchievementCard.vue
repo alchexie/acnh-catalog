@@ -2,7 +2,7 @@
 import type { Achievement } from '../types/achievement';
 import VersionBadge from './VersionBadge.vue';
 import { computed, ref } from 'vue';
-import { getImgUrl } from '../services/dataService';
+import { getImgUrl } from '../utils/imageUtils';
 import { useAchievementDetailModal } from '../composables/useAchievementDetailModal';
 
 const props = defineProps<{

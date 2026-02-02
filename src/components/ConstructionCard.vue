@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { UI_TEXT } from '../constants';
-import {
-  getPriceWithIcon,
-  getConstructionTypeName,
-  getConstructionTypeIcon,
-} from '../services/dataService';
+import { getConstructionTypeIcon } from '../services/iconService';
+import { getConstructionTypeName } from '../services/nameService';
+import { getPriceWithIcon } from '../utils/formatters';
 import type { Construction } from '../types/construction';
 import BaseCard from './BaseCard.vue';
 import DetailRow from './common/DetailRow.vue';

@@ -49,7 +49,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { getImgUrl } from '../services/dataService';
+import { getImgUrl } from '../utils/imageUtils';
 
 const showModal = ref(false);
 const selectedIsland = ref<{ row: number; col: number } | null>(null);
