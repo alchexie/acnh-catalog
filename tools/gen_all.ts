@@ -38,8 +38,9 @@ save(fossils, 'acnh-fossils.json');
 const artworks = genArtwork();
 save(artworks, 'acnh-artworks.json');
 
-const plants = genPlant(items);
-save(plants, 'acnh-plants.json');
+// 因为原始数据中的item数据剔除了植株 已到了Plants中，所暂时不需要重新生成acnh-plants.json
+// const plants = genPlant(items);
+// save(plants, 'acnh-plants.json');
 
 const musics = genMusic();
 save(musics, 'acnh-musics.json');

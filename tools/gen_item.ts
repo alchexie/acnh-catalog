@@ -492,7 +492,9 @@ export function genItem(): Item[] {
         sheetData['Image'] = sheetData['Framed Image'];
       }
       if (sheetName === 'Other') {
-        if (sheetData['Storage Image'] && sheetData['Storage Image'] !== 'NA') {
+        if (sheetData['Shop Image'] && sheetData['Shop Image'] !== 'NA') {
+          sheetData['Image'] = sheetData['Shop Image'];
+        } else if (sheetData['Storage Image'] && sheetData['Storage Image'] !== 'NA') {
           sheetData['Image'] = sheetData['Storage Image'];
         } else {
           sheetData['Image'] = sheetData['Inventory Image'];

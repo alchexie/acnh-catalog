@@ -74,11 +74,11 @@ function loadDataExcel() {
 
     sheetDatas[sheetName] = objectData;
     // 如果有数据，写入JSON文件
-    //   if (objectData.length > 0) {
-    //     const outputFilePath = path.join(outputDir, `${sheetName}.json`);
-    //     fs.writeFileSync(outputFilePath, JSON.stringify(objectData, null, 2));
-    //     console.log(`Exported ${sheetName} to ${outputFilePath}`);
-    //   }
+      // if (objectData.length > 0) {
+      //   const outputFilePath = path.join(outputDir, `${sheetName}.json`);
+      //   fs.writeFileSync(outputFilePath, JSON.stringify(objectData, null, 2));
+      //   console.log(`Exported ${sheetName} to ${outputFilePath}`);
+      // }
   });
   return sheetDatas;
 }

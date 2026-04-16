@@ -54,7 +54,10 @@ const handleClick = () => {
     />
     <div
       v-if="showProduct || showSeeds"
-      :class="['icon-grid', { 'icon-grid--cols-2': showProduct && showSeeds }]"
+      :class="[
+        'icon-grid',
+        showProduct && showSeeds ? 'icon-grid--cols-2' : 'icon-grid--cols-1',
+      ]"
     >
       <div v-if="showSeeds" class="icon-grid-item">
         <ItemIcon :itemId="props.data.seeds!" :size="72" />
