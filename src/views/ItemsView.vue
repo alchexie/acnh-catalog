@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useItemsData } from '../composables/useItemsData';
-import { updateSelections, useSelection } from '../composables/useSelection';
+import { updateSelections } from '../composables/useSelection';
 import { useFilter } from '../composables/useFilter';
 import DataView from '../components/DataView.vue';
 import FilterSection, { type Filter } from '../components/FilterSection.vue';
@@ -234,7 +234,7 @@ const { filteredData, handleFiltersChanged } = useFilter(
 
     // 拥有状态筛选
     if (selectedFilters.owned !== undefined) {
-      if (isSelected(item.id) !== (selectedFilters.owned === 1)) return false;
+      if (item.isAnyOwned !== (selectedFilters.owned === 1)) return false;
     }
 
     // 版本筛选
@@ -326,9 +326,8 @@ const sortedItems = computed(() => {
 });
 
 // 计算拥有的物品数量
-const { isSelected } = useSelection('items');
 const ownedItemsCount = computed(
-  () => allItems.value.filter((item) => isSelected(item.id)).length
+  () => allItems.value.filter((item) => item.isAnyOwned).length
 );
 
 // 处理目录文件上传

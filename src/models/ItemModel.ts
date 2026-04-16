@@ -45,10 +45,11 @@ const { idMap: recipeIdMap } = useRecipesData();
 const { getGroupsByIds, getGroupName } = useActivitysData();
 export class ItemModel {
   private readonly _data: Item;
+  private _selectIds: number[] | null = null;
   private _state: {
     currentVariantIndex: number;
     currentPatternIndex: number;
-    owned: boolean;
+    ownedIds: Record<string, boolean>;
   };
 
   constructor(item: Item) {
@@ -56,7 +57,7 @@ export class ItemModel {
     this._state = reactive({
       currentVariantIndex: 0,
       currentPatternIndex: 0,
-      owned: false,
+      ownedIds: {},
     });
   }
 
@@ -64,12 +65,50 @@ export class ItemModel {
     return this._data;
   }
 
-  get owned(): boolean {
-    return this._state.owned;
+  /**
+   * 设置指定 ID 的拥有状态
+   */
+  setOwned(id: number | string, value: boolean) {
+    this._state.ownedIds[String(id)] = value;
   }
 
-  set owned(value: boolean) {
-    this._state.owned = value;
+  /**
+   * 判断指定 ID 是否拥有
+   */
+  isOwned(id: number | string): boolean {
+    return this._state.ownedIds[String(id)] === true;
+  }
+
+  /**
+   * 是否部分拥有（至少有一个变体/本体被选中）
+   * 对于无变体的道具，等同于判断是否拥有
+   */
+  get isAnyOwned(): boolean {
+    return this.getAllSelectIds().some((id) => this._state.ownedIds[String(id)] === true);
+  }
+
+  /**
+   * 是否全部拥有（所有变体都被选中）
+   */
+  get isAllOwned(): boolean {
+    return this.getAllSelectIds().every((id) => this._state.ownedIds[String(id)] === true);
+  }
+
+  /**
+   * 获取所有可勾选的 ID
+   * 有变体时返回所有变体 ID，无变体时返回主 ID
+   */
+  getAllSelectIds(): number[] {
+    if (!this._selectIds) {
+      const variantIds: number[] = [];
+      for (const group of (this._data.vs || [])) {
+        for (const pattern of group) {
+          if (pattern.id) variantIds.push(pattern.id);
+        }
+      }
+      this._selectIds = variantIds.length > 0 ? variantIds : [this._data.id];
+    }
+    return this._selectIds;
   }
   // ============ 基础属性访问 ============
   get id(): number {

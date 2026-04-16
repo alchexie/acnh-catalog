@@ -89,7 +89,7 @@ const toggleHhaExpanded = () => {
     :icon="icon"
     :displayName="itemModel.name"
     :shape="'rounded'"
-    :getSelectId="() => itemModel.id"
+    :getSelectId="() => itemModel.getAllSelectIds()"
     v-bind="$attrs"
     @click="handleClick"
   >

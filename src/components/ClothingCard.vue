@@ -78,7 +78,7 @@ const handleClick = () => {
     :icon="icon"
     :displayName="itemModel.name"
     :shape="'rounded'"
-    :getSelectId="() => itemModel.variantGroups.flatMap(variant => variant.map(pattern => pattern.id).filter(id => id !== undefined))"
+    :getSelectId="() => itemModel.getAllSelectIds()"
     v-bind="$attrs"
     @click="handleClick"
   >

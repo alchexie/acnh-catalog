@@ -3,6 +3,8 @@ import { ItemModel } from '../models/ItemModel';
 import { CONFIG } from '../config';
 import { useRecipesData } from './useRecipesData';
 import { createDataLoader } from './core/useDataLoader';
+import { selections } from './useSelection';
+import { watchEffect } from 'vue';
 
 // 确保配方数据先加载
 const { loadData: loadRecipes } = useRecipesData();
@@ -30,4 +32,15 @@ export const useItemsData = createDataLoader<Item, ItemModel>({
     return ids;
   },
   errorMessage: '加载物品数据失败',
+});
+
+// 将 selections 状态同步到 ItemModel.ownedIds
+const { data: itemsData } = useItemsData();
+watchEffect(() => {
+  const sel = selections.value['items'] || {};
+  itemsData.value.forEach((item) => {
+    item.getAllSelectIds().forEach((id) => {
+      item.setOwned(id, sel[String(id)] === true);
+    });
+  });
 });

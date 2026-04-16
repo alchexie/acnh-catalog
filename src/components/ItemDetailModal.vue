@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
 import { useItemsData } from '../composables/useItemsData';
-import { useSelection } from '../composables/useSelection';
 import { getPriceWithIcon } from '../utils/formatters';
 import { getSourceName } from '../services/nameService';
 import { processImageUrl } from '../utils/imageUtils';
@@ -76,20 +75,7 @@ const allVariants = computed(() => {
 });
 
 // 拥有状态
-const { isSelected: isItemSelected } = useSelection('items');
-const isOwned = computed(() => {
-  const model = itemModel.value;
-  if (!model) return false;
-  // 检查主 ID
-  if (isItemSelected(model.id)) return true;
-  // 服饰使用变体 ID，检查是否有任何变体被选中
-  for (const group of model.variantGroups) {
-    for (const pattern of group) {
-      if (pattern.id && isItemSelected(pattern.id)) return true;
-    }
-  }
-  return false;
-});
+const isOwned = computed(() => itemModel.value?.isAnyOwned || false);
 
 // 返回首页
 const closeModal = () => {

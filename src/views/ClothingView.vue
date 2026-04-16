@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useItemsData } from '../composables/useItemsData';
-import { updateSelections, useSelection } from '../composables/useSelection';
+import { updateSelections } from '../composables/useSelection';
 import { useFilter } from '../composables/useFilter';
 import DataView from '../components/DataView.vue';
 import FilterSection, { type Filter } from '../components/FilterSection.vue';
@@ -148,7 +148,7 @@ const { filteredData, handleFiltersChanged } = useFilter(
 
     // 拥有状态筛选
     if (selectedFilters.owned !== undefined) {
-      if (isClothingOwned(item) !== (selectedFilters.owned === 1)) return false;
+      if (item.isAnyOwned !== (selectedFilters.owned === 1)) return false;
     }
 
     // 版本筛选
@@ -211,20 +211,8 @@ const sortedItems = computed(() => {
 });
 
 // 计算拥有的物品数量
-const { isSelected } = useSelection('items');
-
-// 服饰使用变体 ID 做勾选，需要检查是否有任何变体被选中
-const isClothingOwned = (item: InstanceType<typeof import('../models/ItemModel').ItemModel>) => {
-  for (const group of item.variantGroups) {
-    for (const pattern of group) {
-      if (pattern.id && isSelected(pattern.id)) return true;
-    }
-  }
-  return false;
-};
-
 const ownedItemsCount = computed(
-  () => allItems.value.filter((item) => isClothingOwned(item)).length
+  () => allItems.value.filter((item) => item.isAnyOwned).length
 );
 
 // 处理目录文件上传
