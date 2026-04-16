@@ -39,7 +39,7 @@ export { selections, saveSelections };
  */
 export const updateSelections = (
   catalogData: {
-    items: Array<{ unique_id: number; variations?: Array<{ unique_id: number }> }>;
+    items: Array<{ unique_id: number }>;
   },
   selectionKey: string = 'items'
 ): void => {
@@ -51,9 +51,6 @@ export const updateSelections = (
   // 设置上传的物品为已勾选
   catalogData.items.forEach((item) => {
     selections.value[selectionKey]![String(item.unique_id)] = true;
-    item.variations?.forEach((variation) => {
-      selections.value[selectionKey]![String(variation.unique_id)] = true;
-    });
   });
 
   // 保存到 localStorage

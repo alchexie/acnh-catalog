@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useItemsData } from '../composables/useItemsData';
-import { updateSelections } from '../composables/useSelection';
+import { updateSelections, useSelection } from '../composables/useSelection';
 import { useFilter } from '../composables/useFilter';
 import DataView from '../components/DataView.vue';
 import FilterSection, { type Filter } from '../components/FilterSection.vue';
 import ItemCard from '../components/ItemCard.vue';
 import CatalogUploader from '../components/CatalogUploader.vue';
+import CatalogExporter from '../components/CatalogExporter.vue';
 import {
   getItemTypeName,
   getVersionName,
@@ -233,7 +234,7 @@ const { filteredData, handleFiltersChanged } = useFilter(
 
     // 拥有状态筛选
     if (selectedFilters.owned !== undefined) {
-      if (item.owned !== (selectedFilters.owned === 1)) return false;
+      if (isSelected(item.id) !== (selectedFilters.owned === 1)) return false;
     }
 
     // 版本筛选
@@ -325,8 +326,9 @@ const sortedItems = computed(() => {
 });
 
 // 计算拥有的物品数量
+const { isSelected } = useSelection('items');
 const ownedItemsCount = computed(
-  () => allItems.value.filter((item) => item.owned).length
+  () => allItems.value.filter((item) => isSelected(item.id)).length
 );
 
 // 处理目录文件上传
@@ -358,6 +360,7 @@ const handleCatalogUpload = (data: {
       >
         <template #action-buttons>
           <CatalogUploader @catalog-uploaded="handleCatalogUpload" />
+          <CatalogExporter selection-key="items" />
         </template>
       </FilterSection>
     </template>

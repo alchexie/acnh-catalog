@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useItemsData } from '../composables/useItemsData';
-import { updateSelections } from '../composables/useSelection';
+import { updateSelections, useSelection } from '../composables/useSelection';
 import { useFilter } from '../composables/useFilter';
 import DataView from '../components/DataView.vue';
 import FilterSection, { type Filter } from '../components/FilterSection.vue';
 import ClothingCard from '../components/ClothingCard.vue';
 import CatalogUploader from '../components/CatalogUploader.vue';
+import CatalogExporter from '../components/CatalogExporter.vue';
 import {
   getItemTypeName,
   getVersionName,
@@ -147,7 +148,7 @@ const { filteredData, handleFiltersChanged } = useFilter(
 
     // 拥有状态筛选
     if (selectedFilters.owned !== undefined) {
-      if (item.owned !== (selectedFilters.owned === 1)) return false;
+      if (isClothingOwned(item) !== (selectedFilters.owned === 1)) return false;
     }
 
     // 版本筛选
@@ -210,8 +211,20 @@ const sortedItems = computed(() => {
 });
 
 // 计算拥有的物品数量
+const { isSelected } = useSelection('items');
+
+// 服饰使用变体 ID 做勾选，需要检查是否有任何变体被选中
+const isClothingOwned = (item: InstanceType<typeof import('../models/ItemModel').ItemModel>) => {
+  for (const group of item.variantGroups) {
+    for (const pattern of group) {
+      if (pattern.id && isSelected(pattern.id)) return true;
+    }
+  }
+  return false;
+};
+
 const ownedItemsCount = computed(
-  () => allItems.value.filter((item) => item.owned).length
+  () => allItems.value.filter((item) => isClothingOwned(item)).length
 );
 
 // 处理目录文件上传
@@ -243,6 +256,7 @@ const handleCatalogUpload = (data: {
       >
         <template #action-buttons>
           <CatalogUploader @catalog-uploaded="handleCatalogUpload" />
+          <CatalogExporter selection-key="items" />
         </template>
       </FilterSection>
     </template>

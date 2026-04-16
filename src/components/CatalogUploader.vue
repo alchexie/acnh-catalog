@@ -50,7 +50,26 @@ const handleFileChange = async (event: Event) => {
     }
 
     uploadStatus.value = `成功加载 ${data.items.length} 个物品`;
-    emit('catalog-uploaded', data);
+    
+    // 将 variations 扁平化：把每个变体的 unique_id 提取为独立的 item
+    const flatItems: Array<{ label: string; unique_id: number }> = [];
+    const seenIds = new Set<number>();
+    data.items.forEach((item: any) => {
+      if (!seenIds.has(item.unique_id)) {
+        seenIds.add(item.unique_id);
+        flatItems.push({ label: item.label, unique_id: item.unique_id });
+      }
+      if (item.variations) {
+        item.variations.forEach((v: any) => {
+          if (!seenIds.has(v.unique_id)) {
+            seenIds.add(v.unique_id);
+            flatItems.push({ label: v.name || item.label, unique_id: v.unique_id });
+          }
+        });
+      }
+    });
+
+    emit('catalog-uploaded', { items: flatItems });
 
     // 3秒后清除状态消息
     setTimeout(() => {

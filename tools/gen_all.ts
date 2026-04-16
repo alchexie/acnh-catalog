@@ -6,7 +6,7 @@ import { genArtwork } from './gen_artwork';
 import { genFossil } from './gen_fossil';
 import { genMsgCard } from './gen_msg_card';
 import { genMusic } from './gen_music';
-import { genPlant } from './gen_plant';
+// import { genPlant } from './gen_plant';
 import { genRecipe } from './gen_recipe';
 import { genVillager } from './gen_villager';
 import { genNpc } from './gen_npc';
