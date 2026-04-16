@@ -96,6 +96,7 @@ export const Version = {
   The200: 13,
   The204: 14,
   The300: 15,
+  The302: 16
 } as const;
 
 export type Version = (typeof Version)[keyof typeof Version];

@@ -89,6 +89,7 @@ export const versionMap: Record<string, Version> = {
   '2.0.0': Version.The200,
   '2.0.4': Version.The204,
   '3.0.0': Version.The300,
+  '3.0.2': Version.The302
 };
 
 export const sizeMap: Record<string, ItemSize> = {
