@@ -16,9 +16,9 @@ export default defineConfig({
       targets: [
         // { src: 'public/catalog_items.json', dest: '.' },
         { src: 'public/translations.json', dest: '.' },
-        { src: 'public/config/**', dest: 'config' },
-        { src: 'public/img/**', dest: 'img' },
-        { src: 'public/sound/**', dest: 'sound' },
+        { src: 'public/config/*', dest: 'config' },
+        { src: 'public/img/*', dest: 'img' },
+        { src: 'public/sound/*', dest: 'sound' },
       ],
     }),
   ],
