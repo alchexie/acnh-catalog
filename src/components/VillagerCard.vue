@@ -104,6 +104,16 @@ const toggleFurnitureExpanded = () => {
     <DetailRow label="口头禅" :value="props.data.catchphrase" />
     <DetailRow label="个性签名" :value="props.data.saying" layout="full" />
 
+    <!-- 房屋图片 -->
+    <div v-if="props.data.houseImage" class="house-image-wrapper">
+      <img
+        :src="processImageUrl(props.data.houseImage)"
+        alt="House Image"
+        class="house-image"
+        loading="lazy"
+      />
+    </div>
+
     <!-- 默认物品图片 -->
     <div v-if="defaultItems.length > 0" class="icon-grid icon-grid--inline">
       <ItemIcon v-for="item in defaultItems" :key="item" :itemId="item" :size="60" />
@@ -131,14 +141,6 @@ const toggleFurnitureExpanded = () => {
             :vIndex="props.data.kitchenware[1]"
             :pIndex="props.data.kitchenware[2]"
             :size="60"
-          />
-          <img
-            v-if="props.data.houseImage"
-            :src="processImageUrl(props.data.houseImage)"
-            :alt="'House Image'"
-            :style="{ width: '60px', height: '60px', borderRadius: '4px' }"
-            :key="'houseImage'"
-            loading="lazy"
           />
         </div>
       </div>

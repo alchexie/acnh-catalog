@@ -81,3 +81,21 @@
   color: $color-text-secondary;
   text-align: center;
 }
+
+
+// --------------------------------------------
+// 房屋图片展示
+// --------------------------------------------
+
+.house-image-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: $spacing-sm;
+}
+
+.house-image {
+  width: 120px;
+  height: 120px;
+  border-radius: $radius-md;
+  object-fit: cover;
+}
