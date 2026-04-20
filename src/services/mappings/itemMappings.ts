@@ -39,6 +39,7 @@ export const ItemTypeNameMap: Record<ItemType, string> = {
   [ItemType.Music]: '音乐',
   [ItemType.Photos]: '照片',
   [ItemType.Posters]: '海报',
+  [ItemType.Plants]: '植物',
   [ItemType.Other]: '其他',
 };
 

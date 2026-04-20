@@ -31,7 +31,8 @@ export const ItemType = {
   Music: 25,
   Photos: 26,
   Posters: 27,
-  Other: 28,
+  Plants:28,
+  Other: 29,
 } as const;
 
 export type ItemType = (typeof ItemType)[keyof typeof ItemType];

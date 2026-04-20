@@ -57,6 +57,7 @@ const sheetNameMap: Record<string, ItemType> = {
   Fossils: ItemType.Fossils,
   Artwork: ItemType.Artwork,
   Gyroids: ItemType.Gyroids,
+  Plants: ItemType.Plants,
   Other: ItemType.Other,
 };
 
@@ -491,6 +492,14 @@ export function genItem(): Item[] {
       if (sheetName === 'Music') {
         sheetData['Image'] = sheetData['Framed Image'];
       }
+      if (sheetName === 'Plants') {
+        if (sheetData['Storage Image'] && sheetData['Storage Image'] !== 'NA') {
+          sheetData['Image'] = sheetData['Storage Image'];
+        } else {
+          sheetData['Image'] = sheetData['Inventory Image'];
+        }
+        sheetData['Icon Image'] = sheetData['Inventory Image'];
+      }
       if (sheetName === 'Other') {
         if (sheetData['Shop Image'] && sheetData['Shop Image'] !== 'NA') {
           sheetData['Image'] = sheetData['Shop Image'];
@@ -532,6 +541,7 @@ export function genItem(): Item[] {
         sheetName === 'Artwork' ||
         sheetName === 'Music' ||
         sheetName === 'Gyroids' ||
+        sheetName === 'Plants' ||
         sheetName === 'Other'
       ) {
         let id = Number(sheetData['Internal ID']);
