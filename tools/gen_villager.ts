@@ -17,10 +17,16 @@ export function genVillager(items?: Item[]): Villager[] {
   items = items || genItem();
   const sheetDatas = getSheetDatas();
   const villagerSheetDatas = sheetDatas['Villagers'];
+  const hhpSheetDatas = sheetDatas['Paradise Planning'];
   const itemMap = new Map<string, Item>();
   for (const item of items) {
     itemMap.set(item.nr, item);
   }
+  const hhpMap = new Map<string, any>();
+  for (const hhpSheetData of hhpSheetDatas) {
+    hhpMap.set(hhpSheetData['Name'], hhpSheetData);
+  }
+
   const villagers: Villager[] = [];
   for (const sheetData of villagerSheetDatas) {
     const id = sheetData['Filename'];
@@ -28,10 +34,25 @@ export function genVillager(items?: Item[]): Villager[] {
       processImageUrl
     );
 
+    let name = sheetData['Name'];
+    let hhpData = hhpMap.get(name);
+    let hhpFurnitures = [];
+    let hhpSong = 0;
+    let hhpReq = '';
+    let hhpMsg = '';
+    if (hhpData) {
+      hhpFurnitures = hhpData['Furniture List']
+        .split(';')
+        .map((s: string) => Number(s.trim()));
+      hhpSong = itemMap.get(hhpData['Song'])?.id || 0;
+      hhpReq = hhpData['Request'];
+      hhpMsg = hhpData['Thought bubble'];
+    }
+
     let villager: Villager = {
       id: id,
-      name: getTrans('Villagers', id) || sheetData['Name'],
-      rawName: sheetData['Name'],
+      name: getTrans('Villagers', id) || name,
+      rawName: name,
       images: images,
       ver: versionMap[sheetData['Version Added']],
       species: speciesMap[sheetData['Species']],
@@ -62,6 +83,12 @@ export function genVillager(items?: Item[]): Villager[] {
       houseImage: sheetData['House Image']
         ? processImageUrl(sheetData['House Image'])
         : undefined,
+
+      hhpSong: hhpSong,
+      hhpFurnitures: hhpFurnitures,
+      hhpReq: hhpReq,
+      hhpMsg: hhpMsg,
+
       bubbleColor: sheetData['Bubble Color'],
       nameColor: sheetData['Name Color'],
     };

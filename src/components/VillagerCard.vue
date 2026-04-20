@@ -17,7 +17,7 @@ import {
 import { getConstellation } from '../utils/dateUtils';
 import { joinArray } from '../utils/common';
 import ColorBlock from './ColorBlock.vue';
-import { processImageUrl } from '../utils/imageUtils';
+import { processImageUrl, getImgUrl } from '../utils/imageUtils';
 
 const props = defineProps<{
   data: Villager;
@@ -26,16 +26,17 @@ const props = defineProps<{
 
 const currentImageIndex = ref(0);
 const isFurnitureExpanded = ref(false);
+const isHhpExpanded = ref(false);
 const currentShape = computed(() =>
   currentImageIndex.value === 0 ? 'circle' : 'rounded'
 );
 
 const furnitureList = computed(() => {
-  return [...props.data.furnitures, props.data.wallpaper, props.data.flooring];
+  return [props.data.song, ...props.data.furnitures, props.data.wallpaper, props.data.flooring];
 });
 
 const defaultItems = computed(() => {
-  return [props.data.clothing, props.data.umbrella, props.data.song];
+  return [props.data.clothing, props.data.umbrella];
 });
 
 const handleClick = () => {
@@ -48,6 +49,10 @@ const handleImageIndexChanged = (index: number) => {
 
 const toggleFurnitureExpanded = () => {
   isFurnitureExpanded.value = !isFurnitureExpanded.value;
+};
+
+const toggleHhpExpanded = () => {
+  isHhpExpanded.value = !isHhpExpanded.value;
 };
 </script>
 
@@ -142,6 +147,29 @@ const toggleFurnitureExpanded = () => {
             :pIndex="props.data.kitchenware[2]"
             :size="60"
           />
+        </div>
+      </div>
+    </div>
+
+    <!-- 快乐家乐园 -->
+    <div v-if="props.data.hhpFurnitures.length > 0" class="panel panel--red">
+      <div class="panel-header" @click="toggleHhpExpanded">
+        <span class="panel-title">
+          <InlineIcon :src="getImgUrl('img/icon/hhp.png')" />
+          快乐家乐园 ({{ props.data.hhpFurnitures.length }})
+        </span>
+        <span class="panel-toggle">{{ isHhpExpanded ? '▼' : '▶' }}</span>
+      </div>
+      <div v-if="isHhpExpanded" class="panel-content">
+        <div class="panel-inner">
+          <DetailRow v-if="props.data.hhpReq" :value="props.data.hhpReq" layout="center" />
+          <DetailRow v-if="props.data.hhpMsg" :value="props.data.hhpMsg" layout="center" />
+        </div>
+        <div class="icon-grid icon-grid--cols-3">
+          <ItemIcon v-if="props.data.hhpSong" :itemId="props.data.hhpSong" :size="60" />
+          <div v-for="furniture in props.data.hhpFurnitures" :key="furniture">
+            <ItemIcon :itemId="furniture" :size="60" />
+          </div>
         </div>
       </div>
     </div>

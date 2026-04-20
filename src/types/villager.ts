@@ -105,6 +105,11 @@ export interface Villager {
   kitchenware: [number, number, number];
   houseImage?: string;
 
+  hhpSong: number;
+  hhpFurnitures: number[];
+  hhpReq: string;
+  hhpMsg: string;
+
   nameColor: string;
   bubbleColor: string;
 }

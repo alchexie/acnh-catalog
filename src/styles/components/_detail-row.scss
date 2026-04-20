@@ -48,7 +48,13 @@
 .detail-row--center {
   align-items: center;
   justify-content: center;
+  text-align: center;
   gap: $spacing-sm;
+
+  .detail-value {
+    max-width: 100%;
+    text-align: center;
+  }
 }
 
 // 高亮模式 - 背景高亮
